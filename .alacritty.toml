@@ -1,0 +1,9 @@
+[font]
+size=15
+normal= {family= "JetBrainsMonoNL Nerd Font", style = "Regular"}
+
+[keyboard]
+bindings = [
+  { key = "Left",  mods = "Command", chars = "\u001bOH"  },
+  { key = "Right", mods = "Command", chars =  "\u001bOF" },
+]
