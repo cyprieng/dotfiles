@@ -1,4 +1,5 @@
 return {
+  -- Edgy window manager
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
