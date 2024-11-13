@@ -11,7 +11,14 @@ return {
     "sindrets/diffview.nvim",
   },
   -- Toggle terminal
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = true,
+    opts = {
+      auto_scroll = false,
+    },
+  },
   -- gitsigns
   {
     "lewis6991/gitsigns.nvim",
