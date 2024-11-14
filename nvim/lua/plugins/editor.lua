@@ -17,6 +17,9 @@ return {
     config = true,
     opts = {
       auto_scroll = false,
+      on_open = function(term)
+        vim.wo.winfixbuf = true
+      end,
     },
   },
   -- gitsigns
