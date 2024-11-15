@@ -3,7 +3,7 @@
 set -eo pipefail
 
 # Current directory
-BASEDIR=$(realpath $(dirname $0))
+BASEDIR=$(realpath "$(dirname "$0")")
 
 icon_path=/Applications/Alacritty.app/Contents/Resources/alacritty.icns
 if [ ! -f "$icon_path" ]; then
@@ -16,7 +16,7 @@ hash="$(shasum $icon_path | head -c 10)"
 mv "$icon_path" "$icon_path.backup-$hash"
 
 echo "Extracting replacement icon"
-gunzip -c "$BASEDIR/assets/alacritty.icns.gz" > "$icon_path"
+gunzip -c "$BASEDIR/alacritty.icns.gz" >"$icon_path"
 
 touch /Applications/Alacritty.app
 killall Finder
