@@ -38,6 +38,11 @@ link_file() {
   ln -s "$source" "$target"
 }
 
+# Install starship
+if ! which starship >/dev/null; then
+  curl -sS https://starship.rs/install.sh | sh
+fi
+
 # Install alacritty
 echo "Installing alacritty..."
 brew list alacritty >/dev/null 2>&1 || brew install --cask alacritty --no-quarantine
@@ -46,6 +51,7 @@ brew list alacritty >/dev/null 2>&1 || brew install --cask alacritty --no-quaran
 install_brew_package neovim
 
 # Install other packages
+install_brew_package antidote
 install_brew_package ripgrep
 install_brew_package ast-grep
 install_brew_package luarocks
@@ -56,7 +62,7 @@ install_brew_package fzf
 
 # Create links
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
-link_file "$BASEDIR/zsh/.antigen.zsh" ~/.antigen.zsh
+link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
@@ -81,5 +87,3 @@ fi
 
 # Golang
 install_brew_package go
-
-docker completion zsh >~/.antigen/bundles/robbyrussell/oh-my-zsh/cache/completions/_docker
