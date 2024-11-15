@@ -2,3 +2,24 @@ add_newline = false
 
 [line_break]
 disabled = true
+
+[package]
+disabled = true
+
+[nodejs]
+disabled = true
+
+[php]
+disabled = true
+
+[aws]
+disabled = true
+
+[rust]
+disabled = true
+
+[golang]
+disabled = true
+
+[python]
+disabled = true
