@@ -76,3 +76,17 @@ fi
 # Install fonts
 font_dir="$HOME/Library/Fonts"
 cp "$BASEDIR"/fonts/* "$font_dir"
+
+# Node
+if [ ! -d "${HOME}/.nvm/.git" ]; then
+  echo 'Installing nvm...'
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+  nvm install stable
+  nvm use stable
+fi
+
+# Golang
+install_brew_package go
