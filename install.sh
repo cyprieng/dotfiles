@@ -51,10 +51,12 @@ install_brew_package ast-grep
 install_brew_package luarocks
 install_brew_package lazygit
 install_brew_package fd
+install_brew_package git-delta
 
 # Create links
 link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
+link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
