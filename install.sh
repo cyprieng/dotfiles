@@ -52,26 +52,17 @@ install_brew_package luarocks
 install_brew_package lazygit
 install_brew_package fd
 install_brew_package git-delta
+install_brew_package fzf
 
 # Create links
+link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
+link_file "$BASEDIR/zsh/.antigen.zsh" ~/.antigen.zsh
 link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
-
-# Install oh-my-zsh
-if ! grep -q oh-my-zsh ~/.zshrc; then
-  echo "Installing oh-my-zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
-# Install zsh_extend.sh
-if ! grep -q zsh_custom.sh ~/.zshrc; then
-  echo "Installing zsh_extend.sh..."
-  echo source "$BASEDIR"/zsh/zsh_custom.sh >>~/.zshrc
-fi
 
 # Install fonts
 font_dir="$HOME/Library/Fonts"
@@ -90,3 +81,5 @@ fi
 
 # Golang
 install_brew_package go
+
+docker completion zsh >~/.antigen/bundles/robbyrussell/oh-my-zsh/cache/completions/_docker
