@@ -11,7 +11,7 @@ vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git di
 vim.keymap.set("n", "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file git history", remap = true })
 
 -- Exit terminal insert mode
-vim.keymap.set("t", "<C-Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- Window navigation
 vim.keymap.set("n", "<A-Right>", "<C-w><Right>", { desc = "Go to right window", remap = true })
