@@ -64,6 +64,13 @@ return {
           },
           { title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
           { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
+          {
+            ft = "toggleterm",
+            size = { height = 0.3 },
+            filter = function(buf, win)
+              return vim.api.nvim_win_get_config(win).relative == "" and vim.api.nvim_win_get_width(0) < 140
+            end,
+          },
         },
         left = {
           { title = "Neotest Summary", ft = "neotest-summary" },
@@ -74,7 +81,7 @@ return {
             ft = "toggleterm",
             size = { width = 0.25 },
             filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == ""
+              return vim.api.nvim_win_get_config(win).relative == "" and vim.api.nvim_win_get_width(0) > 140
             end,
           },
           { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
