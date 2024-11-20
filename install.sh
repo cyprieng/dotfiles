@@ -92,3 +92,9 @@ fi
 
 # Golang
 install_brew_package go
+
+# Rust
+if ! which rustc >/dev/null; then
+  echo 'Installing rust...'
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
