@@ -2,6 +2,9 @@
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 
+# Enable correction
+ENABLE_CORRECTION="true"
+
 # Load antidote
 source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 source <(antidote init)
@@ -40,11 +43,13 @@ preexec() {
 export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias v="nvim" 
-alias jsonlint="pbpaste | jq . | bat -l json"
+alias jsoncb="pbpaste | fx"
 alias weather="curl -m 1 https://wttr.in/Montpellier"
-
-# Enable correction
-ENABLE_CORRECTION="true"
+eval $(thefuck --alias)
+alias ls="eza --icons=always --group-directories-first --git"
 
 # Load the theme
 eval "$(starship init zsh)"
+
+# Load zoxide
+eval "$(zoxide init zsh --cmd cd)"

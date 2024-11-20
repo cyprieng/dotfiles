@@ -64,6 +64,14 @@ install_brew_package bat
 install_brew_package fpp
 install_brew_package jq
 install_brew_package urlscan
+install_brew_package thefuck
+install_brew_package zoxide
+install_brew_package tlrc
+install_brew_package fx
+install_brew_package ranger
+install_brew_package k9s
+install_brew_package lazydocker
+install_brew_package eza
 
 # Create links
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
@@ -89,6 +97,7 @@ if [ ! -d "${HOME}/.nvm/.git" ]; then
 
   nvm install stable
   nvm use stable
+  npm i -g npm-check-updates
 fi
 
 # Golang
