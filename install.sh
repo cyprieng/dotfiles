@@ -62,6 +62,7 @@ install_brew_package fzf
 install_brew_package tmux
 install_brew_package bat
 install_brew_package fpp
+install_brew_package jq
 
 # Create links
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
