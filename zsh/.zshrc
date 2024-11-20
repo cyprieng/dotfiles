@@ -1,3 +1,7 @@
+# Global configuration
+export VISUAL="nvim"
+export EDITOR="$VISUAL"
+
 # Load antidote
 source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 source <(antidote init)
