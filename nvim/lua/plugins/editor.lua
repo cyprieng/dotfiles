@@ -12,4 +12,17 @@ return {
   },
   -- Toggle terminal
   { "akinsho/toggleterm.nvim", version = "*", config = true },
+  -- gitsigns
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true, -- Shows git blame for current line
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = "eol",
+        delay = 500,
+        ignore_whitespace = false,
+      },
+    },
+  },
 }
