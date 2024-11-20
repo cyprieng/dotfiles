@@ -5,13 +5,6 @@ set -eo pipefail
 # Current directory
 BASEDIR=$(realpath "$(dirname "$0")")
 
-# Install a brew package if not installed
-install_brew_package() {
-  package=$1
-  echo "Installing $package..."
-  brew list "$package" >/dev/null 2>&1 || brew install "$package"
-}
-
 # Link a file to the target location
 link_file() {
   source=$1
@@ -43,35 +36,9 @@ if ! which starship >/dev/null; then
   curl -sS https://starship.rs/install.sh | sh
 fi
 
-# Install alacritty
-echo "Installing alacritty..."
-brew list alacritty >/dev/null 2>&1 || brew install --cask alacritty --no-quarantine
-
-# Install neovim
-install_brew_package neovim
-
-# Install other packages
-install_brew_package antidote
-install_brew_package ripgrep
-install_brew_package ast-grep
-install_brew_package luarocks
-install_brew_package lazygit
-install_brew_package fd
-install_brew_package git-delta
-install_brew_package fzf
-install_brew_package tmux
-install_brew_package bat
-install_brew_package fpp
-install_brew_package jq
-install_brew_package urlscan
-install_brew_package thefuck
-install_brew_package zoxide
-install_brew_package tlrc
-install_brew_package fx
-install_brew_package ranger
-install_brew_package k9s
-install_brew_package lazydocker
-install_brew_package eza
+# Install Brewfile
+echo "Installing brew dependencies..."
+brew bundle
 
 # Create links
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
@@ -99,9 +66,6 @@ if [ ! -d "${HOME}/.nvm/.git" ]; then
   nvm use stable
   npm i -g npm-check-updates
 fi
-
-# Golang
-install_brew_package go
 
 # Rust
 if ! which rustc >/dev/null; then
