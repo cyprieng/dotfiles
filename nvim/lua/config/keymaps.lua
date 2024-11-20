@@ -4,4 +4,4 @@
 
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
 vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
-vim.keymap.set("n", "<leader>cc", "<cmd>Codeium Chat<cr>", { desc = "Open codeium chat", remap = true })
+vim.keymap.set("n", "<leader>ac", "<cmd>Codeium Chat<cr>", { desc = "Open codeium chat", remap = true })

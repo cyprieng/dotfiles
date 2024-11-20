@@ -1,4 +1,24 @@
 return {
+  -- Override neotree config
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          show_hidden_count = true,
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_by_name = {
+            ".git",
+            ".DS_Store",
+            "thumbs.db",
+          },
+          never_show = {},
+        },
+      },
+    },
+  },
+
   -- Edgy window manager
   {
     "folke/edgy.nvim",
@@ -61,19 +81,19 @@ return {
         },
         keys = {
           -- increase width
-          ["<c-Right>"] = function(win)
+          ["<C-S-Right>"] = function(win)
             win:resize("width", 2)
           end,
           -- decrease width
-          ["<c-Left>"] = function(win)
+          ["<C-S-Left>"] = function(win)
             win:resize("width", -2)
           end,
           -- increase height
-          ["<c-Up>"] = function(win)
+          ["<C-S-Up>"] = function(win)
             win:resize("height", 2)
           end,
           -- decrease height
-          ["<c-Down>"] = function(win)
+          ["<C-S-Down>"] = function(win)
             win:resize("height", -2)
           end,
         },
