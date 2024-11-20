@@ -39,6 +39,7 @@ preexec() {
 # Aliases
 export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
+alias v="nvim"
 
 # Enable correction
 ENABLE_CORRECTION="true"
