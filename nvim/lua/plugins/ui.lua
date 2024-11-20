@@ -68,7 +68,7 @@ return {
             ft = "toggleterm",
             size = { height = 0.3 },
             filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == "" and vim.api.nvim_win_get_width(0) < 140
+              return vim.api.nvim_win_get_config(win).relative == "" and vim.o.columns < 250
             end,
           },
         },
@@ -81,7 +81,7 @@ return {
             ft = "toggleterm",
             size = { width = 0.25 },
             filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == "" and vim.api.nvim_win_get_width(0) > 140
+              return vim.api.nvim_win_get_config(win).relative == "" and vim.o.columns > 250
             end,
           },
           { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
