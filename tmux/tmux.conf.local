@@ -450,7 +450,7 @@ set -g @resurrect-strategy-nvim 'session'
 # then, use #{foo} in e.g. the 'tmux_conf_theme_status_left' or the
 # 'tmux_conf_theme_status_right' variables.
 set-option -g automatic-rename on
-set-option -g automatic-rename-format '#{b:pane_current_path}'
+set-option -g automatic-rename-format '#{b:pane_current_command} - #{b:pane_current_path}'
 
 # ------------------------------------------------------------------------------
 
