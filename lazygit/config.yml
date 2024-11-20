@@ -1,3 +1,10 @@
+gui:
+  scrollHeight: 10
+  shortTimeFormat: 15:04
+  nerdFontsVersion: "3"
+
+quitOnTopLevelReturn: true
+
 git:
   paging:
     colorArg: always
