@@ -3,5 +3,9 @@
 -- Add any additional keymaps here
 
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
+
+-- Git
 vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
+vim.keymap.set("n", "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file git history", remap = true })
+
 vim.keymap.set("n", "<leader>ac", "<cmd>Codeium Chat<cr>", { desc = "Open codeium chat", remap = true })
