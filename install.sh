@@ -63,6 +63,7 @@ install_brew_package tmux
 install_brew_package bat
 install_brew_package fpp
 install_brew_package jq
+install_brew_package urlscan
 
 # Create links
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
