@@ -1,11 +1,29 @@
-# Load antigen
-source "$HOME"/.antigen.zsh
+# Load antidote
+source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+source <(antidote init)
 
-# Make sure completion directoy exist
-#mkdir -p "$HOME"/.antigen/bundles/robbyrussell/oh-my-zsh/cache/completions/
+# Bundle oh-my-zsh libs and plugins with the 'path:' annotation
+antidote bundle getantidote/use-omz
+antidote bundle ohmyzsh/ohmyzsh path:lib
+antidote bundle ohmyzsh/ohmyzsh path:plugins/git
+antidote bundle ohmyzsh/ohmyzsh path:plugins/extract
+antidote bundle ohmyzsh/ohmyzsh path:plugins/fzf
+antidote bundle ohmyzsh/ohmyzsh path:plugins/docker-compose
+antidote bundle ohmyzsh/ohmyzsh path:plugins/docker
+antidote bundle ohmyzsh/ohmyzsh path:plugins/gitignore
+antidote bundle ohmyzsh/ohmyzsh path:plugins/golang
+antidote bundle ohmyzsh/ohmyzsh path:plugins/history
+antidote bundle ohmyzsh/ohmyzsh path:plugins/kubectl
+antidote bundle ohmyzsh/ohmyzsh path:plugins/npm
+antidote bundle ohmyzsh/ohmyzsh path:plugins/nvm
+antidote bundle ohmyzsh/ohmyzsh path:plugins/rust
+antidote bundle ohmyzsh/ohmyzsh path:plugins/terraform
 
-# Install oh-my-zsh
-antigen use oh-my-zsh
+# Other plugins
+antidote bundle Aloxaf/fzf-tab
+antidote bundle zsh-users/zsh-completions
+antidote bundle zsh-users/zsh-autosuggestions
+antidote bundle zsh-users/zsh-syntax-highlighting
 
 # Custom title
 DISABLE_AUTO_TITLE="true"
@@ -17,28 +35,5 @@ preexec() {
 # Enable correction
 ENABLE_CORRECTION="true"
 
-# oh-my-zsh plugins
-antigen bundle git
-antigen bundle fzf
-antigen bundle docker-compose
-antigen bundle docker
-antigen bundle gitignore
-antigen bundle golang
-antigen bundle history
-antigen bundle kubectl
-antigen bundle npm
-antigen bundle nvm
-antigen bundle rust
-antigen bundle terraform
-
-# Custom plugins
-antigen bundle Aloxaf/fzf-tab
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-syntax-highlighting
-
 # Load the theme
-antigen theme robbyrussell
-
-# Apply antigen
-antigen apply
+eval "$(starship init zsh)"
