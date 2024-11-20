@@ -32,6 +32,10 @@ preexec() {
   echo -ne "\033]0;$action - ${PWD##*/}\a"
 }
 
+# Aliases
+export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
+alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
+
 # Enable correction
 ENABLE_CORRECTION="true"
 
