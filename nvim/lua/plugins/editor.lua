@@ -14,10 +14,13 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    config = true,
-    opts = {
-      auto_scroll = false,
-    },
+    config = function()
+      require("toggleterm").setup({
+        auto_scroll = false,
+      })
+      -- Custom key mapping to exit insert mode
+      vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+    end,
   },
   -- gitsigns
   {
