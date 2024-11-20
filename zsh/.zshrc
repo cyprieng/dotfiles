@@ -41,6 +41,7 @@ export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias v="nvim" 
 alias jsonlint="pbpaste | jq . | bat -l json"
+alias weather="curl -m 1 https://wttr.in/Montpellier"
 
 # Enable correction
 ENABLE_CORRECTION="true"
