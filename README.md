@@ -6,6 +6,7 @@ Collection of my dotfiles. Including configuration for:
 - lazygit
 - Neovim
 - Ranger
+- Rectangle
 - Startship
 - Tmux
 - Zsh

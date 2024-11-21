@@ -29,5 +29,8 @@ brew "eza"
 brew "progress"
 brew "watch"
 
+# Apps
+cask "rectangle"
+
 # Languages
 brew "go"

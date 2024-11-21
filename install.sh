@@ -40,6 +40,13 @@ fi
 echo "Installing brew dependencies..."
 brew bundle
 
+# Open Rectangle
+echo 'Setting up rectangle...'
+killall "Rectangle" >/dev/null 2>&1 || true
+mkdir -p ~/Library/Application\ Support/Rectangle
+cp rectangle/RectangleConfig.json ~/Library/Application\ Support/Rectangle/RectangleConfig.json
+open -n /Applications/Rectangle.app
+
 # Create links
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
