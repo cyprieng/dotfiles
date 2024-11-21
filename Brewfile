@@ -26,6 +26,8 @@ brew "ranger"
 brew "k9s"
 brew "lazydocker"
 brew "eza"
+brew "progress"
+brew "watch"
 
 # Languages
 brew "go"
