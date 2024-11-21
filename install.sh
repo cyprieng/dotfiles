@@ -65,33 +65,38 @@ cp "$BASEDIR"/fonts/* "$font_dir"
 
 # Macos settings
 echo 'Applying macos settings...'
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true                # Always show extensions
-defaults write com.apple.Finder AppleShowAllFiles -bool false                  # Do not show hidden files
-defaults write com.apple.terminal StringEncodings -array 4                     # Set utf8 in terminal
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true    # Expand save dialog
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true   # Expand save dialog
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3                       # Enable full keyboard access
-defaults write com.apple.finder ShowPathbar -bool true                         # Show path bar in finder
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true       # Expand print dialog
-defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true      # Expand print dialog
-defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false     # Disable auto capitalization
-defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false # Disable auto correction
-defaults write NSGlobalDomain AppleFontSmoothing -int 1                        # Enable subpixel font rendering on non-Apple LCDs
-defaults write com.apple.finder ShowStatusBar -bool true                       # Show status bar
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true             # Display full POSIX path as Finder window title
-defaults write com.apple.finder _FXSortFoldersFirst -bool true                 # Keep folders on top when sorting by name
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false     # Disable the warning when changing a file extension
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true   # Disable .DS_Store on network volumes
-defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true       # Disable .DS_Store on USB volumes
-defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"            # Use list view in all Finder windows by default
-defaults write com.apple.dock expose-group-by-app -bool false                  # Don’t group windows by application in Mission Control
-defaults write com.apple.dock autohide-delay -float 0                          # Remove the auto-hiding Dock delay
-defaults write com.apple.dock autohide-time-modifier -float 0                  # Remove the animation when hiding/showing the Dock
-defaults write com.apple.dock autohide -bool true                              # Automatically hide and show the Dock
-defaults write com.apple.dock showhidden -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true                 # Always show extensions
+defaults write com.apple.Finder AppleShowAllFiles -bool false                   # Do not show hidden files
+defaults write com.apple.terminal StringEncodings -array 4                      # Set utf8 in terminal
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true     # Expand save dialog
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true    # Expand save dialog
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3                        # Enable full keyboard access
+defaults write com.apple.finder ShowPathbar -bool true                          # Show path bar in finder
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true        # Expand print dialog
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true       # Expand print dialog
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false      # Disable auto capitalization
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false  # Disable auto correction
+defaults write NSGlobalDomain AppleFontSmoothing -int 1                         # Enable subpixel font rendering on non-Apple LCDs
+defaults write com.apple.finder ShowStatusBar -bool true                        # Show status bar
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true              # Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXSortFoldersFirst -bool true                  # Keep folders on top when sorting by name
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false      # Disable the warning when changing a file extension
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true    # Disable .DS_Store on network volumes
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true        # Disable .DS_Store on USB volumes
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"             # Use list view in all Finder windows by default
+defaults write com.apple.dock expose-group-by-app -bool false                   # Don’t group windows by application in Mission Control
+defaults write com.apple.dock autohide-delay -float 0                           # Remove the auto-hiding Dock delay
+defaults write com.apple.dock autohide-time-modifier -float 0                   # Remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide -bool true                               # Automatically hide and show the Dock
+defaults write com.apple.dock show-recents -bool false                          # Don't show recent applications in Dock
+defaults write com.apple.Safari AutoFillFromAddressBook -bool false             # Disable AutoFill in safari
+defaults write com.apple.Safari AutoFillPasswords -bool false                   # Disable AutoFill in safari
+defaults write com.apple.Safari AutoFillCreditCardData -bool false              # Disable AutoFill in safari
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false          # Disable AutoFill in safari
+defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true # Update extensions automatically
 
 # Restart apps modified
-for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+for app in Finder Dock SystemUIServer Safari; do killall "$app" >/dev/null 2>&1; done
 
 # Node
 if [ ! -d "${HOME}/.nvm/.git" ]; then
