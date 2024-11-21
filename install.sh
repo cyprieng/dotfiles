@@ -55,6 +55,18 @@ link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/c
 font_dir="$HOME/Library/Fonts"
 cp "$BASEDIR"/fonts/* "$font_dir"
 
+# Macos specifics
+echo 'Applying macos settings...'
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.Finder AppleShowAllFiles -bool false
+defaults write com.apple.terminal StringEncodings -array 4
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Restart apps modified
+for app in Finder Dock SystemUIServer; do killall "$app" >/dev/null 2>&1; done
+
 # Node
 if [ ! -d "${HOME}/.nvm/.git" ]; then
   echo 'Installing nvm...'
