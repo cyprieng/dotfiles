@@ -46,6 +46,7 @@ link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/tmux" ~/.config/tmux
+link_file "$BASEDIR/ranger" ~/.config/ranger
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
 # Update Alacritty icon
