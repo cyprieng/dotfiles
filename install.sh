@@ -54,7 +54,11 @@ link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/tmux" ~/.config/tmux
 link_file "$BASEDIR/ranger" ~/.config/ranger
+link_file "$BASEDIR/vale" ~/.config/vale
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
+
+# Vale
+(cd ~/.config/vale && vale sync)
 
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"

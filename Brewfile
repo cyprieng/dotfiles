@@ -30,6 +30,7 @@ brew "progress"
 brew "watch"
 brew "croc"
 brew "lnav"
+brew "vale"
 
 # Apps
 cask "rectangle"

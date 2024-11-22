@@ -47,6 +47,7 @@ alias jsoncb="pbpaste | fx"
 alias weather="curl -m 1 https://wttr.in/Montpellier"
 eval $(thefuck --alias)
 alias ls="eza --icons=always --group-directories-first --git"
+alias vale="vale --config ~/.config/vale/.vale.ini"
 
 # Load the theme
 eval "$(starship init zsh)"
