@@ -28,6 +28,8 @@ brew "lazydocker"
 brew "eza"
 brew "progress"
 brew "watch"
+brew "croc"
+brew "lnav"
 
 # Apps
 cask "rectangle"
