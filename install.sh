@@ -57,6 +57,14 @@ link_file "$BASEDIR/ranger" ~/.config/ranger
 link_file "$BASEDIR/vale" ~/.config/vale
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
+# Git config
+link_file "$BASEDIR/git/.gitconfig" ~/.gitconfig-global
+link_file "$BASEDIR/git/.gitignore" ~/.gitignore
+if ! grep -q "gitconfig-global" ~/.gitconfig; then
+  echo "[include]
+    path = .gitconfig-global" >>~/.gitconfig
+fi
+
 # Vale
 (cd ~/.config/vale && vale sync)
 
