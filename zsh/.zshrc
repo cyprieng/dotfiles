@@ -1,6 +1,7 @@
 # Global configuration
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
+export GPG_TTY=$(tty)
 
 # Enable correction
 ENABLE_CORRECTION="true"
