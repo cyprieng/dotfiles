@@ -31,6 +31,7 @@ brew "watch"
 brew "croc"
 brew "lnav"
 brew "vale"
+brew "gnupg"
 
 # Apps
 cask "rectangle"
