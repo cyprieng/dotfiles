@@ -13,10 +13,10 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules.
-	p = pull --recurse-submodules
+  p = pull --recurse-submodules
 
-	# Clone a repository including all submodules.
-	c = clone --recursive
+  # Commit using commitizen
+	c = !cz commit
 
 	# Commit all changes.
 	ca = !git add ':(exclude,attr:builtin_objectmode=160000)' && git commit -av

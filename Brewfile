@@ -32,6 +32,7 @@ brew "croc"
 brew "lnav"
 brew "vale"
 brew "gnupg"
+brew "commitizen"
 
 # Apps
 cask "rectangle"
