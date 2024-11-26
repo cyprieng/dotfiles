@@ -5,10 +5,8 @@ cask "alacritty", args: { no_quarantine: true }
 brew "neovim"
 
 # Cli tools 
-brew "antidote"
 brew "ripgrep"
 brew "ast-grep"
-brew "luarocks"
 brew "lazygit"
 brew "fd"
 brew "git-delta"
@@ -31,11 +29,20 @@ brew "watch"
 brew "croc"
 brew "lnav"
 brew "vale"
-brew "gnupg"
 brew "commitizen"
+brew "rga"
+brew "httpie"
 
 # Apps
 cask "rectangle"
 
 # Languages
 brew "go"
+
+# Other
+brew "antidote"
+brew "luarocks"
+brew "gnupg"
+brew "poppler"
+brew "pandoc"
+brew "ffmpeg"
