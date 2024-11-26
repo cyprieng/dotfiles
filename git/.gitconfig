@@ -96,7 +96,14 @@
 
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
-	untrackedCache = true
+  untrackedCache = true
+
+  # Set delta pager
+  pager = 'delta'
+
+[delta]
+
+    side-by-side = true
 
 [color]
 
