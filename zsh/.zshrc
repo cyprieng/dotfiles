@@ -45,7 +45,7 @@ export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias v="nvim" 
 alias jsoncb="pbpaste | fx"
-alias weather="curl -m 1 https://wttr.in/Montpellier"
+alias weather="~/go/bin/yr today montpellier"
 eval $(thefuck --alias)
 alias ls="eza --icons=always --group-directories-first --git"
 alias vale="vale --config ~/.config/vale/.vale.ini"

@@ -68,6 +68,9 @@ fi
 # Vale
 (cd ~/.config/vale && vale sync)
 
+# Weather
+go install git.sr.ht/~timharek/yr@latest
+
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
 
