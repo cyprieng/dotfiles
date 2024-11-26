@@ -17,6 +17,8 @@ normal = { family = "JetBrainsMonoNL Nerd Font", style = "Regular" }
 bindings = [
   { key = "Left", mods = "Command", chars = "\u001bOH" },
   { key = "Right", mods = "Command", chars = "\u001bOF" },
+  { key = "Up", mods = "Control|Shift", chars = "\u001b[5~" },   # Page Up
+  { key = "Down", mods = "Control|Shift", chars = "\u001b[6~" }, # Page Down
 ]
 
 # TokyoNight Alacritty Colors
