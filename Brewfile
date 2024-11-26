@@ -32,6 +32,7 @@ brew "vale"
 brew "commitizen"
 brew "rga"
 brew "httpie"
+brew "glow"
 
 # Apps
 cask "rectangle"
