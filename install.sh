@@ -48,6 +48,7 @@ cp rectangle/RectangleConfig.json ~/Library/Application\ Support/Rectangle/Recta
 open -n /Applications/Rectangle.app
 
 # Create links
+link_file "$BASEDIR/zsh/.secrets.sh" ~/.secrets.sh
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
@@ -55,6 +56,7 @@ link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/tmux" ~/.config/tmux
 link_file "$BASEDIR/ranger" ~/.config/ranger
 link_file "$BASEDIR/vale" ~/.config/vale
+link_file "$BASEDIR/aider/.aider.conf.yml" ~/.aider.conf.yml
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
 # Git config

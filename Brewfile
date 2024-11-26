@@ -33,6 +33,7 @@ brew "commitizen"
 brew "rga"
 brew "httpie"
 brew "glow"
+brew "aider"
 
 # Apps
 cask "rectangle"

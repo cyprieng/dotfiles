@@ -1,0 +1,9 @@
+dark-mode: true
+auto-commits: false
+analytics-disable: true
+
+# Completion menu colors
+completion-menu-color: "#a9b1d6"
+completion-menu-bg-color: "#1a1b26"
+completion-menu-current-color: "#7dcfff"
+completion-menu-current-bg-color: "#24283b"

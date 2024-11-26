@@ -3,6 +3,9 @@ export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 
+# Load secrets
+source ~/.secrets.sh 
+
 # Enable correction
 ENABLE_CORRECTION="true"
 
