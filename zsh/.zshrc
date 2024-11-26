@@ -50,6 +50,10 @@ eval $(thefuck --alias)
 alias ls="eza --icons=always --group-directories-first --git"
 alias vale="vale --config ~/.config/vale/.vale.ini"
 
+# Bind keys
+bindkey "^[[1;3C" forward-word    # Alt + →
+bindkey "^[[1;3D" backward-word   # Alt + ←
+
 # Load the theme
 eval "$(starship init zsh)"
 
