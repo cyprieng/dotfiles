@@ -19,6 +19,9 @@ bindings = [
   { key = "Right", mods = "Command", chars = "\u001bOF" },
   { key = "Up", mods = "Control|Shift", chars = "\u001b[5~" },   # Page Up
   { key = "Down", mods = "Control|Shift", chars = "\u001b[6~" }, # Page Down
+  { key = "é", mods = "Alt", chars = "[" },
+  { key = "\"", mods = "Alt", chars = "]" },
+  { key = "v", mods = "Control|Alt", action = "ToggleViMode" },
 ]
 
 # TokyoNight Alacritty Colors
