@@ -6,7 +6,6 @@ brew "neovim"
 
 # Cli tools 
 brew "ripgrep"
-brew "ast-grep"
 brew "lazygit"
 brew "fd"
 brew "git-delta"
@@ -42,11 +41,19 @@ cask "rectangle"
 
 # Languages
 brew "go"
+brew "python"
+brew "pipx"
 
 # Other
 brew "antidote"
-brew "luarocks"
 brew "gnupg"
 brew "poppler"
 brew "pandoc"
 brew "ffmpeg"
+
+# Neovim dependencies
+brew "luarocks"
+brew "ast-grep"
+brew "markdown-toc"
+brew "markdownlint-cli2"
+brew "sqlfluff"

@@ -58,6 +58,7 @@ link_file "$BASEDIR/ranger" ~/.config/ranger
 link_file "$BASEDIR/vale" ~/.config/vale
 link_file "$BASEDIR/aider/.aider.conf.yml" ~/.aider.conf.yml
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
+link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 
 # Git config
 link_file "$BASEDIR/git/.gitconfig" ~/.gitconfig-global
@@ -115,7 +116,7 @@ sudo defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool 
 sudo nvram AutoBoot=%00                                                              # Disable switch on on lid opening
 
 # Restart apps modified
-for app in Finder Dock SystemUIServer Safari; do killall "$app" >/dev/null 2>&1; done
+for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
 
 # Node
 if [ ! -d "${HOME}/.nvm/.git" ]; then
@@ -126,11 +127,17 @@ if [ ! -d "${HOME}/.nvm/.git" ]; then
 
   nvm install stable
   nvm use stable
-  npm i -g npm-check-updates
 fi
+echo 'Installing node dependencies...'
+npm i -g npm-check-updates neovim
 
 # Rust
 if ! which rustc >/dev/null; then
   echo 'Installing rust...'
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 fi
+
+# Python
+echo 'Installing python dependencies...'
+pipx install pylatexenc
+pip3 install --user --break-system-packages neovim
