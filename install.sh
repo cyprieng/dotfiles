@@ -108,6 +108,7 @@ defaults write com.apple.dock autohide-delay -float 0                           
 defaults write com.apple.dock autohide-time-modifier -float 0                        # Remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide -bool true                                    # Automatically hide and show the Dock
 defaults write com.apple.dock show-recents -bool false                               # Don't show recent applications in Dock
+defaults write com.apple.dock no-bouncing -bool TRUE                                 # Disable bouncing in dock
 sudo defaults write com.apple.Safari AutoFillFromAddressBook -bool false             # Disable AutoFill in safari
 sudo defaults write com.apple.Safari AutoFillPasswords -bool false                   # Disable AutoFill in safari
 sudo defaults write com.apple.Safari AutoFillCreditCardData -bool false              # Disable AutoFill in safari
