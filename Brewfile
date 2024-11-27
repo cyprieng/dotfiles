@@ -34,6 +34,8 @@ brew "rga"
 brew "httpie"
 brew "glow"
 brew "aider"
+brew "tokei"
+brew "bottom"
 
 # Apps
 cask "rectangle"

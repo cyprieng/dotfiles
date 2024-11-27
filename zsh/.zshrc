@@ -52,6 +52,7 @@ alias weather="~/go/bin/yr today montpellier"
 eval $(thefuck --alias)
 alias ls="eza --icons=always --group-directories-first --git"
 alias vale="vale --config ~/.config/vale/.vale.ini"
+alias readme-generator="npx readme-md-generator"
 
 # Bind keys
 bindkey "^[[1;3C" forward-word    # Alt + →
