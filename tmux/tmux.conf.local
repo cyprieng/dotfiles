@@ -269,7 +269,7 @@ tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see
 #     - #{username_ssh}
 tmux_conf_theme_status_left=""
 #tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{pretty_pane_current_path} "
-tmux_conf_theme_status_right=' #{prefix}#{pairing}#{synchronized}#(/opt/homebrew/bin/spotify_player get key playback | jq -r '\''if .item == null then "" else (.item.name + " - " + .item.artists[0].name + " |") end'\'')#{?battery_percentage, #{battery_percentage},} , %R , %d %b'
+tmux_conf_theme_status_right=' #{prefix}#{pairing}#{synchronized}#(/opt/homebrew/bin/spotify_player get key playback | jq -r '\''if .item == null then " " else (.item.name + " - " + .item.artists[0].name + " \uE0B3") end'\'')#{?battery_percentage, #{battery_percentage},} , %R , %d %b'
 
 # status left style
 tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
