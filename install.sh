@@ -115,7 +115,6 @@ sudo defaults write com.apple.Safari AutoFillPasswords -bool false              
 sudo defaults write com.apple.Safari AutoFillCreditCardData -bool false              # Disable AutoFill in safari
 sudo defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false          # Disable AutoFill in safari
 sudo defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true # Update extensions automatically
-sudo nvram AutoBoot=%00                                                              # Disable switch on on lid opening
 
 # Restart apps modified
 for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
