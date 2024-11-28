@@ -1,5 +1,7 @@
 dark-mode: true
 auto-commits: false
+gitignore: false
+show-release-notes: false
 analytics-disable: true
 
 # Completion menu colors
