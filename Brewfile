@@ -38,6 +38,7 @@ brew "bottom"
 
 # Apps
 cask "rectangle"
+brew "spotify_player"
 
 # Languages
 brew "go"
