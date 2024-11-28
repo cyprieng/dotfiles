@@ -3,3 +3,4 @@ tmux/plugins
 vale/styles
 .secrets.sh
 !aider/.aider.conf.yml
+karabiner/automatic_backups
