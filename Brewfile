@@ -40,6 +40,7 @@ brew "bottom"
 cask "rectangle"
 brew "spotify_player"
 cask "karabiner-elements"
+cask "localsend"
 
 # Languages
 brew "go"
