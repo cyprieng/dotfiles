@@ -13,6 +13,9 @@ args = ["new-session", "-A", "-D"]
 size = 15
 normal = { family = "JetBrainsMonoNL Nerd Font", style = "Regular" }
 
+[mouse]
+hide_when_typing = true
+
 [keyboard]
 bindings = [
   { key = "Left", mods = "Command", chars = "\u001bOH" },
