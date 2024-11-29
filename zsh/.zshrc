@@ -58,6 +58,7 @@ alias readme-generator="npx readme-md-generator"
 # Bind keys
 bindkey "^[[1;3C" forward-word    # Alt + →
 bindkey "^[[1;3D" backward-word   # Alt + ←
+bindkey "^[e" redo
 
 # Load the theme
 eval "$(starship init zsh)"
