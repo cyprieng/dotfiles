@@ -392,7 +392,7 @@ set -g mouse on
 # unbind C-b
 # set -g prefix C-a
 # bind C-a send-prefix
-
+bind-key x kill-pane
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
