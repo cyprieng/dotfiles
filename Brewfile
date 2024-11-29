@@ -35,6 +35,7 @@ brew "glow"
 brew "aider"
 brew "tokei"
 brew "bottom"
+brew "tmux-xpanes"
 
 # Apps
 cask "rectangle"
