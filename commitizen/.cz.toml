@@ -1,0 +1,42 @@
+[tool.commitizen]
+name = "cz_customize"
+
+[tool.commitizen.customize]
+message_template = "{{change_type}}{% if scope %}({{scope}}){% endif %}: {{message}}{% if body %}\n\n{{body}}{% endif %}{% if footer %}\n\n{{footer}}{% endif %}"
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "change_type"
+message = "Select the type of change you are committing"
+choices = [
+  { value = "fix", name = "fix: A bug fix. Correlates with PATCH in SemVer" },
+  { value = "feat", name = "feat: A new feature. Correlates with MINOR in SemVer" },
+  { value = "docs", name = "docs: Documentation only changes" },
+  { value = "style", name = "style: Changes that do not affect the meaning of the code" },
+  { value = "refactor", name = "refactor: A code change that neither fixes a bug nor adds a feature" },
+  { value = "perf", name = "perf: A code change that improves performance" },
+  { value = "test", name = "test: Adding missing or correcting existing tests" },
+  { value = "build", name = "build: Changes that affect the build system or external dependencies" },
+  { value = "ci", name = "ci: Changes to CI configuration files and scripts" },
+  { value = "chore", name = "chore: Other changes that don't modify src or test files" },
+]
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "scope"
+message = "What is the scope of this change? (class or file name): (press [enter] to skip)"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "message"
+message = "Write a short and imperative summary of the code changes: (lower case and no period)"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "body"
+message = "Provide additional contextual information about the code changes: (press [enter] to skip)"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "footer"
+message = "Footer. Information about Breaking Changes and reference issues that this commit closes: (press [enter] to skip)"

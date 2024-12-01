@@ -60,6 +60,7 @@ link_file "$BASEDIR/aider/.aider.conf.yml" ~/.aider.conf.yml
 link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/karabiner" ~/.config/karabiner
+link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 
 # Git config
 link_file "$BASEDIR/git/.gitconfig" ~/.gitconfig-global

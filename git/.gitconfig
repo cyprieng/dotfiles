@@ -16,7 +16,7 @@
   p = pull --recurse-submodules
 
   # Commit using commitizen
-	c = !cz commit
+	c = !cz --config ~/.cz.toml commit
 
 	# Commit all changes.
 	ca = !git add ':(exclude,attr:builtin_objectmode=160000)' && git commit -av
