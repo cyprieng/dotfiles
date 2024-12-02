@@ -42,6 +42,7 @@ cask "rectangle"
 brew "spotify_player"
 cask "karabiner-elements"
 cask "localsend"
+cask "alfred"
 
 # Languages
 brew "go"
