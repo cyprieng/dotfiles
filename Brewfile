@@ -43,6 +43,7 @@ brew "spotify_player"
 cask "karabiner-elements"
 cask "localsend"
 cask "alfred"
+cask "bettertouchtool"
 
 # Languages
 brew "go"
