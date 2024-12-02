@@ -2,7 +2,7 @@
 name = "cz_customize"
 
 [tool.commitizen.customize]
-message_template = "{{change_type}}{% if scope %}({{scope}}){% endif %}: {{message}}{% if body %}\n\n{{body}}{% endif %}{% if footer %}\n\n{{footer}}{% endif %}"
+message_template = "{{change_type}}{% if scope %}({{scope}}){% endif %}: {{message}}{% if body %}\n\n{{body}}{% endif %}"
 
 [[tool.commitizen.customize.questions]]
 type = "list"
@@ -35,8 +35,3 @@ message = "Write a short and imperative summary of the code changes: (lower case
 type = "input"
 name = "body"
 message = "Provide additional contextual information about the code changes: (press [enter] to skip)"
-
-[[tool.commitizen.customize.questions]]
-type = "input"
-name = "footer"
-message = "Footer. Information about Breaking Changes and reference issues that this commit closes: (press [enter] to skip)"
