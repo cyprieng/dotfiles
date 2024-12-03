@@ -42,7 +42,7 @@ cask "rectangle"
 brew "spotify_player"
 cask "karabiner-elements"
 cask "localsend"
-cask "alfred"
+cask "raycast"
 cask "bettertouchtool"
 
 # Languages
