@@ -46,8 +46,7 @@ cask "alfred"
 cask "bettertouchtool"
 
 # Languages
-brew "go"
-brew "python"
+brew "asdf"
 brew "pipx"
 
 # Other

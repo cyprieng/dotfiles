@@ -121,24 +121,26 @@ sudo defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool 
 # Restart apps modified
 for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
 
-# Node
-if [ ! -d "${HOME}/.nvm/.git" ]; then
-  echo 'Installing nvm...'
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# ASDF
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf global nodejs latest
 
-  nvm install stable
-  nvm use stable
-fi
+asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
+asdf install rust latest
+asdf global rust latest
+
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
+asdf install golang latest
+asdf global golang latest
+
+asdf plugin-add python https://github.com/asdf-community/asdf-python.git
+asdf install python latest
+asdf global python latest
+
+# Node
 echo 'Installing node dependencies...'
 npm i -g npm-check-updates neovim
-
-# Rust
-if ! which rustc >/dev/null; then
-  echo 'Installing rust...'
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-fi
 
 # Python
 echo 'Installing python dependencies...'

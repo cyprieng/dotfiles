@@ -66,3 +66,6 @@ eval "$(starship init zsh)"
 
 # Load zoxide
 eval "$(zoxide init zsh --cmd cd)"
+
+# Load asdf
+source $(brew --prefix asdf)/libexec/asdf.sh
