@@ -80,6 +80,9 @@ go install git.sr.ht/~timharek/yr@latest
 # Bettertouchtool
 open ~/.config/bettertouchtool/default.bttpreset
 
+# Alt tab
+defaults import com.lwouis.alt-tab-macos "$BASEDIR/alttab/com.lwouis.alt-tab-macos.plist"
+
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
 
