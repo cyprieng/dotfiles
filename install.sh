@@ -77,6 +77,9 @@ fi
 # Weather
 go install git.sr.ht/~timharek/yr@latest
 
+# Bettertouchtool
+open ~/.config/bettertouchtool/default.bttpreset
+
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
 
