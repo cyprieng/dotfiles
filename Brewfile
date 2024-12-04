@@ -44,6 +44,11 @@ cask "karabiner-elements"
 cask "localsend"
 cask "raycast"
 cask "bettertouchtool"
+cask "iina"
+cask "dbeaver-community"
+cask "alt-tab"
+cask "bitwarden"
+brew "bitwarden-cli"
 
 # Languages
 brew "asdf"
