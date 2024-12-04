@@ -49,6 +49,7 @@ cask "dbeaver-community"
 cask "alt-tab"
 cask "bitwarden"
 brew "bitwarden-cli"
+cask "hammerspoon"
 
 # Languages
 brew "asdf"

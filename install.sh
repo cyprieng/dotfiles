@@ -61,6 +61,7 @@ link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/c
 link_file "$BASEDIR/bettertouchtool" ~/.config/bettertouchtool
 link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/karabiner" ~/.config/karabiner
+link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 
 # Git config
