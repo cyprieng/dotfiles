@@ -63,8 +63,11 @@ link_file "$BASEDIR/karabiner" ~/.config/karabiner
 link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 
+# Better touch tool
+killall "BetterTouchTool" >/dev/null 2>&1 || true
 link_file "$BASEDIR/bettertouchtool/library" ~/Library/Application\ Support/BetterTouchTool
 cp "$BASEDIR/bettertouchtool/com.hegenberg.BetterTouchTool.plist" ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
+open -n /Applications/BetterTouchTool.app
 
 # Git config
 link_file "$BASEDIR/git/.gitconfig" ~/.gitconfig-global
