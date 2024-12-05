@@ -64,7 +64,7 @@ link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 
 link_file "$BASEDIR/bettertouchtool/library" ~/Library/Application\ Support/BetterTouchTool
-link_file "$BASEDIR/bettertouchtool/com.hegenberg.BetterTouchTool.plist" ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
+cp "$BASEDIR/bettertouchtool/com.hegenberg.BetterTouchTool.plist" ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
 
 # Git config
 link_file "$BASEDIR/git/.gitconfig" ~/.gitconfig-global
