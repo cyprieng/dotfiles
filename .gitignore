@@ -5,7 +5,6 @@ vale/styles
 !aider/.aider.conf.yml
 karabiner/automatic_backups
 
-bettertouchtool/Backups
-bettertouchtool/Logs
-bettertouchtool/.btt_data_store_SUPPORT
-bettertouchtool/btt_data_store*
+bettertouchtool/library/Backups
+bettertouchtool/library/Logs
+bettertouchtool/library/.btt_data_store_SUPPORT
