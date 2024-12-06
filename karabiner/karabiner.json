@@ -255,58 +255,8 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "delete_or_backspace",
-                                    "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    { "key_code": "escape" },
-                                    { "key_code": "delete_or_backspace" }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyperterm$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^io\\.alacritty$",
-                                            "^org\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
                                     "key_code": "delete_forward",
                                     "modifiers": { "mandatory": ["option"] }
-                                },
-                                "to": [
-                                    { "key_code": "escape" },
-                                    { "key_code": "d" }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.apple\\.Terminal$",
-                                            "^com\\.googlecode\\.iterm2$",
-                                            "^co\\.zeit\\.hyperterm$",
-                                            "^co\\.zeit\\.hyper$",
-                                            "^io\\.alacritty$",
-                                            "^org\\.alacritty$",
-                                            "^net\\.kovidgoyal\\.kitty$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "delete_or_backspace",
-                                    "modifiers": { "mandatory": ["fn", "option"] }
                                 },
                                 "to": [
                                     { "key_code": "escape" },
@@ -407,10 +357,7 @@
                                 },
                                 "to": [
                                     { "key_code": "escape" },
-                                    {
-                                        "key_code": "d",
-                                        "modifiers": ["right_control"]
-                                    }
+                                    { "key_code": "d" }
                                 ],
                                 "type": "basic"
                             }
