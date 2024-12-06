@@ -394,6 +394,7 @@ set -g mouse on
 # unbind C-b
 # set -g prefix C-a
 # bind C-a send-prefix
+set-option repeat-time 0
 bind-key x kill-pane
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
