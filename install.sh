@@ -85,6 +85,7 @@ go install git.sr.ht/~timharek/yr@latest
 
 # Alt tab
 defaults import com.lwouis.alt-tab-macos "$BASEDIR/alttab/com.lwouis.alt-tab-macos.plist"
+open -n /Applications/AltTab.app
 
 # Update Alacritty icon
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
@@ -92,6 +93,10 @@ defaults import com.lwouis.alt-tab-macos "$BASEDIR/alttab/com.lwouis.alt-tab-mac
 # Install fonts
 font_dir="$HOME/Library/Fonts"
 cp "$BASEDIR"/fonts/* "$font_dir"
+
+# Ensure app are started
+open -n /Applications/Hammerspoon.app
+open -n /Applications/Karabiner-Elements.app
 
 # Macos settings
 echo 'Applying macos settings...'
