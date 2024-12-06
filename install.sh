@@ -95,7 +95,9 @@ font_dir="$HOME/Library/Fonts"
 cp "$BASEDIR"/fonts/* "$font_dir"
 
 # Ensure app are started
-open -n /Applications/Hammerspoon.app
+if ! pgrep -x "Hammerspoon" >/dev/null; then
+  open -n /Applications/Hammerspoon.app
+fi
 open -n /Applications/Karabiner-Elements.app
 
 # Macos settings
