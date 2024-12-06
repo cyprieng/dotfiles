@@ -162,8 +162,8 @@ asdf install golang latest
 asdf global golang latest
 
 asdf plugin-add python https://github.com/asdf-community/asdf-python.git
-asdf install python 3.10.0
-asdf global python 3.10.0
+asdf install python 3.12.0
+asdf global python 3.12.0
 
 # Node
 echo 'Installing node dependencies...'
