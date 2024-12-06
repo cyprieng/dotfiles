@@ -7,13 +7,25 @@ function tileWindows()
 	local windows = hs.window.visibleWindows()
 	local screenFrame = screen:frame()
 
-	-- Filter out windows that aren't on the main screen or have no title
+	-- Filter and sort windows based on their position (top-left to bottom-right)
 	local windowsOnScreen = {}
 	for _, win in ipairs(windows) do
 		if win:screen() == screen and win:title() ~= "" then
 			table.insert(windowsOnScreen, win)
 		end
 	end
+
+	-- Sort windows by their position (Y first, then X)
+	table.sort(windowsOnScreen, function(a, b)
+		local frameA = a:frame()
+		local frameB = b:frame()
+		if math.abs(frameA.y - frameB.y) < 50 then
+			-- If windows are roughly on the same row, sort by X
+			return frameA.x < frameB.x
+		end
+		-- Otherwise sort by Y
+		return frameA.y < frameB.y
+	end)
 
 	local windowCount = #windowsOnScreen
 	if windowCount == 0 then
