@@ -64,6 +64,7 @@ link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 
 # Better touch tool
+echo 'Setting up bettertouchtool...'
 killall "BetterTouchTool" >/dev/null 2>&1 || true
 link_file "$BASEDIR/bettertouchtool/library" ~/Library/Application\ Support/BetterTouchTool
 cp "$BASEDIR/bettertouchtool/com.hegenberg.BetterTouchTool.plist" ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
@@ -78,23 +79,32 @@ if ! grep -q "gitconfig-global" ~/.gitconfig; then
 fi
 
 # Vale
+echo 'Syncing vale...'
 (cd ~/.config/vale && vale sync)
 
 # Weather
+echo 'Installing yr (weather)...'
 go install git.sr.ht/~timharek/yr@latest
 
 # Alt tab
+echo 'Setting up alt-tab...'
 defaults import com.lwouis.alt-tab-macos "$BASEDIR/alttab/com.lwouis.alt-tab-macos.plist"
+if pgrep -x "AltTab" >/dev/null; then
+  killall "AltTab" >/dev/null 2>&1 || true
+fi
 open -n /Applications/AltTab.app
 
 # Update Alacritty icon
+echo 'Updating Alacritty icon...'
 "$BASEDIR/alacritty/update-alacritty-icon.sh"
 
 # Install fonts
+echo 'Installing fonts...'
 font_dir="$HOME/Library/Fonts"
 cp "$BASEDIR"/fonts/* "$font_dir"
 
 # Ensure app are started
+echo 'Starting applications...'
 if ! pgrep -x "Hammerspoon" >/dev/null; then
   open -n /Applications/Hammerspoon.app
 fi
@@ -138,6 +148,7 @@ sudo defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool 
 for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
 
 # ASDF
+echo 'Setting up asdf...'
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf global nodejs latest
@@ -151,8 +162,8 @@ asdf install golang latest
 asdf global golang latest
 
 asdf plugin-add python https://github.com/asdf-community/asdf-python.git
-asdf install python latest
-asdf global python latest
+asdf install python 3.10.0
+asdf global python 3.10.0
 
 # Node
 echo 'Installing node dependencies...'
@@ -161,4 +172,4 @@ npm i -g npm-check-updates neovim
 # Python
 echo 'Installing python dependencies...'
 pipx install pylatexenc
-pip3 install --user --break-system-packages neovim
+pip3 install --user neovim
