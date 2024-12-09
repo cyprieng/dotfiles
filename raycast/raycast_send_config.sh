@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eo pipefail
+
 # Current directory
 BASEDIR=$(realpath "$(dirname "$0")")
 
