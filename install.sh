@@ -64,6 +64,19 @@ link_file "$BASEDIR/karabiner" ~/.config/karabiner
 link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 
+# Tmux powerline
+if [ ! -d "$HOME/.config/tmux-powerline/themes" ]; then
+  mkdir -p "$HOME/.config/tmux-powerline/themes"
+fi
+link_file "$BASEDIR/tmux/powerline.sh" "$HOME/.config/tmux-powerline/config.sh"
+link_file "$BASEDIR/tmux/powerline-theme.sh" "$HOME/.config/tmux-powerline/themes/custom.sh"
+
+# Ensure tmux tpm is installed
+if [ ! -d "$BASEDIR/tmux/plugins/tpm" ]; then
+  mkdir -p "$BASEDIR/tmux/plugins"
+  git clone https://github.com/tmux-plugins/tpm "$BASEDIR/tmux/plugins/tpm"
+fi
+
 # Better touch tool
 echo 'Setting up bettertouchtool...'
 killall "BetterTouchTool" >/dev/null 2>&1 || true
