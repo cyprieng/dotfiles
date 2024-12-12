@@ -68,8 +68,12 @@ link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 if [ ! -d "$HOME/.config/tmux-powerline/themes" ]; then
   mkdir -p "$HOME/.config/tmux-powerline/themes"
 fi
+if [ ! -d "$HOME/.config/tmux-powerline/segments" ]; then
+  mkdir -p "$HOME/.config/tmux-powerline/segments"
+fi
 link_file "$BASEDIR/tmux/powerline.sh" "$HOME/.config/tmux-powerline/config.sh"
 link_file "$BASEDIR/tmux/powerline-theme.sh" "$HOME/.config/tmux-powerline/themes/custom.sh"
+link_file "$BASEDIR/tmux/spotify.sh" "$HOME/.config/tmux-powerline/segments/spotify.sh"
 
 # Ensure tmux tpm is installed
 if [ ! -d "$BASEDIR/tmux/plugins/tpm" ]; then
