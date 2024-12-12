@@ -61,6 +61,7 @@ brew "gnupg"
 brew "poppler"
 brew "pandoc"
 brew "ffmpeg"
+brew "figlet"
 
 # Neovim dependencies
 brew "luarocks"
