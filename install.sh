@@ -63,6 +63,8 @@ link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/karabiner" ~/.config/karabiner
 link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
+link_file "$BASEDIR/eza" ~/Library/Application\ Support/eza
+link_file "$BASEDIR/spotify-player/theme.toml" ~/.config/spotify-player/theme.toml
 
 # Tmux powerline
 if [ ! -d "$HOME/.config/tmux-powerline/themes" ]; then
