@@ -23,7 +23,7 @@ export TMUX_POWERLINE_STATUS_VISIBILITY="on"
 export TMUX_POWERLINE_WINDOW_STATUS_LINE=0
 # The status bar refresh interval in seconds.
 # Note that events that force-refresh the status bar (such as window renaming) will ignore this.
-export TMUX_POWERLINE_STATUS_INTERVAL="1"
+export TMUX_POWERLINE_STATUS_INTERVAL="10"
 # The location of the window list. Can be {"absolute-centre, centre, left, right"}.
 # Note that "absolute-centre" is only supported on `tmux -V` >= 3.2.
 export TMUX_POWERLINE_STATUS_JUSTIFICATION="left"
@@ -66,7 +66,7 @@ export TMUX_POWERLINE_SEG_BATTERY_NUM_HEARTS="5"
 
 # date.sh {
 # date(1) format for the date. If you don't, for some reason, like ISO 8601 format you might want to have "%D" or "%m/%d/%Y".
-export TMUX_POWERLINE_SEG_DATE_FORMAT="%F"
+export TMUX_POWERLINE_SEG_DATE_FORMAT="%d %b"
 # }
 
 # date_week.sh {
