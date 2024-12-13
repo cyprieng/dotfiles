@@ -23,7 +23,7 @@ link_file() {
   fi
 
   # If the file exists and is not a sym link, back it up
-  if [ -f "$target" ]; then
+  if [ -f "$target" ] || [ -d "$target" ]; then
     mv "$target" "$target.backup"
   fi
 
@@ -65,17 +65,7 @@ link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/eza" ~/Library/Application\ Support/eza
 link_file "$BASEDIR/spotify-player/theme.toml" ~/.config/spotify-player/theme.toml
-
-# Tmux powerline
-if [ ! -d "$HOME/.config/tmux-powerline/themes" ]; then
-  mkdir -p "$HOME/.config/tmux-powerline/themes"
-fi
-if [ ! -d "$HOME/.config/tmux-powerline/segments" ]; then
-  mkdir -p "$HOME/.config/tmux-powerline/segments"
-fi
-link_file "$BASEDIR/tmux/powerline.sh" "$HOME/.config/tmux-powerline/config.sh"
-link_file "$BASEDIR/tmux/powerline-theme.sh" "$HOME/.config/tmux-powerline/themes/custom.sh"
-link_file "$BASEDIR/tmux/spotify.sh" "$HOME/.config/tmux-powerline/segments/spotify.sh"
+link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 
 # Ensure tmux tpm is installed
 if [ ! -d "$BASEDIR/tmux/plugins/tpm" ]; then
