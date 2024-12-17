@@ -1,13 +1,18 @@
 -- Define the Hyper key (Cmd + Alt + Ctrl + Shift)
 local hyper = { "cmd", "alt", "ctrl", "shift" }
 
+-- Function to calculate distance between two points
+local function distance(x1, y1, x2, y2)
+	return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+end
+
 -- Function to tile windows
 function tileWindows()
 	local screen = hs.screen.mainScreen()
 	local windows = hs.window.visibleWindows()
 	local screenFrame = screen:frame()
 
-	-- Filter and sort windows based on their position (top-left to bottom-right)
+	-- Filter windows on current screen
 	local windowsOnScreen = {}
 	for _, win in ipairs(windows) do
 		if win:screen() == screen and win:title() ~= "" then
@@ -15,24 +20,12 @@ function tileWindows()
 		end
 	end
 
-	-- Sort windows by their position (Y first, then X)
-	table.sort(windowsOnScreen, function(a, b)
-		local frameA = a:frame()
-		local frameB = b:frame()
-		if math.abs(frameA.y - frameB.y) < 50 then
-			-- If windows are roughly on the same row, sort by X
-			return frameA.x < frameB.x
-		end
-		-- Otherwise sort by Y
-		return frameA.y < frameB.y
-	end)
-
 	local windowCount = #windowsOnScreen
 	if windowCount == 0 then
 		return
 	end
 
-	-- Calculate grid dimensions based on window count
+	-- Calculate grid dimensions
 	local cols = math.ceil(math.sqrt(windowCount))
 	local rows = math.ceil(windowCount / cols)
 
@@ -40,29 +33,71 @@ function tileWindows()
 	local cellWidth = screenFrame.w / cols
 	local cellHeight = screenFrame.h / rows
 
-	-- Position windows in grid (top to bottom, then left to right)
-	for i, win in ipairs(windowsOnScreen) do
+	-- Create array of target positions
+	local targetPositions = {}
+	for i = 1, windowCount do
 		local row = (i - 1) % rows
 		local col = math.floor((i - 1) / rows)
+		table.insert(targetPositions, {
+			index = i,
+			x = screenFrame.x + (col * cellWidth) + (cellWidth / 2),
+			y = screenFrame.y + (row * cellHeight) + (cellHeight / 2),
+		})
+	end
 
-		local frame = {
-			x = screenFrame.x + (col * cellWidth),
-			y = screenFrame.y + (row * cellHeight),
-			w = cellWidth,
-			h = cellHeight,
-		}
+	-- Assign windows to nearest target positions
+	local assignments = {}
+	local usedPositions = {}
 
-		-- Si c'est la dernière fenêtre, on lui donne tout l'espace restant
-		if i == #windowsOnScreen then
-			-- Étendre jusqu'à la fin de la rangée
-			frame.w = screenFrame.w - frame.x + screenFrame.x
-			-- Si c'est aussi la dernière colonne, étendre jusqu'en bas
-			if col == cols - 1 then
-				frame.h = screenFrame.h - frame.y + screenFrame.y
+	-- For each window, find the nearest available target position
+	for _, win in ipairs(windowsOnScreen) do
+		local winFrame = win:frame()
+		local winCenterX = winFrame.x + (winFrame.w / 2)
+		local winCenterY = winFrame.y + (winFrame.h / 2)
+
+		local nearestDist = math.huge
+		local nearestPos = nil
+
+		for _, pos in ipairs(targetPositions) do
+			if not usedPositions[pos.index] then
+				local dist = distance(winCenterX, winCenterY, pos.x, pos.y)
+				if dist < nearestDist then
+					nearestDist = dist
+					nearestPos = pos
+				end
 			end
 		end
 
-		win:setFrame(frame)
+		if nearestPos then
+			usedPositions[nearestPos.index] = true
+			assignments[nearestPos.index] = win
+		end
+	end
+
+	-- Position windows according to assignments
+	for i = 1, windowCount do
+		local win = assignments[i]
+		if win then
+			local row = (i - 1) % rows
+			local col = math.floor((i - 1) / rows)
+
+			local frame = {
+				x = screenFrame.x + (col * cellWidth),
+				y = screenFrame.y + (row * cellHeight),
+				w = cellWidth,
+				h = cellHeight,
+			}
+
+			-- If it's the last window, give it all remaining space
+			if i == windowCount then
+				frame.w = screenFrame.w - frame.x + screenFrame.x
+				if col == cols - 1 then
+					frame.h = screenFrame.h - frame.y + screenFrame.y
+				end
+			end
+
+			win:setFrame(frame)
+		end
 	end
 end
 
