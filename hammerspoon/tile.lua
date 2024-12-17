@@ -12,6 +12,9 @@ function tileWindows()
 	local windows = hs.window.visibleWindows()
 	local screenFrame = screen:frame()
 
+	-- Determine if screen is vertical (height > width)
+	local isVertical = screenFrame.h > screenFrame.w
+
 	-- Filter windows on current screen
 	local windowsOnScreen = {}
 	for _, win in ipairs(windows) do
@@ -25,9 +28,15 @@ function tileWindows()
 		return
 	end
 
-	-- Calculate grid dimensions
-	local cols = math.ceil(math.sqrt(windowCount))
-	local rows = math.ceil(windowCount / cols)
+	-- Calculate grid dimensions based on screen orientation
+	local cols, rows
+	if isVertical then
+		rows = math.ceil(math.sqrt(windowCount))
+		cols = math.ceil(windowCount / rows)
+	else
+		cols = math.ceil(math.sqrt(windowCount))
+		rows = math.ceil(windowCount / cols)
+	end
 
 	-- Calculate cell dimensions
 	local cellWidth = screenFrame.w / cols
@@ -36,8 +45,17 @@ function tileWindows()
 	-- Create array of target positions
 	local targetPositions = {}
 	for i = 1, windowCount do
-		local row = (i - 1) % rows
-		local col = math.floor((i - 1) / rows)
+		local row, col
+		if isVertical then
+			-- For vertical screens: fill columns first, then rows
+			col = math.floor((i - 1) / rows)
+			row = (i - 1) % rows
+		else
+			-- For horizontal screens: fill rows first, then columns
+			row = (i - 1) % rows
+			col = math.floor((i - 1) / rows)
+		end
+
 		table.insert(targetPositions, {
 			index = i,
 			x = screenFrame.x + (col * cellWidth) + (cellWidth / 2),
@@ -78,8 +96,14 @@ function tileWindows()
 	for i = 1, windowCount do
 		local win = assignments[i]
 		if win then
-			local row = (i - 1) % rows
-			local col = math.floor((i - 1) / rows)
+			local row, col
+			if isVertical then
+				col = math.floor((i - 1) / rows)
+				row = (i - 1) % rows
+			else
+				row = (i - 1) % rows
+				col = math.floor((i - 1) / rows)
+			end
 
 			local frame = {
 				x = screenFrame.x + (col * cellWidth),
