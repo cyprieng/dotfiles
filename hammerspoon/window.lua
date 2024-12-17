@@ -14,6 +14,14 @@ function moveAndResize(win, x, y, w, h)
 	win:setFrame(f)
 end
 
+-- Helper function to determine if screen is small (MacBook)
+function isSmallScreen()
+	local screen = hs.screen.mainScreen()
+	local res = screen:fullFrame()
+	-- Consider screens with height less than 1000 pixels as "small" (typical MacBook)
+	return res.h < 1000
+end
+
 -- Left half
 hs.hotkey.bind(hyper, "left", function()
 	local win = hs.window.focusedWindow()
@@ -41,7 +49,11 @@ end)
 -- Center
 hs.hotkey.bind(hyper, "c", function()
 	local win = hs.window.focusedWindow()
-	moveAndResize(win, 0.15, 0.15, 0.7, 0.7)
+	if isSmallScreen() then
+		moveAndResize(win, 0.1, 0.1, 0.8, 0.8) -- Larger size for small screens
+	else
+		moveAndResize(win, 0.15, 0.15, 0.7, 0.7) -- Original size for larger screens
+	end
 end)
 
 -- Maximize (Rectangle uses Ctrl + Option + Return)
