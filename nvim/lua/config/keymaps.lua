@@ -140,6 +140,14 @@ if vim.lsp.inlay_hint then
     Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
+map("n", "<leader>.", function()
+  require("snacks").scratch()
+end, { desc = "Toggle Scratch Buffer" })
+
+map("n", "<leader>S", function()
+  require("snacks").scratch.select()
+end, { desc = "Select Scratch Buffer" })
+
 -- lazygit
 if vim.fn.executable("lazygit") == 1 then
     map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd" })
