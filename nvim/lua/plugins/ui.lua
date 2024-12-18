@@ -220,92 +220,60 @@ return {
         desc = "Edgy Select Window",
       },
     },
-    opts = function()
-      local opts = {
-        bottom = {
-          {
-            ft = "noice",
-            size = { height = 0.4 },
-            filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == ""
-            end,
-          },
-          {
-            ft = "lazyterm",
-            title = "LazyTerm",
-            size = { height = 0.4 },
-            filter = function(buf)
-              return not vim.b[buf].lazyterm_cmd
-            end,
-          },
-          "Trouble",
-          { ft = "qf", title = "QuickFix" },
-          {
-            ft = "help",
-            size = { height = 20 },
-            -- don't open help files in edgy that we're editing
-            filter = function(buf)
-              return vim.bo[buf].buftype == "help"
-            end,
-          },
-          { title = "Spectre", ft = "spectre_panel", size = { height = 0.4 } },
-          { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
-          {
-            ft = "toggleterm",
-            size = { height = 0.3 },
-            filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == "" and vim.o.columns < 250
-            end,
-          },
-        },
-        left = {
-          { title = "Neotest Summary", ft = "neotest-summary" },
-          -- "neo-tree",
-        },
-        right = {
-          {
-            ft = "toggleterm",
-            size = { width = 0.25 },
-            filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == "" and vim.o.columns > 250
-            end,
-          },
-          { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
-        },
-        keys = {
-          -- increase width
-          ["<C-S-Right>"] = function(win)
-            win:resize("width", 2)
+    opts = {
+      left = {
+        -- Neo-tree à gauche
+        {
+          title = "Neo-Tree",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "filesystem"
           end,
-          -- decrease width
-          ["<C-S-Left>"] = function(win)
-            win:resize("width", -2)
-          end,
-          -- increase height
-          ["<C-S-Up>"] = function(win)
-            win:resize("height", 2)
-          end,
-          -- decrease height
-          ["<C-S-Down>"] = function(win)
-            win:resize("height", -2)
+          size = { width = 0.15 },
+        },
+      },
+
+      right = {
+        -- Terminal à droite pour les grands écrans
+        {
+          title = "Terminal",
+          ft = "toggleterm",
+          size = { width = 0.25 },
+          -- Ne s'affiche que si l'écran est assez large
+          filter = function()
+            return vim.o.columns > 250
           end,
         },
-      }
-      for _, pos in ipairs({ "top", "bottom", "left", "right" }) do
-        opts[pos] = opts[pos] or {}
-        table.insert(opts[pos], {
-          ft = "trouble",
-          filter = function(_buf, win)
-            return vim.w[win].trouble
-              and vim.w[win].trouble.position == pos
-              and vim.w[win].trouble.type == "split"
-              and vim.w[win].trouble.relative == "editor"
-              and not vim.w[win].trouble_preview
+      },
+
+      bottom = {
+        -- Terminal en bas pour les petits écrans
+        {
+          title = "Terminal",
+          ft = "toggleterm",
+          size = { height = 0.3 },
+          -- Ne s'affiche que si l'écran est petit
+          filter = function()
+            return vim.o.columns <= 250
           end,
-        })
-      end
-      return opts
-    end,
+        },
+      },
+
+      -- options = {
+      --   left = { size = 30 }, -- Largeur de la fenêtre de gauche
+      --   right = { size = 40 }, -- Largeur de la fenêtre de droite
+      --   bottom = { size = 15 }, -- Hauteur de la fenêtre du bas
+      -- },
+
+      -- animate = {
+      --   enabled = true,
+      --   fps = 100,
+      --   cps = 120,
+      -- },
+
+      -- exit_when_last = true, -- Ferme la fenêtre quand c'est le dernier buffer
+      -- close_when_all_hidden = true, -- Ferme la fenêtre quand tous les buffers sont cachés
+    },
   },
 
   -- Animation
