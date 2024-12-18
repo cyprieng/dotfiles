@@ -38,7 +38,6 @@ brew "bottom"
 brew "tmux-xpanes"
 
 # Apps
-cask "rectangle"
 brew "spotify_player"
 cask "karabiner-elements"
 cask "localsend"

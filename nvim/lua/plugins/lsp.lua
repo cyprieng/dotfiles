@@ -191,6 +191,8 @@ return {
         --
         astro = {},
         bashls = {},
+        shfmt = {},
+        shellcheck = {},
         css_variables = {},
         cssls = {},
         docker_compose_language_service = {},
@@ -210,7 +212,13 @@ return {
         tailwindcss = {},
         terraformls = {},
         ts_ls = {},
-        volar = {},
+        volar = {
+          init_options = {
+            vue = {
+              hybridMode = false,
+            },
+          },
+        },
         yamlls = {},
         lua_ls = {
           -- cmd = { ... },
@@ -276,13 +284,8 @@ return {
     },
     opts = function(_, opts)
       opts.formatters = opts.formatters or {}
-      -- opts.formatters.prettier = {
-      --   condition = function(_, ctx)
-      --     return M.has_parser(ctx) and (vim.g.lazyvim_prettier_needs_config ~= true or M.has_config(ctx))
-      --   end,
-      -- }
-
       opts.notify_on_error = false
+      local sql_ft = { "sql", "mysql", "plsql" }
       opts.format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -294,8 +297,12 @@ return {
         else
           lsp_format_opt = "fallback"
         end
+
+        -- Specific timeout for SQL
+        local timeout = sql_ft[vim.bo[bufnr].filetype] and 5000 or 500
+
         return {
-          timeout_ms = 500,
+          timeout_ms = timeout,
           lsp_format = lsp_format_opt,
         }
       end
@@ -339,7 +346,6 @@ return {
       end
 
       -- SQL
-      local sql_ft = { "sql", "mysql", "plsql" }
       opts.formatters.sqlfluff = {
         args = { "format", "--dialect=ansi", "-" },
       }
@@ -469,4 +475,3 @@ return {
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 }
-
