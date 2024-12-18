@@ -168,6 +168,9 @@ asdf plugin-add python https://github.com/asdf-community/asdf-python.git
 asdf install python 3.12.0
 asdf global python 3.12.0
 
+# Golang
+go install golang.org/x/tools/cmd/goimports@latest
+
 # Node
 echo 'Installing node dependencies...'
 npm i -g npm-check-updates neovim
