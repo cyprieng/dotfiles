@@ -197,7 +197,12 @@ return {
         cssls = {},
         docker_compose_language_service = {},
         dockerls = {},
-        eslint = {},
+        eslint = {
+          settings = {
+            workingDirectories = { mode = "auto" },
+            format = true,
+          },
+        },
         gopls = {},
         html = {},
         intelephense = {},
@@ -285,7 +290,6 @@ return {
     opts = function(_, opts)
       opts.formatters = opts.formatters or {}
       opts.notify_on_error = false
-      local sql_ft = { "sql", "mysql", "plsql" }
       opts.format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -298,11 +302,8 @@ return {
           lsp_format_opt = "fallback"
         end
 
-        -- Specific timeout for SQL
-        local timeout = sql_ft[vim.bo[bufnr].filetype] and 5000 or 500
-
         return {
-          timeout_ms = timeout,
+          timeout_ms = 5000,
           lsp_format = lsp_format_opt,
         }
       end
@@ -339,13 +340,60 @@ return {
         "vue",
         "yaml",
       }
+      opts.formatters.prettier = {
+        condition = function(ctx)
+          -- Disable prettier if we have an eslint file
+          local has_eslint_config = vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" }, {
+            upward = true,
+            path = ctx.filename,
+          })[1] ~= nil
+          return not has_eslint_config
+        end,
+      }
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(prettierSupported) do
         opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
         table.insert(opts.formatters_by_ft[ft], "prettier")
       end
 
+      -- Eslint
+      opts.formatters.eslint = {
+        condition = function(ctx)
+          -- Check eslint LSP
+          local has_eslint = false
+          for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = ctx.buf })) do
+            if client.name == "eslint" then
+              has_eslint = true
+              break
+            end
+          end
+
+          -- Check config file
+          local has_config = vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" }, {
+            upward = true,
+            path = ctx.filename,
+          })[1] ~= nil
+
+          return has_eslint and has_config
+        end,
+
+        command = "eslint_d",
+        args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
+      }
+
+      local js_filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+      }
+
+      for _, ft in ipairs(js_filetypes) do
+        opts.formatters_by_ft[ft] = { "prettier", "eslint" }
+      end
+
       -- SQL
+      local sql_ft = { "sql", "mysql", "plsql" }
       opts.formatters.sqlfluff = {
         args = { "format", "--dialect=ansi", "-" },
       }
