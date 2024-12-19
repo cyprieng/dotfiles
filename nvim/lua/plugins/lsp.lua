@@ -340,16 +340,6 @@ return {
         "vue",
         "yaml",
       }
-      opts.formatters.prettier = {
-        condition = function(ctx)
-          -- Disable prettier if we have an eslint file
-          local has_eslint_config = vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" }, {
-            upward = true,
-            path = ctx.filename,
-          })[1] ~= nil
-          return not has_eslint_config
-        end,
-      }
       opts.formatters_by_ft = opts.formatters_by_ft or {}
       for _, ft in ipairs(prettierSupported) do
         opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}

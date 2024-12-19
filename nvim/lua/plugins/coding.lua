@@ -557,4 +557,7 @@ return {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
   },
+
+  -- Auto detect indent
+  { "tpope/vim-sleuth" },
 }
