@@ -427,4 +427,7 @@ return {
       })
     end,
   },
+
+  -- UI improvements
+  { "stevearc/dressing.nvim" },
 }
