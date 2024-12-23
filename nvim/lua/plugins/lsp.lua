@@ -224,6 +224,7 @@ return {
             },
           },
         },
+        lemminx = {},
         yamlls = {},
         lua_ls = {
           -- cmd = { ... },
@@ -320,7 +321,10 @@ return {
         terraform = { "terraform_fmt" },
         tf = { "terraform_fmt" },
         ["terraform-vars"] = { "terraform_fmt" },
+        xml = { "xmlformatter" },
+        svg = { "xmlformatter" },
       }
+
       -- Prettier
       local prettierSupported = {
         "css",
