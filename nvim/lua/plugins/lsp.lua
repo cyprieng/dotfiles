@@ -429,6 +429,7 @@ return {
       --  into multiple repos for maintenance purposes.
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      "roobert/tailwindcss-colorizer-cmp.nvim",
     },
     config = function()
       -- See `:help cmp`
@@ -436,7 +437,15 @@ return {
       local luasnip = require("luasnip")
       luasnip.config.setup({})
 
+      -- Tailwind colors
+      require("tailwindcss-colorizer-cmp").setup({
+        color_square_width = 2,
+      })
+
       cmp.setup({
+        formatting = {
+          format = require("tailwindcss-colorizer-cmp").formatter,
+        },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
