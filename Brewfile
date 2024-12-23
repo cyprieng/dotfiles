@@ -36,6 +36,7 @@ brew "aider"
 brew "tokei"
 brew "bottom"
 brew "tmux-xpanes"
+brew "spacer"
 
 # Apps
 brew "spotify_player"
@@ -75,3 +76,4 @@ brew "isort"
 brew "php-cs-fixer"
 brew "terraform"
 brew "eslint_d"
+brew "xmlformat"
