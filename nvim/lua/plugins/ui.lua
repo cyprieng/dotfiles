@@ -176,6 +176,7 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      use_libuv_file_watcher = true,
       filesystem = {
         commands = {
           -- Override delete to use trash instead of rm
