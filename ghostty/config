@@ -25,4 +25,6 @@ keybind = ctrl+shift+up=csi:5~
 # Control + Shift + Down -> Page Down
 keybind = ctrl+shift+down=csi:6~
 
-
+# Quick terminal
+keybind = ctrl+t=toggle_quick_terminal
+quick-terminal-position = center
