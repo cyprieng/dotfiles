@@ -2,6 +2,7 @@
 tmux/plugins
 vale/styles
 .secrets.sh
+secrets.json
 !aider/.aider.conf.yml
 karabiner/automatic_backups
 
