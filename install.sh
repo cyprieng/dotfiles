@@ -45,7 +45,7 @@ link_file "$BASEDIR/zsh/.secrets.sh" ~/.secrets.sh
 link_file "$BASEDIR/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
-link_file "$BASEDIR/alacritty/.alacritty.toml" ~/.alacritty.toml
+link_file "$BASEDIR/ghostty" ~/.config/ghostty
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/tmux" ~/.config/tmux
 link_file "$BASEDIR/ranger" ~/.config/ranger
@@ -92,10 +92,6 @@ if pgrep -x "AltTab" >/dev/null; then
   killall "AltTab" >/dev/null 2>&1 || true
 fi
 open -n /Applications/AltTab.app
-
-# Update Alacritty icon
-echo 'Updating Alacritty icon...'
-"$BASEDIR/alacritty/update-alacritty-icon.sh"
 
 # Install fonts
 echo 'Installing fonts...'

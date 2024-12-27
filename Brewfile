@@ -1,5 +1,5 @@
-# Install alacritty
-cask "alacritty", args: { no_quarantine: true }
+# Install ghostty 
+cask "ghostty"
 
 # Install neovim
 brew "neovim"

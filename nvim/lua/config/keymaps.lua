@@ -19,12 +19,12 @@ map("n", "<leader><Up>", "<C-w><Up>", { desc = "Go to upper window", remap = tru
 map("n", "<leader><Down>", "<C-w><Down>", { desc = "Go to lower window", remap = true })
 
 -- Word navigation
-map("n", "<A-Right>", "w", { noremap = true })
-map("n", "<A-Left>", "b", { noremap = true })
-map("i", "<A-Right>", "<C-o>w", { noremap = true })
-map("i", "<A-Left>", "<C-o>b", { noremap = true })
-map("v", "<A-Right>", "w", { noremap = true })
-map("v", "<A-Left>", "b", { noremap = true })
+map("n", "<ESC>b", "b", { noremap = true })
+map("n", "<ESC>f", "w", { noremap = true })
+map("i", "<ESC>b", "<C-o>b", { noremap = true })
+map("i", "<ESC>f", "<C-o>w", { noremap = true })
+map("v", "<ESC>b", "b", { noremap = true })
+map("v", "<ESC>f", "w", { noremap = true })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })

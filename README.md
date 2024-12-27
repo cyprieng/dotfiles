@@ -1,15 +1,6 @@
 # Dotfiles
 
-Collection of my dotfiles. Including configuration for:
-
-- Alacritty
-- lazygit
-- Neovim
-- Ranger
-- Rectangle
-- Startship
-- Tmux
-- Zsh
+Collection of my dotfiles.
 
 ## Install (Only for macOS)
 

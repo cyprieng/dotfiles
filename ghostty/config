@@ -1,0 +1,28 @@
+# UI
+font-size = 15
+theme = tokyonight_moon
+mouse-hide-while-typing = true
+macos-titlebar-style = hidden
+confirm-close-surface = false
+quit-after-last-window-closed = true
+
+# Shell
+shell-integration-features = true
+initial-command = /opt/homebrew/bin/tmux new-session -A -D 
+
+## Keybindings
+macos-option-as-alt = true
+
+# Command + Left -> Home
+keybind = super+left=csi:H
+
+# Command + Right -> End
+keybind = super+right=csi:F
+
+# Control + Shift + Up -> Page Up
+keybind = ctrl+shift+up=csi:5~
+
+# Control + Shift + Down -> Page Down
+keybind = ctrl+shift+down=csi:6~
+
+
