@@ -1,5 +1,5 @@
 -- Refresh neotree status when leaving a buffer
-vim.api.nvim_create_autocmd({ "BufLeave" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   pattern = { "*" },
   group = vim.api.nvim_create_augroup("neovim_update_tree", { clear = true }),
   callback = function()
