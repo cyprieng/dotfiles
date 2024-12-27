@@ -85,10 +85,6 @@ fi
 echo 'Syncing vale...'
 (cd ~/.config/vale && vale sync)
 
-# Weather
-echo 'Installing yr (weather)...'
-go install git.sr.ht/~timharek/yr@latest
-
 # Alt tab
 echo 'Setting up alt-tab...'
 defaults import com.lwouis.alt-tab-macos "$BASEDIR/alttab/com.lwouis.alt-tab-macos.plist"
@@ -179,3 +175,7 @@ npm i -g npm-check-updates neovim
 echo 'Installing python dependencies...'
 pipx install pylatexenc
 pip3 install --user neovim
+
+# Weather
+echo 'Installing yr (weather)...'
+go install git.sr.ht/~timharek/yr@latest
