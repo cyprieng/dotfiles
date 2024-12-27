@@ -50,6 +50,7 @@ cask "alt-tab"
 cask "bitwarden"
 brew "bitwarden-cli"
 cask "hammerspoon"
+cask "displaylink"
 
 # Languages
 brew "asdf"
