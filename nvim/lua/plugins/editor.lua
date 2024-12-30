@@ -127,6 +127,14 @@ return {
     },
   },
 
+  -- Image preview
+  {
+    "3rd/image.nvim",
+    opts = {
+      tmux_show_only_in_active_window = true,
+    },
+  },
+
   -- Trouble
   {
     "folke/trouble.nvim",
