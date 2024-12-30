@@ -4,6 +4,9 @@ cask "ghostty"
 # Install neovim
 brew "neovim"
 
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
+
 # Cli tools 
 brew "ripgrep"
 brew "lazygit"

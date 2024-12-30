@@ -93,11 +93,6 @@ if pgrep -x "AltTab" >/dev/null; then
 fi
 open -n /Applications/AltTab.app
 
-# Install fonts
-echo 'Installing fonts...'
-font_dir="$HOME/Library/Fonts"
-cp "$BASEDIR"/fonts/* "$font_dir"
-
 # Ensure app are started
 echo 'Starting applications...'
 if ! pgrep -x "Hammerspoon" >/dev/null; then
