@@ -13,13 +13,16 @@
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
 	# Pull in remote changes for the current repository and all its submodules.
-  p = pull --recurse-submodules
+	p = pull --recurse-submodules
 
-  # Commit using commitizen
+	# Commit using commitizen
 	c = !cz --config ~/.cz.toml commit
 
-	# Commit all changes.
-	ca = !git add ':(exclude,attr:builtin_objectmode=160000)' && git commit -av
+	# Add all tracked files
+	a = add -u
+
+	# Commit and push
+	cp = "!f() { git status -s | fzf --multi --preview \"git diff --color {2}\" --bind ctrl-a:select-all,ctrl-d:deselect-all --preview-window=right:70% --bind \"load:select-all+clear-query\" -q '^M' | cut -c4- | xargs -r git add && git c && git push; }; f"
 
 	# Switch to a branch, creating it if necessary.
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
@@ -96,25 +99,25 @@
 
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
-  untrackedCache = true
+	untrackedCache = true
 
-  # Set delta pager
-  pager = 'delta'
+	# Set delta pager
+	pager = 'delta'
 
 [delta]
 
-  side-by-side = true
-  minus-style                   = syntax "#3a273a"
-  minus-non-emph-style          = syntax "#3a273a"
-  minus-emph-style              = syntax "#6b2e43"
-  minus-empty-line-marker-style = syntax "#3a273a"
-  line-numbers-minus-style      = "#e26a75"
-  plus-style                    = syntax "#273849"
-  plus-non-emph-style           = syntax "#273849"
-  plus-emph-style               = syntax "#305f6f"
-  plus-empty-line-marker-style  = syntax "#273849"
-  line-numbers-plus-style       = "#b8db87"
-  line-numbers-zero-style       = "#3b4261"
+	side-by-side = true
+	minus-style                   = syntax "#3a273a"
+	minus-non-emph-style          = syntax "#3a273a"
+	minus-emph-style              = syntax "#6b2e43"
+	minus-empty-line-marker-style = syntax "#3a273a"
+	line-numbers-minus-style      = "#e26a75"
+	plus-style                    = syntax "#273849"
+	plus-non-emph-style           = syntax "#273849"
+	plus-emph-style               = syntax "#305f6f"
+	plus-empty-line-marker-style  = syntax "#273849"
+	line-numbers-plus-style       = "#b8db87"
+	line-numbers-zero-style       = "#3b4261"
 
 [color]
 
