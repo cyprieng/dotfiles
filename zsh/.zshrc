@@ -33,6 +33,14 @@ alias lla="ls -la"
 alias vale="vale --config ~/.config/vale/.vale.ini"
 alias readme-generator="npx readme-md-generator"
 alias cz="cz --config ~/.cz.toml"
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # Bind keys
 bindkey "^[[1;3C" forward-word    # Alt + →
