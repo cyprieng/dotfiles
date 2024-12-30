@@ -498,6 +498,31 @@
                                     { "key_code": "spacebar" }
                                 ],
                                 "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com\\.mitchellh\\.ghostty$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    },
+                                    {
+                                        "input_sources": [
+                                            {
+                                                "input_source_id": "com.apple.keylayout.French",
+                                                "language": "fr"
+                                            }
+                                        ],
+                                        "type": "input_source_if"
+                                    }
+                                ],
+                                "from": { "key_code": "backslash" },
+                                "to": [
+                                    { "key_code": "backslash" },
+                                    { "key_code": "spacebar" }
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
