@@ -1,5 +1,6 @@
 # UI
 font-size = 15
+font-thicken = true
 theme = tokyonight_moon
 mouse-hide-while-typing = true
 macos-titlebar-style = hidden
