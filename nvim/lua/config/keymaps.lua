@@ -4,6 +4,13 @@ local Snacks = require("snacks")
 -- Toggle UI windows
 map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
 map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotree", remap = true })
+map("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "Github copilot", remap = true })
+map("n", "<leader>cq", function()
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+  end
+end, { desc = "Github copilot current file", remap = true })
 
 -- Git
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
