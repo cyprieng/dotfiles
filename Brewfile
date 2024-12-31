@@ -67,6 +67,7 @@ brew "ffmpeg"
 brew "figlet"
 brew "libpq"
 brew "imagemagick"
+brew "p7zip"
 
 # Neovim dependencies
 brew "luarocks"
