@@ -186,6 +186,9 @@ return {
             require("neo-tree.sources.manager").refresh(state.name)
           end,
         },
+        follow_current_file = {
+          enabled = true,
+        },
         filtered_items = {
           show_hidden_count = true,
           hide_dotfiles = false,
