@@ -54,6 +54,7 @@ cask "bitwarden"
 brew "bitwarden-cli"
 cask "hammerspoon"
 cask "displaylink"
+cask "sf-symbols"
 
 # Languages
 brew "asdf"
@@ -69,6 +70,8 @@ brew "figlet"
 brew "libpq"
 brew "imagemagick"
 brew "p7zip"
+brew "swiftlint"
+brew "periphery"
 
 # Neovim dependencies
 brew "luarocks"
