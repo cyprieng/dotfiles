@@ -59,6 +59,12 @@ link_file "$BASEDIR/eza" ~/Library/Application\ Support/eza
 link_file "$BASEDIR/spotify-player/theme.toml" ~/.config/spotify-player/theme.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 
+# GH
+if ! gh auth status >/dev/null; then
+  gh auth login
+fi
+gh extension install github/gh-copilot
+
 # Ensure tmux tpm is installed
 if [ ! -d "$BASEDIR/tmux/plugins/tpm" ]; then
   mkdir -p "$BASEDIR/tmux/plugins"

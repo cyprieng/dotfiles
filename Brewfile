@@ -39,6 +39,7 @@ brew "tokei"
 brew "bottom"
 brew "tmux-xpanes"
 brew "spacer"
+brew "gh"
 
 # Apps
 brew "spotify_player"
