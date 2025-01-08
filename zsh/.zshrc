@@ -27,13 +27,13 @@ alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias v="nvim" 
 alias jsoncb="pbpaste | fx"
 alias weather="~/go/bin/yr today montpellier"
-eval $(thefuck --alias)
 alias ls="eza --icons=always --group-directories-first --git"
 alias lla="ls -la"
 alias vale="vale --config ~/.config/vale/.vale.ini"
 alias readme-generator="npx readme-md-generator"
 alias cz="cz --config ~/.cz.toml"
-eval "$(gh copilot alias -- zsh)"
+alias ghce="gh copilot explain"
+alias ghcs="gh copilot suggest"
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
