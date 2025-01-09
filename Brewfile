@@ -41,6 +41,7 @@ brew "spacer"
 brew "gh"
 
 # Apps
+cask "spotify"
 brew "spotify_player"
 cask "karabiner-elements"
 cask "localsend"
