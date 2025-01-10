@@ -55,6 +55,7 @@ brew "bitwarden-cli"
 cask "hammerspoon"
 cask "displaylink"
 cask "sf-symbols"
+brew "gifski"
 
 # Languages
 brew "asdf"
