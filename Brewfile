@@ -57,6 +57,7 @@ cask "hammerspoon"
 cask "displaylink"
 cask "sf-symbols"
 brew "gifski"
+cask "proxyman"
 
 # Languages
 brew "asdf"
