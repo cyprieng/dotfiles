@@ -41,6 +41,7 @@ brew "spacer"
 brew "gh"
 
 # Apps
+cask "orion"
 cask "spotify"
 brew "spotify_player"
 cask "karabiner-elements"
