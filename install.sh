@@ -71,13 +71,6 @@ if [ ! -d "$BASEDIR/tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm "$BASEDIR/tmux/plugins/tpm"
 fi
 
-# Better touch tool
-echo 'Setting up bettertouchtool...'
-killall "BetterTouchTool" >/dev/null 2>&1 || true
-link_file "$BASEDIR/bettertouchtool/library" ~/Library/Application\ Support/BetterTouchTool
-cp "$BASEDIR/bettertouchtool/com.hegenberg.BetterTouchTool.plist" ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
-open -n /Applications/BetterTouchTool.app
-
 # Git config
 link_file "$BASEDIR/git/.gitconfig" ~/.gitconfig-global
 link_file "$BASEDIR/git/.gitignore" ~/.gitignore
