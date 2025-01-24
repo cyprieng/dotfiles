@@ -39,6 +39,7 @@ brew "bottom"
 brew "tmux-xpanes"
 brew "spacer"
 brew "gh"
+brew "kubectx"
 
 # Apps
 cask "orion"
