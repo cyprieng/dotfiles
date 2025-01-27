@@ -78,6 +78,7 @@ brew "imagemagick"
 brew "p7zip"
 brew "swiftlint"
 brew "periphery"
+brew "uv"
 
 # Neovim dependencies
 brew "luarocks"

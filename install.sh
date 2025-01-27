@@ -175,3 +175,6 @@ pip3 install --user neovim
 # Weather
 echo 'Installing yr (weather)...'
 go install git.sr.ht/~timharek/yr@latest
+
+# Posting
+uv tool install --python 3.12 posting
