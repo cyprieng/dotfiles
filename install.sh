@@ -43,6 +43,7 @@ brew bundle
 # Create links
 link_file "$BASEDIR/zsh/.secrets.sh" ~/.secrets.sh
 link_file "$BASEDIR/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
+link_file "$BASEDIR/zsh/.zfunc" ~/.zfunc
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/ghostty" ~/.config/ghostty
@@ -169,7 +170,7 @@ npm i -g npm-check-updates neovim
 
 # Python
 echo 'Installing python dependencies...'
-pipx install pylatexenc
+pipx install pylatexenc poetry
 pip3 install --user neovim
 
 # Weather

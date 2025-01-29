@@ -10,6 +10,10 @@ source ~/.secrets.sh
 # Enable correction
 ENABLE_CORRECTION="true"
 
+# Load zfunc and compinit
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
 # Load antidote
 source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 antidote load
