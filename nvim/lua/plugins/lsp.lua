@@ -311,7 +311,7 @@ return {
         markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
         php = { "php_cs_fixer" },
-        python = { "isort", "black" },
+        python = { "ruff_format" },
         rust = { "rustfmt", lsp_format = "fallback" },
         hcl = { "packer_fmt" },
         terraform = { "terraform_fmt" },

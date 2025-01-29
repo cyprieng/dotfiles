@@ -179,3 +179,4 @@ go install git.sr.ht/~timharek/yr@latest
 
 # Posting
 uv tool install --python 3.12 posting
+uv tool install ruff@latest
