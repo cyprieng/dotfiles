@@ -18,7 +18,10 @@ function handleKeyboardConnection()
 	-- Check for USB keyboards
 	for _, device in pairs(devices) do
 		-- You might need to adjust this check based on your keyboard's properties
-		if device.productName and device.productName:lower():match("xd87") then
+		if
+			device.productName
+			and (device.productName:lower():match("xd87") or device.productName:lower():match("hotdox"))
+		then
 			keyboardFound = true
 			break
 		end
