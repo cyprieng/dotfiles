@@ -25,6 +25,17 @@ map("n", "<leader><Left>", "<C-w><Left>", { desc = "Go to left window", remap = 
 map("n", "<leader><Up>", "<C-w><Up>", { desc = "Go to upper window", remap = true })
 map("n", "<leader><Down>", "<C-w><Down>", { desc = "Go to lower window", remap = true })
 
+-- Start/end of line
+-- Map Ctrl-A (sent by Cmd+Left) to first non-blank character
+vim.keymap.set("n", "<C-a>", "^", { noremap = true })
+vim.keymap.set("i", "<C-a>", "<C-o>^", { noremap = true })
+vim.keymap.set("v", "<C-a>", "^", { noremap = true })
+
+-- Map Ctrl-E (sent by Cmd+Right) to end of line
+vim.keymap.set("n", "<C-e>", "$", { noremap = true })
+vim.keymap.set("i", "<C-e>", "<C-o>$", { noremap = true })
+vim.keymap.set("v", "<C-e>", "$", { noremap = true })
+
 -- Word navigation
 map("n", "<ESC>b", "b", { noremap = true })
 map("n", "<ESC>f", "w", { noremap = true })

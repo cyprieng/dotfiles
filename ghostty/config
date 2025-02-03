@@ -9,16 +9,22 @@ quit-after-last-window-closed = true
 
 # Shell
 shell-integration-features = true
-initial-command = /opt/homebrew/bin/tmux new-session -A -D 
+initial-command = /opt/homebrew/bin/tmux new-session -A -D
 
 ## Keybindings
-macos-option-as-alt = false 
+macos-option-as-alt = false
 
 # Command + Left -> Home
-keybind = super+left=csi:H
+keybind = super+left=text:\x01
 
 # Command + Right -> End
-keybind = super+right=csi:F
+keybind = super+right=text:\x05
+
+# Undo
+keybind = super+z=text:\x1f
+
+# Redo
+keybind = super+shift+z=esc:e
 
 # Control + Shift + Up -> Page Up
 keybind = ctrl+shift+up=csi:5~
