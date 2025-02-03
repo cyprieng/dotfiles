@@ -61,7 +61,6 @@ brew "gifski"
 cask "proxyman"
 cask "shortcat"
 cask "jordanbaird-ice"
-cask "onyx"
 
 # Languages
 brew "asdf"
