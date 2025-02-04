@@ -44,6 +44,17 @@ map("i", "<ESC>f", "<C-o>w", { noremap = true })
 map("v", "<ESC>b", "b", { noremap = true })
 map("v", "<ESC>f", "w", { noremap = true })
 
+-- Word remove
+-- Alt + Backspace to delete word backward
+vim.keymap.set("n", "<A-BS>", "db", { desc = "Delete word backward" })
+vim.keymap.set("i", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
+vim.keymap.set("c", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
+
+-- Alt + Delete to delete word forward
+vim.keymap.set("n", "<A-Del>", "dw", { desc = "Delete word forward" })
+vim.keymap.set("i", "<A-Del>", "<C-o>dw", { desc = "Delete word forward" })
+vim.keymap.set("c", "<A-Del>", "<C-Del>", { desc = "Delete word forward" })
+
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
