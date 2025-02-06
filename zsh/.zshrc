@@ -57,7 +57,7 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 
 # Load asdf
-source $(brew --prefix asdf)/libexec/asdf.sh
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \

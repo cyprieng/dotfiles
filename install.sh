@@ -59,6 +59,7 @@ link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/eza" ~/Library/Application\ Support/eza
 link_file "$BASEDIR/spotify-player/theme.toml" ~/.config/spotify-player/theme.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
+link_file "$BASEDIR/.tool-versions" ~/.tool-versions
 
 # GH
 if ! gh auth status >/dev/null; then
@@ -146,20 +147,11 @@ for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
 # ASDF
 echo 'Setting up asdf...'
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs latest
-asdf global nodejs latest
-
-asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
-asdf install rust latest
-asdf global rust latest
-
+asdf plugin add rust https://github.com/asdf-community/asdf-rust.git
 asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
-asdf install golang latest
-asdf global golang latest
-
-asdf plugin-add python https://github.com/asdf-community/asdf-python.git
-asdf install python 3.12.0
-asdf global python 3.12.0
+asdf plugin add python https://github.com/asdf-community/asdf-python.git
+asdf plugin update --all
+asdf install
 
 # Golang
 go install golang.org/x/tools/cmd/goimports@latest
