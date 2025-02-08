@@ -40,6 +40,7 @@ brew "tmux-xpanes"
 brew "spacer"
 brew "gh"
 brew "kubectx"
+brew "yt-dlp"
 
 # Apps
 cask "orion"
