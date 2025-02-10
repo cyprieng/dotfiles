@@ -8,6 +8,7 @@ brew "neovim"
 cask "font-jetbrains-mono-nerd-font"
 
 # Cli tools 
+brew "atuin"
 brew "ripgrep"
 brew "lazygit"
 brew "fd"

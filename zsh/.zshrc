@@ -59,6 +59,9 @@ eval "$(zoxide init zsh --cmd cd)"
 # Load asdf
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# Atuin
+eval "$(atuin init zsh)"
+
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
