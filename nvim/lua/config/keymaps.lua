@@ -19,6 +19,12 @@ map("n", "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file gi
 -- Exit terminal insert mode
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
+-- Terminal tmux navigation
+map("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
+map("t", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { noremap = true, silent = true })
+map("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { noremap = true, silent = true })
+map("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { noremap = true, silent = true })
+
 -- Window navigation
 map("n", "<leader><Right>", "<C-w><Right>", { desc = "Go to right window", remap = true })
 map("n", "<leader><Left>", "<C-w><Left>", { desc = "Go to left window", remap = true })
