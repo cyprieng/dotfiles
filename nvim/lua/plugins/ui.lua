@@ -389,4 +389,21 @@ return {
 
   -- UI improvements
   { "stevearc/dressing.nvim" },
+
+  -- Auto close buffers
+  {
+    "axkirillov/hbac.nvim",
+    config = true,
+    opts = {
+      autoclose = true,
+      threshold = 5,
+      close_command = function(bufnr)
+        vim.api.nvim_buf_delete(bufnr, {})
+      end,
+      close_buffers_with_windows = false, -- hbac will close buffers with associated windows if this option is `true`
+      telescope = {
+        -- See #telescope-configuration below
+      },
+    },
+  },
 }
