@@ -1,0 +1,28 @@
+[theme]
+name = "tokyonight"
+parent = "marine"
+
+[colors]
+# AlertInfo: alerting the user at an INFO level
+AlertInfo = "#ffc777"
+
+# AlertWarn: alerting the user at a WARN level
+AlertWarn = "#ff9e64"
+
+# AlertError: alerting the user at an ERROR level
+AlertError = "#ff007c"
+
+# Annotation: less-critical, supporting text
+Annotation = "#b4f9f8"
+
+# Base: default foreground color
+Base = "#c0caf5"
+
+# Guidance: instructing the user as help or context
+Guidance = "#4fd6be"
+
+# Important: drawing the user’s attention to information
+Important = "#bb9af7"
+
+# Title: titling a section or view
+Title = "#3d59a1"

@@ -46,6 +46,7 @@ link_file "$BASEDIR/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
 link_file "$BASEDIR/zsh/.zfunc" ~/.zfunc
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/zsh/atuin/config.toml" ~/.config/atuin/config.toml
+link_file "$BASEDIR/zsh/atuin/themes" ~/.config/atuin/themes
 link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/ghostty" ~/.config/ghostty
 link_file "$BASEDIR/nvim" ~/.config/nvim
