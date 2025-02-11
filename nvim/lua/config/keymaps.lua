@@ -25,12 +25,6 @@ map("t", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { noremap = true, silent = true }
 map("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { noremap = true, silent = true })
 map("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { noremap = true, silent = true })
 
--- Window navigation
-map("n", "<leader><Right>", "<C-w><Right>", { desc = "Go to right window", remap = true })
-map("n", "<leader><Left>", "<C-w><Left>", { desc = "Go to left window", remap = true })
-map("n", "<leader><Up>", "<C-w><Up>", { desc = "Go to upper window", remap = true })
-map("n", "<leader><Down>", "<C-w><Down>", { desc = "Go to lower window", remap = true })
-
 -- Start/end of line
 -- Map Ctrl-A (sent by Cmd+Left) to first non-blank character
 vim.keymap.set("n", "<C-a>", "^", { noremap = true })
@@ -78,10 +72,7 @@ map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", {
 -- buffers
 map("n", "<A-S-Right>", "<cmd>bnext<cr>", { desc = "Next buffer", remap = true })
 map("n", "<A-S-Left>", "<cmd>bprevious<cr>", { desc = "Previous buffer", remap = true })
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
@@ -110,16 +101,8 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search R
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- Add undo break-points
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
-
 -- save file
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-
---keywordprg
-map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 
 -- better indenting
 map("v", "<", "<gv")
@@ -134,9 +117,6 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- new file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
-map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
@@ -198,13 +178,6 @@ end, { desc = "Git Browse (copy)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
-
--- highlights under cursor
-map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-map("n", "<leader>uI", "<cmd>InspectTree<cr>", { desc = "Inspect Tree" })
-
--- floating terminal
-map("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
 
 -- Terminal Mappings
 map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
