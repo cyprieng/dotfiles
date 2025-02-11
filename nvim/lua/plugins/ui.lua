@@ -259,8 +259,26 @@ return {
       },
     },
     opts = {
+      keys = {
+        -- increase width
+        ["<leader><right>"] = function(win)
+          win:resize("width", 2)
+        end,
+        -- decrease width
+        ["<leader><left>"] = function(win)
+          win:resize("width", -2)
+        end,
+        -- increase height
+        ["<leader><up>"] = function(win)
+          win:resize("height", 2)
+        end,
+        -- decrease height
+        ["<leader><down>"] = function(win)
+          win:resize("height", -2)
+        end,
+      },
       left = {
-        -- Neo-tree à gauche
+        -- Neo-tree on left
         {
           title = "Neo-Tree",
           ft = "neo-tree",
@@ -272,12 +290,11 @@ return {
       },
 
       right = {
-        -- Terminal à droite pour les grands écrans
+        -- Terminal on right for large screen
         {
           title = "Terminal",
           ft = "toggleterm",
           size = { width = 0.25 },
-          -- Ne s'affiche que si l'écran est assez large
           filter = function()
             return vim.o.columns > 250
           end,
@@ -285,12 +302,11 @@ return {
       },
 
       bottom = {
-        -- Terminal en bas pour les petits écrans
+        -- Terminal at the bottom for small screen
         {
           title = "Terminal",
           ft = "toggleterm",
           size = { height = 0.3 },
-          -- Ne s'affiche que si l'écran est petit
           filter = function()
             return vim.o.columns <= 250
           end,

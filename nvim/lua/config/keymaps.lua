@@ -20,10 +20,10 @@ map("n", "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file gi
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- Terminal tmux navigation
-map("t", "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
-map("t", "<C-j>", "<cmd>TmuxNavigateDown<cr>", { noremap = true, silent = true })
-map("t", "<C-k>", "<cmd>TmuxNavigateUp<cr>", { noremap = true, silent = true })
-map("t", "<C-l>", "<cmd>TmuxNavigateRight<cr>", { noremap = true, silent = true })
+map({ "t", "i" }, "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
+map({ "t", "i" }, "<C-j>", "<cmd>TmuxNavigateDown<cr>", { noremap = true, silent = true })
+map({ "t", "i" }, "<C-k>", "<cmd>TmuxNavigateUp<cr>", { noremap = true, silent = true })
+map({ "t", "i" }, "<C-l>", "<cmd>TmuxNavigateRight<cr>", { noremap = true, silent = true })
 
 -- Start/end of line
 -- Map Ctrl-A (sent by Cmd+Left) to first non-blank character
@@ -55,12 +55,6 @@ vim.keymap.set("n", "<A-Del>", "dw", { desc = "Delete word forward" })
 vim.keymap.set("i", "<A-Del>", "<C-o>dw", { desc = "Delete word forward" })
 vim.keymap.set("c", "<A-Del>", "<C-Del>", { desc = "Delete word forward" })
 
--- Resize window using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
-
 -- Move Lines
 map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
 map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
@@ -69,9 +63,17 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
 map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
+-- Move lines with macos alt behavior
+map("n", "Ï", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "È", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "Ï", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "È", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "Ï", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "È", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+
 -- buffers
-map("n", "<A-S-Right>", "<cmd>bnext<cr>", { desc = "Next buffer", remap = true })
-map("n", "<A-S-Left>", "<cmd>bprevious<cr>", { desc = "Previous buffer", remap = true })
+map("n", "<A-S-Right>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer", remap = true })
+map("n", "<A-S-Left>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer", remap = true })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()

@@ -12,7 +12,7 @@ shell-integration-features = true
 initial-command = /opt/homebrew/bin/tmux new-session -A -D
 
 ## Keybindings
-macos-option-as-alt = true
+macos-option-as-alt = false
 
 # Command + Left -> Home
 keybind = super+left=text:\x01
