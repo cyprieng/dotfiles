@@ -191,6 +191,12 @@ map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
+-- Resize windows
+map("n", "<leader><right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
+map("n", "<leader><left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
+map("n", "<leader><up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
+map("n", "<leader><down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
+
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
