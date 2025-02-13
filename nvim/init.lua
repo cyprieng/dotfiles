@@ -81,6 +81,9 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = false
 
+-- Set startofline
+vim.opt.startofline = true
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
