@@ -72,8 +72,6 @@ map("v", "Ï", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "
 map("v", "È", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
-map("n", "<A-S-Right>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer", remap = true })
-map("n", "<A-S-Left>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous buffer", remap = true })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
