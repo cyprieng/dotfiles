@@ -81,6 +81,7 @@ brew "p7zip"
 brew "swiftlint"
 brew "periphery"
 brew "uv"
+brew "graphviz"
 
 # Neovim dependencies
 brew "luarocks"
