@@ -193,10 +193,63 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
 -- Resize windows
-map("n", "<leader><right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
-map("n", "<leader><left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
-map("n", "<leader><up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
-map("n", "<leader><down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
+-- Helper function to check if resize is possible in current window
+local function can_resize(direction)
+    local current_win = vim.api.nvim_get_current_win()
+    local window_layout = vim.fn.winlayout()
+
+    -- Recursive function to check if current window is in a resizable split
+    local function check_layout(layout, parent_type)
+        if layout[1] == "leaf" then
+            -- If we found our window
+            if layout[2] == current_win then
+                -- Return true if parent layout type matches our resize direction
+                return parent_type == direction
+            end
+            return false
+        end
+
+        -- Record the current layout type
+        local current_type = layout[1] == "row" and "vertical" or "horizontal"
+
+        -- Check all children
+        for _, child in ipairs(layout[2]) do
+            if check_layout(child, current_type) then
+                return true
+            end
+        end
+        return false
+    end
+
+    return check_layout(window_layout, nil)
+end
+
+-- Resize windows with fallback to tmux
+local function resize_with_fallback(resize_cmd, tmux_direction, resize_direction)
+    if can_resize(resize_direction) then
+        vim.cmd(resize_cmd)
+    else
+        local tmux_cmd = string.format("tmux resize-pane -%s 5", tmux_direction)
+        vim.fn.system(tmux_cmd)
+    end
+end
+
+-- Mappings
+map("n", "<leader><right>", function()
+    resize_with_fallback("vertical resize +2", "R", "vertical")
+end, { desc = "Increase window width" })
+
+map("n", "<leader><left>", function()
+    resize_with_fallback("vertical resize -2", "L", "vertical")
+end, { desc = "Decrease window width" })
+
+map("n", "<leader><up>", function()
+    resize_with_fallback("resize +2", "U", "horizontal")
+end, { desc = "Increase window height" })
+
+map("n", "<leader><down>", function()
+    resize_with_fallback("resize -2", "D", "horizontal")
+end, { desc = "Decrease window height" })
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
