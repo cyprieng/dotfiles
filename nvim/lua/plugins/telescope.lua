@@ -105,6 +105,13 @@ return {
             find_command = find_command,
             hidden = true,
           },
+          buffers = {
+            mappings = {
+              i = {
+                ["<C-d>"] = actions.delete_buffer,
+              },
+            },
+          },
         },
       }
     end,
