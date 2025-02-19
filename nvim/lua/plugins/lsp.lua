@@ -196,7 +196,14 @@ return {
         marksman = {},
         mdx_analyzer = {},
         prismals = {},
-        pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              venvPath = ".venv",
+              pythonPath = ".venv/bin/python",
+            },
+          },
+        },
         rust_analyzer = {},
         somesass_ls = {},
         sqlls = {},

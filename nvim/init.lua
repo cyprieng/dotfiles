@@ -1,7 +1,3 @@
--- Python virtual env
-vim.env.VIRTUAL_ENV = vim.fn.getcwd() .. "/.venv"
-vim.env.PATH = vim.env.VIRTUAL_ENV .. "/bin:" .. vim.env.PATH
-
 -- Disable some default UI
 vim.opt.ruler = false
 vim.opt.laststatus = 2
