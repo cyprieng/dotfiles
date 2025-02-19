@@ -192,12 +192,16 @@ local function can_resize(direction)
     local window_layout = vim.fn.winlayout()
 
     -- Recursive function to check if current window is in a resizable split
-    local function check_layout(layout, parent_type)
+    local function check_layout(layout, path)
         if layout[1] == "leaf" then
             -- If we found our window
             if layout[2] == current_win then
-                -- Return true if parent layout type matches our resize direction
-                return parent_type == direction
+                -- Check if any part of the path matches our resize direction
+                for _, parent_type in ipairs(path) do
+                    if parent_type == direction then
+                        return true
+                    end
+                end
             end
             return false
         end
@@ -205,16 +209,23 @@ local function can_resize(direction)
         -- Record the current layout type
         local current_type = layout[1] == "row" and "vertical" or "horizontal"
 
+        -- Add current type to the path
+        table.insert(path, current_type)
+
         -- Check all children
         for _, child in ipairs(layout[2]) do
-            if check_layout(child, current_type) then
+            if check_layout(child, path) then
                 return true
             end
         end
+
+        -- Remove current type from the path
+        table.remove(path)
+
         return false
     end
 
-    return check_layout(window_layout, nil)
+    return check_layout(window_layout, {})
 end
 
 -- Resize windows with fallback to tmux
