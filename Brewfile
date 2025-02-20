@@ -45,7 +45,6 @@ brew "yt-dlp"
 brew "forgit"
 
 # Apps
-cask "orion"
 cask "spotify"
 brew "spotify_player"
 cask "karabiner-elements"
