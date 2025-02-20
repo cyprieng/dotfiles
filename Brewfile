@@ -42,6 +42,7 @@ brew "spacer"
 brew "gh"
 brew "kubectx"
 brew "yt-dlp"
+brew "forgit"
 
 # Apps
 cask "orion"
