@@ -426,6 +426,7 @@ return {
   -- TMUX navigation
   {
     "christoomey/vim-tmux-navigator",
+    commit = "d847ea942a5bb4d4fab6efebc9f30d787fd96e65", -- new versions cause issues with terminal
     cmd = {
       "TmuxNavigateLeft",
       "TmuxNavigateDown",
