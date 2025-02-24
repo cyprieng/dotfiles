@@ -63,6 +63,9 @@ link_file "$BASEDIR/spotify-player/theme.toml" ~/.config/spotify-player/theme.to
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
 
+# Launchd
+link_file "$BASEDIR/launchd/local.brew.upgrade.plist" ~/Library/LaunchAgents/local.brew.upgrade.plist
+
 # GH
 if ! gh auth status >/dev/null; then
   gh auth login
