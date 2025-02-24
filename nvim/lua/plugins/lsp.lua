@@ -210,6 +210,7 @@ return {
         tailwindcss = {},
         terraformls = {},
         ts_ls = {},
+        harper_ls = {},
         volar = {
           init_options = {
             vue = {
