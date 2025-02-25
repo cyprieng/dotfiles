@@ -115,16 +115,6 @@ return {
     },
   },
 
-  -- Markdown preview
-  {
-    "OXY2DEV/markview.nvim",
-    lazy = false,
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-  },
-
   -- Image preview
   {
     "3rd/image.nvim",
