@@ -1,5 +1,9 @@
 local map = vim.keymap.set
+
 local Snacks = require("snacks")
+
+-- Avante chat clear
+map("n", "<leader>al", "<cmd>AvanteClear<cr>", { desc = "Clear Avante chat" })
 
 -- Select all
 map("n", "<leader>ga", "ggVG", { desc = "Select All" })
