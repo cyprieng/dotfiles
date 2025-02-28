@@ -16,8 +16,8 @@
   <key>RunAtLoad</key>
   <true />
   <key>StandardErrorPath</key>
-  <string>/dev/null</string>
+  <string>/Users/cyprien/Library/Logs/brew-upgrade-error.log</string>
   <key>StandardOutPath</key>
-  <string>/dev/null</string>
+  <string>/Users/cyprien/Library/Logs/brew-upgrade.log</string>
  </dict>
 </plist>
