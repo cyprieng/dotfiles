@@ -45,6 +45,7 @@ brew "yt-dlp"
 brew "typst"
 
 # Apps
+brew "wireguard-tools"
 cask "spotify"
 brew "spotify_player"
 cask "karabiner-elements"
