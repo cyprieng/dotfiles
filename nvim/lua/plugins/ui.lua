@@ -176,6 +176,11 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      window = {
+        mappings = {
+          ["s"] = false,
+        },
+      },
       use_libuv_file_watcher = true,
       filesystem = {
         commands = {
