@@ -25,16 +25,20 @@ map({ "t", "i" }, "<C-j>", "<cmd>TmuxNavigateDown<cr>", { noremap = true, silent
 map({ "t", "i" }, "<C-k>", "<cmd>TmuxNavigateUp<cr>", { noremap = true, silent = true })
 map({ "t", "i" }, "<C-l>", "<cmd>TmuxNavigateRight<cr>", { noremap = true, silent = true })
 
+-- Page up/down
+map("n", "<PageUp>", "20k", { noremap = true, silent = true })
+map("n", "<PageDown>", "20j", { noremap = true, silent = true })
+
 -- Start/end of line
 -- Map Ctrl-A (sent by Cmd+Left) to first non-blank character
-vim.keymap.set("n", "<C-a>", "^", { noremap = true })
-vim.keymap.set("i", "<C-a>", "<C-o>^", { noremap = true })
-vim.keymap.set("v", "<C-a>", "^", { noremap = true })
+map("n", "<C-a>", "^", { noremap = true })
+map("i", "<C-a>", "<C-o>^", { noremap = true })
+map("v", "<C-a>", "^", { noremap = true })
 
 -- Map Ctrl-E (sent by Cmd+Right) to end of line
-vim.keymap.set("n", "<C-e>", "$", { noremap = true })
-vim.keymap.set("i", "<C-e>", "<C-o>$", { noremap = true })
-vim.keymap.set("v", "<C-e>", "$", { noremap = true })
+map("n", "<C-e>", "$", { noremap = true })
+map("i", "<C-e>", "<C-o>$", { noremap = true })
+map("v", "<C-e>", "$", { noremap = true })
 
 -- Word navigation
 map("n", "<ESC>b", "b", { noremap = true })
@@ -46,14 +50,14 @@ map("v", "<ESC>f", "w", { noremap = true })
 
 -- Word remove
 -- Alt + Backspace to delete word backward
-vim.keymap.set("n", "<A-BS>", "db", { desc = "Delete word backward" })
-vim.keymap.set("i", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
-vim.keymap.set("c", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
+map("n", "<A-BS>", "db", { desc = "Delete word backward" })
+map("i", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
+map("c", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
 
 -- Alt + Delete to delete word forward
-vim.keymap.set("n", "<A-Del>", "dw", { desc = "Delete word forward" })
-vim.keymap.set("i", "<A-Del>", "<C-o>dw", { desc = "Delete word forward" })
-vim.keymap.set("c", "<A-Del>", "<C-Del>", { desc = "Delete word forward" })
+map("n", "<A-Del>", "dw", { desc = "Delete word forward" })
+map("i", "<A-Del>", "<C-o>dw", { desc = "Delete word forward" })
+map("c", "<A-Del>", "<C-Del>", { desc = "Delete word forward" })
 
 -- Move Lines
 map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
