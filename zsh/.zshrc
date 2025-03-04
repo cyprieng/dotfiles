@@ -4,6 +4,11 @@ export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
+# Load brew
+if [ "$(uname)" = "Linux" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Load secrets
 source ~/.secrets.sh 
 
@@ -15,7 +20,11 @@ fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
 # Load antidote
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+if [[ -e /opt/homebrew/opt/antidote/share/antidote/antidote.zsh ]]; then
+    source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+else
+    source /home/linuxbrew/.linuxbrew/share/antidote/antidote.zsh
+fi
 antidote load
 
 # Custom title
@@ -61,9 +70,6 @@ export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # Atuin
 eval "$(atuin init zsh)"
-
-# Forgit
-[ -f $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh ] && source $HOMEBREW_PREFIX/share/forgit/forgit.plugin.zsh
 
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
