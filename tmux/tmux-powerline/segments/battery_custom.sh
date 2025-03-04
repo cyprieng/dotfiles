@@ -11,6 +11,13 @@ check_if_charging() {
 }
 
 run_segment() {
-  echo "$(check_if_charging)$(get_battery_percent)%"
+  battery_percent=$(get_battery_percent)
+
+  # Show nothing if we dont have a battery
+  if [ -z "$battery_percent" ]; then
+    return 0
+  fi
+
+  echo "${TMUX_POWERLINE_SEPARATOR_LEFT_THIN} $(check_if_charging)$battery_percent%"
   return 0
 }

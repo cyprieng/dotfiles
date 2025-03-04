@@ -132,7 +132,7 @@ if [ -z "$TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS" ]; then
     #"cpu 240 136"
     #"load 237 167"
     #"tmux_mem_cpu_load 234 136"
-    "battery_custom default_bg_color default_fg_color ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+    "battery_custom default_bg_color default_fg_color"
     #"air ${TMUX_POWERLINE_SEG_AIR_COLOR} 255"
     #"weather 37 255"
     #"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}"
