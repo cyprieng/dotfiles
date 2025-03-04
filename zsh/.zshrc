@@ -74,7 +74,6 @@ eval "$(atuin init zsh)"
 
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
   --info=inline-right \
   --ansi \
   --layout=reverse \
