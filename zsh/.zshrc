@@ -2,7 +2,7 @@
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
-export PATH="$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/usr/local/bin/:$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Load brew
 if [ "$(uname)" = "Linux" ]; then
@@ -37,6 +37,7 @@ preexec() {
 # Aliases
 export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
+alias tt="tmux new-session -A -D"
 alias v="nvim" 
 alias jsoncb="pbpaste | fx"
 alias weather="~/go/bin/yr today montpellier"
