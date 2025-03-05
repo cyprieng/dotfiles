@@ -179,6 +179,7 @@ return {
       window = {
         mappings = {
           ["s"] = false,
+          ["|"] = "open_vsplit",
         },
       },
       use_libuv_file_watcher = true,
