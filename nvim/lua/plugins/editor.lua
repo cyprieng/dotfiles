@@ -181,4 +181,10 @@ return {
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
   },
+
+  -- Better comments
+  {
+    "numToStr/Comment.nvim",
+    opts = {},
+  },
 }
