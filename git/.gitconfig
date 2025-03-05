@@ -1,5 +1,4 @@
 [alias]
-
 	# View abbreviated SHA, description, and history graph of the latest 20 commits.
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
@@ -69,18 +68,24 @@
 	# Show the user email for the current repository.
 	whoami = config user.email
 
-[apply]
+[column]
+	ui = auto
 
+[tag]
+	sort = version:refname
+
+[init]
+        defaultBranch = main
+
+[apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
 
 [branch]
-
 	# Show most recently changed branches first.
 	sort = -committerdate
 
 [core]
-
 	# Use custom `.gitignore`
 	excludesfile = ~/.gitignore
 
@@ -105,8 +110,9 @@
 	pager = 'delta'
 
 [delta]
-
 	side-by-side = true
+	navigate = true  # use n and N to move between diff sections
+	dark = true
 	minus-style                   = syntax "#3a273a"
 	minus-non-emph-style          = syntax "#3a273a"
 	minus-emph-style              = syntax "#6b2e43"
@@ -120,59 +126,69 @@
 	line-numbers-zero-style       = "#3b4261"
 
 [color]
-
 	# Use colors in Git commands that are capable of colored output when
 	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
 	ui = auto
 
 [color "branch"]
-
 	current = yellow reverse
 	local = yellow
 	remote = green
 
 [color "diff"]
-
 	meta = yellow bold
 	frag = magenta bold # line info
 	old = red # deletions
 	new = green # additions
 
 [color "status"]
-
 	added = green
 	changed = yellow 
 	untracked = cyan
 
 [commit]
-
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true 
 
 [diff]
-
-	# Detect copies as well as renames.
-	renames = copies
+	renames = copies # Detect copies as well as renames.
+	algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
 
 [diff "bin"]
-
 	# Use `hexdump` to diff binary files.
 	textconv = hexdump -v -C
 
 [help]
-
 	# Automatically correct and execute mistyped commands.
 	autocorrect = prompt
 
 [merge]
-
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	conflictstyle = zdiff3
 
 [push]
-
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+	autoSetupRemote = true
 
+[pull]
+        rebase = true
+
+[fetch]
+        prune = true
+        pruneTags = true
+	all = true
+
+[rerere]
+        enabled = true
+	autoupdate = true
+
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
