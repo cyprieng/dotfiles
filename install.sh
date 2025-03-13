@@ -172,6 +172,10 @@ if $macos; then
   sudo defaults write com.apple.Safari AutoFillCreditCardData -bool false              # Disable AutoFill in safari
   sudo defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false          # Disable AutoFill in safari
   sudo defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true # Update extensions automatically
+  sudo pmset -b lowpowermode 1                                                         # Enable low power mode on battery
+  defaults write -g InitialKeyRepeat -int 10                                           # Set initial key repeat to fast
+  defaults write -g KeyRepeat -int 1                                                   # Set key repeat to fast
+  defaults write -g NSWindowShouldDragOnGesture -bool true                             # Enable drag on gesture
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
