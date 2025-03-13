@@ -85,6 +85,7 @@ brew "swiftlint"
 brew "periphery"
 brew "uv"
 brew "graphviz"
+brew "pam-reattach"
 
 # Neovim dependencies
 brew "luarocks"

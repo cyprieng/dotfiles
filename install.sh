@@ -188,6 +188,15 @@ if $macos; then
   open_app_if_not_running "Hammerspoon"
   open_app_if_not_running "Karabiner"
   open_app_if_not_running "OrbStack"
+
+  # Use TouchId for sudo
+  if ! grep -q "pam_tid.so" /etc/pam.d/sudo; then
+    # Create a backup of the original file
+    sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak
+
+    # Add the line to the beginning of the file
+    sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo
+  fi
 fi
 
 # ASDF
