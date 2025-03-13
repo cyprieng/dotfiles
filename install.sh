@@ -122,22 +122,10 @@ if $macos; then
   killall "BetterTouchTool" >/dev/null 2>&1 || true
   link_file "$BASEDIR/bettertouchtool/library" ~/Library/Application\ Support/BetterTouchTool
   cp "$BASEDIR/bettertouchtool/com.hegenberg.BetterTouchTool.plist" ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
-  open -n /Applications/BetterTouchTool.app
 
   # Alt tab
   echo 'Setting up alt-tab...'
   defaults import com.lwouis.alt-tab-macos "$BASEDIR/alttab/com.lwouis.alt-tab-macos.plist"
-  if pgrep -x "AltTab" >/dev/null; then
-    killall "AltTab" >/dev/null 2>&1 || true
-  fi
-  open -n /Applications/AltTab.app
-
-  # Ensure app are started
-  echo 'Starting applications...'
-  if ! pgrep -x "Hammerspoon" >/dev/null; then
-    open -n /Applications/Hammerspoon.app
-  fi
-  open -n /Applications/Karabiner-Elements.app
 
   # Macos settings
   echo 'Applying macos settings...'
@@ -179,6 +167,27 @@ if $macos; then
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
+
+  # Open apps
+  open_app_if_not_running() {
+    if [ -z "$1" ]; then
+      echo "Usage: open_app_if_not_running AppName.app"
+      return 1
+    fi
+
+    app_name="$1"
+
+    if ! pgrep -f "$app_name" >/dev/null; then
+      echo "Opening $app_name..."
+      open -a "$app_name"
+    fi
+  }
+
+  open_app_if_not_running "BetterTouchTool"
+  open_app_if_not_running "AltTab"
+  open_app_if_not_running "Hammerspoon"
+  open_app_if_not_running "Karabiner"
+  open_app_if_not_running "OrbStack"
 fi
 
 # ASDF
