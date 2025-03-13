@@ -3,7 +3,7 @@ local usbKeyboardConnected = false
 
 -- Input source IDs
 local FRENCH_INPUT = "com.apple.keylayout.French"
-local US_INTL_INPUT = "com.apple.keylayout.USInternational-PC"
+local US_INTL_INPUT = "com.apple.keyboardlayout.qwerty-fr.keylayout.qwerty-fr"
 
 -- Function to change input source
 function changeInputSource(sourceID)

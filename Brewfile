@@ -1,3 +1,6 @@
+# Layout
+cask "qwerty-fr"
+
 # Install ghostty 
 cask "ghostty"
 
