@@ -10,7 +10,7 @@ brew "neovim"
 # Fonts
 cask "font-jetbrains-mono-nerd-font"
 
-# Cli tools 
+# Cli tools
 brew "atuin"
 brew "ripgrep"
 brew "lazygit"
@@ -47,6 +47,7 @@ brew "yt-dlp"
 brew "typst"
 
 # Apps
+cask "orbstack"
 brew "wireguard-tools"
 cask "spotify"
 brew "spotify_player"
