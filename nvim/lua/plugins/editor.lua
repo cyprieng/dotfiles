@@ -187,4 +187,18 @@ return {
     "numToStr/Comment.nvim",
     opts = {},
   },
+
+  -- Replace
+  {
+    "MagicDuck/grug-far.nvim",
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          require("grug-far").open()
+        end,
+        desc = "Replace",
+      },
+    },
+  },
 }
