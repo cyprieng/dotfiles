@@ -59,7 +59,9 @@ return {
           },
         },
         config = function()
-          require("copilot").setup({})
+          require("copilot").setup({
+            copilot_node_command = os.getenv("HOME") .. "/.asdf/installs/nodejs/23.7.0/bin/node",
+          })
         end,
       },
       {
