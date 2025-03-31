@@ -5,9 +5,8 @@ return {
     cmd = "Telescope",
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-      },
+      "nvim-telescope/telescope-fzf-native.nvim",
+      "debugloop/telescope-undo.nvim",
     },
     keys = {
       {
@@ -47,6 +46,11 @@ return {
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
+      {
+        "<leader>fu",
+        "<cmd>Telescope undo<cr>",
+        desc = "undo history",
+      },
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -69,7 +73,14 @@ return {
         end
       end
 
+      require("telescope").load_extension("undo")
+
       return {
+        extensions = {
+          undo = {
+            -- telescope-undo.nvim config, see below
+          },
+        },
         defaults = {
           prompt_prefix = " ",
           selection_caret = " ",
