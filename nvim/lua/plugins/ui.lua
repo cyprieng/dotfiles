@@ -472,4 +472,7 @@ return {
       { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
     },
   },
+
+  -- Better quickfix
+  { "kevinhwang91/nvim-bqf" },
 }
