@@ -81,6 +81,8 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldcolumn = "0"
 
 -- Set startofline
 vim.opt.startofline = true
