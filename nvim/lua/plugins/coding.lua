@@ -364,13 +364,6 @@ return {
     },
   },
 
-  -- Rename
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    opts = {},
-  },
-
   -- Display color
   {
     "echasnovski/mini.hipatterns",
