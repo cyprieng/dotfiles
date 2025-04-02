@@ -1,3 +1,13 @@
+-- Ensure cmdheight is not getting resized when resizing the window
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  callback = function()
+    vim.defer_fn(function()
+      vim.opt.cmdheight = 0
+    end, 50)
+  end,
+})
+
 -- Auto insert mode when entering in a term buffer
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = "term://*",
