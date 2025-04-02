@@ -79,8 +79,14 @@ return {
 
       return {
         extensions = {
-          undo = {
-            -- telescope-undo.nvim config, see below
+          undo = {},
+          file_browser = {
+            hidden = {
+              file_browser = true,
+              folder_browser = true,
+            },
+            respect_gitignore = false,
+            no_ignore = true,
           },
         },
         defaults = {
