@@ -1,6 +1,8 @@
 style = "auto"
 enter_accept = true
 filter_mode_shell_up_key_binding = "workspace"
+store_failed = true
+secrets_filter = false
 
 [theme]
 name = "tokyonight"
