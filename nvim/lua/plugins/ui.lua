@@ -475,4 +475,10 @@ return {
 
   -- Better quickfix
   { "kevinhwang91/nvim-bqf" },
+
+  -- Sticky buffers
+  {
+    "stevearc/stickybuf.nvim",
+    opts = {},
+  },
 }
