@@ -395,6 +395,7 @@ return {
     },
     opts = {
       options = {
+        separator_style = "slant",
         close_command = function(n)
           Snacks.bufdelete(n)
         end,
@@ -416,6 +417,11 @@ return {
             highlight = "Directory",
             text_align = "left",
           },
+        },
+        hover = {
+          enabled = true,
+          delay = 50,
+          reveal = { "close" },
         },
       },
     },
