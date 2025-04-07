@@ -66,6 +66,7 @@ cask "sf-symbols"
 brew "gifski"
 cask "proxyman"
 cask "jordanbaird-ice"
+cask "piphero"
 
 # Languages
 brew "asdf"
