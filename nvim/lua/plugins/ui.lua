@@ -423,6 +423,13 @@ return {
           delay = 50,
           reveal = { "close" },
         },
+        custom_filter = function(buf_number, _)
+          if vim.bo[buf_number].buftype ~= "terminal" and vim.bo[buf_number].buftype ~= "quickfix" then
+            return true
+          else
+            return false
+          end
+        end,
       },
     },
     config = function(_, opts)
