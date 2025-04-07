@@ -47,7 +47,7 @@ return {
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
       { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
-      { "<leader>;", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", desc = "File explorer" },
+      { "<leader>;", ":Telescope file_browser<CR>", desc = "File explorer" },
       {
         "<leader>fu",
         "<cmd>Telescope undo<cr>",
