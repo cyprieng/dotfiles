@@ -159,22 +159,8 @@ return {
   -- Todo comment highlight
   {
     "folke/todo-comments.nvim",
-    keys = {
-      {
-        "<leader>st",
-        function()
-          require("todo-comments.fzf").todo()
-        end,
-        desc = "Todo",
-      },
-      {
-        "<leader>sT",
-        function()
-          require("todo-comments.fzf").todo({ keywords = { "TODO", "FIX", "FIXME" } })
-        end,
-        desc = "Todo/Fix/Fixme",
-      },
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
   },
 
   -- Add indentation guides even on blank lines
