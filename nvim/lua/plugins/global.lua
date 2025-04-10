@@ -34,4 +34,12 @@ return {
       },
     },
   },
+
+  -- Link terminal and current neovim instance when opening files
+  {
+    "willothy/flatten.nvim",
+    config = true,
+    lazy = false,
+    priority = 1001,
+  },
 }
