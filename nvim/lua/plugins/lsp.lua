@@ -12,6 +12,8 @@ return {
       },
     },
   },
+  -- JSON Schema Store
+  { "b0o/schemastore.nvim" },
   { "Bilal2453/luvit-meta", lazy = true },
   {
     -- Main LSP Configuration
@@ -207,7 +209,14 @@ return {
         gopls = {},
         html = {},
         intelephense = {},
-        jsonls = {},
+        jsonls = {
+          settings = {
+            json = {
+              schemas = require("schemastore").json.schemas(),
+              validate = { enable = true },
+            },
+          },
+        },
         marksman = {},
         mdx_analyzer = {},
         prismals = {},
@@ -234,7 +243,20 @@ return {
           },
         },
         lemminx = {},
-        yamlls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemaStore = {
+                -- You must disable built-in schemaStore support if you want to use
+                -- this plugin and its advanced options like `ignore`.
+                enable = false,
+                -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                url = "",
+              },
+              schemas = require("schemastore").yaml.schemas(),
+            },
+          },
+        },
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
