@@ -1,7 +1,8 @@
--- Disable some default UI
+-- Global UI settings
 vim.opt.ruler = false
 vim.opt.laststatus = 2
 vim.opt.cmdheight = 0
+vim.opt.cursorline = true
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
