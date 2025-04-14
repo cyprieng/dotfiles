@@ -68,6 +68,7 @@ cask "proxyman"
 cask "jordanbaird-ice"
 cask "piphero"
 cask "stats"
+cask "aldente"
 
 # Languages
 brew "asdf"
