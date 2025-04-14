@@ -67,6 +67,7 @@ brew "gifski"
 cask "proxyman"
 cask "jordanbaird-ice"
 cask "piphero"
+cask "stats"
 
 # Languages
 brew "asdf"
