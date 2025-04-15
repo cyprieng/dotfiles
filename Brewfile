@@ -47,7 +47,7 @@ brew "yt-dlp"
 brew "typst"
 
 # Apps
-cask "orbstack"
+cask "docker"
 brew "wireguard-tools"
 cask "spotify"
 brew "spotify_player"
@@ -70,7 +70,6 @@ cask "piphero"
 cask "stats"
 cask "aldente"
 cask "dropshelf"
-cask "hazel"
 
 # Languages
 brew "asdf"
