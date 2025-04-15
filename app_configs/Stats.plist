@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Battery_state</key>
+	<false/>
+	<key>CPU_mini_color</key>
+	<string>monochrome</string>
+	<key>CPU_mini_label</key>
+	<true/>
+	<key>Disk_state</key>
+	<false/>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{800, 448}</string>
+	<key>NSOSPLastRootDirectory</key>
+	<data>
+	Ym9vazgDAAAAAAQQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAIA
+	AAQAAAADAwAAAAQAAAUAAAABAQAAVXNlcnMAAAAHAAAAAQEAAGN5cHJpZW4ACAAAAAEB
+	AABkb3RmaWxlcwMAAAABAQAAenNoAAsAAAABAQAAYXBwX2NvbmZpZ3MAFAAAAAEGAAAQ
+	AAAAIAAAADAAAABAAAAATAAAAAgAAAAEAwAAkjgAAAAAAAAIAAAABAMAAIzVAwAAAAAA
+	CAAAAAQDAABUN0EHAAAAAAgAAAAEAwAAOgR1BwAAAAAIAAAABAMAABH28goAAAAAFAAA
+	AAEGAAB8AAAAjAAAAJwAAACsAAAAvAAAAAgAAAAABAAAQcbXHa9SAxMYAAAAAQIAAAIA
+	AAAAAAAAHwIAAAAAAAAfAgAAAAAAAAAAAAABBQAACAAAAAQDAAADAAAAAAAAAAQAAAAD
+	AwAA9QEAAAgAAAABCQAAZmlsZTovLy8MAAAAAQEAAE1hY2ludG9zaCBIRAgAAAAEAwAA
+	AFChG3MAAAAIAAAAAAQAAEHGqT9HgAAAJAAAAAEBAAAxQUE1RkJEMy02MkU3LTRDMEIt
+	QjA4MC1FNzJENjMyMzkyNTIYAAAAAQIAAIEAAAABAAAA7xMAAAEAAADvEwAAAQAAAAEA
+	AAABAQAALwAAADAAAAABAgAAZG5pYgAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+	AAAAcmRsZgIAAAAAAAAA8AAAAP7///8BAAAAAAAAABMAAAAEEAAAYAAAAAAAAAAFEAAA
+	zAAAAAAAAAAQEAAA+AAAAAAAAABAEAAA6AAAAAAAAAACIAAAzAEAAAAAAAAFIAAAPAEA
+	AAAAAAAQIAAATAEAAAAAAAARIAAAgAEAAAAAAAASIAAAYAEAAAAAAAATIAAAcAEAAAAA
+	AAAgIAAArAEAAAAAAAAwIAAAGAEAAAAAAAABwAAAIAEAAAAAAAARwAAAIAAAAAAAAAAS
+	wAAAMAEAAAAAAAAB0AAAGAEAAAAAAAAQ0AAABAAAAAAAAAAX8AAATAAAAAAAAAAi8AAA
+	2AEAAAAAAAA=
+	</data>
+	<key>NSStatusItem Preferred Position CPU_mini</key>
+	<real>175</real>
+	<key>NSStatusItem Restore Position Battery_battery</key>
+	<integer>823</integer>
+	<key>NSStatusItem Restore Position Disk_mini</key>
+	<integer>936</integer>
+	<key>NSStatusItem Restore Position Network_speed</key>
+	<integer>865</integer>
+	<key>NSStatusItem Restore Position RAM_mini</key>
+	<integer>983</integer>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>320 320 800 448 0 0 1440 875 </string>
+	<key>Network_state</key>
+	<false/>
+	<key>RAM_state</key>
+	<false/>
+	<key>runAtLoginInitialized</key>
+	<true/>
+	<key>setupProcess</key>
+	<true/>
+	<key>telemetry</key>
+	<false/>
+	<key>updater_check_ts</key>
+	<integer>1744632343</integer>
+	<key>version</key>
+	<string>2.11.40</string>
+</dict>
+</plist>
