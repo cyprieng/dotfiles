@@ -199,6 +199,7 @@ if $macos; then
   open_app_if_not_running "AlDente"
   open_app_if_not_running "Stats"
   open_app_if_not_running "Supercharge"
+  open_app_if_not_running "Dropshelf"
 
   # Use TouchId for sudo
   if ! grep -q "pam_tid.so" /etc/pam.d/sudo; then

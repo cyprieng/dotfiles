@@ -69,6 +69,7 @@ cask "jordanbaird-ice"
 cask "piphero"
 cask "stats"
 cask "aldente"
+cask "dropshelf"
 
 # Languages
 brew "asdf"
