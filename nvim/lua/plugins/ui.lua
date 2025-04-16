@@ -531,8 +531,10 @@ return {
   {
     "sphamba/smear-cursor.nvim",
     opts = {},
-    config = function(_, opts)
-      require("smear_cursor").toggle()
+    config = function()
+      require("smear_cursor").setup({
+        smear_insert_mode = false,
+      })
     end,
   },
 }
