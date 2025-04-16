@@ -24,9 +24,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-      -- Sonarlint
-      "https://gitlab.com/schrieveslaach/sonarlint.nvim.git",
-
       -- Allows extra capabilities provided by nvim-cmp
       "hrsh7th/cmp-nvim-lsp",
     },
@@ -273,38 +270,6 @@ return {
         },
       }
 
-      -- Sonarlint
-      require("sonarlint").setup({
-        server = {
-          cmd = {
-            vim.fn.expand("$MASON/bin/sonarlint-language-server"),
-            "-stdio",
-            "-analyzers",
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonargo.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonarhtml.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonariac.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonarjs.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonarphp.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonarpython.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonartext.jar"),
-            vim.fn.expand("$MASON/packages/sonarlint-language-server/extension/analyzers/sonarxml.jar"),
-          },
-        },
-        filetypes = {
-          "go",
-          "html",
-          "terraform",
-          "javascript",
-          "typescript",
-          "astro",
-          "typescriptreact",
-          "vue",
-          "php",
-          "python",
-          "xml",
-        },
-      })
-
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -319,7 +284,6 @@ return {
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
         "prettier",
-        "sonarlint-language-server",
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
