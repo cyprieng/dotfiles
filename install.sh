@@ -109,14 +109,6 @@ fi
 
 # Mac os specifics
 if $macos; then
-  # Install supercharge
-  echo 'Installing supercharge...'
-  curl -L "https://www.dropbox.com/scl/fi/xrt4b6r2ry2ukxpmrrry8/Supercharge-1.15.1-trial-1743088560.zip?rlkey=l1fspagzwlbjguxkgg34prwji&raw=1" -o /tmp/supercharge.zip
-  unzip -oq /tmp/supercharge.zip -d /tmp
-  rm -rf /Applications/Supercharge.app
-  mv /tmp/Supercharge.app /Applications/
-  rm -rf /tmp/supercharge.zip /tmp/Supercharge.app
-
   # Config links
   link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
   link_file "$BASEDIR/eza" ~/Library/Application\ Support/eza
@@ -198,7 +190,6 @@ if $macos; then
   open_app_if_not_running "Docker"
   open_app_if_not_running "AlDente"
   open_app_if_not_running "Stats"
-  open_app_if_not_running "Supercharge"
   open_app_if_not_running "Dropshelf"
   open_app_if_not_running "CleanShot X"
 
