@@ -526,4 +526,13 @@ return {
     -- Optional: Lazy load Incline
     event = "VeryLazy",
   },
+
+  -- Animate cursor
+  {
+    "sphamba/smear-cursor.nvim",
+    opts = {},
+    config = function(_, opts)
+      require("smear_cursor").toggle()
+    end,
+  },
 }
