@@ -70,6 +70,7 @@ cask "piphero"
 cask "stats"
 cask "aldente"
 cask "dropshelf"
+cask "cleanshot"
 
 # Languages
 brew "asdf"
