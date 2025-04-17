@@ -2,10 +2,6 @@ local map = vim.keymap.set
 
 local Snacks = require("snacks")
 
--- Prevent deleting from also copying
-map({ "n", "v" }, "d", '"_d', { noremap = true })
-map("n", "dd", '"_dd', { noremap = true })
-
 -- Avante chat clear
 map("n", "<leader>al", "<cmd>AvanteClear<cr>", { desc = "Clear Avante chat" })
 
