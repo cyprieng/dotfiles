@@ -71,6 +71,7 @@ cask "stats"
 cask "aldente"
 cask "dropshelf"
 cask "cleanshot"
+cask "mac-mouse-fix"
 
 # Languages
 brew "asdf"
