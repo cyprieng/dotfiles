@@ -40,3 +40,11 @@ vim.api.nvim_create_autocmd("User", {
     end
   end,
 })
+
+-- Run vim-sleuth on file save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("silent Sleuth")
+  end,
+})
