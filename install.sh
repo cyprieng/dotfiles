@@ -86,6 +86,7 @@ link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
+link_file "$BASEDIR/euporie" "$HOME/Library/Application Support/euporie"
 
 # GH
 if ! gh auth status >/dev/null; then
@@ -227,6 +228,7 @@ npm i -g npm-check-updates neovim
 echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
+uv tool install euporie
 
 # Weather
 echo 'Installing yr (weather)...'
