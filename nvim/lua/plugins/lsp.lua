@@ -383,7 +383,7 @@ return {
         condition = function(ctx)
           -- Check eslint LSP
           local has_eslint = false
-          for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = ctx.buf })) do
+          for _, client in ipairs(vim.lsp.get_clients({ bufnr = ctx.buf })) do
             if client.name == "eslint" then
               has_eslint = true
               break
