@@ -16,7 +16,7 @@ fi
 
 # See Color formatting section below for details on what colors can be used here.
 TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR="#222436"
-TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR="#c8d3f5"
+TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR="#f4b8e4"
 # shellcheck disable=SC2034
 TMUX_POWERLINE_SEG_AIR_COLOR=$(air_color)
 
@@ -47,9 +47,8 @@ fi
 # shellcheck disable=SC2128
 if [ -z "$TMUX_POWERLINE_WINDOW_STATUS_FORMAT" ]; then
   TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-    "#[fg=#82aaff,bg=#3B4261]"
     "#[fg=#222436,bg=#3B4261]$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
-    "#[fg=#82aaff,bg=#3B4261] #{?#{==:#F,-},#[nodim],#[dim]} #I #W #[nodim]"
+    "#[fg=#f4b8e4,bg=#3B4261] #{?#{==:#F,-},#[nodim],#[dim]} #I #W #[nodim]"
     "#[fg=#3B4261,bg=#222436]$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
   )
 #(
