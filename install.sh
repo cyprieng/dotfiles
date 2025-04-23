@@ -63,7 +63,6 @@ else
   # Link configs
   mkdir -p ~/.config/lazygit/
   link_file "$BASEDIR/lazygit/config.yml" ~/.config/lazygit/config.yml
-  link_file "$BASEDIR/eza" ~/.config/eza
   link_file "$BASEDIR/euporie" ~/.config/euporie
 fi
 
@@ -78,15 +77,19 @@ link_file "$BASEDIR/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
 link_file "$BASEDIR/zsh/.zfunc" ~/.zfunc
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/zsh/atuin/config.toml" ~/.config/atuin/config.toml
-link_file "$BASEDIR/zsh/atuin/themes" ~/.config/atuin/themes
 link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/tmux" ~/.config/tmux
-link_file "$BASEDIR/ranger" ~/.config/ranger
 link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
+
+# Install tmux catpuccin
+if [ ! -d ~/.config/tmux/plugins/catppuccin ]; then
+  mkdir -p ~/.config/tmux/plugins/catppuccin
+  git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+fi
 
 # GH
 if ! gh auth status >/dev/null; then
@@ -112,7 +115,6 @@ fi
 if $macos; then
   # Config links
   link_file "$BASEDIR/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
-  link_file "$BASEDIR/eza" ~/Library/Application\ Support/eza
   link_file "$BASEDIR/ghostty" ~/.config/ghostty
   link_file "$BASEDIR/karabiner" ~/.config/karabiner
   link_file "$BASEDIR/hammerspoon" ~/.hammerspoon

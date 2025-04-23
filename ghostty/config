@@ -1,7 +1,7 @@
 # UI
 font-size = 15
 font-thicken = true
-theme = tokyonight_moon
+theme = catpuccin 
 mouse-hide-while-typing = true
 macos-titlebar-style = hidden
 confirm-close-surface = false
