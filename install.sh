@@ -64,6 +64,7 @@ else
   mkdir -p ~/.config/lazygit/
   link_file "$BASEDIR/lazygit/config.yml" ~/.config/lazygit/config.yml
   link_file "$BASEDIR/eza" ~/.config/eza
+  link_file "$BASEDIR/euporie" ~/.config/euporie
 fi
 
 # Install starship
@@ -86,7 +87,6 @@ link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
-link_file "$BASEDIR/euporie" "$HOME/Library/Application Support/euporie"
 
 # GH
 if ! gh auth status >/dev/null; then
@@ -117,6 +117,7 @@ if $macos; then
   link_file "$BASEDIR/karabiner" ~/.config/karabiner
   link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
   link_file "$BASEDIR/launchd/local.brew.upgrade.plist" ~/Library/LaunchAgents/local.brew.upgrade.plist
+  link_file "$BASEDIR/euporie" "$HOME/Library/Application Support/euporie"
 
   # Better touch tool
   echo 'Setting up bettertouchtool...'
