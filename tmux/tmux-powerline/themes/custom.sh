@@ -17,6 +17,10 @@ fi
 # See Color formatting section below for details on what colors can be used here.
 TMUX_POWERLINE_DEFAULT_BACKGROUND_COLOR="#222436"
 TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR="#f4b8e4"
+
+TMUX_POWERLINE_RIGHT_BACKGROUND_COLOR="#222436"
+TMUX_POWERLINE_RIGHT_FOREGROUND_COLOR="#c8d3f5"
+
 # shellcheck disable=SC2034
 TMUX_POWERLINE_SEG_AIR_COLOR=$(air_color)
 
@@ -127,18 +131,18 @@ if [ -z "$TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS" ]; then
     #"macos_notification_count 29 255"
     #"mailcount 9 255"
     #"now_playing default_bg_color default_fg_color"
-    "spotify default_bg_color default_fg_color"
+    "spotify ${TMUX_POWERLINE_RIGHT_BACKGROUND_COLOR} ${TMUX_POWERLINE_RIGHT_FOREGROUND_COLOR}"
     #"cpu 240 136"
     #"load 237 167"
     #"tmux_mem_cpu_load 234 136"
-    "battery_custom default_bg_color default_fg_color"
+    "battery_custom ${TMUX_POWERLINE_RIGHT_BACKGROUND_COLOR} ${TMUX_POWERLINE_RIGHT_FOREGROUND_COLOR}"
     #"air ${TMUX_POWERLINE_SEG_AIR_COLOR} 255"
     #"weather 37 255"
     #"rainbarf 0 ${TMUX_POWERLINE_DEFAULT_FOREGROUND_COLOR}"
     #"xkb_layout 125 117"
     #"date_day 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
-    "date default_bg_color default_fg_color ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
-    "time default_bg_color default_fg_color ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+    "date ${TMUX_POWERLINE_RIGHT_BACKGROUND_COLOR} ${TMUX_POWERLINE_RIGHT_FOREGROUND_COLOR} ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
+    "time ${TMUX_POWERLINE_RIGHT_BACKGROUND_COLOR} ${TMUX_POWERLINE_RIGHT_FOREGROUND_COLOR} ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
     #"utc_time 235 136 ${TMUX_POWERLINE_SEPARATOR_LEFT_THIN}"
   )
 fi
