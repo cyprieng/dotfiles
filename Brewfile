@@ -107,3 +107,7 @@ brew "eslint_d"
 brew "prettier"
 brew "xmlformat"
 brew "harper"
+
+# Weather
+tap "timharek/tap"
+brew "yr"

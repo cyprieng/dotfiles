@@ -233,9 +233,5 @@ pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
 uv tool install euporie
 
-# Weather
-echo 'Installing yr (weather)...'
-go install git.sr.ht/~timharek/yr@latest
-
 # Ruff
 uv tool install ruff@latest
