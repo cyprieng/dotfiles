@@ -8,6 +8,19 @@ return {
     priority = 1000,
     opts = {
       flavour = "frappe",
+      integrations = {
+        diffview = true,
+        grug_far = true,
+        mason = true,
+        noice = true,
+        overseer = true,
+        snacks = {
+          enabled = true,
+          indent_scope_color = "lavender",
+        },
+        lsp_trouble = true,
+        which_key = true,
+      },
     },
     init = function()
       vim.cmd.colorscheme("catppuccin")
@@ -74,7 +87,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-        theme = "auto",
+        theme = "catppuccin",
         globalstatus = true,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
@@ -374,6 +387,7 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
+    after = "catppuccin",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
@@ -426,6 +440,7 @@ return {
       },
     },
     config = function(_, opts)
+      opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
       require("bufferline").setup(opts)
       -- Fix bufferline when restoring a session
       vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
