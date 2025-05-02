@@ -460,6 +460,11 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "roobert/tailwindcss-colorizer-cmp.nvim",
+
+      "onsails/lspkind.nvim", -- Adds vscode-like pictograms to nvim-cmp
+
+      -- colors
+      "brenoprata10/nvim-highlight-colors",
     },
     config = function()
       -- See `:help cmp`
@@ -490,9 +495,23 @@ return {
       end
       require("ufo").setup()
 
+      -- Highlight colors
+      require("nvim-highlight-colors").setup({})
+
+      local lspkind = require("lspkind")
       cmp.setup({
         formatting = {
-          format = require("tailwindcss-colorizer-cmp").formatter,
+          format = function(entry, item)
+            local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+            item = require("lspkind").cmp_format({
+              mode = "symbol_text",
+            })(entry, item)
+            if color_item.abbr_hl_group then
+              item.kind_hl_group = color_item.abbr_hl_group
+              item.kind = color_item.abbr
+            end
+            return item
+          end,
         },
         snippet = {
           expand = function(args)
