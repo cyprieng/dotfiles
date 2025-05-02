@@ -153,8 +153,8 @@ return {
       preview = {
         type = "float",
         relative = "editor",
-        position = {1, 1},
-        size = {width=0.5, height=0.3}
+        position = { 1, 1 },
+        size = { width = 0.5, height = 0.3 },
       },
     },
     cmd = "Trouble",
@@ -258,5 +258,11 @@ return {
     opts = {
       fold_virt_text_handler = ufo_handler,
     },
+  },
+
+  -- Better yank
+  {
+    "gbprod/yanky.nvim",
+    opts = {},
   },
 }
