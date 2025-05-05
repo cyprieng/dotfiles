@@ -273,10 +273,43 @@ map('n', 'zR', require('ufo').openAllFolds)
 map('n', 'zM', require('ufo').closeAllFolds)
 
 -- Yanky
-vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
-vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
-vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+map({"n","x"}, "p", "<Plug>(YankyPutAfter)")
+map({"n","x"}, "P", "<Plug>(YankyPutBefore)")
+map({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
+map({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
+map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 
-vim.keymap.set("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
-vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextEntry)")
+-- LuaSnip
+local luasnip = require("luasnip")
+-- Tab to expand or jump in a snippet
+vim.keymap.set("i", "<Tab>", function()
+  if luasnip.expand_or_jumpable() then
+    return "<Plug>luasnip-expand-or-jump"
+  else
+    return "<Tab>"
+  end
+end, { expr = true, silent = true })
+
+-- Shift-Tab to jump backwards
+vim.keymap.set("i", "<S-Tab>", function()
+  luasnip.jump(-1)
+end, { silent = true })
+
+-- Tab and Shift-Tab in select mode
+vim.keymap.set("s", "<Tab>", function()
+  luasnip.jump(1)
+end, { silent = true })
+
+vim.keymap.set("s", "<S-Tab>", function()
+  luasnip.jump(-1)
+end, { silent = true })
+
+-- Change choices in choiceNodes
+vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  if luasnip.choice_active() then
+    return "<Plug>luasnip-next-choice"
+  else
+    return "<C-E>"
+  end
+end, { expr = true, silent = true })
