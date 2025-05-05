@@ -283,7 +283,7 @@ map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 -- LuaSnip
 local luasnip = require("luasnip")
 -- Tab to expand or jump in a snippet
-vim.keymap.set("i", "<Tab>", function()
+map("i", "<Tab>", function()
   if luasnip.expand_or_jumpable() then
     return "<Plug>luasnip-expand-or-jump"
   else
@@ -292,21 +292,21 @@ vim.keymap.set("i", "<Tab>", function()
 end, { expr = true, silent = true })
 
 -- Shift-Tab to jump backwards
-vim.keymap.set("i", "<S-Tab>", function()
+map("i", "<S-Tab>", function()
   luasnip.jump(-1)
 end, { silent = true })
 
 -- Tab and Shift-Tab in select mode
-vim.keymap.set("s", "<Tab>", function()
+map("s", "<Tab>", function()
   luasnip.jump(1)
 end, { silent = true })
 
-vim.keymap.set("s", "<S-Tab>", function()
+map("s", "<S-Tab>", function()
   luasnip.jump(-1)
 end, { silent = true })
 
 -- Change choices in choiceNodes
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
+map({ "i", "s" }, "<C-E>", function()
   if luasnip.choice_active() then
     return "<Plug>luasnip-next-choice"
   else
