@@ -498,6 +498,7 @@ return {
       -- Highlight colors
       require("nvim-highlight-colors").setup({})
 
+      -- Lspkind
       local lspkind = require("lspkind")
       cmp.setup({
         formatting = {
@@ -505,6 +506,7 @@ return {
             local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
             item = require("lspkind").cmp_format({
               mode = "symbol_text",
+              symbol_map = { Copilot = "" },
             })(entry, item)
             if color_item.abbr_hl_group then
               item.kind_hl_group = color_item.abbr_hl_group
