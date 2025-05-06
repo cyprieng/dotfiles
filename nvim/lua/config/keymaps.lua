@@ -281,35 +281,27 @@ map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 
 -- LuaSnip
-local luasnip = require("luasnip")
--- Tab to expand or jump in a snippet
-map("i", "<Tab>", function()
-  if luasnip.expand_or_jumpable() then
-    return "<Plug>luasnip-expand-or-jump"
+local ls = require("luasnip")
+map({"i"}, "<Tab>", function()
+  if ls.expand_or_jumpable() then
+    ls.expand()
   else
-    return "<Tab>"
+    return vim.api.nvim_replace_termcodes("<Tab>", true, true, true)
   end
-end, { expr = true, silent = true })
+end, {silent = true, expr = true})
 
--- Shift-Tab to jump backwards
-map("i", "<S-Tab>", function()
-  luasnip.jump(-1)
-end, { silent = true })
-
--- Tab and Shift-Tab in select mode
-map("s", "<Tab>", function()
-  luasnip.jump(1)
-end, { silent = true })
-
-map("s", "<S-Tab>", function()
-  luasnip.jump(-1)
-end, { silent = true })
-
--- Change choices in choiceNodes
-map({ "i", "s" }, "<C-E>", function()
-  if luasnip.choice_active() then
-    return "<Plug>luasnip-next-choice"
+map({"i", "s"}, "<Tab>", function()
+  if ls.jumpable(1) then
+    return ls.jump(1)
   else
-    return "<C-E>"
+    return vim.api.nvim_replace_termcodes("<Tab>", true, true, true)
   end
-end, { expr = true, silent = true })
+end, {silent = true, expr = true})
+
+map({"i", "s"}, "<S-Tab>", function()
+  if ls.jumpable(-1) then
+    return ls.jump(-1)
+  else
+    return vim.api.nvim_replace_termcodes("<S-Tab>", true, true, true)
+  end
+end, {silent = true, expr = true})
