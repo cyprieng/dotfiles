@@ -452,14 +452,16 @@ return {
           },
         },
       },
-      "saadparwaiz1/cmp_luasnip",
 
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
+      -- Sources
+      "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
       "roobert/tailwindcss-colorizer-cmp.nvim",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "SergioRibera/cmp-dotenv",
+      "chrisgrieser/cmp_yanky",
 
       "onsails/lspkind.nvim", -- Adds vscode-like pictograms to nvim-cmp
 
@@ -523,6 +525,7 @@ return {
         preselect = cmp.PreselectMode.None,
         completion = {
           completeopt = "menu,menuone,noinsert,noselect",
+          keyword_length = 0,
         },
 
         -- For an understanding of why these mappings were
@@ -548,6 +551,10 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
+          { name = "buffer" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "dotenv" },
+          { name = "cmp_yanky" },
         },
         sorting = {
           priority_weight = 2,
