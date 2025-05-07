@@ -64,6 +64,7 @@ else
   mkdir -p ~/.config/lazygit/
   link_file "$BASEDIR/lazygit/config.yml" ~/.config/lazygit/config.yml
   link_file "$BASEDIR/euporie" ~/.config/euporie
+  link_file "$BASEDIR/k9s" ~/.config/k9s/
 fi
 
 # Install starship
@@ -120,6 +121,7 @@ if $macos; then
   link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
   link_file "$BASEDIR/launchd/local.brew.upgrade.plist" ~/Library/LaunchAgents/local.brew.upgrade.plist
   link_file "$BASEDIR/euporie" "$HOME/Library/Application Support/euporie"
+  link_file "$BASEDIR/k9s" "$HOME/Library/Application Support/k9s"
 
   # Better touch tool
   echo 'Setting up bettertouchtool...'
