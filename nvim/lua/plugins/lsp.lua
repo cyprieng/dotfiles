@@ -26,6 +26,20 @@ return {
 
       -- Allows extra capabilities provided by nvim-cmp
       "hrsh7th/cmp-nvim-lsp",
+
+      -- Python venv
+      {
+        "linux-cultist/venv-selector.nvim",
+        branch = "regexp",
+        dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+        opts = {},
+        keys = {
+          -- Keymap to open VenvSelector to pick a venv.
+          { "<leader>vs", "<cmd>VenvSelect<cr>" },
+          -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
+          { "<leader>vc", "<cmd>VenvSelectCached<cr>" },
+        },
+      },
     },
     config = function()
       -- Brief aside: **What is LSP?**
