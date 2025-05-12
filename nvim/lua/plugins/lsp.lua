@@ -567,7 +567,7 @@ return {
           { name = "path" },
           { name = "buffer" },
           { name = "nvim_lsp_signature_help" },
-          { name = "dotenv" },
+          { name = "dotenv", option = { dotenv_environment = "local" } },
           { name = "cmp_yanky" },
         },
         sorting = {
