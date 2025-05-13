@@ -555,20 +555,20 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
         }),
         sources = {
-          -- Copilot Source
+          { name = "nvim_lsp", group_index = 1 },
+          { name = "luasnip", group_index = 1 },
+          { name = "path", group_index = 1 },
+          { name = "nvim_lsp_signature_help", group_index = 1 },
+          { name = "dotenv", option = { dotenv_environment = "local" }, group_index = 1 },
           { name = "copilot", group_index = 2 },
+          { name = "cmp_yanky", group_index = 3 },
+          { name = "buffer", group_index = 3 },
+
           {
             name = "lazydev",
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
             group_index = 0,
           },
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "path" },
-          { name = "buffer" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "dotenv", option = { dotenv_environment = "local" } },
-          { name = "cmp_yanky" },
         },
         sorting = {
           priority_weight = 2,
