@@ -279,29 +279,3 @@ map({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
 map({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
-
--- LuaSnip
-local ls = require("luasnip")
-map({"i"}, "<Tab>", function()
-  if ls.expand_or_jumpable() then
-    ls.expand()
-  else
-    return vim.api.nvim_replace_termcodes("<Tab>", true, true, true)
-  end
-end, {silent = true, expr = true})
-
-map({"i", "s"}, "<Tab>", function()
-  if ls.jumpable(1) then
-    return ls.jump(1)
-  else
-    return vim.api.nvim_replace_termcodes("<Tab>", true, true, true)
-  end
-end, {silent = true, expr = true})
-
-map({"i", "s"}, "<S-Tab>", function()
-  if ls.jumpable(-1) then
-    return ls.jump(-1)
-  else
-    return vim.api.nvim_replace_termcodes("<S-Tab>", true, true, true)
-  end
-end, {silent = true, expr = true})

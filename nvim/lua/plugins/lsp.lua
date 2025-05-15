@@ -24,9 +24,6 @@ return {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-      -- Allows extra capabilities provided by nvim-cmp
-      "hrsh7th/cmp-nvim-lsp",
-
       -- Python venv
       {
         "linux-cultist/venv-selector.nvim",
@@ -174,13 +171,6 @@ return {
         end
         vim.diagnostic.config({ signs = { text = diagnostic_signs } })
       end
-
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -441,11 +431,11 @@ return {
     end,
   },
 
-  { -- Autocompletion
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+  -- Autocompletion
+  {
+    "saghen/blink.cmp",
     dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
+      "giuxtaposition/blink-cmp-copilot",
       {
         "L3MON4D3/LuaSnip",
         build = (function()
@@ -466,133 +456,104 @@ return {
           },
         },
       },
-
-      -- Sources
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "roobert/tailwindcss-colorizer-cmp.nvim",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "SergioRibera/cmp-dotenv",
-      "chrisgrieser/cmp_yanky",
-
-      "onsails/lspkind.nvim", -- Adds vscode-like pictograms to nvim-cmp
-
-      -- colors
-      "brenoprata10/nvim-highlight-colors",
     },
-    config = function()
-      -- See `:help cmp`
-      local cmp = require("cmp")
-      local luasnip = require("luasnip")
-      luasnip.config.setup({})
+    version = "1.*",
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = {
+        preset = "default",
+        ["<C-r>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-e>"] = { "hide", "fallback" },
 
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-
-      -- Tailwind colors
-      require("tailwindcss-colorizer-cmp").setup({
-        color_square_width = 2,
-      })
-
-      -- Tell the server the capability of foldingRange,
-      -- Neovim hasn't added foldingRange to default capabilities, users must add it manually
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
-      local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
-      for _, ls in ipairs(language_servers) do
-        require("lspconfig")[ls].setup({
-          capabilities = capabilities,
-          -- you can add other fields for setting up lsp server in this table
-        })
-      end
-      require("ufo").setup()
-
-      -- Highlight colors
-      require("nvim-highlight-colors").setup({})
-
-      -- Lspkind
-      local lspkind = require("lspkind")
-      cmp.setup({
-        formatting = {
-          format = function(entry, item)
-            local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
-            item = require("lspkind").cmp_format({
-              mode = "symbol_text",
-              symbol_map = { Copilot = "" },
-            })(entry, item)
-            if color_item.abbr_hl_group then
-              item.kind_hl_group = color_item.abbr_hl_group
-              item.kind = color_item.abbr
-            end
-            return item
-          end,
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = {
+          "select_next",
+          "snippet_forward",
+          "fallback",
         },
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
-          end,
-        },
-        preselect = cmp.PreselectMode.None,
-        completion = {
-          completeopt = "menu,menuone,noinsert,noselect",
-          keyword_length = 0,
-        },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 
-        -- For an understanding of why these mappings were
-        -- chosen, you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        mapping = cmp.mapping({
-          ["<enter>"] = cmp.mapping.confirm({ select = false }),
-          ["<c-e>"] = cmp.mapping.abort(),
-          ["<tab>"] = cmp.mapping.select_next_item(),
-          ["<s-tab>"] = cmp.mapping.select_prev_item(),
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        }),
-        sources = {
-          { name = "nvim_lsp", group_index = 1 },
-          { name = "luasnip", group_index = 1 },
-          { name = "path", group_index = 1 },
-          { name = "nvim_lsp_signature_help", group_index = 1 },
-          { name = "dotenv", option = { dotenv_environment = "local" }, group_index = 1 },
-          { name = "copilot", group_index = 2 },
-          { name = "cmp_yanky", group_index = 3 },
-          { name = "buffer", group_index = 3 },
+        ["<Up>"] = { "fallback" },
+        ["<Down>"] = { "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+        ["<C-n>"] = { "select_next", "fallback_to_mappings" },
 
-          {
-            name = "lazydev",
-            -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-            group_index = 0,
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+        ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+      },
+
+      appearance = {
+        nerd_font_variant = "mono",
+      },
+
+      completion = {
+        documentation = { auto_show = true },
+        accept = { auto_brackets = { enabled = true } },
+        list = {
+          selection = {
+            preselect = false,
           },
         },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            require("copilot_cmp.comparators").prioritize,
 
-            -- Below is the default comparitor list and order for nvim-cmp
-            cmp.config.compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
+        -- Highlight colors
+        menu = {
+          draw = {
+            components = {
+              -- customize the drawing of kind icons
+              kind_icon = {
+                text = function(ctx)
+                  -- default kind icon
+                  local icon = ctx.kind_icon
+                  -- if LSP source, check for color derived from documentation
+                  if ctx.item.source_name == "LSP" then
+                    local color_item =
+                      require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
+                    if color_item and color_item.abbr ~= "" then
+                      icon = color_item.abbr
+                    end
+                  end
+                  return icon .. ctx.icon_gap
+                end,
+                highlight = function(ctx)
+                  -- default highlight group
+                  local highlight = "BlinkCmpKind" .. ctx.kind
+                  -- if LSP source, check for color derived from documentation
+                  if ctx.item.source_name == "LSP" then
+                    local color_item =
+                      require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
+                    if color_item and color_item.abbr_hl_group then
+                      highlight = color_item.abbr_hl_group
+                    end
+                  end
+                  return highlight
+                end,
+              },
+            },
           },
         },
-        experimental = {
-          ghost_text = { hl_group = "CmpGhostText" },
+      },
+
+      signature = { enabled = true },
+      snippets = { preset = "luasnip" },
+
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+          },
         },
-      })
-    end,
+      },
+
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+    },
+    opts_extend = { "sources.default" },
   },
 
   { -- Highlight, edit, and navigate code
