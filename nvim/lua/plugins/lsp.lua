@@ -490,7 +490,7 @@ return {
       },
 
       completion = {
-        documentation = { auto_show = true },
+        documentation = { auto_show = true, auto_show_delay_ms = 200 },
         accept = { auto_brackets = { enabled = true } },
         list = {
           selection = {
@@ -501,6 +501,7 @@ return {
         -- Highlight colors
         menu = {
           draw = {
+            treesitter = { "lsp" },
             components = {
               -- customize the drawing of kind icons
               kind_icon = {
