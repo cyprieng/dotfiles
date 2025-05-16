@@ -270,37 +270,11 @@ return {
       }
 
       -- JS and vuejs
-      require("lspconfig").vtsls.setup({
-        filetypes = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-          "vue",
-        },
-        settings = {
-          vtsls = {
-            tsserver = {
-              globalPlugins = {
-                {
-                  name = "@vue/typescript-plugin",
-                  location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
-                  languages = { "vue" },
-                  confignamespace = "typescript",
-                  enableforworkspacetypescriptversions = true,
-                },
-              },
-            },
-          },
-        },
-      })
-
+      require("lspconfig").vtsls.setup({})
       require("lspconfig").volar.setup({
         init_options = {
           vue = {
-            hybridMode = true,
+            hybridMode = false,
           },
         },
       })
@@ -571,7 +545,8 @@ return {
       snippets = { preset = "luasnip" },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lsp" },
+        --default = { "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
           copilot = {
             name = "copilot",
