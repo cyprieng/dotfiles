@@ -235,15 +235,9 @@ return {
         sqlls = {},
         tailwindcss = {},
         terraformls = {},
-        ts_ls = {},
         harper_ls = {},
-        volar = {
-          init_options = {
-            vue = {
-              hybridMode = false,
-            },
-          },
-        },
+        vtsls = {},
+        volar = {},
         lemminx = {},
         yamlls = {
           settings = {
@@ -274,6 +268,42 @@ return {
           },
         },
       }
+
+      -- JS and vuejs
+      require("lspconfig").vtsls.setup({
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+          "vue",
+        },
+        settings = {
+          vtsls = {
+            tsserver = {
+              globalPlugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  location = vim.fn.expand("$MASON/packages/vue-language-server/node_modules/@vue/language-server"),
+                  languages = { "vue" },
+                  confignamespace = "typescript",
+                  enableforworkspacetypescriptversions = true,
+                },
+              },
+            },
+          },
+        },
+      })
+
+      require("lspconfig").volar.setup({
+        init_options = {
+          vue = {
+            hybridMode = true,
+          },
+        },
+      })
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
