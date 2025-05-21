@@ -85,6 +85,7 @@ link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
+link_file "$BASEDIR/asdf/.asdfrc" ~/.asdfrc
 
 # Install tmux catpuccin
 if [ ! -d ~/.config/tmux/plugins/catppuccin ]; then
