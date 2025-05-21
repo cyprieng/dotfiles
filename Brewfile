@@ -77,6 +77,7 @@ cask "mac-mouse-fix"
 # Languages
 brew "asdf"
 brew "pipx"
+brew "pnpm"
 
 # Other
 brew "antidote"
