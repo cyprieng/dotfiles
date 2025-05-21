@@ -1,4 +1,5 @@
 return {
+  { "mrjones2014/smart-splits.nvim" },
   {
     "folke/persistence.nvim",
     event = "BufReadPre",

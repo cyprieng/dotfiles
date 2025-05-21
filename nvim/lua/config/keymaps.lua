@@ -19,12 +19,6 @@ map("n", "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file gi
 -- Exit terminal insert mode
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
--- Terminal tmux navigation
-map({ "t", "i" }, "<C-h>", "<cmd>TmuxNavigateLeft<cr>", { noremap = true, silent = true })
-map({ "t", "i" }, "<C-j>", "<cmd>TmuxNavigateDown<cr>", { noremap = true, silent = true })
-map({ "t", "i" }, "<C-k>", "<cmd>TmuxNavigateUp<cr>", { noremap = true, silent = true })
-map({ "t", "i" }, "<C-l>", "<cmd>TmuxNavigateRight<cr>", { noremap = true, silent = true })
-
 -- Page up/down
 map("n", "<PageUp>", "20k", { noremap = true, silent = true })
 map("n", "<PageDown>", "20j", { noremap = true, silent = true })
@@ -189,76 +183,6 @@ map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
 
--- Resize windows
--- Helper function to check if resize is possible in current window
-local function can_resize(direction)
-    local current_win = vim.api.nvim_get_current_win()
-    local window_layout = vim.fn.winlayout()
-
-    -- Recursive function to check if current window is in a resizable split
-    local function check_layout(layout, path)
-        if layout[1] == "leaf" then
-            -- If we found our window
-            if layout[2] == current_win then
-                -- Check if any part of the path matches our resize direction
-                for _, parent_type in ipairs(path) do
-                    if parent_type == direction then
-                        return true
-                    end
-                end
-            end
-            return false
-        end
-
-        -- Record the current layout type
-        local current_type = layout[1] == "row" and "vertical" or "horizontal"
-
-        -- Add current type to the path
-        table.insert(path, current_type)
-
-        -- Check all children
-        for _, child in ipairs(layout[2]) do
-            if check_layout(child, path) then
-                return true
-            end
-        end
-
-        -- Remove current type from the path
-        table.remove(path)
-
-        return false
-    end
-
-    return check_layout(window_layout, {})
-end
-
--- Resize windows with fallback to tmux
-local function resize_with_fallback(resize_cmd, tmux_direction, resize_direction)
-    if can_resize(resize_direction) then
-        vim.cmd(resize_cmd)
-    else
-        local tmux_cmd = string.format("tmux resize-pane -%s 5", tmux_direction)
-        vim.fn.system(tmux_cmd)
-    end
-end
-
--- Mappings
-map("n", "<leader><right>", function()
-    resize_with_fallback("vertical resize +2", "R", "vertical")
-end, { desc = "Increase window width" })
-
-map("n", "<leader><left>", function()
-    resize_with_fallback("vertical resize -2", "L", "vertical")
-end, { desc = "Decrease window width" })
-
-map("n", "<leader><up>", function()
-    resize_with_fallback("resize +2", "U", "horizontal")
-end, { desc = "Increase window height" })
-
-map("n", "<leader><down>", function()
-    resize_with_fallback("resize -2", "D", "horizontal")
-end, { desc = "Decrease window height" })
-
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
@@ -279,3 +203,42 @@ map({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
 map({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
+
+-- Vim / Tmux navigation
+map({"t", "i", "n"}, '<S-left>', function()
+  local win = require("edgy").get_win()
+  if win then
+    win:resize("width", -2)
+  else
+    require('smart-splits').resize_left()
+  end
+end)
+map({"t", "i", "n"}, '<S-down>', function()
+  local win = require("edgy").get_win()
+  if win then
+    win:resize("height", -2)
+  else
+    require('smart-splits').resize_down()
+  end
+end)
+map({"t", "i", "n"}, '<S-up>', function()
+  local win = require("edgy").get_win()
+  if win then
+    win:resize("height", 2)
+  else
+    require('smart-splits').resize_up()
+  end
+end)
+map({"t", "i", "n"}, '<S-right>', function()
+  local win = require("edgy").get_win()
+  if win then
+    win:resize("width", 2)
+  else
+    require('smart-splits').resize_right()
+  end
+end)
+
+map({"t", "i", "n"}, '<C-h>', require('smart-splits').move_cursor_left)
+map({"t", "i", "n"}, '<C-j>', require('smart-splits').move_cursor_down)
+map({"t", "i", "n"}, '<C-k>', require('smart-splits').move_cursor_up)
+map({"t", "i", "n"}, '<C-l>', require('smart-splits').move_cursor_right)

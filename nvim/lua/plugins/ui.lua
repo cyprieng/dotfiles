@@ -295,24 +295,6 @@ return {
       },
     },
     opts = {
-      keys = {
-        -- increase width
-        ["<leader><right>"] = function(win)
-          win:resize("width", 2)
-        end,
-        -- decrease width
-        ["<leader><left>"] = function(win)
-          win:resize("width", -2)
-        end,
-        -- increase height
-        ["<leader><up>"] = function(win)
-          win:resize("height", 2)
-        end,
-        -- decrease height
-        ["<leader><down>"] = function(win)
-          win:resize("height", -2)
-        end,
-      },
       left = {
         -- Neo-tree on left
         {
