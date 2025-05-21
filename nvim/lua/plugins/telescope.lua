@@ -44,6 +44,9 @@ return {
       -- git
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
+      { "<leader>gh", "<cmd>Telescope git_bcommits_range<cr>", { desc = "Open file git history", remap = true } },
+      { "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file git history", remap = true } },
+
       -- search
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },

@@ -14,7 +14,6 @@ map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotree", remap = tru
 
 -- Git
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
-map("n", "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file git history", remap = true })
 
 -- Exit terminal insert mode
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
