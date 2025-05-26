@@ -1,6 +1,6 @@
 -- Global UI settings
 vim.opt.ruler = false
-vim.opt.laststatus = 2
+vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 
