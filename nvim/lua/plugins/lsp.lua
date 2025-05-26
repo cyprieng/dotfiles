@@ -237,7 +237,7 @@ return {
         terraformls = {},
         harper_ls = {},
         vtsls = {},
-        volar = {},
+        vue_ls = {},
         lemminx = {},
         yamlls = {
           settings = {
@@ -271,7 +271,7 @@ return {
 
       -- JS and vuejs
       require("lspconfig").vtsls.setup({})
-      require("lspconfig").volar.setup({
+      vim.lsp.config("vue_ls", {
         init_options = {
           vue = {
             hybridMode = false,
