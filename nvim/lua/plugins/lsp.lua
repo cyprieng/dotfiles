@@ -546,8 +546,7 @@ return {
       snippets = { preset = "luasnip" },
 
       sources = {
-        default = { "lsp" },
-        --default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
           copilot = {
             name = "copilot",
