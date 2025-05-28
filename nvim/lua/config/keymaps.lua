@@ -237,7 +237,7 @@ map({"t", "i", "n"}, '<S-right>', function()
   end
 end)
 
-map({"t", "i", "n"}, '<C-h>', require('smart-splits').move_cursor_left)
-map({"t", "i", "n"}, '<C-j>', require('smart-splits').move_cursor_down)
-map({"t", "i", "n"}, '<C-k>', require('smart-splits').move_cursor_up)
-map({"t", "i", "n"}, '<C-l>', require('smart-splits').move_cursor_right)
+map({"t", "i", "n"}, '<C-h>', '<cmd>:SmartCursorMoveLeft<cr>')
+map({"t", "i", "n"}, '<C-j>', '<cmd>:SmartCursorMoveDown<cr>')
+map({"t", "i", "n"}, '<C-k>', '<cmd>:SmartCursorMoveUp<cr>')
+map({"t", "i", "n"}, '<C-l>', '<cmd>:SmartCursorMoveRight<cr>')
