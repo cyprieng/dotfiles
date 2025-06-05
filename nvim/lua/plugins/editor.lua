@@ -258,4 +258,13 @@ return {
       require("numb").setup()
     end,
   },
+
+  -- Markdown rendering
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      file_types = { "markdown", "codecompanion" },
+    },
+    ft = { "markdown", "codecompanion" },
+  },
 }
