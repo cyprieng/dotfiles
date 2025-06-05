@@ -602,11 +602,6 @@ return {
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
-  -- Treesitter context
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-  },
-
   -- Tailwind
   {
     "luckasRanarison/tailwind-tools.nvim",

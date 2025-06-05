@@ -42,14 +42,6 @@ return {
     opts = {},
   },
 
-  -- Multi cursor
-  {
-    "mg979/vim-visual-multi",
-    branch = "master",
-    config = function() end,
-    lazy = false,
-  },
-
   -- Diff view
   {
     "sindrets/diffview.nvim",
@@ -234,16 +226,6 @@ return {
         desc = "Replace",
       },
     },
-  },
-
-  -- Split/join
-  {
-    "Wansmer/treesj",
-    keys = { "<space>m", "<space>j", "<space>s" },
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = function()
-      require("treesj").setup({})
-    end,
   },
 
   -- Better folding

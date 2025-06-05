@@ -456,27 +456,6 @@ return {
     },
   },
 
-  -- TMUX navigation
-  {
-    "christoomey/vim-tmux-navigator",
-    commit = "d847ea942a5bb4d4fab6efebc9f30d787fd96e65", -- new versions cause issues with terminal
-    cmd = {
-      "TmuxNavigateLeft",
-      "TmuxNavigateDown",
-      "TmuxNavigateUp",
-      "TmuxNavigateRight",
-      "TmuxNavigatePrevious",
-      "TmuxNavigatorProcessList",
-    },
-    keys = {
-      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-    },
-  },
-
   -- Better quickfix
   { "kevinhwang91/nvim-bqf" },
 
@@ -516,16 +495,5 @@ return {
     end,
     -- Optional: Lazy load Incline
     event = "VeryLazy",
-  },
-
-  -- Animate cursor
-  {
-    "sphamba/smear-cursor.nvim",
-    opts = {},
-    config = function()
-      require("smear_cursor").setup({
-        smear_insert_mode = false,
-      })
-    end,
   },
 }

@@ -43,37 +43,4 @@ return {
     lazy = false,
     priority = 1001,
   },
-
-  -- Task runner
-  {
-    "stevearc/overseer.nvim",
-    keys = {
-      {
-        "<leader>ot",
-        function()
-          require("overseer").toggle()
-        end,
-        desc = "Toggle Task List",
-      },
-      {
-        "<leader>or",
-        function()
-          require("overseer").run_template()
-        end,
-        desc = "Run Task Template",
-      },
-    },
-    opts = {
-      task_list = {
-        max_height = { 40, 0.5 },
-        height = 0.3,
-        bindings = {
-          ["<C-l>"] = false,
-          ["<C-h>"] = false,
-          ["<C-k>"] = false,
-          ["<C-j>"] = false,
-        },
-      },
-    },
-  },
 }
