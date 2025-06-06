@@ -240,7 +240,6 @@ map({"t", "i", "n"}, '<C-k>', '<cmd>:SmartCursorMoveUp<cr>')
 map({"t", "i", "n"}, '<C-l>', '<cmd>:SmartCursorMoveRight<cr>')
 
 -- Code companion
-map({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
 map({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
 map("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
