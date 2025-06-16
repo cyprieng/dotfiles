@@ -58,3 +58,20 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
     end
   end,
 })
+
+-- Smart-splits have an issue where @pane-is-vim is sometimes resetted to 0
+-- Ensure it is set to 1 every time we gain focus
+vim.api.nvim_create_autocmd("FocusGained", {
+  callback = function()
+    if vim.env.TMUX then
+      vim.fn.jobstart({
+        "tmux",
+        "set-option",
+        "-p",
+        "@pane-is-vim",
+        "1",
+      })
+    end
+  end,
+  desc = "Set tmux @pane-is-vim=1 when Neovim gains focus (only in tmux)",
+})
