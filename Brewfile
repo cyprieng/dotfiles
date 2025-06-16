@@ -77,6 +77,7 @@ cask "cleanshot"
 brew "asdf"
 brew "pipx"
 brew "pnpm"
+brew "rustup"
 
 # Other
 brew "antidote"

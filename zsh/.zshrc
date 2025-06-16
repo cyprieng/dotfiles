@@ -2,7 +2,7 @@
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
-export PATH="/usr/local/bin/:$HOME/.local/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/usr/local/bin/:$HOME/.local/bin:/opt/homebrew/opt/rustup/bin:/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Load brew
 if [ "$(uname)" = "Linux" ]; then

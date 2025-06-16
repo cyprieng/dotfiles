@@ -201,7 +201,6 @@ if $macos; then
   open_app_if_not_running "Dropshelf"
   open_app_if_not_running "CleanShot X"
   open_app_if_not_running "PiPHero"
-  open_app_if_not_running "Mac Mouse Fix"
 
   # Use TouchId for sudo
   if ! grep -q "pam_tid.so" /etc/pam.d/sudo; then
@@ -216,7 +215,6 @@ fi
 # ASDF
 echo 'Setting up asdf...'
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf plugin add rust https://github.com/asdf-community/asdf-rust.git
 asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf plugin add python https://github.com/asdf-community/asdf-python.git
 asdf plugin add java https://github.com/halcyon/asdf-java.git
@@ -235,6 +233,10 @@ echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
 uv tool install euporie
+
+# Rust
+rustup install stable
+rustup default stable
 
 # Ruff
 uv tool install ruff@latest
