@@ -10,6 +10,7 @@ return {
         suggestion = { enabled = false },
         panel = { enabled = false },
       },
+      copilot_model = "gemini-2.5-pro",
     },
     config = function()
       require("copilot").setup({
@@ -23,16 +24,22 @@ return {
     opts = {
       strategies = {
         chat = {
-          adapter = "copilot",
-          model = "claude-sonnet-4-20250514",
+          adapter = {
+            name = "copilot",
+            model = "gemini-2.5-pro",
+          },
         },
         inline = {
-          adapter = "copilot",
-          model = "claude-sonnet-4-20250514",
+          adapter = {
+            name = "copilot",
+            model = "gemini-2.5-pro",
+          },
         },
         cmd = {
-          adapter = "copilot",
-          model = "claude-sonnet-4-20250514",
+          adapter = {
+            name = "copilot",
+            model = "gemini-2.5-pro",
+          },
         },
       },
     },
