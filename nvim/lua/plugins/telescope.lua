@@ -79,20 +79,6 @@ return {
         return require("trouble.sources.telescope").open(...)
       end
 
-      local function find_command()
-        if 1 == vim.fn.executable("rg") then
-          return { "rg", "--files", "--color", "never", "-g", "!.git" }
-        elseif 1 == vim.fn.executable("fd") then
-          return { "fd", "--type", "f", "--color", "never", "-E", ".git" }
-        elseif 1 == vim.fn.executable("fdfind") then
-          return { "fdfind", "--type", "f", "--color", "never", "-E", ".git" }
-        elseif 1 == vim.fn.executable("find") and vim.fn.has("win32") == 0 then
-          return { "find", ".", "-type", "f" }
-        elseif 1 == vim.fn.executable("where") then
-          return { "where", "/r", ".", "*" }
-        end
-      end
-
       require("telescope").load_extension("undo")
 
       return {
@@ -136,10 +122,26 @@ return {
               ["<Tab>"] = focus_preview,
             },
           },
+          preview = {
+            -- We limit line length to 200 characters otherwise telescope is very slow
+            filetype_hook = function(filepath, bufnr, opts)
+              local cmd = { "cut", "-c", "1-200", filepath }
+              require("telescope.previewers.utils").job_maker(cmd, bufnr, opts)
+
+              -- Set filetype after content is loaded
+              vim.schedule(function()
+                -- Try to detect filetype from filename
+                local ft = vim.filetype.match({ filename = filepath })
+                if ft then
+                  vim.bo[bufnr].filetype = ft
+                end
+              end)
+            end,
+          },
         },
         pickers = {
           find_files = {
-            find_command = find_command,
+            find_command = { "rg", "--files", "--color", "never", "-g", "!.git" },
             hidden = true,
           },
           buffers = {
