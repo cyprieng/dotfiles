@@ -20,7 +20,7 @@ return {
     cmd = "Telescope",
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "debugloop/telescope-undo.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
     },
@@ -72,16 +72,14 @@ return {
         desc = "undo history",
       },
     },
-    opts = function()
+    config = function()
       local actions = require("telescope.actions")
 
       local open_with_trouble = function(...)
         return require("trouble.sources.telescope").open(...)
       end
 
-      require("telescope").load_extension("undo")
-
-      return {
+      require("telescope").setup({
         extensions = {
           undo = {},
           file_browser = {
@@ -91,6 +89,12 @@ return {
             },
             respect_gitignore = false,
             no_ignore = true,
+          },
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
           },
         },
         defaults = {
@@ -152,7 +156,11 @@ return {
             },
           },
         },
-      }
+      })
+
+      -- Load plugins
+      require("telescope").load_extension("undo")
+      require("telescope").load_extension("fzf")
     end,
   },
 }
