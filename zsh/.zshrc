@@ -66,7 +66,12 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats 'on %B%F{5}%b%f '
 
 preexec() {
-  CMD_TIMER=$EPOCHREALTIME
+  # Only set timer if the command is not empty or just whitespace
+  if [[ -n ${1//[[:space:]]/} ]]; then
+    CMD_TIMER=$EPOCHREALTIME
+  else
+    unset CMD_TIMER
+  fi
 }
 
 precmd() {
@@ -74,12 +79,13 @@ precmd() {
   local elapsed=""
   if [[ -n $CMD_TIMER ]]; then
     local now=$EPOCHREALTIME
-    local diff=$(printf "%.1f" "$(echo "$now - $CMD_TIMER" | bc)")
+    local diff=$(printf "%.0f" "$(echo "$now - $CMD_TIMER" | bc)")
     if (( diff > 1 )); then
-      elapsed="(%F{yellow}${diff}s%f) "
+      elapsed=" (%F{yellow}${diff}s%f)"
     fi
+    unset CMD_TIMER
   fi
-  PROMPT="%F{cyan}%B%~%b%f ${vcs_info_msg_0_}${elapsed}%F{2}%B❯%f%b "
+  PROMPT="%F{cyan}%B%~%b%f ${vcs_info_msg_0_}%F{2}%B❯%f%b${elapsed} "
 }
 
 # Load zoxide
