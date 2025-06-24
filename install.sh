@@ -67,18 +67,12 @@ else
   link_file "$BASEDIR/k9s" ~/.config/k9s/
 fi
 
-# Install starship
-if ! which starship >/dev/null; then
-  curl -sS https://starship.rs/install.sh | sh
-fi
-
 # Create config links
 link_file "$BASEDIR/zsh/.secrets.sh" ~/.secrets.sh
 link_file "$BASEDIR/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
 link_file "$BASEDIR/zsh/.zfunc" ~/.zfunc
 link_file "$BASEDIR/zsh/.zshrc" ~/.zshrc
 link_file "$BASEDIR/zsh/atuin/config.toml" ~/.config/atuin/config.toml
-link_file "$BASEDIR/starship/starship.toml" ~/.config/starship.toml
 link_file "$BASEDIR/nvim" ~/.config/nvim
 link_file "$BASEDIR/tmux" ~/.config/tmux
 link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff

@@ -60,8 +60,13 @@ function y() {
 # Bind keys
 bindkey "^[e" redo
 
-# Load the theme
-eval "$(starship init zsh)"
+# Prompt
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' formats 'on %B%F{5}%b%f '
+precmd() {
+  vcs_info
+  PROMPT='%F{cyan}%B%~%b%f ${vcs_info_msg_0_}%F{2}%B❯%f%b '
+}
 
 # Load zoxide
 eval "$(zoxide init zsh --cmd cd)"
