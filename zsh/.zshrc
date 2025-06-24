@@ -62,10 +62,24 @@ bindkey "^[e" redo
 
 # Prompt
 autoload -Uz vcs_info
+
 zstyle ':vcs_info:git:*' formats 'on %B%F{5}%b%f '
+
+preexec() {
+  CMD_TIMER=$EPOCHREALTIME
+}
+
 precmd() {
   vcs_info
-  PROMPT='%F{cyan}%B%~%b%f ${vcs_info_msg_0_}%F{2}%B❯%f%b '
+  local elapsed=""
+  if [[ -n $CMD_TIMER ]]; then
+    local now=$EPOCHREALTIME
+    local diff=$(printf "%.1f" "$(echo "$now - $CMD_TIMER" | bc)")
+    if (( diff > 1 )); then
+      elapsed="(%F{yellow}${diff}s%f) "
+    fi
+  fi
+  PROMPT="%F{cyan}%B%~%b%f ${vcs_info_msg_0_}${elapsed}%F{2}%B❯%f%b "
 }
 
 # Load zoxide
