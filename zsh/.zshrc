@@ -79,13 +79,13 @@ precmd() {
   local elapsed=""
   if [[ -n $CMD_TIMER ]]; then
     local now=$EPOCHREALTIME
-    local diff=$(printf "%.0f" "$(echo "$now - $CMD_TIMER" | bc)")
+    local diff=$(printf "%.2f" "$(echo "$now - $CMD_TIMER" | bc)")
     if (( diff > 1 )); then
-      elapsed=" (%F{yellow}${diff}s%f)"
+      elapsed="(%F{yellow}${diff}s%f) "
     fi
     unset CMD_TIMER
   fi
-  PROMPT="%F{cyan}%B%~%b%f ${vcs_info_msg_0_}%F{2}%B❯%f%b${elapsed} "
+  PROMPT="%F{cyan}%B%~%b%f ${vcs_info_msg_0_}${elapsed}%F{2}%B❯%f%b "
 }
 
 # Load zoxide
