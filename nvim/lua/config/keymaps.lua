@@ -7,12 +7,32 @@ map("n", "<leader>ga", "ggVG", { desc = "Select All" })
 
 -- Toggle UI windows
 map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
-map(
-  "n",
-  "<leader>e",
-  "<cmd>Neotree toggle position=top buffers<cr><cmd>Neotree toggle position=left filesystem<cr>",
-  { desc = "Neotree", remap = true }
-)
+
+-- Neotree mappings
+local function is_neotree_open()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+    if ft == "neo-tree" then
+      return true
+    end
+  end
+  return false
+end
+
+map("n", "<leader>e", function()
+  vim.cmd("Neotree source=filesystem toggle")
+  if is_neotree_open() then
+    vim.cmd("Neotree focus")
+  end
+end, { desc = "Neotree", remap = true })
+
+map("n", "<leader>bb", function()
+  vim.cmd("Neotree source=buffers toggle")
+  if is_neotree_open() then
+    vim.cmd("Neotree focus source=buffers")
+  end
+end, { desc = "Neotree buffers" })
 
 -- Git
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
@@ -71,7 +91,6 @@ map("v", "Ï", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "
 map("v", "È", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
-map("n", "<leader>bb", "<cmd>Neotree action=focus source=buffers<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })

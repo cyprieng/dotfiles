@@ -184,8 +184,13 @@ return {
     },
     opts = {
       sources = { "filesystem", "buffers" },
+      source_selector = {
+        winbar = true,
+        statusline = false,
+      },
       window = {
         mappings = {
+          ["<space>"] = false,
           ["s"] = false,
           ["|"] = "open_vsplit",
         },
@@ -281,17 +286,7 @@ return {
         {
           title = "Neo-Tree",
           ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "filesystem"
-          end,
           size = { width = 0.15, height = 0.7 },
-        },
-        {
-          title = "Neo-Tree Buffers",
-          ft = "neo-tree",
-          filter = function(buf)
-            return vim.b[buf].neo_tree_source == "buffers"
-          end,
         },
       },
 
