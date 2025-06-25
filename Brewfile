@@ -77,6 +77,7 @@ brew "asdf"
 brew "pipx"
 brew "pnpm"
 brew "rustup"
+cask "dotnet-sdk"
 
 # Other
 brew "antidote"

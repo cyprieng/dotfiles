@@ -267,6 +267,7 @@ return {
             },
           },
         },
+        csharp_ls = {},
       }
 
       -- JS and vuejs
