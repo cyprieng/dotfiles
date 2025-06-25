@@ -10,7 +10,7 @@ map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true
 map(
   "n",
   "<leader>e",
-  "<cmd>Neotree toggle position=left filesystem<cr><cmd>Neotree toggle position=top buffers<cr>",
+  "<cmd>Neotree toggle position=top buffers<cr><cmd>Neotree toggle position=left filesystem<cr>",
   { desc = "Neotree", remap = true }
 )
 
