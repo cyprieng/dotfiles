@@ -183,6 +183,7 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      sources = { "filesystem", "buffers" },
       window = {
         mappings = {
           ["s"] = false,
@@ -213,6 +214,9 @@ return {
           },
           never_show = {},
         },
+      },
+      buffers = {
+        show_unloaded = true,
       },
     },
     config = function(_, opts)
@@ -280,7 +284,14 @@ return {
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
-          size = { width = 0.15 },
+          size = { width = 0.15, height = 0.7 },
+        },
+        {
+          title = "Neo-Tree Buffers",
+          ft = "neo-tree",
+          filter = function(buf)
+            return vim.b[buf].neo_tree_source == "buffers"
+          end,
         },
       },
 
@@ -343,90 +354,8 @@ return {
     },
   },
 
-  -- Bufferline
-  {
-    "akinsho/bufferline.nvim",
-    event = "VeryLazy",
-    after = "catppuccin",
-    keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
-      { "<leader>bs", "<Cmd>BufferLinePick<CR>", desc = "Pick buffer" },
-      { "<S-h>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-      { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
-    },
-    opts = {
-      options = {
-        separator_style = "slant",
-        close_command = function(n)
-          Snacks.bufdelete(n)
-        end,
-        right_mouse_command = function(n)
-          Snacks.bufdelete(n)
-        end,
-        diagnostics = "none",
-        always_show_bufferline = true,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
-          },
-        },
-        hover = {
-          enabled = true,
-          delay = 50,
-          reveal = { "close" },
-        },
-        custom_filter = function(buf_number, _)
-          if vim.bo[buf_number].buftype ~= "terminal" and vim.bo[buf_number].buftype ~= "quickfix" then
-            return true
-          else
-            return false
-          end
-        end,
-      },
-    },
-    config = function(_, opts)
-      opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
-      require("bufferline").setup(opts)
-      -- Fix bufferline when restoring a session
-      vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
-        callback = function()
-          vim.schedule(function()
-            pcall(nvim_bufferline)
-          end)
-        end,
-      })
-    end,
-  },
-
   -- UI improvements
   { "stevearc/dressing.nvim" },
-
-  -- Auto close buffers
-  {
-    "axkirillov/hbac.nvim",
-    config = true,
-    opts = {
-      autoclose = true,
-      threshold = 5,
-      close_command = function(bufnr)
-        vim.api.nvim_buf_delete(bufnr, {})
-      end,
-      close_buffers_with_windows = false, -- hbac will close buffers with associated windows if this option is `true`
-      telescope = {
-        -- See #telescope-configuration below
-      },
-    },
-  },
 
   -- Better quickfix
   { "kevinhwang91/nvim-bqf" },

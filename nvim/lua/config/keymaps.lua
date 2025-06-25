@@ -7,7 +7,12 @@ map("n", "<leader>ga", "ggVG", { desc = "Select All" })
 
 -- Toggle UI windows
 map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
-map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Neotree", remap = true })
+map(
+  "n",
+  "<leader>e",
+  "<cmd>Neotree toggle position=left filesystem<cr><cmd>Neotree toggle position=top buffers<cr>",
+  { desc = "Neotree", remap = true }
+)
 
 -- Git
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
@@ -66,7 +71,7 @@ map("v", "Ï", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "
 map("v", "È", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", "<leader>bb", "<cmd>Neotree action=focus source=buffers<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
@@ -74,6 +79,8 @@ map("n", "<leader>bo", function()
   Snacks.bufdelete.other()
 end, { desc = "Delete Other Buffers" })
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Prev Buffer" })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
