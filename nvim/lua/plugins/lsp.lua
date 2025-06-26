@@ -236,7 +236,6 @@ return {
         tailwindcss = {},
         terraformls = {},
         harper_ls = {},
-        ts_ls = {},
         vue_ls = {},
         lemminx = {},
         yamlls = {
@@ -293,6 +292,7 @@ return {
       vim.list_extend(ensure_installed, {
         "stylua", -- Used to format Lua code
         "prettier",
+        "ts_ls",
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -310,6 +310,13 @@ return {
         },
       })
     end,
+  },
+
+  -- Typescript LSP
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
   },
 
   { -- Autoformat
