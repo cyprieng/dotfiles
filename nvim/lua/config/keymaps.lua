@@ -260,10 +260,26 @@ map({"t", "i", "n"}, '<S-right>', function()
   end
 end)
 
-map({"t", "i", "n"}, '<C-h>', '<cmd>:SmartCursorMoveLeft<cr>')
-map({"t", "i", "n"}, '<C-j>', '<cmd>:SmartCursorMoveDown<cr>')
-map({"t", "i", "n"}, '<C-k>', '<cmd>:SmartCursorMoveUp<cr>')
-map({"t", "i", "n"}, '<C-l>', '<cmd>:SmartCursorMoveRight<cr>')
+map({"i", "n"}, '<C-h>', '<cmd>:SmartCursorMoveLeft<cr>')
+map({"i", "n"}, '<C-j>', '<cmd>:SmartCursorMoveDown<cr>')
+map({"i", "n"}, '<C-k>', '<cmd>:SmartCursorMoveUp<cr>')
+map({"i", "n"}, '<C-l>', '<cmd>:SmartCursorMoveRight<cr>')
+
+-- For terminal mode we need to exit to normal mode before executing the command otherwise it sometimes move to the wrong window
+local function smart_term_move(cmd)
+  return function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
+    vim.defer_fn(function()
+     vim.cmd(cmd)
+    end, 1)
+  end
+end
+
+map("t", "<C-h>", smart_term_move("SmartCursorMoveLeft"))
+map("t", "<C-j>", smart_term_move("SmartCursorMoveDown"))
+map("t", "<C-k>", smart_term_move("SmartCursorMoveUp"))
+map("t", "<C-l>", smart_term_move("SmartCursorMoveRight"))
+
 
 -- Code companion
 map({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
