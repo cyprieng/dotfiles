@@ -236,7 +236,7 @@ return {
         tailwindcss = {},
         terraformls = {},
         harper_ls = {},
-        vtsls = {},
+        ts_ls = {},
         vue_ls = {},
         lemminx = {},
         yamlls = {
@@ -270,8 +270,7 @@ return {
         csharp_ls = {},
       }
 
-      -- JS and vuejs
-      require("lspconfig").vtsls.setup({})
+      -- Vuejs
       vim.lsp.config("vue_ls", {
         init_options = {
           vue = {
