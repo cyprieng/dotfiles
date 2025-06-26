@@ -10,7 +10,7 @@ return {
         suggestion = { enabled = false },
         panel = { enabled = false },
       },
-      copilot_model = "gemini-2.5-pro",
+      copilot_model = "gpt-4.1",
     },
     config = function()
       require("copilot").setup({
@@ -26,19 +26,19 @@ return {
         chat = {
           adapter = {
             name = "copilot",
-            model = "gemini-2.5-pro",
+            model = "gpt-4.1",
           },
         },
         inline = {
           adapter = {
             name = "copilot",
-            model = "gemini-2.5-pro",
+            model = "gpt-4.1",
           },
         },
         cmd = {
           adapter = {
             name = "copilot",
-            model = "gemini-2.5-pro",
+            model = "gpt-4.1",
           },
         },
       },
