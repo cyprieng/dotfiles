@@ -47,18 +47,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
 
-      -- Better diff
-      {
-        "echasnovski/mini.diff",
-        config = function()
-          local diff = require("mini.diff")
-          diff.setup({
-            -- Disabled by default
-            source = diff.gen_source.none(),
-          })
-        end,
-      },
-
       -- Image pasting
       {
         "HakonHarnes/img-clip.nvim",
