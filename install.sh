@@ -79,6 +79,7 @@ link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
 link_file "$BASEDIR/asdf/.asdfrc" ~/.asdfrc
+link_file "$BASEDIR/mcphub" ~/.config/mcphub
 
 # Install tmux catpuccin
 if [ ! -d ~/.config/tmux/plugins/catppuccin ]; then
@@ -224,6 +225,7 @@ echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
 uv tool install vectorcode
+uv tool install mcp-server-git
 
 # Rust
 rustup install stable
