@@ -2,9 +2,19 @@
   "nativeMCPServers": [],
   "mcpServers": {
     "git": {
+      "disabled": false,
       "command": "uvx",
       "args": ["mcp-server-git"]
+    },
+    "context7": {
+      "disabled": false,
+      "command": "npx",
+      "autoApprove": ["resolve-library-id", "get-library-docs"],
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "excel": {
+      "command": "uvx",
+      "args": ["excel-mcp-server", "stdio"]
     }
   }
 }
-
