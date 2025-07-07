@@ -63,7 +63,6 @@ else
   # Link configs
   mkdir -p ~/.config/lazygit/
   link_file "$BASEDIR/lazygit/config.yml" ~/.config/lazygit/config.yml
-  link_file "$BASEDIR/euporie" ~/.config/euporie
   link_file "$BASEDIR/k9s" ~/.config/k9s/
 fi
 
@@ -115,7 +114,6 @@ if $macos; then
   link_file "$BASEDIR/karabiner" ~/.config/karabiner
   link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
   link_file "$BASEDIR/launchd/local.brew.upgrade.plist" ~/Library/LaunchAgents/local.brew.upgrade.plist
-  link_file "$BASEDIR/euporie" "$HOME/Library/Application Support/euporie"
   link_file "$BASEDIR/k9s" "$HOME/Library/Application Support/k9s"
 
   # Better touch tool
@@ -225,7 +223,7 @@ npm i -g npm-check-updates neovim
 echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
-uv tool install euporie
+uv tool install vectorcode
 
 # Rust
 rustup install stable
