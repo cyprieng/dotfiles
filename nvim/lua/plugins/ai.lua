@@ -19,6 +19,7 @@ return {
     end,
   },
 
+  -- Source code indexation
   {
     "Davidyz/VectorCode",
     version = "*",
@@ -26,8 +27,11 @@ return {
     cmd = "VectorCode",
   },
 
+  -- MCP servers
   {
     "ravitemer/mcphub.nvim",
+    lazy = true,
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -39,8 +43,11 @@ return {
     end,
   },
 
+  -- AI interface
   {
     "olimorris/codecompanion.nvim",
+    lazy = true,
+    event = "VeryLazy",
     opts = {
       strategies = {
         chat = {
