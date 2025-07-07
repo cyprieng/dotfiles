@@ -1,20 +1,44 @@
 {
   "nativeMCPServers": [],
   "mcpServers": {
+    "time": {
+      "args": ["mcp-server-time"],
+      "command": "uvx"
+    },
     "git": {
-      "disabled": false,
+      "args": ["mcp-server-git"],
       "command": "uvx",
-      "args": ["mcp-server-git"]
+      "disabled": false
     },
     "context7": {
+      "args": ["-y", "@upstash/context7-mcp@latest"],
       "disabled": false,
       "command": "npx",
-      "autoApprove": ["resolve-library-id", "get-library-docs"],
-      "args": ["-y", "@upstash/context7-mcp@latest"]
+      "autoApprove": ["resolve-library-id", "get-library-docs"]
+    },
+    "sequential-thinking": {
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "command": "npx"
+    },
+    "github": {
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${cmd: echo $GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "command": "docker",
+      "disabled": false
     },
     "excel": {
-      "command": "uvx",
-      "args": ["excel-mcp-server", "stdio"]
+      "args": ["excel-mcp-server", "stdio"],
+      "command": "uvx"
     }
   }
 }
+
