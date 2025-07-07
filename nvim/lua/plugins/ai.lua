@@ -20,6 +20,13 @@ return {
   },
 
   {
+    "Davidyz/VectorCode",
+    version = "*",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "VectorCode",
+  },
+
+  {
     "olimorris/codecompanion.nvim",
     opts = {
       strategies = {
@@ -39,6 +46,13 @@ return {
           adapter = {
             name = "copilot",
             model = "gpt-4.1",
+          },
+        },
+      },
+      extensions = {
+        vectorcode = {
+          opts = {
+            add_tool = true,
           },
         },
       },
