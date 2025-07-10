@@ -189,7 +189,6 @@ if $macos; then
   open_app_if_not_running "AltTab"
   open_app_if_not_running "Hammerspoon"
   open_app_if_not_running "Karabiner"
-  open_app_if_not_running "Docker"
   open_app_if_not_running "AlDente"
   open_app_if_not_running "Stats"
   open_app_if_not_running "Dropshelf"
