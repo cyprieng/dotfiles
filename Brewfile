@@ -47,8 +47,13 @@ brew "kubectx"
 brew "yt-dlp"
 brew "typst"
 
+# Docker
+brew "docker"
+brew "docker-buildx"
+brew "docker-credential-helper"
+brew "colima"
+
 # Apps
-cask "docker"
 brew "wireguard-tools"
 cask "spotify"
 brew "spotify_player"
