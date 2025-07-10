@@ -19,14 +19,6 @@ return {
     end,
   },
 
-  -- Source code indexation
-  {
-    "Davidyz/VectorCode",
-    version = "*",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    cmd = "VectorCode",
-  },
-
   -- MCP servers
   {
     "ravitemer/mcphub.nvim",
@@ -70,11 +62,6 @@ return {
         },
       },
       extensions = {
-        vectorcode = {
-          opts = {
-            add_tool = true,
-          },
-        },
         mcphub = {
           callback = "mcphub.extensions.codecompanion",
           opts = {

@@ -5,6 +5,10 @@
       "args": ["mcp-server-time"],
       "command": "uvx"
     },
+    "vectorcode-mcp-server": {
+      "command": "vectorcode-mcp-server",
+      "args": []
+    },
     "git": {
       "args": ["mcp-server-git"],
       "command": "uvx",
@@ -41,4 +45,3 @@
     }
   }
 }
-

@@ -225,7 +225,7 @@ echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
 uv tool install vectorcode
-uv tool install mcp-server-git
+uv tool install 'mcp-server-git[mcp]'
 
 # Rust
 rustup install stable
