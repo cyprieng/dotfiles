@@ -33,8 +33,6 @@ vim.api.nvim_create_autocmd("User", {
       vim.defer_fn(function()
         vim.notify("Starting daily updates...")
         vim.cmd("Lazy update")
-        vim.cmd("MasonUpdate")
-        vim.cmd("MasonToolsUpdate")
         vim.fn.writefile({}, vim.fn.stdpath("data") .. "/lazy-last-update")
       end, 1000)
     end

@@ -296,7 +296,17 @@ return {
       local ensure_enabled = { unpack(ensure_installed) }
       vim.list_extend(ensure_installed, { "ts_ls" })
 
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+      -- Define specific versions for some tools
+      for i, v in ipairs(ensure_installed) do
+        if v == "vue_ls" then
+          ensure_installed[i] = { "vue_ls", version = "2.2.8" }
+        end
+      end
+
+      require("mason-tool-installer").setup({
+        ensure_installed = ensure_installed,
+        auto_update = true,
+      })
 
       require("mason-lspconfig").setup({
         automatic_enable = ensure_enabled,
