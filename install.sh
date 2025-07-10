@@ -224,8 +224,8 @@ npm i -g npm-check-updates neovim
 echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
-uv tool install vectorcode
-uv tool install 'mcp-server-git[mcp]'
+uv tool install 'vectorcode[mcp]'
+uv tool install mcp-server-git
 
 # Rust
 rustup install stable
