@@ -237,6 +237,7 @@ return {
         terraformls = {},
         harper_ls = {},
         vue_ls = {},
+        vtsls = {},
         lemminx = {},
         yamlls = {
           settings = {
@@ -269,14 +270,57 @@ return {
         csharp_ls = {},
       }
 
-      -- Vuejs
-      vim.lsp.config("vue_ls", {
-        init_options = {
-          vue = {
-            hybridMode = false,
+      -- VUE config
+      local vue_language_server_path = vim.fn.stdpath("data")
+        .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+      local vue_plugin = {
+        name = "@vue/typescript-plugin",
+        location = vue_language_server_path,
+        languages = { "vue" },
+        configNamespace = "typescript",
+      }
+      local vtsls_config = {
+        settings = {
+          vtsls = {
+            tsserver = {
+              globalPlugins = {
+                vue_plugin,
+              },
+            },
           },
         },
-      })
+        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+      }
+
+      local vue_ls_config = {
+        on_init = function(client)
+          client.handlers["tsserver/request"] = function(_, result, context)
+            local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+            if #clients == 0 then
+              vim.notify("Could not found `vtsls` lsp client, vue_lsp would not work without it.", vim.log.levels.ERROR)
+              return
+            end
+            local ts_client = clients[1]
+
+            local param = unpack(result)
+            local id, command, payload = unpack(param)
+            ts_client:exec_cmd({
+              title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+              command = "typescript.tsserverRequest",
+              arguments = {
+                command,
+                payload,
+              },
+            }, { bufnr = context.bufnr }, function(_, r)
+              local response_data = { { id, r.body } }
+              ---@diagnostic disable-next-line: param-type-mismatch
+              client:notify("tsserver/response", response_data)
+            end)
+          end
+        end,
+      }
+      vim.lsp.config("vtsls", vtsls_config)
+      vim.lsp.config("vue_ls", vue_ls_config)
 
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
@@ -293,15 +337,6 @@ return {
         "stylua", -- Used to format Lua code
         "prettier",
       })
-      local ensure_enabled = { unpack(ensure_installed) }
-      vim.list_extend(ensure_installed, { "ts_ls" })
-
-      -- Define specific versions for some tools
-      for i, v in ipairs(ensure_installed) do
-        if v == "vue_ls" then
-          ensure_installed[i] = { "vue_ls", version = "2.2.8" }
-        end
-      end
 
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
@@ -309,7 +344,7 @@ return {
       })
 
       require("mason-lspconfig").setup({
-        automatic_enable = ensure_enabled,
+        automatic_enable = ensure_installed,
         handlers = {
           function(server_name)
             local server = servers[server_name] or {}
@@ -322,13 +357,6 @@ return {
         },
       })
     end,
-  },
-
-  -- Typescript LSP
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
   },
 
   { -- Autoformat
