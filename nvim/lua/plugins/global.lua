@@ -43,4 +43,13 @@ return {
     lazy = false,
     priority = 1001,
   },
+
+  -- Oil file explorer
+  {
+    "stevearc/oil.nvim",
+    opts = {
+      delete_to_trash = true,
+    },
+    lazy = false,
+  },
 }
