@@ -1,28 +1,19 @@
 {
-  "nativeMCPServers": [],
   "mcpServers": {
-    "time": {
-      "args": ["mcp-server-time"],
-      "command": "uvx"
+    "context7": {
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "autoApprove": ["resolve-library-id", "get-library-docs"],
+      "command": "npx",
+      "disabled": false
     },
-    "vectorcode-mcp-server": {
-      "command": "vectorcode-mcp-server",
-      "args": []
+    "excel": {
+      "args": ["excel-mcp-server", "stdio"],
+      "command": "uvx"
     },
     "git": {
       "args": ["mcp-server-git"],
       "command": "uvx",
       "disabled": false
-    },
-    "context7": {
-      "args": ["-y", "@upstash/context7-mcp@latest"],
-      "disabled": false,
-      "command": "npx",
-      "autoApprove": ["resolve-library-id", "get-library-docs"]
-    },
-    "sequential-thinking": {
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "command": "npx"
     },
     "github": {
       "args": [
@@ -33,15 +24,28 @@
         "GITHUB_PERSONAL_ACCESS_TOKEN",
         "ghcr.io/github/github-mcp-server"
       ],
+      "command": "docker",
+      "disabled": false,
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "${cmd: echo $GITHUB_PERSONAL_ACCESS_TOKEN}"
-      },
-      "command": "docker",
+      }
+    },
+    "markitdown": {
+      "command": "markitdown-mcp",
       "disabled": false
     },
-    "excel": {
-      "args": ["excel-mcp-server", "stdio"],
+    "sequential-thinking": {
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "command": "npx"
+    },
+    "time": {
+      "args": ["mcp-server-time"],
       "command": "uvx"
+    },
+    "vectorcode-mcp-server": {
+      "args": [],
+      "command": "vectorcode-mcp-server"
     }
-  }
+  },
+  "nativeMCPServers": []
 }
