@@ -368,6 +368,10 @@ return {
       { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
     },
     opts = {
+      highlights = {
+        buffer_visible = { fg = "#C6D0F5", bg = "#303546", bold = true, italic = true },
+        separator_visible = { bg = "#303546", fg = "#191C26" },
+      },
       options = {
         separator_style = "slant",
         close_command = function(n)
@@ -401,8 +405,8 @@ return {
       },
     },
     config = function(_, opts)
-      opts.highlights = require("catppuccin.groups.integrations.bufferline").get()
       require("bufferline").setup(opts)
+
       -- Fix bufferline when restoring a session
       vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
         callback = function()
