@@ -76,6 +76,7 @@ cask "stats"
 cask "aldente"
 cask "dropshelf"
 cask "cleanshot"
+cask "grandperspective"
 
 # Languages
 brew "asdf"
