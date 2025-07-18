@@ -267,4 +267,7 @@ return {
     },
     ft = { "markdown", "codecompanion" },
   },
+
+  -- Rainbow delimiters
+  { "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 }

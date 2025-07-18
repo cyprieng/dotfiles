@@ -20,6 +20,7 @@ return {
           indent_scope_color = "lavender",
         },
         lsp_trouble = true,
+        rainbow_delimiters = true,
         which_key = true,
       },
     },
