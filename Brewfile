@@ -77,6 +77,7 @@ cask "aldente"
 cask "dropshelf"
 cask "cleanshot"
 cask "grandperspective"
+cask "appcleaner"
 
 # Languages
 brew "asdf"
