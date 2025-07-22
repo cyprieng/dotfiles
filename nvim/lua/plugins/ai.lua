@@ -72,6 +72,9 @@ return {
         },
       },
     },
+    init = function()
+      require("plugins.ai.extensions.companion-notification").init()
+    end,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
