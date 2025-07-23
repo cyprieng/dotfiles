@@ -63,7 +63,7 @@ else
   # Link configs
   mkdir -p ~/.config/lazygit/
   link_file "$BASEDIR/lazygit/config.yml" ~/.config/lazygit/config.yml
-  link_file "$BASEDIR/k9s" ~/.config/k9s/
+  link_file "$BASEDIR/k9s" ~/.config/k9s
 fi
 
 # Create config links
