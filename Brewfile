@@ -51,6 +51,7 @@ brew "typst"
 brew "docker"
 brew "docker-buildx"
 brew "docker-credential-helper"
+brew "docker-compose"
 brew "colima"
 
 # Apps
