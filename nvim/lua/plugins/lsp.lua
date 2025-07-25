@@ -520,16 +520,35 @@ return {
 
         ["<CR>"] = { "accept", "fallback" },
         ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_ghost_text_visible() then
+              if cmp.snippet_active() then
+                return cmp.accept()
+              else
+                return cmp.select_and_accept()
+              end
+            end
+          end,
           "select_next",
           "snippet_forward",
           "fallback",
         },
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 
-        ["<Up>"] = { "fallback" },
-        ["<Down>"] = { "fallback" },
-        ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
-        ["<C-n>"] = { "select_next", "fallback_to_mappings" },
+        ["<Up>"] = { "select_prev", "fallback" },
+        ["<Down>"] = { "select_next", "fallback" },
+        ["<C-p>"] = {
+          function(cmp)
+            cmp.select_prev({ on_ghost_text = true })
+          end,
+          "fallback_to_mappings",
+        },
+        ["<C-n>"] = {
+          function(cmp)
+            cmp.select_next({ on_ghost_text = true })
+          end,
+          "fallback_to_mappings",
+        },
 
         ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
@@ -550,8 +569,15 @@ return {
           },
         },
 
+        ghost_text = {
+          enabled = true,
+          show_with_menu = false,
+          show_without_selection = true,
+        },
+
         -- Highlight colors
         menu = {
+          auto_show = false,
           draw = {
             treesitter = { "lsp" },
             components = {
