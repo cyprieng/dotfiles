@@ -83,12 +83,12 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- Move lines with macos alt behavior
-map("n", "Ï", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "È", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "Ï", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "È", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "Ï", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "È", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+map("n", "ü", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "ï", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "ü", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "ï", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "ü", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "ï", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
 map("n", "<leader>bd", function()
