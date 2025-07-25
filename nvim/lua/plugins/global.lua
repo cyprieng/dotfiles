@@ -52,6 +52,8 @@ return {
     },
     lazy = false,
   },
+
+  -- HTTP client
   {
     "mistweaverco/kulala.nvim",
     keys = {
