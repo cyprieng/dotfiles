@@ -49,7 +49,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost" }, {
   pattern = "*",
   callback = function()
-    if vim.bo.modified and not vim.bo.readonly and vim.fn.expand("%") ~= "" and vim.bo.buftype == "" then
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local filetype = vim.bo.filetype
+    local buftype = vim.bo.buftype
+    -- Ignore non-file buffers and kulala response/scratch buffers
+    if
+      buftype ~= ""
+      or bufname == ""
+      or bufname:match("^kulala://")
+      or filetype == "kulala"
+      or filetype == "kulala-scratch"
+      or filetype == "http"
+      or filetype == "rest"
+    then
+      return
+    end
+    if vim.bo.modified and not vim.bo.readonly then
       vim.api.nvim_command("silent update")
     end
   end,
