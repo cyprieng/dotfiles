@@ -79,6 +79,7 @@ cask "dropshelf"
 cask "cleanshot"
 cask "grandperspective"
 cask "appcleaner"
+cask "orion"
 
 # Languages
 brew "asdf"
