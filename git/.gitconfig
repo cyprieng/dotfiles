@@ -185,7 +185,7 @@
 	all = true
 
 [rerere]
-        enabled = true
+        enabled = false
 	autoupdate = true
 
 [rebase]
