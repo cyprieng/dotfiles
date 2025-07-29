@@ -1,5 +1,5 @@
 -- Ensure cmdheight is not getting resized when resizing the window
-vim.api.nvim_create_autocmd("VimResized", {
+vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "BufLeave", "FocusLost" }, {
   pattern = "*",
   callback = function()
     vim.defer_fn(function()
