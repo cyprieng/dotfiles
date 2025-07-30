@@ -225,7 +225,6 @@ npm i -g npm-check-updates neovim
 echo 'Installing python dependencies...'
 pipx install pylatexenc poetry
 pip3 install --user --break-system-packages neovim
-uv tool install 'vectorcode[mcp]'
 uv tool install mcp-server-git
 uv tool install 'markitdown[all]'
 uv tool install markitdown-mcp
