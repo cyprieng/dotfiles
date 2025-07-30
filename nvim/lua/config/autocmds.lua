@@ -19,6 +19,19 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   end,
 })
 
+-- Auto close git commit and rebase buffers after saving
+vim.api.nvim_create_autocmd("BufWritePost", {
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ft = vim.bo[bufnr].filetype
+    if ft == "gitcommit" or ft == "gitrebase" then
+      vim.defer_fn(function()
+        vim.api.nvim_buf_delete(bufnr, {})
+      end, 50)
+    end
+  end,
+})
+
 -- Configuration for automatic updates
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimStarted",
