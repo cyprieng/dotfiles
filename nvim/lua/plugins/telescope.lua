@@ -79,6 +79,33 @@ return {
         return require("trouble.sources.telescope").open(...)
       end
 
+      -- Find files
+      local normal_cmd = { "rg", "--files", "--color", "never", "-g", "!.git" }
+      local no_ignore_cmd = { "rg", "--files", "--color", "never", "-g", "!.git", "--no-ignore" }
+      local use_no_ignore = false
+      local function toggle_no_ignore(prompt_bufnr)
+        use_no_ignore = not use_no_ignore
+        actions.close(prompt_bufnr)
+        require("telescope.builtin").find_files({
+          find_command = use_no_ignore and no_ignore_cmd or normal_cmd,
+          hidden = true,
+        })
+      end
+
+      -- Live grep
+      local normal_grep_args = { "--color=never", "-g", "!.git" }
+      local no_ignore_grep_args = { "--color=never", "-g", "!.git", "--no-ignore" }
+      local use_no_ignore_grep = false
+      local function toggle_no_ignore_grep(prompt_bufnr)
+        use_no_ignore_grep = not use_no_ignore_grep
+        require("telescope.actions").close(prompt_bufnr)
+        require("telescope.builtin").live_grep({
+          additional_args = function()
+            return use_no_ignore_grep and no_ignore_grep_args or normal_grep_args
+          end,
+        })
+      end
+
       require("telescope").setup({
         extensions = {
           undo = {},
@@ -145,9 +172,24 @@ return {
         },
         pickers = {
           find_files = {
-            find_command = { "rg", "--files", "--color", "never", "-g", "!.git" },
+            find_command = normal_cmd,
             hidden = true,
+            mappings = {
+              i = {
+                ["<C-i>"] = toggle_no_ignore,
+              },
+            },
           },
+          live_grep = {
+            find_command = normal_grep_args,
+            hidden = true,
+            mappings = {
+              i = {
+                ["<C-i>"] = toggle_no_ignore_grep,
+              },
+            },
+          },
+
           buffers = {
             mappings = {
               i = {
