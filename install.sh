@@ -163,7 +163,7 @@ if $macos; then
   sudo defaults write com.apple.Safari AutoFillCreditCardData -bool false              # Disable AutoFill in safari
   sudo defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false          # Disable AutoFill in safari
   sudo defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true # Update extensions automatically
-  sudo pmset -b lowpowermode 0                                                         # Enable low power mode on battery
+  sudo pmset -b lowpowermode 0                                                         # No low power mode on battery
   defaults write -g InitialKeyRepeat -int 10                                           # Set initial key repeat to fast
   defaults write -g KeyRepeat -int 2                                                   # Set key repeat to fast
   defaults write -g NSWindowShouldDragOnGesture -bool true                             # Enable drag on gesture
