@@ -338,6 +338,8 @@ return {
         "prettier",
         "php-debug-adapter",
         "delve",
+        "js-debug-adapter",
+        "debugpy",
       })
 
       require("mason-tool-installer").setup({

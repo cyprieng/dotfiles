@@ -151,6 +151,7 @@ return {
       ensure_installed = {
         "delve",
         "php",
+        "python",
       },
 
       handlers = {
@@ -234,5 +235,26 @@ return {
         detached = vim.fn.has("win32") == 0,
       },
     })
+
+    -- JavaScript/TypeScript Debug Adapter
+    local js_debug_path = vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js"
+    require("dap").adapters["pwa-node"] = {
+      type = "server",
+      host = "localhost",
+      port = "${port}",
+      executable = {
+        command = "node",
+        args = { js_debug_path, "${port}" },
+      },
+    }
+    require("dap").configurations.javascript = {
+      {
+        type = "pwa-node",
+        request = "launch",
+        name = "Launch file",
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+      },
+    }
   end,
 }
