@@ -114,7 +114,6 @@ if $macos; then
   link_file "$BASEDIR/ghostty" ~/.config/ghostty
   link_file "$BASEDIR/karabiner" ~/.config/karabiner
   link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
-  link_file "$BASEDIR/launchd/local.brew.upgrade.plist" ~/Library/LaunchAgents/local.brew.upgrade.plist
   link_file "$BASEDIR/k9s" "$HOME/Library/Application Support/k9s"
   ln -sfn $(which docker-buildx) ~/.docker/cli-plugins
   ln -sfn $(which docker-compose) ~/.docker/cli-plugins
