@@ -323,6 +323,14 @@ return {
     event = "VeryLazy",
     opts = {
       routes = {
+        -- Ignore notifications for img-clip
+        {
+          filter = {
+            event = "notify",
+            find = "Content is not an image",
+          },
+          opts = { skip = true },
+        },
         {
           filter = {
             event = "msg_show",
