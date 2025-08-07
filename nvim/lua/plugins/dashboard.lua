@@ -4,7 +4,12 @@ return {
     priority = 1000,
     opts = {
       bigfile = { enabled = true },
-      indent = { enabled = true },
+      indent = {
+        enabled = true,
+        scope = {
+          char = "▍",
+        },
+      },
       input = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },

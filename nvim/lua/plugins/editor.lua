@@ -186,12 +186,6 @@ return {
     opts = {},
   },
 
-  -- Add indentation guides even on blank lines
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "VeryLazy",
-  },
-
   -- Surrounding
   {
     "echasnovski/mini.surround",
