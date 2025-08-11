@@ -1,3 +1,10 @@
+-- Automatically show diagnostics in a floating window when the cursor is held
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
+})
+
 -- Ensure cmdheight is not getting resized when resizing the window
 vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "BufLeave", "FocusLost" }, {
   pattern = "*",
