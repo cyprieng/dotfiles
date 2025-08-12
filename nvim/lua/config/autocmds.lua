@@ -1,7 +1,28 @@
 -- Automatically show diagnostics in a floating window when the cursor is held
+local diag_float_winid = nil
+
 vim.api.nvim_create_autocmd("CursorHold", {
   callback = function()
-    vim.diagnostic.open_float(nil, { focus = false })
+    local opts = { focus = false }
+    local bufnr = vim.api.nvim_get_current_buf()
+    local cursor = vim.api.nvim_win_get_cursor(0)
+    local line = cursor[1] - 1
+    local diagnostics = vim.diagnostic.get(bufnr, { lnum = line })
+    for _, diag in ipairs(diagnostics) do
+      if diag.message and #diag.message > 80 then -- Only show if message is long
+        _, diag_float_winid = vim.diagnostic.open_float(nil, opts)
+        return
+      end
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufLeave", "WinLeave" }, {
+  callback = function()
+    if diag_float_winid and vim.api.nvim_win_is_valid(diag_float_winid) then
+      vim.api.nvim_win_close(diag_float_winid, true)
+      diag_float_winid = nil
+    end
   end,
 })
 
