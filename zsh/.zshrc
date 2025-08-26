@@ -58,6 +58,7 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+whoseport() { lsof -i :$1 -sTCP:LISTEN -t | xargs -r ps -o pid=,comm= -p; }
 
 # Bind keys
 bindkey "^[e" redo
