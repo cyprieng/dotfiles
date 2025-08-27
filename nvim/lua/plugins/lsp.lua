@@ -152,7 +152,6 @@ return {
 
       -- Change diagnostic symbols in the sign column (gutter)
       vim.diagnostic.config({
-        virtual_text = true, -- Show diagnostics as virtual text
         signs = true, -- Show signs in the sign column
         underline = true, -- Use underline for diagnostics
         update_in_insert = false, -- Don't update diagnostics in insert mode
@@ -696,5 +695,16 @@ return {
       "neovim/nvim-lspconfig",
     },
     opts = {},
+  },
+
+  -- Diagnostics
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+      require("tiny-inline-diagnostic").setup()
+      vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+    end,
   },
 }
