@@ -492,6 +492,7 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       "giuxtaposition/blink-cmp-copilot",
+      "Kaiser-Yang/blink-cmp-avante",
       {
         "L3MON4D3/LuaSnip",
         build = (function()
@@ -623,13 +624,18 @@ return {
       snippets = { preset = "luasnip" },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante" },
         providers = {
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
             score_offset = 100,
             async = true,
+          },
+          avante = {
+            module = "blink-cmp-avante",
+            name = "Avante",
+            opts = {},
           },
         },
       },

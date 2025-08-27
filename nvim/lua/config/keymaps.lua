@@ -277,11 +277,3 @@ map("t", "<C-h>", smart_term_move("SmartCursorMoveLeft"))
 map("t", "<C-j>", smart_term_move("SmartCursorMoveDown"))
 map("t", "<C-k>", smart_term_move("SmartCursorMoveUp"))
 map("t", "<C-l>", smart_term_move("SmartCursorMoveRight"))
-
-
--- Code companion
-map({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-map("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
-
--- Expand 'cc' into 'CodeCompanion' in the command line
-vim.cmd([[cab cc CodeCompanion]])

@@ -257,9 +257,9 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
-      file_types = { "markdown", "codecompanion" },
+      file_types = { "markdown", "Avante" },
     },
-    ft = { "markdown", "codecompanion" },
+    ft = { "markdown", "Avante" },
   },
 
   -- Rainbow delimiters

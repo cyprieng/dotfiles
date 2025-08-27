@@ -31,64 +31,79 @@ return {
     config = function()
       require("mcphub").setup({
         use_bundled_binary = true,
+        extensions = {
+          avante = {
+            make_slash_commands = true, -- make /slash commands from MCP server prompts
+          },
+        },
       })
     end,
   },
 
-  -- AI interface
+  -- avante
   {
-    "olimorris/codecompanion.nvim",
-    lazy = true,
+    "yetone/avante.nvim",
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    -- ⚠️ must add this setting! ! !
+    build = vim.fn.has("win32") ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+      or "make",
     event = "VeryLazy",
+    version = false, -- Never set this value to "*"! Never!
+    ---@module 'avante'
+    ---@type avante.Config
     opts = {
-      strategies = {
-        chat = {
-          adapter = {
-            name = "copilot",
-            model = "gpt-4.1",
-          },
-        },
-        inline = {
-          adapter = {
-            name = "copilot",
-            model = "gpt-4.1",
-          },
-        },
-        cmd = {
-          adapter = {
-            name = "copilot",
-            model = "gpt-4.1",
-          },
+      provider = "copilot",
+      providers = {
+        copilot = {
+          model = "gpt-4.1",
         },
       },
-      extensions = {
-        mcphub = {
-          callback = "mcphub.extensions.codecompanion",
-          opts = {
-            show_result_in_chat = true, -- Show mcp tool results in chat
-            make_vars = true, -- Convert resources to #variables
-            make_slash_commands = true, -- Add prompts as /slash commands
-          },
+      input = {
+        provider = "snacks",
+        provider_opts = {
+          -- Additional snacks.input options
+          title = "Avante Input",
+          icon = " ",
         },
       },
+      file_selector = {
+        provider = "telescope",
+      },
+      selector = {
+        provider = "telescope",
+      },
+
+      -- system_prompt as function ensures LLM always has latest MCP server state
+      -- This is evaluated for every message, even in existing chats
+      system_prompt = function()
+        local hub = require("mcphub").get_hub_instance()
+        return hub and hub:get_active_servers_prompt() or ""
+      end,
+      -- Using function prevents requiring mcphub before it's loaded
+      custom_tools = function()
+        return {
+          require("mcphub.extensions.avante").mcp_tool(),
+        }
+      end,
     },
-    init = function()
-      require("plugins.ai.extensions.companion-notification").init()
-    end,
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-
-      -- Image pasting
+      "MunifTanjim/nui.nvim",
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
       {
+        -- support for image pasting
         "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
         opts = {
-          filetypes = {
-            codecompanion = {
-              prompt_for_file_name = false,
-              template = "[Image]($FILE_PATH)",
-              use_absolute_path = true,
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
             },
+            -- required for Windows users
+            use_absolute_path = true,
           },
         },
       },
