@@ -16,18 +16,9 @@
       "disabled": false
     },
     "github": {
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
-      ],
-      "command": "docker",
-      "disabled": false,
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${cmd: echo $GITHUB_PERSONAL_ACCESS_TOKEN}"
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${cmd: echo $GITHUB_PERSONAL_ACCESS_TOKEN}"
       }
     },
     "markitdown": {
