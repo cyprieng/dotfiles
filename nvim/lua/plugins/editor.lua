@@ -215,7 +215,12 @@ return {
       {
         "<leader>sr",
         function()
-          require("grug-far").open()
+          require("grug-far").open({
+            prefills = {
+              search = vim.fn.expand("<cword>"),
+              paths = vim.fn.getcwd(),
+            },
+          })
         end,
         desc = "Replace",
       },
