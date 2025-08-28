@@ -8,6 +8,15 @@ vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "BufLeave
   end,
 })
 
+-- Trigger git status update when leaving a buffer
+-- Used by neo-tree
+vim.api.nvim_create_autocmd({ "BufLeave" }, {
+  callback = function()
+    local events = require("neo-tree.events")
+    events.fire_event(events.GIT_EVENT)
+  end,
+})
+
 -- Auto insert mode when entering in a term buffer
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = "term://*",

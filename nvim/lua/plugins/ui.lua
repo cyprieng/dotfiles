@@ -197,8 +197,8 @@ return {
           ["oa"] = "avante_add_files",
         },
       },
-      use_libuv_file_watcher = true,
       filesystem = {
+        use_libuv_file_watcher = true,
         commands = {
           -- Override delete to use trash instead of rm
           delete = function(state)
@@ -249,40 +249,6 @@ return {
         show_unloaded = true,
       },
     },
-    config = function(_, opts)
-      require("neo-tree").setup(opts)
-
-      -- Watch for file system changes
-      local uv = vim.loop
-      local refresh_neo_tree = function()
-        require("neo-tree.sources.manager").refresh("filesystem")
-      end
-
-      local watch_dir = function(path)
-        local handle
-        handle = uv.new_fs_event()
-        uv.fs_event_start(
-          handle,
-          path,
-          {},
-          vim.schedule_wrap(function()
-            refresh_neo_tree()
-          end)
-        )
-      end
-
-      -- Watch the current working directory
-      watch_dir(vim.loop.cwd())
-
-      -- Refresh Neo-tree when leaving terminal mode
-      vim.api.nvim_create_autocmd("TermLeave", {
-        callback = function()
-          vim.defer_fn(function()
-            refresh_neo_tree()
-          end, 100)
-        end,
-      })
-    end,
   },
 
   -- Edgy window manager
