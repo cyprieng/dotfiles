@@ -10,7 +10,110 @@ local function focus_preview(prompt_bufnr)
     vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", prompt_win))
   end, { buffer = bufnr })
   vim.cmd(string.format("noautocmd lua vim.api.nvim_set_current_win(%s)", winid))
-  -- api.nvim_set_current_win(winid)
+end
+
+-- Buffer search based on bufferline.nvim to have the same order and filters
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local conf = require("telescope.config").values
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local entry_display = require("telescope.pickers.entry_display")
+
+-- Helper to get or create a highlight group for a specific color
+local function get_icon_hl(color)
+  local hl_name = "TelescopeDevicon" .. color:gsub("#", "")
+  if vim.fn.hlexists(hl_name) == 0 then
+    vim.api.nvim_set_hl(0, hl_name, { fg = color })
+  end
+  return hl_name
+end
+
+local function bufferline_picker(opts)
+  opts = opts or {}
+
+  local devicons = require("nvim-web-devicons")
+  local ok, bufferline = pcall(require, "bufferline")
+  if not ok then
+    vim.notify("bufferline.nvim is not available", vim.log.levels.ERROR)
+    return
+  end
+
+  local bufferline_buffers = bufferline.get_elements and bufferline.get_elements().elements or {}
+  if not bufferline_buffers or vim.tbl_isempty(bufferline_buffers) then
+    vim.notify("No buffers found in bufferline", vim.log.levels.INFO)
+    return
+  end
+
+  pickers
+    .new(opts, {
+      prompt_title = "Bufferline Buffers",
+      finder = finders.new_table({
+        results = bufferline_buffers,
+        entry_maker = function(entry)
+          local bufnr = entry.id
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+          if filename == "" then
+            filename = "[No Name]"
+          end
+          local ft_icon, ft_color = devicons.get_icon_color(filename)
+          local modified = vim.bo[bufnr].modified
+          local icon_hl = ft_color and get_icon_hl(ft_color) or nil
+          local is_current = bufnr == vim.api.nvim_get_current_buf()
+
+          return {
+            value = bufnr,
+            ordinal = filename,
+            filename = filename,
+            icon = ft_icon or "",
+            icon_hl = icon_hl,
+            modified = modified,
+            bufnr = bufnr,
+            is_current = is_current,
+            display = function(entry2)
+              local displayer = entry_display.create({
+                separator = " ",
+                items = {
+                  { width = 2 }, -- icon
+                  { width = nil }, -- filename
+                  { width = 2 }, -- modified dot
+                  { width = 6 }, -- buffer number
+                },
+              })
+              return displayer({
+                { entry2.icon, entry2.icon_hl },
+                { entry2.filename, entry2.is_current and "TelescopeResultsIdentifier" or "" },
+                { entry2.modified and "●" or " ", entry2.modified and "TelescopeResultsNumber" or "" },
+                { "[" .. entry2.bufnr .. "]", "Comment" },
+              })
+            end,
+          }
+        end,
+      }),
+      sorter = conf.generic_sorter(opts),
+      previewer = require("telescope.previewers").new_buffer_previewer({
+        define_preview = function(self, entry, _)
+          local bufnr = entry.value
+          if vim.api.nvim_buf_is_valid(bufnr) then
+            local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+            vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
+            local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+            vim.api.nvim_buf_set_option(self.state.bufnr, "filetype", ft)
+          end
+        end,
+      }),
+      attach_mappings = function(prompt_bufnr, map)
+        actions.select_default:replace(function()
+          actions.close(prompt_bufnr)
+          local selection = action_state.get_selected_entry()
+          if selection and selection.value then
+            vim.api.nvim_set_current_buf(selection.value)
+          end
+        end)
+        return true
+      end,
+    })
+    :find()
 end
 
 return {
@@ -27,18 +130,13 @@ return {
     keys = {
       {
         "<leader>,",
-        "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>",
-        desc = "Switch Buffer",
+        bufferline_picker,
+        desc = "Buffers (filtered)",
       },
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
       { "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find Files (Root Dir)" },
       -- find
-      {
-        "<leader>fb",
-        "<cmd>Telescope buffers sort_mru=true sort_lastused=true ignore_current_buffer=true<cr>",
-        desc = "Buffers",
-      },
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
       -- git
@@ -189,7 +287,6 @@ return {
               },
             },
           },
-
           buffers = {
             mappings = {
               i = {

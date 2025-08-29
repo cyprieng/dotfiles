@@ -395,7 +395,11 @@ return {
           reveal = { "close" },
         },
         custom_filter = function(buf_number, _)
-          if vim.bo[buf_number].buftype ~= "terminal" and vim.bo[buf_number].buftype ~= "quickfix" then
+          if
+            vim.bo[buf_number].buftype ~= "terminal"
+            and vim.bo[buf_number].buftype ~= "quickfix"
+            and vim.bo[buf_number].buftype ~= "nofile"
+          then
             return true
           else
             return false
