@@ -52,10 +52,12 @@ local function bufferline_picker(opts)
         results = bufferline_buffers,
         entry_maker = function(entry)
           local bufnr = entry.id
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+          local fullpath = vim.api.nvim_buf_get_name(bufnr)
+          local filename = vim.fn.fnamemodify(fullpath, ":t")
           if filename == "" then
             filename = "[No Name]"
           end
+          local relpath = fullpath ~= "" and vim.fn.fnamemodify(fullpath, ":.") or ""
           local ft_icon, ft_color = devicons.get_icon_color(filename)
           local modified = vim.bo[bufnr].modified
           local icon_hl = ft_color and get_icon_hl(ft_color) or nil
@@ -63,8 +65,9 @@ local function bufferline_picker(opts)
 
           return {
             value = bufnr,
-            ordinal = filename,
+            ordinal = filename .. " " .. relpath,
             filename = filename,
+            relpath = relpath,
             icon = ft_icon or "",
             icon_hl = icon_hl,
             modified = modified,
@@ -76,6 +79,7 @@ local function bufferline_picker(opts)
                 items = {
                   { width = 2 }, -- icon
                   { width = nil }, -- filename
+                  { width = nil }, -- relative path
                   { width = 2 }, -- modified dot
                   { width = 6 }, -- buffer number
                 },
@@ -83,6 +87,7 @@ local function bufferline_picker(opts)
               return displayer({
                 { entry2.icon, entry2.icon_hl },
                 { entry2.filename, entry2.is_current and "TelescopeResultsIdentifier" or "" },
+                { entry2.relpath ~= "" and "(" .. entry2.relpath .. ")" or "", "Comment" },
                 { entry2.modified and "●" or " ", entry2.modified and "TelescopeResultsNumber" or "" },
                 { "[" .. entry2.bufnr .. "]", "Comment" },
               })
