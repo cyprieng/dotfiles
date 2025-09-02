@@ -183,8 +183,8 @@ return {
       end
 
       -- Find files
-      local normal_cmd = { "rg", "--files", "--color", "never", "-g", "!.git" }
-      local no_ignore_cmd = { "rg", "--files", "--color", "never", "-g", "!.git", "--no-ignore" }
+      local normal_cmd = { "rg", "--hidden", "--files", "--color", "never", "-g", "!.git" }
+      local no_ignore_cmd = { "rg", "--hidden", "--files", "--color", "never", "-g", "!.git", "--no-ignore" }
       local use_no_ignore = false
       local function toggle_no_ignore(prompt_bufnr)
         use_no_ignore = not use_no_ignore
@@ -196,8 +196,8 @@ return {
       end
 
       -- Live grep
-      local normal_grep_args = { "--color=never", "-g", "!.git" }
-      local no_ignore_grep_args = { "--color=never", "-g", "!.git", "--no-ignore" }
+      local normal_grep_args = { "--color=never", "--hidden", "-g", "!.git" }
+      local no_ignore_grep_args = { "--color=never", "--hidden", "-g", "!.git", "--no-ignore" }
       local use_no_ignore_grep = false
       local function toggle_no_ignore_grep(prompt_bufnr)
         use_no_ignore_grep = not use_no_ignore_grep
@@ -284,7 +284,7 @@ return {
             },
           },
           live_grep = {
-            find_command = normal_grep_args,
+            additional_args = normal_grep_args,
             hidden = true,
             mappings = {
               i = {
