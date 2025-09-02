@@ -94,9 +94,22 @@ map("v", "ï", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { de
 map("n", "<leader>bd", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
+
 map("n", "<leader>bo", function()
-  Snacks.bufdelete.other()
-end, { desc = "Delete Other Buffers" })
+  local open_buffers = {}
+  -- Collect all buffer numbers shown in windows
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    open_buffers[vim.api.nvim_win_get_buf(win)] = true
+  end
+
+  -- Get all listed buffers
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if not open_buffers[buf] then
+      Snacks.bufdelete.delete(buf)
+    end
+  end
+end, { desc = "Delete Other Buffers (except those in windows)" })
+
 map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Clear search with <esc>
