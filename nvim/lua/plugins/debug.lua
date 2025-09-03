@@ -13,6 +13,9 @@ return {
 
     -- Language specific debug adapters
     "leoluz/nvim-dap-go",
+
+    -- Ghost text
+    "theHamsta/nvim-dap-virtual-text",
   },
   keys = {
     {
