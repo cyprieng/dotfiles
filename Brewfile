@@ -79,6 +79,7 @@ cask "cleanshot"
 cask "grandperspective"
 cask "appcleaner"
 cask "orion"
+cask "netnewswire"
 
 # Languages
 brew "asdf"
