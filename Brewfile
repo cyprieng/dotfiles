@@ -80,6 +80,7 @@ cask "grandperspective"
 cask "appcleaner"
 cask "orion"
 cask "netnewswire"
+cask "openmtp"
 
 # Languages
 brew "asdf"
