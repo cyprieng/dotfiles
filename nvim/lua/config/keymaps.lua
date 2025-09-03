@@ -103,9 +103,11 @@ map("n", "<leader>bo", function()
   end
 
   -- Get all listed buffers
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if not open_buffers[buf] then
-      Snacks.bufdelete.delete(buf)
+  local bufferline = require("bufferline")
+  local bufferline_buffers = bufferline.get_elements and bufferline.get_elements().elements or {}
+  for _, buf in ipairs(bufferline_buffers) do
+    if not open_buffers[buf.id] then
+      Snacks.bufdelete.delete(buf.id)
     end
   end
 end, { desc = "Delete Other Buffers (except those in windows)" })
