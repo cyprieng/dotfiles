@@ -59,6 +59,13 @@ function y() {
 }
 whoseport() { lsof -i :$1 -sTCP:LISTEN -t | xargs -r ps -o pid=,comm= -p; }
 
+# I want clear to also clear the scrollback in tmux or nvim
+if [[ -n "$NVIM" ]]; then
+  alias clear="nvim --server \"\$NVIM\" --remote-send '<Cmd>lua require(\"toggleterm\").exec(\"exit\", 1)<CR><Cmd>lua vim.defer_fn(function() require(\"toggleterm\").toggle() end, 200)<CR>'"
+elif [ -n "$TMUX" ]; then
+  alias clear='clear && tmux clear-history'
+fi
+
 # Bind keys
 bindkey "^[e" redo
 
