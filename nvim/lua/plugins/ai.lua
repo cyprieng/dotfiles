@@ -12,11 +12,6 @@ return {
       },
       copilot_model = "gpt-4.1",
     },
-    config = function()
-      require("copilot").setup({
-        copilot_node_command = os.getenv("HOME") .. "/.asdf/installs/nodejs/23.7.0/bin/node",
-      })
-    end,
   },
 
   -- MCP servers

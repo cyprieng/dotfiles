@@ -81,11 +81,12 @@ cask "orion"
 cask "openmtp"
 
 # Languages
-brew "asdf"
 brew "pipx"
 brew "pnpm"
 brew "rustup"
-cask "dotnet-sdk"
+brew "golang"
+brew "uv"
+brew "nvm"
 
 # Other
 brew "antidote"
@@ -99,7 +100,6 @@ brew "imagemagick"
 brew "p7zip"
 brew "swiftlint"
 brew "periphery"
-brew "uv"
 brew "graphviz"
 brew "pam-reattach"
 

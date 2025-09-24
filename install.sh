@@ -78,7 +78,6 @@ link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
-link_file "$BASEDIR/asdf/.asdfrc" ~/.asdfrc
 link_file "$BASEDIR/mcphub" ~/.config/mcphub
 
 # Install tmux catpuccin
@@ -205,15 +204,6 @@ if $macos; then
     sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo
   fi
 fi
-
-# ASDF
-echo 'Setting up asdf...'
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
-asdf plugin add python https://github.com/asdf-community/asdf-python.git
-asdf plugin add java https://github.com/halcyon/asdf-java.git
-asdf plugin update --all
-asdf install
 
 # Golang
 go install golang.org/x/tools/cmd/goimports@latest
