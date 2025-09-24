@@ -1,6 +1,1 @@
-require("raycast")
-require("tile")
 require("keyboard")
-require("window")
-require("trash")
-require("downloads")

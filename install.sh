@@ -168,7 +168,7 @@ if $macos; then
   defaults write -g KeyRepeat -int 2                                                   # Set key repeat to fast
   defaults write -g NSWindowShouldDragOnGesture -bool true                             # Enable drag on gesture
   defaults write com.apple.dock expose-group-apps -bool true                           # Fix mission control for aerospace
-  defaults write com.apple.spaces spans-displays -bool true                            # Disable separate spaces for displays (aerospace)
+  defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
@@ -194,7 +194,6 @@ if $macos; then
   open_app_if_not_running "Karabiner"
   open_app_if_not_running "AlDente"
   open_app_if_not_running "Stats"
-  open_app_if_not_running "Dropshelf"
   open_app_if_not_running "CleanShot X"
 
   # Use TouchId for sudo
