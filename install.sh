@@ -115,6 +115,7 @@ if $macos; then
   link_file "$BASEDIR/karabiner" ~/.config/karabiner
   link_file "$BASEDIR/hammerspoon" ~/.hammerspoon
   link_file "$BASEDIR/k9s" "$HOME/Library/Application Support/k9s"
+  link_file "$BASEDIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
   ln -sfn $(which docker-buildx) ~/.docker/cli-plugins
   ln -sfn $(which docker-compose) ~/.docker/cli-plugins
 
@@ -166,6 +167,8 @@ if $macos; then
   defaults write -g InitialKeyRepeat -int 10                                           # Set initial key repeat to fast
   defaults write -g KeyRepeat -int 2                                                   # Set key repeat to fast
   defaults write -g NSWindowShouldDragOnGesture -bool true                             # Enable drag on gesture
+  defaults write com.apple.dock expose-group-apps -bool true                           # Fix mission control for aerospace
+  defaults write com.apple.spaces spans-displays -bool true                            # Disable separate spaces for displays (aerospace)
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done

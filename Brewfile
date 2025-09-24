@@ -56,6 +56,8 @@ brew "docker-compose"
 brew "colima"
 
 # Apps
+brew "FelixKratz/formulae/borders"
+cask "nikitabobko/tap/aerospace"
 brew "wireguard-tools"
 cask "spotify"
 brew "spotify_player"
