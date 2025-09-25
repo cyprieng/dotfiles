@@ -215,6 +215,10 @@ automatically-unhide-macos-hidden-apps = false
 if.app-id = 'com.kagi.kagimacOS'
 run = "move-node-to-workspace B"
 
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = "move-node-to-workspace B"
+
 # Dev
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
@@ -233,10 +237,28 @@ run = "move-node-to-workspace C"
 if.app-id = 'com.microsoft.Outlook'
 run = "move-node-to-workspace C"
 
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = "move-node-to-workspace C"
+
+# Organization
+[[on-window-detected]]
+if.app-id = 'com.apple.reminders'
+run = "move-node-to-workspace 1"
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+run = "move-node-to-workspace 1"
+
 # Notes
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 run = "move-node-to-workspace N"
+
+# Media
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = "move-node-to-workspace 2"
 
 # Others
 [[on-window-detected]]
@@ -245,5 +267,9 @@ run = "move-node-to-workspace O"
 
 [[on-window-detected]]
 if.app-id = 'org.openvpn.client.app'
+run = "move-node-to-workspace O"
+
+[[on-window-detected]]
+if.app-id = 'com.macpaw.CleanMyMac5'
 run = "move-node-to-workspace O"
 
