@@ -121,29 +121,7 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-ctrl-shift-7 = 'workspace 7'
     cmd-alt-ctrl-shift-8 = 'workspace 8'
     cmd-alt-ctrl-shift-9 = 'workspace 9'
-    cmd-alt-ctrl-shift-a = 'workspace A' 
-    cmd-alt-ctrl-shift-b = 'workspace B'
-    cmd-alt-ctrl-shift-c = 'workspace C'
-    cmd-alt-ctrl-shift-d = 'workspace D'
-    cmd-alt-ctrl-shift-e = 'workspace E'
-    cmd-alt-ctrl-shift-f = 'workspace F'
-    cmd-alt-ctrl-shift-g = 'workspace G'
-    cmd-alt-ctrl-shift-i = 'workspace I'
-    cmd-alt-ctrl-shift-m = 'workspace M'
-    cmd-alt-ctrl-shift-n = 'workspace N'
-    cmd-alt-ctrl-shift-o = 'workspace O'
-    cmd-alt-ctrl-shift-p = 'workspace P'
-    cmd-alt-ctrl-shift-q = 'workspace Q'
-    cmd-alt-ctrl-shift-r = 'workspace R'
-    cmd-alt-ctrl-shift-s = 'workspace S'
-    cmd-alt-ctrl-shift-t = 'workspace T'
-    cmd-alt-ctrl-shift-u = 'workspace U'
-    cmd-alt-ctrl-shift-v = 'workspace V'
-    cmd-alt-ctrl-shift-w = 'workspace W'
-    cmd-alt-ctrl-shift-x = 'workspace X'
-    cmd-alt-ctrl-shift-y = 'workspace Y'
-    cmd-alt-ctrl-shift-z = 'workspace Z'
-
+    
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
@@ -154,29 +132,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-7 = 'move-node-to-workspace 7'
     alt-shift-8 = 'move-node-to-workspace 8'
     alt-shift-9 = 'move-node-to-workspace 9'
-    alt-shift-a = 'move-node-to-workspace A'
-    alt-shift-b = 'move-node-to-workspace B'
-    alt-shift-c = 'move-node-to-workspace C'
-    alt-shift-d = 'move-node-to-workspace D'
-    alt-shift-e = 'move-node-to-workspace E'
-    alt-shift-f = 'move-node-to-workspace F'
-    alt-shift-g = 'move-node-to-workspace G'
-    alt-shift-i = 'move-node-to-workspace I'
-    alt-shift-m = 'move-node-to-workspace M'
-    alt-shift-n = 'move-node-to-workspace N'
-    alt-shift-o = 'move-node-to-workspace O'
-    alt-shift-p = 'move-node-to-workspace P'
-    alt-shift-q = 'move-node-to-workspace Q'
-    alt-shift-r = 'move-node-to-workspace R'
-    alt-shift-s = 'move-node-to-workspace S'
-    alt-shift-t = 'move-node-to-workspace T'
-    alt-shift-u = 'move-node-to-workspace U'
-    alt-shift-v = 'move-node-to-workspace V'
-    alt-shift-w = 'move-node-to-workspace W'
-    alt-shift-x = 'move-node-to-workspace X'
-    alt-shift-y = 'move-node-to-workspace Y'
-    alt-shift-z = 'move-node-to-workspace Z'
-
+   
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
@@ -206,70 +162,76 @@ automatically-unhide-macos-hidden-apps = false
     shift-down = ['volume set 0', 'mode main']
 
 [workspace-to-monitor-force-assignment]
-    B = "^PHL"
-    C = "^LG"
-    D = 'main'
+    1 = '^PHL'
+    2 = 'main'
+    3 = '^LG'
+    4 = '^LG'
+    5 = 'main'
+    6 = '^LG'
+    7 = 'main'
+    8 = 'main'
+    9 = 'main'
 
 # Browser 
 [[on-window-detected]]
 if.app-id = 'com.kagi.kagimacOS'
-run = "move-node-to-workspace B"
+run = "move-node-to-workspace 1"
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
-run = "move-node-to-workspace B"
+run = "move-node-to-workspace 1"
 
 # Dev
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = "move-node-to-workspace D"
+run = "move-node-to-workspace 2"
 
 # Communication
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = "move-node-to-workspace C"
+run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = "move-node-to-workspace C"
+run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
-run = "move-node-to-workspace C"
+run = "move-node-to-workspace 3"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = "move-node-to-workspace C"
+run = "move-node-to-workspace 3"
 
 # Organization
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-run = "move-node-to-workspace 1"
+run = "move-node-to-workspace 4"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = "move-node-to-workspace 1"
+run = "move-node-to-workspace 4"
 
 # Notes
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = "move-node-to-workspace N"
+run = "move-node-to-workspace 5"
 
 # Media
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = "move-node-to-workspace 2"
+run = "move-node-to-workspace 6"
 
 # Others
 [[on-window-detected]]
 if.app-id = 'Plantronics-Inc..Plantronics-Hub'
-run = "move-node-to-workspace O"
+run = "move-node-to-workspace 9"
 
 [[on-window-detected]]
 if.app-id = 'org.openvpn.client.app'
-run = "move-node-to-workspace O"
+run = "move-node-to-workspace 9"
 
 [[on-window-detected]]
 if.app-id = 'com.macpaw.CleanMyMac5'
-run = "move-node-to-workspace O"
+run = "move-node-to-workspace 9"
 
