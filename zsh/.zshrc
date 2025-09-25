@@ -12,8 +12,21 @@ fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-    [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+export HOMEBREW_PREFIX="$(brew --prefix)"
+
+nvm_lazy_load() {
+  unset -f nvm node npm npx
+  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+}
+
+for cmd in nvm node npm npx; do
+  eval "
+  $cmd() {
+    nvm_lazy_load
+    $cmd \"\$@\"
+  }
+  "
+done
 
 # Load secrets
 source ~/.secrets.sh 
