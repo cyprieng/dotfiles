@@ -64,6 +64,7 @@ alias lla="ls -la"
 alias cz="cz --config ~/.cz.toml"
 alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
+alias load.env="set -a && source .env && set +a"
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
