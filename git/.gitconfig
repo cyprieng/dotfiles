@@ -37,6 +37,9 @@
 	# Amend the currently staged files to the latest commit.
 	amend = commit --amend --reuse-message=HEAD
 
+	# Fixup commit
+	fixup = "!f() { git commit --fixup $1 && git rebase -i --autosquash $1~1; }; f"
+
 	# Credit an author on the latest commit.
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 
