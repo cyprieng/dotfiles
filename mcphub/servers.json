@@ -32,6 +32,10 @@
     "time": {
       "args": ["mcp-server-time"],
       "command": "uvx"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
     }
   },
   "nativeMCPServers": []
