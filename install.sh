@@ -168,6 +168,7 @@ if $macos; then
   defaults write -g NSWindowShouldDragOnGesture -bool true                             # Enable drag on gesture
   defaults write com.apple.dock expose-group-apps -bool true                           # Fix mission control for aerospace
   defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
+  defaults write com.apple.universalaccess reduceMotion -bool true                     # Reduce motion
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
