@@ -1,7 +1,7 @@
 # You can use it t
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-  'exec-and-forget borders active_color=0xffbabbf1 inactive_color=0xc02c2e34 width=6.0'
+  'exec-and-forget borders active_color=0xffef9f76 inactive_color=0xc02c2e34 width=8.0'
 ]
 
 # Start AeroSpace at login
