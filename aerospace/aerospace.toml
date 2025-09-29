@@ -123,15 +123,15 @@ automatically-unhide-macos-hidden-apps = false
     cmd-alt-ctrl-shift-9 = 'workspace 9'
     
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-    alt-shift-1 = 'move-node-to-workspace 1'
-    alt-shift-2 = 'move-node-to-workspace 2'
-    alt-shift-3 = 'move-node-to-workspace 3'
-    alt-shift-4 = 'move-node-to-workspace 4'
-    alt-shift-5 = 'move-node-to-workspace 5'
-    alt-shift-6 = 'move-node-to-workspace 6'
-    alt-shift-7 = 'move-node-to-workspace 7'
-    alt-shift-8 = 'move-node-to-workspace 8'
-    alt-shift-9 = 'move-node-to-workspace 9'
+    cmd-ctrl-1 = 'move-node-to-workspace 1'
+    cmd-ctrl-2 = 'move-node-to-workspace 2'
+    cmd-ctrl-3 = 'move-node-to-workspace 3'
+    cmd-ctrl-4 = 'move-node-to-workspace 4'
+    cmd-ctrl-5 = 'move-node-to-workspace 5'
+    cmd-ctrl-6 = 'move-node-to-workspace 6'
+    cmd-ctrl-7 = 'move-node-to-workspace 7'
+    cmd-ctrl-8 = 'move-node-to-workspace 8'
+    cmd-ctrl-9 = 'move-node-to-workspace 9'
    
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -163,7 +163,7 @@ automatically-unhide-macos-hidden-apps = false
 
 [workspace-to-monitor-force-assignment]
     1 = '^PHL'
-    2 = 'main'
+    2 = ['^EB321HQU', 'main']
     3 = '^LG'
     4 = '^LG'
     5 = 'main'
