@@ -1,5 +1,7 @@
 return {
-  { "mrjones2014/smart-splits.nvim" },
+  { "mrjones2014/smart-splits.nvim", opts = {
+    at_edge = "stop",
+  } },
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
