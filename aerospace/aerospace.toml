@@ -97,9 +97,33 @@ automatically-unhide-macos-hidden-apps = false
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-h = 'focus left --boundaries all-monitors-outer-frame'
-    alt-j = 'focus down --boundaries all-monitors-outer-frame'
-    alt-k = 'focus up --boundaries all-monitors-outer-frame'
     alt-l = 'focus right --boundaries all-monitors-outer-frame'
+
+    # Two of my screens caused up and down to be reversed, this fixes that.
+    alt-j = '''exec-and-forget
+      if ! aerospace focus down --boundaries-action fail; then
+        current_monitor=$(aerospace list-monitors --focused | awk -F'|' '{print $2}' | sed 's/^ *//')
+        if [[ "$current_monitor" == "Mi Monitor" ]]; then
+          exit 0
+        elif [[ "$current_monitor" == "LG ULTRAWIDE" ]]; then
+          aerospace focus-monitor "Mi Monitor"
+        else
+          aerospace focus down --boundaries all-monitors-outer-frame
+        fi
+      fi
+    '''
+    alt-k = '''exec-and-forget
+      if ! aerospace focus up --boundaries-action fail; then
+        current_monitor=$(aerospace list-monitors --focused | awk -F'|' '{print $2}' | sed 's/^ *//')
+        if [[ "$current_monitor" == "LG ULTRAWIDE" ]]; then
+          exit 0
+        elif [[ "$current_monitor" == "Mi Monitor" ]]; then
+          aerospace focus-monitor "LG ULTRAWIDE"
+        else
+          aerospace focus up --boundaries all-monitors-outer-frame
+        fi
+      fi
+    '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     alt-shift-h = 'move left'
