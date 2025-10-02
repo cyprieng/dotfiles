@@ -97,8 +97,8 @@ automatically-unhide-macos-hidden-apps = false
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-h = 'focus left --boundaries all-monitors-outer-frame'
-    alt-j = 'focus up --boundaries all-monitors-outer-frame' # On my mac focus up was focusing down so i had to swap j and k
-    alt-k = 'focus down --boundaries all-monitors-outer-frame'
+    alt-j = 'focus down --boundaries all-monitors-outer-frame'
+    alt-k = 'focus up --boundaries all-monitors-outer-frame'
     alt-l = 'focus right --boundaries all-monitors-outer-frame'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
