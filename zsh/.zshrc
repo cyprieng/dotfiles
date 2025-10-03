@@ -1,3 +1,6 @@
+# Node (need to be before brew to avoid conflicts)
+eval "$(fnm env --use-on-cd --shell zsh)"
+
 # Global configuration
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
@@ -9,24 +12,6 @@ export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 if [ "$(uname)" = "Linux" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-export HOMEBREW_PREFIX="$(brew --prefix)"
-
-nvm_lazy_load() {
-  unset -f nvm node npm npx
-  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
-}
-
-for cmd in nvm node npm npx; do
-  eval "
-  $cmd() {
-    nvm_lazy_load
-    $cmd \"\$@\"
-  }
-  "
-done
 
 # Load secrets
 source ~/.secrets.sh 

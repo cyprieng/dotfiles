@@ -85,7 +85,7 @@ brew "pnpm"
 brew "rustup"
 brew "golang"
 brew "uv"
-brew "nvm"
+brew "fnm"
 
 # Other
 brew "antidote"
