@@ -210,6 +210,10 @@ run = "move-node-to-workspace 1"
 if.app-id = 'com.mitchellh.ghostty'
 run = "move-node-to-workspace 2"
 
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = "move-node-to-workspace 2"
+
 # Communication
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
