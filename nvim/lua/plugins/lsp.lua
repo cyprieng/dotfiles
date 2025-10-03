@@ -27,7 +27,19 @@ return {
       -- Python venv
       {
         "linux-cultist/venv-selector.nvim",
-        dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+        dependencies = {
+          "neovim/nvim-lspconfig",
+          "nvim-telescope/telescope.nvim",
+          {
+            "mfussenegger/nvim-dap-python",
+            build = {
+              type = "builtin",
+              copy_directories = {
+                "doc",
+              },
+            },
+          },
+        },
         opts = {},
         keys = {
           -- Keymap to open VenvSelector to pick a venv.
