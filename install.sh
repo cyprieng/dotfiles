@@ -170,6 +170,11 @@ if $macos; then
   defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
   sudo defaults write com.apple.universalaccess reduceMotion -bool true                # Reduce motion
   launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist                 # Disable Apple Music opening on media key press
+  defaults write com.apple.dock launchanim -bool false                                 # Disable launch animation
+
+  # Reduce dock animation time
+  defaults write com.apple.dock mineffect -string "scale"
+  defaults write com.apple.dock mineffect-duration -float 0.1
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
