@@ -218,6 +218,9 @@ go install golang.org/x/tools/cmd/goimports@latest
 echo 'Installing node dependencies...'
 npm i -g npm-check-updates neovim
 
+# Claude code
+/opt/homebrew/bin/npm install -g @anthropic-ai/claude-code
+
 # Python
 echo 'Installing python dependencies...'
 pipx install pylatexenc poetry

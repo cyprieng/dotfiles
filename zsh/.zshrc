@@ -50,6 +50,7 @@ alias cz="cz --config ~/.cz.toml"
 alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
+alias claude="/opt/homebrew/bin/claude"
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"

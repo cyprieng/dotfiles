@@ -32,6 +32,9 @@ keybind = ctrl+shift+up=csi:5~
 # Control + Shift + Down -> Page Down
 keybind = ctrl+shift+down=csi:6~
 
+# Claude new line 
+keybind = shift+enter=text:\x1b\r
+
 # Quick terminal
 keybind = ctrl+t=toggle_quick_terminal
 quick-terminal-position = center

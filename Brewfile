@@ -86,6 +86,7 @@ brew "rustup"
 brew "golang"
 brew "uv"
 brew "fnm"
+brew "node"
 
 # Other
 brew "antidote"
