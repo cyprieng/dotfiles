@@ -169,6 +169,7 @@ if $macos; then
   defaults write com.apple.dock expose-group-apps -bool true                           # Fix mission control for aerospace
   defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
   sudo defaults write com.apple.universalaccess reduceMotion -bool true                # Reduce motion
+  launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist                 # Disable Apple Music opening on media key press
 
   # Restart apps modified
   for app in Finder Dock SystemUIServer Safari; do killall "$app" || true; done
