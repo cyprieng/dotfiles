@@ -227,6 +227,8 @@ npm i -g npm-check-updates neovim
 # Claude code
 /opt/homebrew/bin/npm install -g @anthropic-ai/claude-code
 /opt/homebrew/bin/claude mcp add-from-claude-desktop --scope user
+source ./zsh/.secrets.sh
+/opt/homebrew/bin/claude mcp add --scope user --transport http github https://api.githubcopilot.com/mcp -H "Authorization: Bearer $GITHUB_PERSONAL_ACCESS_TOKEN"
 
 # Python
 echo 'Installing python dependencies...'
