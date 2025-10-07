@@ -66,6 +66,9 @@ else
   link_file "$BASEDIR/k9s" ~/.config/k9s
 fi
 
+# Decrypt secrets
+git secret reveal -f
+
 # Create config links
 link_file "$BASEDIR/zsh/.secrets.sh" ~/.secrets.sh
 link_file "$BASEDIR/zsh/.zsh_plugins.txt" ~/.zsh_plugins.txt
@@ -117,6 +120,7 @@ if $macos; then
   link_file "$BASEDIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
   ln -sfn $(which docker-buildx) ~/.docker/cli-plugins
   ln -sfn $(which docker-compose) ~/.docker/cli-plugins
+  link_file "$BASEDIR/claude/claude_desktop_config.json" "$HOME/Library/Application Support/Claude/claude_desktop_config.json"
 
   # Better touch tool
   echo 'Setting up bettertouchtool...'
@@ -220,6 +224,7 @@ npm i -g npm-check-updates neovim
 
 # Claude code
 /opt/homebrew/bin/npm install -g @anthropic-ai/claude-code
+/opt/homebrew/bin/claude mcp add-from-claude-desktop --scope user
 
 # Python
 echo 'Installing python dependencies...'

@@ -46,6 +46,7 @@ brew "kubectx"
 brew "yt-dlp"
 brew "typst"
 brew "pngpaste"
+brew "git-secret"
 
 # Docker
 brew "docker"

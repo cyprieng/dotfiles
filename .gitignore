@@ -12,4 +12,7 @@ bettertouchtool/library/Logs
 bettertouchtool/library/.btt_data_store_SUPPORT
 bettertouchtool/library/bettertouchtool.bttlicense
 
-*.rayconfig
+.gitsecret/keys/random_seed
+!*.secret
+raycast/config.rayconfig
+claude/claude_desktop_config.json
