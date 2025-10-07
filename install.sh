@@ -81,7 +81,6 @@ link_file "$BASEDIR/sqlfluff/.sqlfluff" ~/.sqlfluff
 link_file "$BASEDIR/commitizen/.cz.toml" ~/.cz.toml
 link_file "$BASEDIR/tmux/tmux-powerline" "$HOME/.config/tmux-powerline"
 link_file "$BASEDIR/.tool-versions" ~/.tool-versions
-link_file "$BASEDIR/mcphub" ~/.config/mcphub
 
 # Install tmux catpuccin
 if [ ! -d ~/.config/tmux/plugins/catppuccin ]; then
@@ -120,6 +119,9 @@ if $macos; then
   link_file "$BASEDIR/aerospace/aerospace.toml" "$HOME/.aerospace.toml"
   ln -sfn $(which docker-buildx) ~/.docker/cli-plugins
   ln -sfn $(which docker-compose) ~/.docker/cli-plugins
+
+  # Claude
+  mkdir -p ~/Library/Application\ Support/Claude/
   link_file "$BASEDIR/claude/claude_desktop_config.json" "$HOME/Library/Application Support/Claude/claude_desktop_config.json"
 
   # Better touch tool

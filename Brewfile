@@ -79,6 +79,7 @@ cask "grandperspective"
 cask "orion"
 cask "openmtp"
 cask "shortcat"
+cask "claude"
 
 # Languages
 brew "pipx"
