@@ -147,9 +147,11 @@ setup:
 	@defaults write -g NSWindowShouldDragOnGesture -bool true                             # Enable drag on gesture
 	@defaults write com.apple.dock expose-group-apps -bool true                           # Fix mission control for aerospace
 	@defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
-	@sudo defaults write com.apple.universalaccess reduceMotion -bool true                # Reduce motion
 	@launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null || true # Disable Apple Music opening on media key press
-	@defaults write com.apple.dock launchanim -bool false                                 # Disable launch animation
+	
+	# Reduce animations
+	@defaults write com.apple.Accessibility reduceMotion -bool true
+	@defaults write com.apple.dock launchanim -bool false
 
 	# Reduce dock animation time
 	@defaults write com.apple.dock mineffect -string "scale"
