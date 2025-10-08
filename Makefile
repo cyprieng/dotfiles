@@ -199,6 +199,8 @@ update:
 clean:
 	@echo "Cleaning up broken symlinks..."
 	@find ~ -maxdepth 1 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
+	@find ~/.config -maxdepth 2 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
+	@find ~/Library/Application\ Support -maxdepth 2 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
 
 	@echo "Cleaning Homebrew..."
 	@brew cleanup
