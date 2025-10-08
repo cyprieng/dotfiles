@@ -212,7 +212,7 @@ clean:
 
 backup:
 	@echo "Backing up AltTab configuration..."
-	@./alttab/backup_plist.sh
+	@./alttab/backup_config.sh
 
 	@echo "Backing up BetterTouchTool configuration..."
 	@./bettertouchtool/backup_config.sh
