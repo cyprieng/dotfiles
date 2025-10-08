@@ -11,6 +11,7 @@ brew "neovim"
 cask "font-jetbrains-mono-nerd-font"
 
 # Cli tools
+brew "stow"
 brew "coreutils"
 brew "atuin"
 brew "ripgrep"
