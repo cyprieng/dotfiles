@@ -176,6 +176,10 @@ setup:
 	@echo "Setting up Claude Code MCP..."
 	@/opt/homebrew/bin/claude mcp add-from-claude-desktop --scope user
 
+	# Raycast
+	@echo "Setting up Raycast..."
+	@open raycast/config.rayconfig
+
 # ==============================================================================
 # Update
 # ==============================================================================
@@ -216,3 +220,8 @@ backup:
 
 	@echo "Backing up BetterTouchTool configuration..."
 	@./bettertouchtool/backup_config.sh
+
+	@echo "Backing up Raycast configuration..."
+	@./raycast/backup_config.sh
+	
+	@git secret hide

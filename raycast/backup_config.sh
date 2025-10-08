@@ -32,6 +32,3 @@ sleep 2
 # Rename file
 rm "$BASEDIR/"config.rayconfig || true
 mv "$(find "$BASEDIR" -name "*.rayconfig" -maxdepth 1)" "$BASEDIR/"config.rayconfig 2>/dev/null
-
-# Send using croc
-croc send "$BASEDIR/"config.rayconfig
