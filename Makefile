@@ -1,4 +1,4 @@
-.PHONY: help install stow unstow deps setup update clean
+.PHONY: help install stow unstow deps setup update clean backup
 
 help:
 	@echo "Available commands:"
@@ -9,6 +9,7 @@ help:
 	@echo "  make setup    - Configure apps & system settings"
 	@echo "  make update   - Update everything"
 	@echo "  make clean    - Clean up broken symlinks"
+	@echo "  make backup   - Backup app configurations"
 
 # ==============================================================================
 # Main installation
@@ -204,3 +205,14 @@ clean:
 
 	@echo "Cleaning Homebrew..."
 	@brew cleanup
+
+# ==============================================================================
+# Backup for configuration that cannot be symlinked
+# ==============================================================================
+
+backup:
+	@echo "Backing up AltTab configuration..."
+	@./alttab/backup_plist.sh
+
+	@echo "Backing up BetterTouchTool configuration..."
+	@./bettertouchtool/backup_config.sh
