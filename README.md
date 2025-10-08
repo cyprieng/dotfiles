@@ -1,9 +1,9 @@
 # Dotfiles
 
-Collection of my dotfiles.
+Collection of my doltfiles.
 
 ## Install (Only for macOS)
 
 ```sh
-./install.sh
+make install
 ```
