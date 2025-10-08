@@ -1,21 +1,7 @@
 .DS_Store
-tmux/**/plugins
-vale/styles
-.secrets.sh
-!aider/.aider.conf.yml
-karabiner/automatic_backups
-
-nvim/lazy-lock.json
-
-bettertouchtool/**/Backups
-bettertouchtool/**/Logs
-bettertouchtool/**/.btt_data_store_SUPPORT
-bettertouchtool/**/bettertouchtool.bttlicense
-
-.gitsecret/keys/random_seed
-!*.secret
-raycast/config.rayconfig
-claude/claude_desktop_config.json
-claude/Library/Application\ Support/Claude/claude_desktop_config.json
 
 .claude
+
+.gitsecret/keys/random_seed
+raycast/config.rayconfig
+claude/Library/Application\ Support/Claude/claude_desktop_config.json
