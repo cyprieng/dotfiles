@@ -15,7 +15,7 @@ help:
 # Main installation
 # ==============================================================================
 
-install: deps setup stow
+install: stow deps setup
 	@echo "✓ Installation complete!"
 
 # ==============================================================================
@@ -37,7 +37,7 @@ unstow:
 deps:
 	# Install brew
 	@echo "Installing Homebrew..."
-	@which brew >/dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	@which brew >/dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && eval "$$(/opt/homebrew/bin/brew shellenv)"
 
 	# Install Brewfile
 	@echo "Installing brew dependencies..."
@@ -54,12 +54,14 @@ deps:
 
 	# Python
 	@echo "Installing Python dependencies..."
-	@pipx install pylatexenc poetry
-	@pip3 install --user --break-system-packages neovim
+	@uv tool install pylatexenc
+	@uv tool install poetry
+	@uv tool install pynvim
 	@uv tool install mcp-server-git
 	@uv tool install 'markitdown[all]'
 	@uv tool install markitdown-mcp
 	@uv tool install ruff@latest
+	@uv tool install xmlformatter
 
 	# Rust
 	@echo "Installing Rust..."
@@ -73,7 +75,24 @@ deps:
 setup:
 	# Decrypt secrets
 	@echo "Decrypting secrets..."
-	@git secret reveal -f
+	@if ! git secret reveal -f; then \
+		echo ""; \
+		echo "❌ Error: Failed to reveal secrets"; \
+		echo ""; \
+		echo "This usually means your GPG key is not imported."; \
+		echo ""; \
+		echo "To fix this:"; \
+		echo "     gpg --import /path/to/your/private-key.asc"; \
+		read -p "Have you imported your GPG key? (y/N): " answer; \
+		if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
+			echo ""; \
+			echo "Retrying..."; \
+			git secret reveal -f; \
+		else \
+			echo "Aborted. Please import your key and run this command again."; \
+			exit 1; \
+		fi \
+	fi
 
 	# Better touch tool
 	# The plist cannot be a symlink, so we need to copy it
@@ -96,12 +115,6 @@ setup:
 	# Git config
 	@echo "Configuring git..."
 	@grep -q "gitconfig-global" ~/.gitconfig 2>/dev/null || echo "[include]\n    path = .gitconfig-global" >> ~/.gitconfig
-
-	# Link docker cli plugins because we use colima
-	@echo "Setting up Docker CLI plugins..."
-	@mkdir -p ~/.docker/cli-plugins
-	@ln -sfn $$(which docker-buildx) ~/.docker/cli-plugins/docker-buildx
-	@ln -sfn $$(which docker-compose) ~/.docker/cli-plugins/docker-compose
 
 	# Alt tab
 	@echo "Setting up AltTab..."
@@ -148,6 +161,7 @@ setup:
 	@defaults write com.apple.dock expose-group-apps -bool true                           # Fix mission control for aerospace
 	@defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
 	@launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null || true # Disable Apple Music opening on media key press
+	@defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Fix scroll direction
 	
 	# Reduce animations
 	@defaults write com.apple.Accessibility reduceMotion -bool true
@@ -169,6 +183,8 @@ setup:
 	@pgrep -f "Karabiner" >/dev/null || open -a "Karabiner-Elements"
 	@pgrep -f "AlDente" >/dev/null || open -a "AlDente"
 	@pgrep -f "CleanShot X" >/dev/null || open -a "CleanShot X"
+	@pgrep -f "Shortcat" >/dev/null || open -a "Shortcat"
+	@pgrep -f "Aerospace" >/dev/null || open -a "Aerospace"
 
 	# Use TouchId for sudo
 	@echo "Setting up TouchID for sudo..."

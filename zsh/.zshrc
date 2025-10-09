@@ -13,9 +13,6 @@ if [ "$(uname)" = "Linux" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# Load secrets
-source ~/.secrets.sh 
-
 # Enable correction
 ENABLE_CORRECTION="true"
 
