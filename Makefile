@@ -116,6 +116,41 @@ setup:
 	@echo "Configuring git..."
 	@grep -q "gitconfig-global" ~/.gitconfig 2>/dev/null || echo "[include]\n    path = .gitconfig-global" >> ~/.gitconfig
 
+	# GPG key
+	@if [ -z "$$(git config --global user.signingkey)" ]; then \
+		echo "=== Available GPG Secret Keys ==="; \
+		gpg --list-secret-keys --keyid-format=long; \
+		read -p "Enter the key ID you want to use for Git signing: " key_id; \
+		if [ -z "$$key_id" ]; then \
+			echo "Error: No key ID provided."; \
+			exit 1; \
+		fi; \
+		git config --global user.signingkey "$$key_id"; \
+		echo "✓ Git signing key configured successfully!"; \
+	fi
+
+        # Git user name and email
+	@if [ -z "$$(git config --global user.email)" ]; then \
+		read -p "Enter your Git email: " user_email; \
+		if [ -z "$$user_email" ]; then \
+			echo "Error: No email provided."; \
+			exit 1; \
+		fi; \
+		git config --global user.email "$$user_email"; \
+		echo "✓ Git email configured: $$user_email"; \
+	fi
+	@if [ -z "$$(git config --global user.signingkey)" ]; then \
+		echo "=== Available GPG Secret Keys ==="; \
+		gpg --list-secret-keys --keyid-format=long; \
+		read -p "Enter the key ID you want to use for Git signing: " key_id; \
+		if [ -z "$$key_id" ]; then \
+			echo "Error: No key ID provided."; \
+			exit 1; \
+		fi; \
+		git config --global user.signingkey "$$key_id"; \
+		echo "✓ Git signing key configured successfully!"; \
+	fi
+	
 	# Alt tab
 	@echo "Setting up AltTab..."
 	@defaults import com.lwouis.alt-tab-macos alttab/com.lwouis.alt-tab-macos.plist
