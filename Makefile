@@ -220,7 +220,7 @@ setup:
 	@pgrep -f "BetterTouchTool" >/dev/null || open -a "BetterTouchTool"
 	@pgrep -f "AltTab" >/dev/null || open -a "AltTab"
 	@pgrep -f "Hammerspoon" >/dev/null || open -a "Hammerspoon"
-	@pgrep -f "Karabiner" >/dev/null || open -a "Karabiner-Elements"
+	@pgrep -f "Karabiner" >/dev/null || open -a /Applications/Karabiner-Elements.app
 	@pgrep -f "AlDente" >/dev/null || open -a "AlDente"
 	@pgrep -f "CleanShot X" >/dev/null || open -a "CleanShot X"
 	@pgrep -f "Shortcat" >/dev/null || open -a "Shortcat"
