@@ -1,9 +1,73 @@
 # Dotfiles
 
-Collection of my doltfiles.
+My dotfiles for macOS.
 
-## Install (Only for macOS)
+## Available Commands
 
-```sh
-make install
-```
+Run `make help` to see all available commands:
+
+- `make install` - Full installation (runs stow, deps, and setup)
+- `make stow` - Symlink all dotfiles to your home directory
+- `make unstow` - Remove all symlinks
+- `make deps` - Install all dependencies (Homebrew, Go, Node, Python, Rust packages)
+- `make setup` - Configure apps & system settings (decrypt secrets, setup git, apply macOS settings)
+- `make update` - Update everything (Homebrew, Node, Python, Rust)
+- `make clean` - Clean up broken symlinks and Homebrew cache
+- `make backup` - Backup app configurations (AltTab, BetterTouchTool, Raycast)
+
+## Manual process
+
+### macOS Settings
+
+- Reduce animations: Apple menu > System Settings > Accessibility > Motion > Turn on Reduce motion
+- Add qwerty-fr: Apple menu > System Settings > Keyboard > Input Sources > Add qwerty-fr from Others
+- Hide menu bar items: Apple menu > Menu Bar > Hide everything except Aerospace and AlDente (replace native battery with it)
+
+### Apps on startup
+
+Make sure the following apps run on startup:
+
+- Aerospace
+- AlDente
+- CleanShotX
+- Display Link Manager
+- Hammerspoon
+- Raycast
+- Shortcat
+
+### Dock
+
+Rearrange Dock:
+
+- Chrome
+- Claude
+- Mail
+- Ghostty
+- Obsidian
+
+### Chrome
+
+Install the following extensions:
+
+- [2FAS](https://chromewebstore.google.com/detail/2fas-auth-two-factor-auth/dbfoemgnkgieejfkaddieamagdfepnff)
+- [Archive.today](https://chromewebstore.google.com/detail/archivetoday-automator/mmhadhnchpgicjlmlcdfaapkekknnkha)
+- [Obsidian Web Clipper](https://chromewebstore.google.com/detail/obsidian-web-clipper/cnjifjpddelmedmihgijeibhnjfabmlf)
+- [Old Reddit Redirect](https://chromewebstore.google.com/detail/old-reddit-redirect/dneaehbmnbhcippjikoajpoabadpodje)
+- [Proton Pass](https://chromewebstore.google.com/detail/proton-pass-free-password/ghmbeldphafepmbegfdlkpapadhbakde)
+- [uBlock Origin Lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
+- [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
+- [Wayback Machine](https://chromewebstore.google.com/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak)
+
+Add the following bookmarks to the bookmarks bar:
+
+- [Homelab Apps](https://apps.guillemot.me/)
+- [Hacker News](https://news.ycombinator.com/news)
+- [GitHub](https://github.com/)
+- [Kite News](https://kite.kagi.com/)
+- [Via](https://usevia.app/)
+
+### Others
+
+Install [CleanMyMac](https://macpaw.com/fr/download/cleanmymac)
+
+Do not forget to log out and log back in to make sure all changes are applied.
