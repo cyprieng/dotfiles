@@ -1,10 +1,13 @@
-.PHONY: help install stow unstow deps setup update clean backup
+PATH  := $(PATH):/opt/homebrew/bin/
+SHELL := env PATH=$(PATH) /bin/bash
+.PHONY: help install stow unstow init deps setup update clean backup
 
 help:
 	@echo "Available commands:"
 	@echo "  make install  - Full installation (everything)"
 	@echo "  make stow     - Symlink all dotfiles"
 	@echo "  make unstow   - Remove all symlinks"
+	@echo "  make init     - Install brew and stow"
 	@echo "  make deps     - Install all dependencies (brew + languages)"
 	@echo "  make setup    - Configure apps & system settings"
 	@echo "  make update   - Update everything"
@@ -15,7 +18,7 @@ help:
 # Main installation
 # ==============================================================================
 
-install: stow deps setup
+install: init stow deps setup
 	@echo "✓ Installation complete!"
 
 # ==============================================================================
@@ -34,11 +37,15 @@ unstow:
 # Dependencies installation
 # ==============================================================================
 
-deps:
+init:
 	# Install brew
 	@echo "Installing Homebrew..."
-	@which brew >/dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && eval "$$(/opt/homebrew/bin/brew shellenv)"
+	@which brew >/dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	
+	# Install stow
+	@brew install stow
 
+deps:
 	# Install Brewfile
 	@echo "Installing brew dependencies..."
 	@brew bundle
@@ -114,7 +121,7 @@ setup:
 
 	# Git config
 	@echo "Configuring git..."
-	@grep -q "gitconfig-global" ~/.gitconfig 2>/dev/null || echo "[include]\n    path = .gitconfig-global" >> ~/.gitconfig
+	@grep -q "gitconfig-global" ~/.gitconfig 2>/dev/null || echo -e "[include]\n    path = .gitconfig-global" >> ~/.gitconfig
 
 	# GPG key
 	@if [ -z "$$(git config --global user.signingkey)" ]; then \
@@ -129,7 +136,7 @@ setup:
 		echo "✓ Git signing key configured successfully!"; \
 	fi
 
-        # Git user name and email
+    # Git user name and email
 	@if [ -z "$$(git config --global user.email)" ]; then \
 		read -p "Enter your Git email: " user_email; \
 		if [ -z "$$user_email" ]; then \
@@ -139,16 +146,14 @@ setup:
 		git config --global user.email "$$user_email"; \
 		echo "✓ Git email configured: $$user_email"; \
 	fi
-	@if [ -z "$$(git config --global user.signingkey)" ]; then \
-		echo "=== Available GPG Secret Keys ==="; \
-		gpg --list-secret-keys --keyid-format=long; \
-		read -p "Enter the key ID you want to use for Git signing: " key_id; \
-		if [ -z "$$key_id" ]; then \
-			echo "Error: No key ID provided."; \
+	@if [ -z "$$(git config --global user.name)" ]; then \
+		read -p "Enter your Git name: " user_name; \
+		if [ -z "$$user_name" ]; then \
+			echo "Error: No name provided."; \
 			exit 1; \
 		fi; \
-		git config --global user.signingkey "$$key_id"; \
-		echo "✓ Git signing key configured successfully!"; \
+		git config --global user.name "$$user_name"; \
+		echo "✓ Git name configured: $$user_name"; \
 	fi
 	
 	# Alt tab

@@ -9,6 +9,7 @@ Run `make help` to see all available commands:
 - `make install` - Full installation (runs stow, deps, and setup)
 - `make stow` - Symlink all dotfiles to your home directory
 - `make unstow` - Remove all symlinks
+- `make init` - Install brew and stow
 - `make deps` - Install all dependencies (Homebrew, Go, Node, Python, Rust packages)
 - `make setup` - Configure apps & system settings (decrypt secrets, setup git, apply macOS settings)
 - `make update` - Update everything (Homebrew, Node, Python, Rust)
