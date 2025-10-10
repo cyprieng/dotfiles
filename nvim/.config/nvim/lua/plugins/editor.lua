@@ -179,29 +179,6 @@ return {
     },
   },
 
-  -- Todo comment highlight
-  {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {},
-  },
-
-  -- Surrounding
-  {
-    "echasnovski/mini.surround",
-    opts = {
-      mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
-        update_n_lines = "gsn", -- Update `n_lines`
-      },
-    },
-  },
-
   -- Better comments
   {
     "numToStr/Comment.nvim",
@@ -250,21 +227,13 @@ return {
     end,
   },
 
-  -- Line picker
-  {
-    "nacro90/numb.nvim",
-    config = function()
-      require("numb").setup()
-    end,
-  },
-
   -- Markdown rendering
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
-      file_types = { "markdown", "Avante" },
+      file_types = { "markdown" },
     },
-    ft = { "markdown", "Avante" },
+    ft = { "markdown" },
   },
 
   -- Rainbow delimiters

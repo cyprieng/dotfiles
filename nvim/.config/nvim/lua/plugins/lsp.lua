@@ -163,10 +163,10 @@ return {
 
       -- Change diagnostic symbols in the sign column (gutter)
       vim.diagnostic.config({
-        signs = true,             -- Show signs in the sign column
-        underline = true,         -- Use underline for diagnostics
+        signs = true, -- Show signs in the sign column
+        underline = true, -- Use underline for diagnostics
         update_in_insert = false, -- Don't update diagnostics in insert mode
-        severity_sort = true,     -- Sort diagnostics by severity
+        severity_sort = true, -- Sort diagnostics by severity
         float = {
           show_header = true,
           border = "rounded",
@@ -281,7 +281,7 @@ return {
 
       -- VUE config
       local vue_language_server_path = vim.fn.stdpath("data")
-          .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+        .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
       local vue_plugin = {
         name = "@vue/typescript-plugin",
         location = vue_language_server_path,
@@ -501,7 +501,6 @@ return {
     "saghen/blink.cmp",
     dependencies = {
       "giuxtaposition/blink-cmp-copilot",
-      "Kaiser-Yang/blink-cmp-avante",
       {
         "L3MON4D3/LuaSnip",
         build = (function()
@@ -603,7 +602,7 @@ return {
                   -- if LSP source, check for color derived from documentation
                   if ctx.item.source_name == "LSP" then
                     local color_item =
-                        require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
+                      require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
                     if color_item and color_item.abbr ~= "" then
                       icon = color_item.abbr
                     end
@@ -616,7 +615,7 @@ return {
                   -- if LSP source, check for color derived from documentation
                   if ctx.item.source_name == "LSP" then
                     local color_item =
-                        require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
+                      require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
                     if color_item and color_item.abbr_hl_group then
                       highlight = color_item.abbr_hl_group
                     end
@@ -633,18 +632,13 @@ return {
       snippets = { preset = "luasnip" },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot", "avante" },
+        default = { "lsp", "path", "snippets", "buffer", "copilot" },
         providers = {
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
             score_offset = 100,
             async = true,
-          },
-          avante = {
-            module = "blink-cmp-avante",
-            name = "Avante",
-            opts = {},
           },
         },
       },
