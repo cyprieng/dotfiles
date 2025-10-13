@@ -45,10 +45,14 @@ brew "yt-dlp"
 brew "typst"
 brew "git-secret"
 
+# Docker
+brew "podman"
+brew "docker-compose"
+brew "docker"
+
 # Apps
 cask "google-chrome"
 cask "postman"
-cask "docker-desktop"
 tap "FelixKratz/formulae"
 brew "FelixKratz/formulae/borders"
 cask "nikitabobko/tap/aerospace"

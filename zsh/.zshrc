@@ -6,7 +6,6 @@ export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="/usr/local/bin/:$HOME/.local/bin:/opt/homebrew/opt/rustup/bin:/opt/homebrew/opt/libpq/bin:$PATH"
-export DOCKER_HOST="unix://$HOME/.colima/docker.sock"
 
 # Load brew
 if [ "$(uname)" = "Linux" ]; then
@@ -101,6 +100,14 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Atuin
 eval "$(atuin init zsh)"
+
+# Docker
+docker() {
+    if [[ -z "$DOCKER_HOST" ]]; then
+        export DOCKER_HOST="unix://$(podman machine inspect --format '{{ .ConnectionInfo.PodmanSocket.Path }}')"
+    fi
+    command docker "$@"
+}
 
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
