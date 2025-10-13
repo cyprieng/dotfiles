@@ -36,6 +36,8 @@ preexec() {
 
 # Aliases
 export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
+alias docker="podman"
+alias lazydocker='DOCKER_HOST=unix://$(podman machine inspect --format '\''{{ .ConnectionInfo.PodmanSocket.Path }}'\'') lazydocker'
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias tt="tmux new-session -A -D"
 alias v="nvim" 
@@ -100,14 +102,6 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Atuin
 eval "$(atuin init zsh)"
-
-# Docker
-docker() {
-    if [[ -z "$DOCKER_HOST" ]]; then
-        export DOCKER_HOST="unix://$(podman machine inspect --format '{{ .ConnectionInfo.PodmanSocket.Path }}')"
-    fi
-    command docker "$@"
-}
 
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \

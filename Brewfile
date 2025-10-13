@@ -47,7 +47,7 @@ brew "git-secret"
 
 # Docker
 brew "podman"
-brew "docker-compose"
+brew "podman-compose"
 brew "docker"
 
 # Apps

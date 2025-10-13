@@ -231,7 +231,6 @@ setup:
 	@grep -q "pam_tid.so" /etc/pam.d/sudo 2>/dev/null || (sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak && sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo)
 
 	# Docker
-	ln -sfn $$(which docker-compose) $$HOME/.docker/cli-plugins/docker-compose
 	podman machine init || true
 	podman machine start || true
 
