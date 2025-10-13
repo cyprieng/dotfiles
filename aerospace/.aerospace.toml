@@ -190,11 +190,7 @@ automatically-unhide-macos-hidden-apps = false
     2 = ['^EB321HQU', 'main']
     3 = '^LG'
     4 = '^LG'
-    5 = 'main'
     6 = '^LG'
-    7 = 'main'
-    8 = 'main'
-    9 = 'main'
 
 # Browser 
 [[on-window-detected]]
