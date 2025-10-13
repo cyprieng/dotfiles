@@ -1,7 +1,10 @@
 return {
+  -- TMUX split integration
   { "mrjones2014/smart-splits.nvim", opts = {
     at_edge = "stop",
   } },
+
+  -- Session management
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
