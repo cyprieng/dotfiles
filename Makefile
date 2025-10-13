@@ -230,10 +230,6 @@ setup:
 	@echo "Setting up TouchID for sudo..."
 	@grep -q "pam_tid.so" /etc/pam.d/sudo 2>/dev/null || (sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak && sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo)
 
-	# Docker
-	podman machine init || true
-	podman machine start || true
-
 	# Claude code
 	@echo "Setting up Claude Code MCP..."
 	@/opt/homebrew/bin/claude mcp add-from-claude-desktop --scope user

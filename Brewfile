@@ -45,12 +45,8 @@ brew "yt-dlp"
 brew "typst"
 brew "git-secret"
 
-# Docker
-brew "podman"
-brew "podman-compose"
-brew "docker"
-
 # Apps
+cask "docker-desktop"
 cask "google-chrome"
 cask "postman"
 tap "FelixKratz/formulae"

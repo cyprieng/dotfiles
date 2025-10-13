@@ -36,8 +36,6 @@ preexec() {
 
 # Aliases
 export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
-alias docker="podman"
-alias lazydocker='DOCKER_HOST=unix://$(podman machine inspect --format '\''{{ .ConnectionInfo.PodmanSocket.Path }}'\'') lazydocker'
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias tt="tmux new-session -A -D"
 alias v="nvim" 
