@@ -2,6 +2,9 @@
 
 My dotfiles for macOS.
 
+Some files (claude and raycast configurations) are encrypted and can only be decrypted with my private key.
+Do not use the dotfiles as-is but as a base for your configuration.
+
 ## Available Commands
 
 Run `make help` to see all available commands:
@@ -35,6 +38,9 @@ Make sure the following apps run on startup:
 - Hammerspoon
 - Raycast
 - Shortcat
+- AltTab
+- Karabiner
+- BetterTouchTool
 
 ### Dock
 

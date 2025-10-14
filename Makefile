@@ -215,17 +215,6 @@ setup:
 	@echo "Restarting modified apps..."
 	@for app in Finder Dock SystemUIServer Safari; do killall "$$app" 2>/dev/null || true; done
 
-	# Open apps
-	@echo "Opening apps..."
-	@pgrep -f "BetterTouchTool" >/dev/null || open -a "BetterTouchTool"
-	@pgrep -f "AltTab" >/dev/null || open -a "AltTab"
-	@pgrep -f "Hammerspoon" >/dev/null || open -a "Hammerspoon"
-	@pgrep -f "Karabiner" >/dev/null || open -a /Applications/Karabiner-Elements.app
-	@pgrep -f "AlDente" >/dev/null || open -a "AlDente"
-	@pgrep -f "CleanShot X" >/dev/null || open -a "CleanShot X"
-	@pgrep -f "Shortcat" >/dev/null || open -a "Shortcat"
-	@pgrep -f "Aerospace" >/dev/null || open -a "Aerospace"
-
 	# Use TouchId for sudo
 	@echo "Setting up TouchID for sudo..."
 	@grep -q "pam_tid.so" /etc/pam.d/sudo 2>/dev/null || (sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak && sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo)
