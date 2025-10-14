@@ -194,7 +194,15 @@ return {
           ["<space>"] = false,
           ["s"] = false,
           ["|"] = "open_vsplit",
+          ["o"] = "system_open",
         },
+      },
+      commands = {
+        system_open = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          vim.fn.jobstart({ "open", path }, { detach = true })
+        end,
       },
       filesystem = {
         use_libuv_file_watcher = true,
