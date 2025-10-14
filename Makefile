@@ -202,6 +202,7 @@ setup:
 	@defaults write com.apple.spaces spans-displays -bool false                           # Enable separate spaces for displays
 	@launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null || true # Disable Apple Music opening on media key press
 	@defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Fix scroll direction
+	@defaults write com.apple.dock minimize-to-application -bool true # Minimize into app icon
 	
 	# Reduce animations
 	@defaults write com.apple.Accessibility reduceMotion -bool true
