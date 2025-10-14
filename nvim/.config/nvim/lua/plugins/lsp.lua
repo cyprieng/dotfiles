@@ -439,27 +439,32 @@ return {
       keymap = {
         preset = "default",
         ["<C-r>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-e>"] = { "hide", "fallback" },
+        ["<C-e>"] = { "cancel", "fallback" },
 
         ["<CR>"] = { "accept", "fallback" },
         ["<Tab>"] = {
-          function(cmp)
-            if cmp.is_ghost_text_visible() then
-              if cmp.snippet_active() then
-                return cmp.accept()
-              else
-                return cmp.select_and_accept()
-              end
-            end
-          end,
           "select_next",
           "snippet_forward",
           "fallback",
         },
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 
-        ["<Up>"] = { "select_prev", "fallback" },
-        ["<Down>"] = { "select_next", "fallback" },
+        ["<Up>"] = {
+          function(cmp)
+            if cmp.get_selected_item() then
+              return cmp.select_prev({ on_ghost_text = true })
+            end
+          end,
+          "fallback",
+        },
+        ["<Down>"] = {
+          function(cmp)
+            if cmp.get_selected_item() then
+              return cmp.select_next({ on_ghost_text = true })
+            end
+          end,
+          "fallback",
+        },
         ["<C-p>"] = {
           function(cmp)
             cmp.select_prev({ on_ghost_text = true })
