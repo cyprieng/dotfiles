@@ -304,4 +304,22 @@ return {
     build = "npm i",
     config = true,
   },
+
+  -- Code annotation generator
+  {
+    "danymat/neogen",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function()
+      require("neogen").setup({
+        enabled = true,
+        snippet_engine = "luasnip",
+      })
+
+      vim.keymap.set("n", "<leader>cn", ":lua require('neogen').generate()<CR>", {
+        noremap = true,
+        silent = true,
+        desc = "Generate documentation",
+      })
+    end,
+  },
 }
