@@ -492,15 +492,9 @@ return {
           },
         },
 
-        ghost_text = {
-          enabled = true,
-          show_with_menu = false,
-          show_without_selection = true,
-        },
-
         -- Highlight colors
         menu = {
-          auto_show = false,
+          auto_show = true,
           draw = {
             treesitter = { "lsp" },
             components = {
@@ -542,13 +536,20 @@ return {
       snippets = { preset = "luasnip" },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "copilot" },
+        default = { "lsp", "path", "snippets", "copilot" },
         providers = {
           copilot = {
             name = "copilot",
             module = "blink-cmp-copilot",
             score_offset = 100,
             async = true,
+          },
+          path = {
+            opts = {
+              get_cwd = function(_)
+                return vim.fn.getcwd()
+              end,
+            },
           },
         },
       },
