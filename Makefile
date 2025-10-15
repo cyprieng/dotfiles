@@ -61,14 +61,14 @@ deps:
 
 	# Python
 	@echo "Installing Python dependencies..."
-	@uv tool install pylatexenc
-	@uv tool install poetry
-	@uv tool install pynvim
-	@uv tool install mcp-server-git
-	@uv tool install 'markitdown[all]'
-	@uv tool install markitdown-mcp
-	@uv tool install ruff@latest
-	@uv tool install xmlformatter
+	@uv tool install pylatexenc --python 3.13
+	@uv tool install poetry --python 3.13
+	@uv tool install pynvim --python 3.13
+	@uv tool install mcp-server-git --python 3.13
+	@uv tool install 'markitdown[all]' --python 3.13
+	@uv tool install markitdown-mcp --python 3.13
+	@uv tool install ruff@latest --python 3.13
+	@uv tool install xmlformatter --python 3.13
 
 	# Rust
 	@echo "Installing Rust..."
