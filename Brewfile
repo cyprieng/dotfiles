@@ -80,6 +80,7 @@ brew "golang"
 brew "uv"
 brew "fnm"
 brew "node"
+brew "rbenv"
 
 # Other
 brew "antidote"

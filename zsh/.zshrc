@@ -1,6 +1,9 @@
 # Node (need to be before brew to avoid conflicts)
 eval "$(fnm env --use-on-cd --shell zsh)"
 
+# Ruby
+eval "$(rbenv init -)"
+
 # Global configuration
 export VISUAL="nvim"
 export EDITOR="$VISUAL"

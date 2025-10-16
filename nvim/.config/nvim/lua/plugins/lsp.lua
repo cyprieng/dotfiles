@@ -193,6 +193,8 @@ return {
             },
           },
         },
+        ruby_lsp = {},
+        rubocop = {},
       }
 
       -- VUE config

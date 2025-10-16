@@ -13,6 +13,7 @@ return {
 
     -- Language specific debug adapters
     "leoluz/nvim-dap-go",
+    "suketa/nvim-dap-ruby",
 
     -- Ghost text
     "theHamsta/nvim-dap-virtual-text",
@@ -259,5 +260,8 @@ return {
         cwd = "${workspaceFolder}",
       },
     }
+
+    -- Ruby
+    require("dap-ruby").setup()
   end,
 }
