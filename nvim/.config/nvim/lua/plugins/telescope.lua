@@ -29,9 +29,12 @@ local function get_icon_hl(color)
   return hl_name
 end
 
+-- Custom Telescope picker for bufferline buffers
+-- Shows buffers in the same order and with the same filters as bufferline
 local function bufferline_picker(opts)
   opts = opts or {}
 
+  -- Load required dependencies
   local devicons = require("nvim-web-devicons")
   local ok, bufferline = pcall(require, "bufferline")
   if not ok then
@@ -39,10 +42,61 @@ local function bufferline_picker(opts)
     return
   end
 
+  -- Get buffer list from bufferline
   local bufferline_buffers = bufferline.get_elements and bufferline.get_elements().elements or {}
   if not bufferline_buffers or vim.tbl_isempty(bufferline_buffers) then
     vim.notify("No buffers found in bufferline", vim.log.levels.INFO)
     return
+  end
+
+  -- Create entry for each buffer with metadata and display formatting
+  local function make_entry(entry)
+    local bufnr = entry.id
+    local fullpath = vim.api.nvim_buf_get_name(bufnr)
+    local filename = vim.fn.fnamemodify(fullpath, ":t")
+    if filename == "" then
+      filename = "[No Name]"
+    end
+
+    -- Get file metadata
+    local relpath = fullpath ~= "" and vim.fn.fnamemodify(fullpath, ":.") or ""
+    local ft_icon, ft_color = devicons.get_icon_color(filename)
+    local modified = vim.bo[bufnr].modified
+    local icon_hl = ft_color and get_icon_hl(ft_color) or nil
+    local is_current = bufnr == vim.api.nvim_get_current_buf()
+
+    return {
+      value = bufnr,
+      ordinal = filename .. " " .. relpath, -- Used for fuzzy searching
+      filename = filename,
+      relpath = relpath,
+      icon = ft_icon or "",
+      icon_hl = icon_hl,
+      modified = modified,
+      bufnr = bufnr,
+      is_current = is_current,
+
+      -- Define how the entry is displayed in the picker
+      display = function(entry2)
+        local displayer = entry_display.create({
+          separator = " ",
+          items = {
+            { width = 2 }, -- icon
+            { width = nil }, -- filename
+            { width = nil }, -- relative path
+            { width = 2 }, -- modified indicator
+            { width = 6 }, -- buffer number
+          },
+        })
+        return displayer({
+          { entry2.icon, entry2.icon_hl },
+          { entry2.filename, entry2.is_current and "TelescopeResultsIdentifier" or "" },
+          { entry2.relpath ~= "" and "(" .. entry2.relpath .. ")" or "", "Comment" },
+          { entry2.modified and "●" or " ", entry2.modified and "TelescopeResultsNumber" or "" },
+          { "[" .. entry2.bufnr .. "]", "Comment" },
+        })
+      end,
+    }
   end
 
   pickers
@@ -50,64 +104,26 @@ local function bufferline_picker(opts)
       prompt_title = "Bufferline Buffers",
       finder = finders.new_table({
         results = bufferline_buffers,
-        entry_maker = function(entry)
-          local bufnr = entry.id
-          local fullpath = vim.api.nvim_buf_get_name(bufnr)
-          local filename = vim.fn.fnamemodify(fullpath, ":t")
-          if filename == "" then
-            filename = "[No Name]"
-          end
-          local relpath = fullpath ~= "" and vim.fn.fnamemodify(fullpath, ":.") or ""
-          local ft_icon, ft_color = devicons.get_icon_color(filename)
-          local modified = vim.bo[bufnr].modified
-          local icon_hl = ft_color and get_icon_hl(ft_color) or nil
-          local is_current = bufnr == vim.api.nvim_get_current_buf()
-
-          return {
-            value = bufnr,
-            ordinal = filename .. " " .. relpath,
-            filename = filename,
-            relpath = relpath,
-            icon = ft_icon or "",
-            icon_hl = icon_hl,
-            modified = modified,
-            bufnr = bufnr,
-            is_current = is_current,
-            display = function(entry2)
-              local displayer = entry_display.create({
-                separator = " ",
-                items = {
-                  { width = 2 }, -- icon
-                  { width = nil }, -- filename
-                  { width = nil }, -- relative path
-                  { width = 2 }, -- modified dot
-                  { width = 6 }, -- buffer number
-                },
-              })
-              return displayer({
-                { entry2.icon, entry2.icon_hl },
-                { entry2.filename, entry2.is_current and "TelescopeResultsIdentifier" or "" },
-                { entry2.relpath ~= "" and "(" .. entry2.relpath .. ")" or "", "Comment" },
-                { entry2.modified and "●" or " ", entry2.modified and "TelescopeResultsNumber" or "" },
-                { "[" .. entry2.bufnr .. "]", "Comment" },
-              })
-            end,
-          }
-        end,
+        entry_maker = make_entry,
       }),
       sorter = conf.generic_sorter(opts),
+
+      -- Show buffer contents in preview window
       previewer = require("telescope.previewers").new_buffer_previewer({
         define_preview = function(self, entry, _)
           local bufnr = entry.value
           if vim.api.nvim_buf_is_valid(bufnr) then
             local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
             vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
-            local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-            vim.api.nvim_buf_set_option(self.state.bufnr, "filetype", ft)
+            local ft = vim.bo[bufnr].filetype
+            vim.bo[self.state.bufnr].filetype = ft
           end
         end,
       }),
+
+      -- Setup keymaps
       attach_mappings = function(prompt_bufnr, map)
+        -- Override default action to switch to selected buffer
         actions.select_default:replace(function()
           actions.close(prompt_bufnr)
           local selection = action_state.get_selected_entry()
@@ -115,6 +131,55 @@ local function bufferline_picker(opts)
             vim.api.nvim_set_current_buf(selection.value)
           end
         end)
+
+        -- Add Ctrl-d to delete the selected buffer
+        local delete_buffer = function()
+          local selection = action_state.get_selected_entry()
+          if not selection or not selection.value then
+            return
+          end
+
+          local bufnr = selection.value
+
+          -- Delete the buffer using vim command
+          -- Bufferline will intercept this and handle it properly
+          local success, err = pcall(vim.cmd.bdelete, bufnr)
+          if not success then
+            vim.notify("Cannot delete buffer: " .. tostring(err), vim.log.levels.WARN)
+            return
+          end
+
+          -- Refresh the picker after a small delay to allow bufferline to update
+          vim.defer_fn(function()
+            local current_picker = action_state.get_current_picker(prompt_bufnr)
+            if not current_picker then
+              return
+            end
+
+            -- Get updated buffer list from bufferline
+            local new_buffers = bufferline.get_elements and bufferline.get_elements().elements or {}
+
+            -- Close picker if no buffers remain
+            if vim.tbl_isempty(new_buffers) then
+              actions.close(prompt_bufnr)
+              return
+            end
+
+            -- Refresh picker with new buffer list
+            current_picker:refresh(
+              finders.new_table({
+                results = new_buffers,
+                entry_maker = make_entry,
+              }),
+              { reset_prompt = false }
+            )
+          end, 50)
+        end
+
+        -- Map Ctrl-d in both insert and normal mode
+        map("i", "<C-d>", delete_buffer)
+        map("n", "<C-d>", delete_buffer)
+
         return true
       end,
     })
@@ -289,13 +354,6 @@ return {
             mappings = {
               i = {
                 ["<C-i>"] = toggle_no_ignore_grep,
-              },
-            },
-          },
-          buffers = {
-            mappings = {
-              i = {
-                ["<C-d>"] = actions.delete_buffer,
               },
             },
           },
