@@ -5,7 +5,7 @@ cask "qwerty-fr"
 cask "ghostty"
 
 # Install neovim
-brew "neovim"
+brew "neovim", args: ["head"] 
 
 # Fonts
 cask "font-jetbrains-mono-nerd-font"

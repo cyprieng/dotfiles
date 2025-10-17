@@ -195,6 +195,7 @@ return {
         },
         ruby_lsp = {},
         rubocop = {},
+        copilot = {},
       }
 
       -- VUE config
@@ -279,6 +280,31 @@ return {
             vim.lsp.config.setup(server_name, server)
           end,
         },
+      })
+
+      -- Github copilot
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local bufnr = args.buf
+          local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+          if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
+            vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
+
+            vim.keymap.set(
+              "i",
+              "<C-F>",
+              vim.lsp.inline_completion.get,
+              { desc = "LSP: accept inline completion", buffer = bufnr }
+            )
+            vim.keymap.set(
+              "i",
+              "<C-G>",
+              vim.lsp.inline_completion.select,
+              { desc = "LSP: switch inline completion", buffer = bufnr }
+            )
+          end
+        end,
       })
     end,
   },
@@ -412,7 +438,6 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      "giuxtaposition/blink-cmp-copilot",
       {
         "L3MON4D3/LuaSnip",
         build = (function()
@@ -543,22 +568,7 @@ return {
       snippets = { preset = "luasnip" },
 
       sources = {
-        default = { "lsp", "path", "snippets", "copilot" },
-        providers = {
-          copilot = {
-            name = "copilot",
-            module = "blink-cmp-copilot",
-            score_offset = 100,
-            async = true,
-          },
-          path = {
-            opts = {
-              get_cwd = function(_)
-                return vim.fn.getcwd()
-              end,
-            },
-          },
-        },
+        default = { "lsp", "path", "snippets" },
       },
 
       fuzzy = { implementation = "prefer_rust_with_warning" },
