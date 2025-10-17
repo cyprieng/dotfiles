@@ -126,6 +126,7 @@ fi
 # shellcheck disable=SC1143,SC2128
 if [ -z "$TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS" ]; then
   TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
+    "zoom_indicator 214 0"
     #"earthquake 3 0"
     #"pwd 89 211"
     #"macos_notification_count 29 255"
