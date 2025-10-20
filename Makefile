@@ -56,17 +56,13 @@ deps:
 
 	# Node
 	@echo "Installing Node dependencies..."
-	@npm i -g npm-check-updates neovim
-	@/opt/homebrew/bin/npm install -g @anthropic-ai/claude-code
+	@/opt/homebrew/bin/npm install -g @anthropic-ai/claude-code npm-check-updates neovim
 
 	# Python
 	@echo "Installing Python dependencies..."
 	@uv tool install pylatexenc --python 3.13
 	@uv tool install poetry --python 3.13
 	@uv tool install pynvim --python 3.13
-	@uv tool install mcp-server-git --python 3.13
-	@uv tool install 'markitdown[all]' --python 3.13
-	@uv tool install markitdown-mcp --python 3.13
 	@uv tool install ruff@latest --python 3.13
 	@uv tool install xmlformatter --python 3.13
 
@@ -219,10 +215,6 @@ setup:
 	# Use TouchId for sudo
 	@echo "Setting up TouchID for sudo..."
 	@grep -q "pam_tid.so" /etc/pam.d/sudo 2>/dev/null || (sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak && sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo)
-
-	# Claude code
-	@echo "Setting up Claude Code MCP..."
-	@/opt/homebrew/bin/claude mcp add-from-claude-desktop --scope user
 
 	# Raycast
 	@echo "Setting up Raycast..."
