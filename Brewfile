@@ -44,6 +44,7 @@ brew "kubectx"
 brew "yt-dlp"
 brew "typst"
 brew "git-secret"
+brew "tw93/tap/mole"
 
 # Apps
 cask "docker-desktop"
