@@ -44,24 +44,24 @@ map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 map("n", "<PageUp>", "20k", { noremap = true, silent = true })
 map("n", "<PageDown>", "20j", { noremap = true, silent = true })
 
--- Start/end of line
--- Map Ctrl-A (sent by Cmd+Left) to first non-blank character
-map("n", "<C-a>", "^", { noremap = true })
-map("i", "<C-a>", "<C-o>^", { noremap = true })
-map("v", "<C-a>", "^", { noremap = true })
+-- Start/end of line (Command+Left/Right sends Home/End)
+-- Map Home to first non-blank character
+map("n", "<Home>", "^", { noremap = true })
+map("i", "<Home>", "<C-o>^", { noremap = true })
+map("v", "<Home>", "^", { noremap = true })
 
--- Map Ctrl-E (sent by Cmd+Right) to end of line
-map("n", "<C-e>", "$", { noremap = true })
-map("i", "<C-e>", "<C-o>$", { noremap = true })
-map("v", "<C-e>", "$", { noremap = true })
+-- Map End to end of line
+map("n", "<End>", "$", { noremap = true })
+map("i", "<End>", "<C-o>$", { noremap = true })
+map("v", "<End>", "$", { noremap = true })
 
--- Word navigation
-map("n", "<ESC>b", "b", { noremap = true })
-map("n", "<ESC>f", "w", { noremap = true })
-map("i", "<ESC>b", "<C-o>b", { noremap = true })
-map("i", "<ESC>f", "<C-o>w", { noremap = true })
-map("v", "<ESC>b", "b", { noremap = true })
-map("v", "<ESC>f", "w", { noremap = true })
+-- Word navigation (Alt+Left/Right)
+map("n", "<M-Left>", "b", { noremap = true })
+map("n", "<M-Right>", "w", { noremap = true })
+map("i", "<M-Left>", "<C-o>b", { noremap = true })
+map("i", "<M-Right>", "<C-o>w", { noremap = true })
+map("v", "<M-Left>", "b", { noremap = true })
+map("v", "<M-Right>", "w", { noremap = true })
 
 -- Word remove
 -- Alt + Backspace to delete word backward

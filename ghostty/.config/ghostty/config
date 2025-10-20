@@ -16,10 +16,16 @@ initial-command = /opt/homebrew/bin/tmux new-session -A -D
 macos-option-as-alt = false
 
 # Command + Left -> Home
-keybind = super+left=text:\x01
+keybind = super+left=text:\x1bOH
 
 # Command + Right -> End
-keybind = super+right=text:\x05
+keybind = super+right=text:\x1bOF
+
+# Alt + Left -> Move word backward
+keybind = alt+left=text:\x1b[1;3D
+
+# Alt + Right -> Move word forward
+keybind = alt+right=text:\x1b[1;3C
 
 # Undo
 keybind = super+z=text:\x1f
@@ -35,7 +41,3 @@ keybind = ctrl+shift+down=csi:6~
 
 # Claude new line 
 keybind = shift+enter=text:\x1b\r
-
-# Quick terminal
-keybind = ctrl+t=toggle_quick_terminal
-quick-terminal-position = center

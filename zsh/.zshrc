@@ -70,6 +70,14 @@ fi
 # Bind keys
 bindkey "^[e" redo
 
+# Home/End keys (for Ghostty Command+Left/Right)
+bindkey "^[OH" beginning-of-line
+bindkey "^[OF" end-of-line
+
+# Word navigation (for Ghostty Alt+Left/Right)
+bindkey "^[[1;3D" backward-word
+bindkey "^[[1;3C" forward-word
+
 # Prompt
 autoload -Uz vcs_info
 
