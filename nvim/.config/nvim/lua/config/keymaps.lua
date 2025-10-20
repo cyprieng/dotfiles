@@ -65,30 +65,22 @@ map("v", "<M-Right>", "w", { noremap = true })
 
 -- Word remove
 -- Alt + Backspace to delete word backward
-map("n", "<A-BS>", "db", { desc = "Delete word backward" })
-map("i", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
-map("c", "<A-BS>", "<C-w>", { desc = "Delete word backward" })
+map("n", "<M-BS>", "db", { desc = "Delete word backward" })
+map("i", "<M-BS>", "<C-w>", { desc = "Delete word backward" })
+map("c", "<M-BS>", "<C-w>", { desc = "Delete word backward" })
 
 -- Alt + Delete to delete word forward
-map("n", "<A-Del>", "dw", { desc = "Delete word forward" })
-map("i", "<A-Del>", "<C-o>dw", { desc = "Delete word forward" })
-map("c", "<A-Del>", "<C-Del>", { desc = "Delete word forward" })
+map("n", "<M-Del>", "dw", { desc = "Delete word forward" })
+map("i", "<M-Del>", "<C-o>dw", { desc = "Delete word forward" })
+map("c", "<M-Del>", "<C-Del>", { desc = "Delete word forward" })
 
--- Move Lines
-map("n", "<A-j>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "<A-k>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
-
--- Move lines with macos alt behavior
-map("n", "ü", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
-map("n", "ï", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
-map("i", "ü", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
-map("i", "ï", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
-map("v", "ü", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
-map("v", "ï", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
+-- Move Lines (Alt+Up/Down)
+map("n", "<M-Down>", "<cmd>execute 'move .+' . v:count1<cr>==", { desc = "Move Down" })
+map("n", "<M-Up>", "<cmd>execute 'move .-' . (v:count1 + 1)<cr>==", { desc = "Move Up" })
+map("i", "<M-Down>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+map("i", "<M-Up>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+map("v", "<M-Down>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc = "Move Down" })
+map("v", "<M-Up>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- buffers
 map("n", "<leader>bd", function()
