@@ -44,6 +44,7 @@ brew "kubectx"
 brew "yt-dlp"
 brew "typst"
 brew "git-secret"
+tap "tw93/tap"
 brew "tw93/tap/mole"
 
 # Apps
