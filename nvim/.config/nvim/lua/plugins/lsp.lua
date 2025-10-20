@@ -195,7 +195,13 @@ return {
         },
         ruby_lsp = {},
         rubocop = {},
-        copilot = {},
+        copilot = {
+          cmd = {
+            "/opt/homebrew/bin/node",
+            vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
+            "--stdio",
+          },
+        },
       }
 
       -- VUE config
@@ -261,26 +267,24 @@ return {
         "js-debug-adapter",
         "debugpy",
       })
-
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
         auto_update = true,
       })
-
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
       require("mason-lspconfig").setup({
         automatic_enable = ensure_installed,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            vim.lsp.config.setup(server_name, server)
-          end,
-        },
       })
+
+      -- Setup all servers
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      for server_name, server_config in pairs(servers) do
+        local server = vim.tbl_deep_extend("force", {}, server_config)
+        -- This handles overriding only values explicitly passed
+        -- by the server configuration above. Useful when disabling
+        -- certain features of an LSP (for example, turning off formatting for ts_ls)
+        server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+        vim.lsp.config(server_name, server)
+      end
 
       -- Github copilot
       vim.api.nvim_create_autocmd("LspAttach", {
