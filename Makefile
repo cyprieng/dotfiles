@@ -258,6 +258,9 @@ clean:
 	@echo "Cleaning Homebrew..."
 	@brew cleanup
 
+	@echo "Cleaning system..."
+	@mo clean
+
 # ==============================================================================
 # Backup for configuration that cannot be symlinked
 # ==============================================================================
