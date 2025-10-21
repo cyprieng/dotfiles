@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   jq \
   nano \
   vim \
+  fd-find \
+  ripgrep \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Ensure default node user has access to /usr/local/share
@@ -82,3 +84,4 @@ RUN PROFILE=/home/node/.zshrc curl -o- https://raw.githubusercontent.com/nvm-sh/
 
 # Add zsh alias to always run claude in dangerous mode
 RUN echo "alias claude='claude --dangerously-skip-permissions'" >> /home/node/.zshrc
+RUN echo "alias fd='fdfind'" >> /home/node/.zshrc

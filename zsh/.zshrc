@@ -72,11 +72,21 @@ docker() {
 }
 
 # Claude devcontainer
-alias claude.dev.init="cp -r $DOTFILES_DIRECTORY/.claude-devcontainer ."
 function claude.dev() {
-     devcontainer $1 --workspace-folder . --config .claude-devcontainer/devcontainer.json ${@: 2}
+  # Check if the first argument is "init"
+  if [[ "$1" == "init" ]]; then
+    cp -r $DOTFILES_DIRECTORY/.claude-devcontainer .
+
+  # Check if the first argument is "shell"
+  elif [[ "$1" == "shell" ]]; then
+    shift
+    claude.dev exec zsh "$@"
+
+  # Otherwise, run devcontainer with the provided arguments
+  else
+    devcontainer $1 --workspace-folder . --config .claude-devcontainer/devcontainer.json ${@: 2}
+  fi
 }
-alias claude.dev.shell="claude.dev exec zsh"
 
 # I want clear to also clear the scrollback in tmux or nvim
 if [[ -n "$NVIM" ]]; then
