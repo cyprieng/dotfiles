@@ -37,6 +37,25 @@ iptables -A INPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
+# Allow inbound traffic on development ports from environment variable
+if [ -n "${DEV_PORTS:-}" ]; then
+    echo "Configuring firewall for development ports: $DEV_PORTS"
+    IFS=',' read -ra PORTS <<<"$DEV_PORTS"
+    for port in "${PORTS[@]}"; do
+        # Trim whitespace
+        port=$(echo "$port" | xargs)
+        if [[ "$port" =~ ^[0-9]+$ ]]; then
+            echo "Allowing port $port"
+            iptables -A INPUT -p tcp --dport "$port" -j ACCEPT
+            iptables -A OUTPUT -p tcp --sport "$port" -j ACCEPT
+        else
+            echo "WARNING: Invalid port number '$port' in DEV_PORTS, skipping"
+        fi
+    done
+else
+    echo "No DEV_PORTS environment variable set, skipping development port configuration"
+fi
+
 # Create ipset with CIDR support
 ipset create allowed-domains hash:net
 
