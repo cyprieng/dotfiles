@@ -3,6 +3,20 @@ FROM node:20
 ARG TZ
 ENV TZ="$TZ"
 
+# Avoid interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Ensure a real UTF-8 locale exists early in the build so tools like man/manpath don't warn
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+# Install minimal locale data and generate en_US.UTF-8 before other packages that may use locales
+RUN apt-get update && apt-get install -y --no-install-recommends locales \
+  && sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+  && locale-gen en_US.UTF-8 \
+  && update-locale LANG=en_US.UTF-8 \
+  && rm -rf /var/lib/apt/lists/*
+
 ARG CLAUDE_CODE_VERSION=latest
 
 # Install basic development tools
