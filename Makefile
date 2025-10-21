@@ -56,7 +56,7 @@ deps:
 
 	# Node
 	@echo "Installing Node dependencies..."
-	@/opt/homebrew/bin/npm install -g @anthropic-ai/claude-code npm-check-updates neovim
+	@/opt/homebrew/bin/npm install -g @anthropic-ai/claude-code npm-check-updates neovim @devcontainers/cli
 
 	# Python
 	@echo "Installing Python dependencies..."

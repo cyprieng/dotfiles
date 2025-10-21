@@ -38,7 +38,7 @@ preexec() {
 }
 
 # Aliases
-export DOTFILES_DIRECTORY="$(dirname $(dirname $(readlink ~/.zshrc)))"
+export DOTFILES_DIRECTORY="$HOME/dotfiles"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias tt="tmux new-session -A -D"
 alias v="nvim" 
@@ -59,6 +59,23 @@ function y() {
 	rm -f -- "$tmp"
 }
 whoseport() { lsof -i :$1 -sTCP:LISTEN -t | xargs -r ps -o pid=,comm= -p; }
+
+# Docker
+docker() {
+  if [[ "$1" == "stop" && "$2" == "all" ]]; then
+    command docker stop $(command docker ps -a -q)
+  elif [[ "$1" == "rm" && "$2" == "all" ]]; then
+    command docker rm $(command docker ps -a -q)
+  else
+    command docker "$@"
+  fi
+}
+
+# Devcontainer
+alias dev.init="cp -r $DOTFILES_DIRECTORY/.devcontainer ."
+function dev() {
+     devcontainer $1 --workspace-folder . ${@: 2}
+ }
 
 # I want clear to also clear the scrollback in tmux or nvim
 if [[ -n "$NVIM" ]]; then
