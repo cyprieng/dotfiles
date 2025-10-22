@@ -17,8 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends locales \
   && update-locale LANG=en_US.UTF-8 \
   && rm -rf /var/lib/apt/lists/*
 
-ARG CLAUDE_CODE_VERSION=latest
-
 # Install basic development tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
   less \
@@ -59,6 +57,7 @@ RUN mkdir -p /workspace /home/node/.claude && \
 
 WORKDIR /workspace
 
+# Install git-delta for improved git diffs
 ARG GIT_DELTA_VERSION=0.18.2
 RUN ARCH=$(dpkg --print-architecture) && \
   wget "https://github.com/dandavison/delta/releases/download/${GIT_DELTA_VERSION}/git-delta_${GIT_DELTA_VERSION}_${ARCH}.deb" && \
@@ -75,10 +74,6 @@ ENV PATH=$PATH:/usr/local/share/npm-global/bin
 # Set the default shell to zsh rather than sh
 ENV SHELL=/bin/zsh
 
-# Set the default editor and visual
-ENV EDITOR=nano
-ENV VISUAL=nano
-
 # Default powerline10k theme
 ARG ZSH_IN_DOCKER_VERSION=1.2.0
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v${ZSH_IN_DOCKER_VERSION}/zsh-in-docker.sh)" -- \
@@ -90,12 +85,12 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
   -x
 
 # Install Claude
-RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}
+RUN npm install -g @anthropic-ai/claude-code
 
 # Install nvm
 ENV NPM_CONFIG_PREFIX=
 RUN PROFILE=/home/node/.zshrc curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 
-# Add zsh alias to always run claude in dangerous mode
+# Aliases 
 RUN echo "alias claude='claude --dangerously-skip-permissions'" >> /home/node/.zshrc
 RUN echo "alias fd='fdfind'" >> /home/node/.zshrc

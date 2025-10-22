@@ -1,5 +1,5 @@
 {
-  "name": "Claude Code Sandbox",
+  "name": "Agent Code Sandbox",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
@@ -13,7 +13,7 @@
   "customizations": {},
   "remoteUser": "node",
   "mounts": [
-    "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
+    "source=agent-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
     "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume",
     "source=${localEnv:HOME}/.claude/CLAUDE.md,target=/tmp/host-claude-md,type=bind,consistency=cached"
   ],
