@@ -6,4 +6,4 @@
 raycast/config.rayconfig
 claude/Library/Application\ Support/Claude/claude_desktop_config.json
 
-!.claude-devcontainer
+!.agent-devcontainer

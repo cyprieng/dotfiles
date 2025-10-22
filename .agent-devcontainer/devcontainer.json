@@ -9,7 +9,14 @@
       "ZSH_IN_DOCKER_VERSION": "1.2.0"
     }
   },
-  "runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW"],
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true,
+      "dockerDashComposeVersion": "v2"
+    }
+  },
+  "overrideCommand": true,
   "customizations": {},
   "remoteUser": "node",
   "mounts": [
@@ -25,5 +32,6 @@
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
   "postCreateCommand": "ln -sf /tmp/host-claude-md /home/node/.claude/CLAUDE.md",
+  "postStartCommand": "sudo /usr/local/share/docker-init.sh",
   "waitFor": "postStartCommand"
 }

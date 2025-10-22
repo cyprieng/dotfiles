@@ -13,5 +13,5 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 
-# Claude devcontainer
-.claude-devcontainer
+# Agent devcontainer
+.agent-devcontainer

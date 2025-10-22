@@ -42,6 +42,10 @@ RUN mkdir -p /usr/local/share/npm-global && \
 
 ARG USERNAME=node
 
+# Grant node user passwordless sudo only for Docker daemon startup
+RUN echo "$USERNAME ALL=(root) NOPASSWD: /usr/local/share/docker-init.sh" > /etc/sudoers.d/docker-init && \
+  chmod 0440 /etc/sudoers.d/docker-init
+
 # Persist bash history.
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \
   && mkdir /commandhistory \
