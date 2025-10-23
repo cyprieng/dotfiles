@@ -32,10 +32,6 @@ antidote load
 
 # Custom title
 DISABLE_AUTO_TITLE="true"
-preexec() {
-  local action="$1"
-  echo -ne "\033]0;$action - ${PWD##*/}\a"
-}
 
 # Aliases
 export DOTFILES_DIRECTORY="$HOME/dotfiles"
@@ -50,6 +46,30 @@ alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
 alias claude="/opt/homebrew/bin/claude"
+
+# Notification function
+function dialog() {
+  local title="${1:-Notification}"
+  local message="${2:-Your message here}"
+  osascript -e "display dialog \"$message\" with title \"$title\" buttons {\"OK\"} default button 1" > /dev/null
+}
+function notify() {
+  local cmdstatus=$?
+  local title message
+  local last_cmd="${LAST_CMD:-Unknown command}"
+
+  if [[ $cmdstatus -eq 0 ]]; then
+    title="✓ Success"
+    message="${1:-$last_cmd}"
+  else
+    title="✗ Failed (exit $cmdstatus)"
+    message="${1:-$last_cmd}"
+  fi
+
+  dialog "$title" "$message"
+  return $cmdstatus
+}
+
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -112,6 +132,14 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats 'on %B%F{5}%b%f '
 
 preexec() {
+  local action="$1"
+
+  # Set window title
+  echo -ne "\033]0;$action - ${PWD##*/}\a"
+
+  # Capture command for notify
+  LAST_CMD="$1"
+
   # Only set timer if the command is not empty or just whitespace
   if [[ -n ${1//[[:space:]]/} ]]; then
     CMD_TIMER=$EPOCHREALTIME
