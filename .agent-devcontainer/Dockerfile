@@ -94,6 +94,27 @@ RUN npm install -g @anthropic-ai/claude-code
 # Install nvm
 ENV NPM_CONFIG_PREFIX=
 RUN PROFILE=/home/node/.zshrc curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+RUN echo 'autoload -U add-zsh-hook\n\
+  load-nvmrc() {\n\
+  local node_version="$(nvm version)"\n\
+  local nvmrc_path="$(nvm_find_nvmrc)"\n\
+  \n\
+  if [ -n "$nvmrc_path" ]; then\n\
+  local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")\n\
+  \n\
+  if [ "$nvmrc_node_version" = "N/A" ]; then\n\
+  nvm install\n\
+  elif [ "$nvmrc_node_version" != "$node_version" ]; then\n\
+  nvm use\n\
+  fi\n\
+  elif [ "$node_version" != "$(nvm version default)" ]; then\n\
+  echo "Reverting to nvm default version"\n\
+  nvm use default\n\
+  fi\n\
+  }\n\
+  add-zsh-hook chpwd load-nvmrc\n\
+  load-nvmrc\n\' >> /home/node/.zshrc
+
 
 # Aliases 
 RUN echo "alias claude='claude --dangerously-skip-permissions'" >> /home/node/.zshrc
