@@ -86,7 +86,6 @@ brew "node"
 brew "rbenv"
 
 # Other
-brew "antidote"
 brew "gnupg"
 brew "poppler"
 brew "pandoc"

@@ -22,13 +22,25 @@ ENABLE_CORRECTION="true"
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
-# Load antidote
-if [[ -e /opt/homebrew/opt/antidote/share/antidote/antidote.zsh ]]; then
-    source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
-else
-    source /home/linuxbrew/.linuxbrew/share/antidote/antidote.zsh
-fi
-antidote load
+# Load zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Plugins
+zinit snippet OMZL::git.zsh
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::directories.zsh
+zinit snippet OMZ::plugins/common-aliases
+zinit snippet OMZ::plugins/git
+zinit snippet OMZ::plugins/extract
+zinit load Aloxaf/fzf-tab
+zinit load zsh-users/zsh-completions
+zinit load zsh-users/zsh-autosuggestions
+zinit load zsh-users/zsh-syntax-highlighting
 
 # Custom title
 DISABLE_AUTO_TITLE="true"

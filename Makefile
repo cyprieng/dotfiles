@@ -228,6 +228,10 @@ update:
 	@echo "Updating Homebrew..."
 	@brew update && brew upgrade && brew cleanup
 
+	@echo "Updating Zinit..."
+	@zsh -ic 'zinit self-update'
+	@zsh -ic 'zinit update'
+
 	@echo "Updating Node packages..."
 	@npm update -g
 
