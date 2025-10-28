@@ -27,11 +27,11 @@ install: init stow deps setup
 
 stow:
 	@echo "Symlinking dotfiles..."
-	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh
+	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
 
 unstow:
 	@echo "Removing symlinks..."
-	@stow -D --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh
+	@stow -D --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
 
 # ==============================================================================
 # Dependencies installation
@@ -50,13 +50,8 @@ deps:
 	@echo "Installing brew dependencies..."
 	@brew bundle
 
-	# Golang
-	@echo "Installing Go dependencies..."
-	@go install golang.org/x/tools/cmd/goimports@latest
-
-	# Node
-	@echo "Installing Node dependencies..."
-	@/opt/homebrew/bin/npm install -g @anthropic-ai/claude-code npm-check-updates neovim @devcontainers/cli
+	# Mise
+	@mise install
 
 	# Python
 	@echo "Installing Python dependencies..."
@@ -65,11 +60,6 @@ deps:
 	@uv tool install pynvim --python 3.13
 	@uv tool install ruff@latest --python 3.13
 	@uv tool install xmlformatter --python 3.13
-
-	# Rust
-	@echo "Installing Rust..."
-	@rustup install stable
-	@rustup default stable
 
 # ==============================================================================
 # System and app configuration
@@ -232,20 +222,20 @@ update:
 	@zsh -ic 'zinit self-update'
 	@zsh -ic 'zinit update'
 
-	@echo "Updating Node packages..."
-	@npm update -g
+	@echo "Updating mise..."
+	@mise upgrade
 
 	@echo "Updating Python tools..."
 	@uv tool upgrade --all
-
-	@echo "Updating Rust..."
-	@rustup update
 
 # ==============================================================================
 # Cleanup
 # ==============================================================================
 
 clean:
+	@echo "Cleaning up brew formulae and casks"
+	@./clean-brew.sh
+
 	@echo "Cleaning up broken symlinks..."
 	@find ~ -maxdepth 1 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
 	@find ~/.config -maxdepth 2 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true

@@ -197,7 +197,7 @@ return {
         rubocop = {},
         copilot = {
           cmd = {
-            "/opt/homebrew/bin/node",
+            vim.fn.expand("$HOME/.local/share/mise/installs/node/22.21.0/bin/node"),
             vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
             "--stdio",
           },
@@ -411,7 +411,7 @@ return {
           return has_eslint and has_config
         end,
 
-        command = "eslint_d",
+        command = "eslint",
         args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
       }
 

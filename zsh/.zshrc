@@ -1,14 +1,8 @@
-# Node (need to be before brew to avoid conflicts)
-eval "$(fnm env --use-on-cd --shell zsh)"
-
-# Ruby
-eval "$(rbenv init -)"
-
 # Global configuration
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
-export PATH="/usr/local/bin/:$HOME/.local/bin:/opt/homebrew/opt/rustup/bin:/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOME/.local/share/mise/shims:/usr/local/bin/:$HOME/.local/bin:$PATH"
 
 # Load brew
 if [ "$(uname)" = "Linux" ]; then
@@ -87,7 +81,6 @@ alias cz="cz --config ~/.cz.toml"
 alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
-alias claude="/opt/homebrew/bin/claude"
 
 # Notification function
 function dialog() {

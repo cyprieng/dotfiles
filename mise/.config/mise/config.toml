@@ -1,0 +1,18 @@
+[tools]
+node = "lts"
+"npm:prettier" = "latest"
+"npm:eslint" = "latest"
+"npm:markdown-toc" = "latest"
+"npm:markdownlint-cli2" = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@devcontainers/cli" = "latest"
+
+python = "3.13"
+uv = "latest"
+ruby = "latest"
+go = "latest"
+rust = "latest"
+terraform = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python", "ruby", "go", "rust", "terraform"]
