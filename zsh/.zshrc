@@ -42,6 +42,7 @@ zinit load zsh-users/zsh-completions
 zinit load zsh-users/zsh-autosuggestions
 zinit load zsh-users/zsh-syntax-highlighting
 zinit load MichaelAquilina/zsh-you-should-use
+zinit load wfxr/forgit
 
 # fzf-tab configuration
 # disable sort when completing `git checkout`
