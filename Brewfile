@@ -88,10 +88,5 @@ brew "imagemagick"
 brew "p7zip"
 brew "graphviz"
 brew "pam-reattach"
-
-# Neovim dependencies
 brew "pkgconf"
-brew "luarocks"
 brew "ast-grep"
-brew "sqlfluff"
-brew "harper"

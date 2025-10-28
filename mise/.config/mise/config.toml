@@ -1,9 +1,5 @@
 [tools]
 node = "lts"
-"npm:prettier" = "latest"
-"npm:eslint" = "latest"
-"npm:markdown-toc" = "latest"
-"npm:markdownlint-cli2" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@devcontainers/cli" = "latest"
 

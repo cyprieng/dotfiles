@@ -262,10 +262,18 @@ return {
       vim.list_extend(ensure_installed, {
         "stylua",
         "prettier",
+        "eslint",
+        "eslint_d",
         "php-debug-adapter",
+        "php-cs-fixer",
         "delve",
         "js-debug-adapter",
         "debugpy",
+        "sqlfluff",
+        "markdown-toc",
+        "markdownlint-cli2",
+        "ruff",
+        "xmlformatter",
       })
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
@@ -357,7 +365,6 @@ return {
         php = { "php_cs_fixer" },
         python = { "ruff_format" },
         rust = { "rustfmt", lsp_format = "fallback" },
-        hcl = { "packer_fmt" },
         terraform = { "terraform_fmt" },
         tf = { "terraform_fmt" },
         ["terraform-vars"] = { "terraform_fmt" },
@@ -411,7 +418,7 @@ return {
           return has_eslint and has_config
         end,
 
-        command = "eslint",
+        command = "eslint_d",
         args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
       }
 

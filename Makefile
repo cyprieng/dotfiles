@@ -53,14 +53,6 @@ deps:
 	# Mise
 	@mise install
 
-	# Python
-	@echo "Installing Python dependencies..."
-	@uv tool install pylatexenc --python 3.13
-	@uv tool install poetry --python 3.13
-	@uv tool install pynvim --python 3.13
-	@uv tool install ruff@latest --python 3.13
-	@uv tool install xmlformatter --python 3.13
-
 # ==============================================================================
 # System and app configuration
 # ==============================================================================
@@ -224,9 +216,6 @@ update:
 
 	@echo "Updating mise..."
 	@mise upgrade
-
-	@echo "Updating Python tools..."
-	@uv tool upgrade --all
 
 # ==============================================================================
 # Cleanup
