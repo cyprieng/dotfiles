@@ -12,10 +12,6 @@ fi
 # Enable correction
 ENABLE_CORRECTION="true"
 
-# Load zfunc and compinit
-fpath+=~/.zfunc
-autoload -Uz compinit && compinit
-
 # Load zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -226,3 +222,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=separator:#ff966c \
   --color=spinner:#ff007c \
 "
+
+# Load zfunc and compinit
+autoload -Uz compinit && compinit
