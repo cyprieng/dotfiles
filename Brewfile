@@ -78,6 +78,8 @@ cask "obsidian"
 
 # Languages
 brew "mise"
+tap "shivammathur/php"
+brew "shivammathur/php/php"
 
 # Other
 brew "gnupg"
