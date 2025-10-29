@@ -194,7 +194,6 @@ return {
           },
         },
         ruby_lsp = {},
-        rubocop = {},
         copilot = {
           cmd = {
             vim.fn.expand("$HOME/.local/share/mise/installs/node/22.21.0/bin/node"),
