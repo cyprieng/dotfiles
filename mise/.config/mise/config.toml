@@ -3,7 +3,7 @@ node = "lts"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@devcontainers/cli" = "latest"
 
-python = "3.13"
+python = "latest"
 uv = "latest"
 ruby = "latest"
 go = "latest"
