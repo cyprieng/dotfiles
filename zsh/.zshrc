@@ -202,6 +202,8 @@ eval "$(atuin init zsh)"
 # FZF theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --info=inline-right \
+  --bind alt-up:preview-up,alt-down:preview-down \
+  --bind alt-shift-up:preview-page-up,alt-shift-down:preview-page-down \
   --ansi \
   --layout=reverse \
   --border=none \
