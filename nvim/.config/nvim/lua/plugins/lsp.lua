@@ -196,7 +196,7 @@ return {
         ruby_lsp = {},
         copilot = {
           cmd = {
-            vim.fn.expand("$HOME/.local/share/mise/installs/node/22.21.0/bin/node"),
+            vim.fn.expand("$HOME/.local/share/mise/installs/node/lts/bin/node"),
             vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
             "--stdio",
           },
