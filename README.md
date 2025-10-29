@@ -77,4 +77,6 @@ Add the following bookmarks to the bookmarks bar:
 
 Install [CleanMyMac](https://macpaw.com/fr/download/cleanmymac)
 
+Change the wallpaper using the ones from `wallpaper` directory.
+
 Do not forget to log out and log back in to make sure all changes are applied.
