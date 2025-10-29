@@ -2,9 +2,6 @@ local map = vim.keymap.set
 
 local Snacks = require("snacks")
 
--- Select all
-map("n", "<leader>ga", "ggVG", { desc = "Select All" })
-
 -- Toggle UI windows
 map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
 
