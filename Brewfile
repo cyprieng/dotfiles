@@ -75,6 +75,7 @@ cask "openmtp"
 cask "shortcat"
 cask "claude"
 cask "obsidian"
+cask "TheBoredTeam/boring-notch/boring-notch", args: { no_quarantine: true }
 
 # Languages
 brew "mise"
