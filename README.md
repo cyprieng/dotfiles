@@ -47,15 +47,16 @@ Make sure the following apps run on startup:
 
 Rearrange Dock:
 
+- Zen browser
 - Chrome
 - Claude
 - Mail
 - Ghostty
 - Obsidian
 
-### Chrome
+### Zen / Chrome
 
-Install the following extensions:
+Install the following chrome extensions:
 
 - [2FAS](https://chromewebstore.google.com/detail/2fas-auth-two-factor-auth/dbfoemgnkgieejfkaddieamagdfepnff)
 - [Archive.today](https://chromewebstore.google.com/detail/archivetoday-automator/mmhadhnchpgicjlmlcdfaapkekknnkha)
@@ -65,6 +66,16 @@ Install the following extensions:
 - [uBlock Origin Lite](https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh)
 - [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
 - [Wayback Machine](https://chromewebstore.google.com/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak)
+
+The following Zen extensions:
+
+- [2FAS](https://addons.mozilla.org/fr/firefox/addon/2fas-two-factor-authentication/)
+- [Web Archives](https://addons.mozilla.org/fr/firefox/addon/view-page-archive/)
+- [Obsidian Web Clipper](https://addons.mozilla.org/fr/firefox/addon/web-clipper-obsidian/)
+- [Old Reddit Redirect](https://addons.mozilla.org/fr/firefox/addon/old-reddit-redirect/)
+- [Proton Pass](https://addons.mozilla.org/fr/firefox/addon/proton-pass/)
+- [uBlock Origin](https://addons.mozilla.org/fr/firefox/addon/ublock-origin/)
+- [Vimium](https://addons.mozilla.org/fr/firefox/addon/vimium-ff/)
 
 Add the following bookmarks to the bookmarks bar:
 

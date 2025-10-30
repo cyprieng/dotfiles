@@ -52,6 +52,7 @@ brew "tw93/tap/mole"
 # Apps
 cask "docker-desktop"
 cask "google-chrome"
+cask "zen"
 cask "postman"
 tap "FelixKratz/formulae"
 brew "FelixKratz/formulae/borders"
