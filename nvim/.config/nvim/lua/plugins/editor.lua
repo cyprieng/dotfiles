@@ -65,8 +65,9 @@ return {
       current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = "eol",
-        delay = 500,
+        delay = 1000,
         ignore_whitespace = false,
+        update_debounce = 2000,
       },
 
       on_attach = function(bufnr)
@@ -222,8 +223,12 @@ return {
   -- Color highlight
   {
     "brenoprata10/nvim-highlight-colors",
+    event = "VeryLazy",
     config = function()
-      require("nvim-highlight-colors").setup({})
+      require("nvim-highlight-colors").setup({
+        render = "virtual",
+        enable_tailwind = true,
+      })
     end,
   },
 

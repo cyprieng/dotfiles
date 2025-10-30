@@ -184,9 +184,9 @@ precmd() {
   local elapsed=""
   if [[ -n $CMD_TIMER ]]; then
     local now=$EPOCHREALTIME
-    local diff=$(printf "%.2f" "$(echo "$now - $CMD_TIMER" | bc)")
+    local diff=$(( now - CMD_TIMER ))
     if (( diff > 1 )); then
-      elapsed="(%F{yellow}${diff}s%f) "
+      printf -v elapsed "(%s%.2fs%s) " "%F{yellow}" "$diff" "%f"
     fi
     unset CMD_TIMER
   fi
@@ -225,5 +225,10 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=spinner:#ff007c \
 "
 
-# Load zfunc and compinit
-autoload -Uz compinit && compinit
+# Load zfunc and compinit (optimized: only once per day)
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi

@@ -93,6 +93,22 @@ return {
         globalstatus = true,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+        refresh = {
+          statusline = 1000,
+          tabline = 1000,
+          winbar = 1000,
+          refresh_time = 100,
+          events = {
+            "WinEnter",
+            "BufEnter",
+            "BufWritePost",
+            "SessionLoadPost",
+            "FileChangedShellPost",
+            "VimResized",
+            "Filetype",
+            "ModeChanged",
+          },
+        },
       },
       tabline = {},
       sections = {
@@ -111,7 +127,7 @@ return {
           },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
         },
-        lualine_x = {
+        lualine_y = {
           Snacks.profiler.status(),
           {
             function()
@@ -162,14 +178,9 @@ return {
             },
           },
         },
-        lualine_y = {
+        lualine_z = {
           { "progress", separator = " ", padding = { left = 1, right = 0 } },
           { "location", padding = { left = 0, right = 1 } },
-        },
-        lualine_z = {
-          function()
-            return " " .. os.date("%R")
-          end,
         },
       },
     },
@@ -394,8 +405,8 @@ return {
     config = function(_, opts)
       require("bufferline").setup(opts)
 
-      -- Fix bufferline when restoring a session
-      vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
+      -- Fix bufferline when restoring a session (only during session load)
+      vim.api.nvim_create_autocmd("SessionLoadPost", {
         callback = function()
           vim.schedule(function()
             pcall(nvim_bufferline)
