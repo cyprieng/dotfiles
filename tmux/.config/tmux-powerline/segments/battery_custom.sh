@@ -4,9 +4,25 @@ get_battery_percent() {
   pmset -g batt | grep -o "[0-9][0-9]*\%" | rev | cut -c 2- | rev
 }
 
-check_if_charging() {
+get_charging_icon() {
   if /usr/sbin/ioreg -c AppleSmartBattery -w0 | grep -q "\"ExternalConnected\" = Yes"; then
     echo "󰚥 "
+  fi
+}
+
+get_battery_icon() {
+  local percent=$1
+
+  if [ "$percent" -ge 80 ]; then
+    echo "  "
+  elif [ "$percent" -ge 66 ]; then
+    echo "   "
+  elif [ "$percent" -ge 50 ]; then
+    echo "  "
+  elif [ "$percent" -ge 30 ]; then
+    echo "  "
+  else
+    echo "  "
   fi
 }
 
@@ -18,6 +34,6 @@ run_segment() {
     return 0
   fi
 
-  echo "${TMUX_POWERLINE_SEPARATOR_LEFT_THIN} $(check_if_charging)$battery_percent%"
+  echo "${TMUX_POWERLINE_SEPARATOR_LEFT_THIN} $(get_charging_icon)$battery_percent%$(get_battery_icon "$battery_percent")"
   return 0
 }
