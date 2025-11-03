@@ -62,6 +62,7 @@ return {
     "lewis6991/gitsigns.nvim",
     opts = {
       current_line_blame = true, -- Shows git blame for current line
+      update_debounce = 1000,
       current_line_blame_opts = {
         virt_text = true,
         virt_text_pos = "eol",
