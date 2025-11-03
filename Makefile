@@ -18,7 +18,7 @@ help:
 # Main installation
 # ==============================================================================
 
-install: init stow deps setup
+install: init stow deps setup dns
 	@echo "✓ Installation complete!"
 
 # ==============================================================================
@@ -203,10 +203,25 @@ setup:
 	@open raycast/config.rayconfig
 
 # ==============================================================================
+# DNS Update
+# ==============================================================================
+
+dns:
+	@echo "Downloading hosts..."
+	@curl -o /tmp/hosts https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+	@sudo cp /etc/hosts /etc/hosts.bak
+	@sudo cp /tmp/hosts /etc/hosts
+
+	@echo "Flushing DNS cache..."
+	@sudo dscacheutil -flushcache
+	@sudo killall -HUP mDNSResponder
+
+
+# ==============================================================================
 # Update
 # ==============================================================================
 
-update:
+update: dns
 	@echo "Updating Homebrew..."
 	@brew update && brew upgrade && brew cleanup
 
