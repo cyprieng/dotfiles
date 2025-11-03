@@ -1,5 +1,7 @@
 # Global configuration
 export VISUAL="nvim"
+export PAGER="bat"
+export BAT_PAGER="less -R"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="$HOME/.local/share/mise/shims:/usr/local/bin/:$HOME/.local/bin:$PATH"
