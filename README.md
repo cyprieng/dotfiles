@@ -15,6 +15,8 @@ Run `make help` to see all available commands:
 - `make init` - Install brew and stow
 - `make deps` - Install all dependencies (Homebrew, Go, Node, Python, Rust packages)
 - `make setup` - Configure apps & system settings (decrypt secrets, setup git, apply macOS settings)
+- `make dns` - Set up a blocklist of malicious DNS entries using /etc/hosts
+- `make extras` - Install extra applications and configurations
 - `make update` - Update everything (Homebrew, Node, Python, Rust)
 - `make clean` - Clean up broken symlinks and Homebrew cache
 - `make backup` - Backup app configurations (AltTab, BetterTouchTool, Raycast)
