@@ -18,7 +18,7 @@ help:
 # Main installation
 # ==============================================================================
 
-install: init stow deps setup dns
+install: init stow deps setup
 	@echo "✓ Installation complete!"
 
 # ==============================================================================
@@ -193,14 +193,22 @@ setup:
 	# Restart apps modified
 	@echo "Restarting modified apps..."
 	@for app in Finder Dock SystemUIServer Safari; do killall "$$app" 2>/dev/null || true; done
+	
+	# Raycast
+	@echo "Setting up Raycast..."
+	@open raycast/config.rayconfig
+
+# ==============================================================================
+# Extra setup 
+# ==============================================================================
+extra: dns
+	@echo "Installing extra brew dependencies..."
+	@brew bundle --file=Brewfile-extra
 
 	# Use TouchId for sudo
 	@echo "Setting up TouchID for sudo..."
 	@grep -q "pam_tid.so" /etc/pam.d/sudo 2>/dev/null || (sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak && sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo)
 
-	# Raycast
-	@echo "Setting up Raycast..."
-	@open raycast/config.rayconfig
 
 # ==============================================================================
 # DNS Update
@@ -221,7 +229,7 @@ dns:
 # Update
 # ==============================================================================
 
-update: dns
+update:
 	@echo "Updating Homebrew..."
 	@brew update && brew upgrade && brew cleanup
 

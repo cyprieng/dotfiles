@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Path to your Brewfile
+# Path to your Brewfiles
 BREWFILE="Brewfile"
+BREWFILE_EXTRA="Brewfile-extra"
 
 echo "Loading installed packages..."
 # Get all explicitly installed formulae (leaves)
@@ -10,12 +11,21 @@ installed_formulae=$(brew leaves)
 # Get all installed casks
 installed_casks=$(brew list --cask)
 
-echo "Parsing Brewfile..."
-# Extract formulae from Brewfile (handle both simple names and tap/formula format, strip args)
-brewfile_formulae=$(grep '^brew ' "$BREWFILE" | sed 's/brew ["'\'']\([^"'\'']*\)["'\''].*/\1/' | awk -F',' '{print $1}' | tr -d '"' | tr -d "'" | sed 's/^brew //' | tr '[:upper:]' '[:lower:]')
+echo "Parsing Brewfiles..."
+# Concatenate both Brewfiles (if Brewfile-extra exists)
+if [ -f "$BREWFILE_EXTRA" ]; then
+    combined_brewfile=$(cat "$BREWFILE" "$BREWFILE_EXTRA")
+    echo "Found both Brewfile and Brewfile-extra"
+else
+    combined_brewfile=$(cat "$BREWFILE")
+    echo "Found only Brewfile"
+fi
 
-# Extract casks from Brewfile (handle both simple names and tap/cask format, strip args)
-brewfile_casks=$(grep '^cask ' "$BREWFILE" | sed 's/cask ["'\'']\([^"'\'']*\)["'\''].*/\1/' | awk -F',' '{print $1}' | tr -d '"' | tr -d "'" | sed 's/^cask //' | tr '[:upper:]' '[:lower:]')
+# Extract formulae from combined Brewfiles (handle both simple names and tap/formula format, strip args)
+brewfile_formulae=$(echo "$combined_brewfile" | grep '^brew ' | sed 's/brew ["'\'']\([^"'\'']*\)["'\''].*/\1/' | awk -F',' '{print $1}' | tr -d '"' | tr -d "'" | sed 's/^brew //' | tr '[:upper:]' '[:lower:]')
+
+# Extract casks from combined Brewfiles (handle both simple names and tap/cask format, strip args)
+brewfile_casks=$(echo "$combined_brewfile" | grep '^cask ' | sed 's/cask ["'\'']\([^"'\'']*\)["'\''].*/\1/' | awk -F',' '{print $1}' | tr -d '"' | tr -d "'" | sed 's/^cask //' | tr '[:upper:]' '[:lower:]')
 
 # Combine all brewfile packages (lowercase)
 all_brewfile_packages="$brewfile_formulae"$'\n'"$brewfile_casks"
