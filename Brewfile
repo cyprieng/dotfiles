@@ -48,6 +48,7 @@ brew "typst"
 brew "git-secret"
 tap "tw93/tap"
 brew "tw93/tap/mole"
+brew "git-lfs"
 
 # Apps
 cask "docker-desktop"
