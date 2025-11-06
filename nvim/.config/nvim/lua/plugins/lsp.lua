@@ -273,6 +273,7 @@ return {
         "markdownlint-cli2",
         "ruff",
         "xmlformatter",
+        "erb-formatter",
       })
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
@@ -369,6 +370,7 @@ return {
         ["terraform-vars"] = { "terraform_fmt" },
         xml = { "xmlformatter" },
         svg = { "xmlformatter" },
+        eruby = { "erb_format" },
       }
 
       -- Prettier
