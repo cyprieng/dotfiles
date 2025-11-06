@@ -75,6 +75,7 @@ tap "shivammathur/php"
 brew "shivammathur/php/php"
 
 # Other
+brew "luarocks"
 brew "gnupg"
 brew "poppler"
 brew "pandoc"
