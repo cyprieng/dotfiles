@@ -49,6 +49,7 @@ brew "git-secret"
 tap "tw93/tap"
 brew "tw93/tap/mole"
 brew "git-lfs"
+brew "television"
 
 # Apps
 cask "docker-desktop"
