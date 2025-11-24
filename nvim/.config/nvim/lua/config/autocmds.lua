@@ -65,8 +65,22 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyVimStarted",
   callback = function()
+    local data_path = vim.fn.stdpath("data")
+    local update_file = data_path .. "/lazy-last-update"
+    local lock_file = data_path .. "/lazy-update.lock"
+
+    -- Try to acquire lock (create lock file exclusively)
+    local lock_fd = vim.loop.fs_open(lock_file, "wx", 438) -- 438 = 0666 in octal
+    if not lock_fd then
+      -- Another instance is updating or lock exists
+      return
+    end
+
+    -- We have the lock, close it immediately (we just need it as a flag)
+    vim.loop.fs_close(lock_fd)
+
     -- Get last update time from file
-    local last_update = vim.fn.getftime(vim.fn.stdpath("data") .. "/lazy-last-update")
+    local last_update = vim.fn.getftime(update_file)
     local current_time = os.time()
 
     -- If more than 24h have passed since last update
@@ -74,8 +88,11 @@ vim.api.nvim_create_autocmd("User", {
       if require("lazy.status").has_updates then
         require("lazy").update({ show = false })
       end
-      vim.fn.writefile({}, vim.fn.stdpath("data") .. "/lazy-last-update")
+      vim.fn.writefile({}, update_file)
     end
+
+    -- Release lock
+    vim.loop.fs_unlink(lock_file)
   end,
 })
 
