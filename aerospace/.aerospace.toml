@@ -96,8 +96,10 @@ automatically-unhide-macos-hidden-apps = false
     alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-    alt-h = 'focus left --boundaries all-monitors-outer-frame'
-    alt-l = 'focus right --boundaries all-monitors-outer-frame'
+    alt-h = 'focus left --boundaries all-monitors-outer-frame --ignore-floating'
+    alt-l = 'focus right --boundaries all-monitors-outer-frame --ignore-floating'
+    # alt-j = 'focus down --boundaries all-monitors-outer-frame --ignore-floating'
+    # alt-k = 'focus up --boundaries all-monitors-outer-frame --ignore-floating'
 
     # Two of my screens caused up and down to be reversed, this fixes that.
     alt-j = '''exec-and-forget
@@ -108,7 +110,7 @@ automatically-unhide-macos-hidden-apps = false
         elif [[ "$current_monitor" == "LG ULTRAWIDE" ]]; then
           aerospace focus-monitor "Mi Monitor"
         else
-          aerospace focus down --boundaries all-monitors-outer-frame
+          aerospace focus down --boundaries all-monitors-outer-frame --ignore-floating
         fi
       fi
     '''
@@ -120,7 +122,7 @@ automatically-unhide-macos-hidden-apps = false
         elif [[ "$current_monitor" == "Mi Monitor" ]]; then
           aerospace focus-monitor "LG ULTRAWIDE"
         else
-          aerospace focus up --boundaries all-monitors-outer-frame
+          aerospace focus up --boundaries all-monitors-outer-frame --ignore-floating
         fi
       fi
     '''
