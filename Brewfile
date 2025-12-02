@@ -50,6 +50,7 @@ tap "tw93/tap"
 brew "tw93/tap/mole"
 brew "git-lfs"
 brew "television"
+brew "trippy"
 
 # Apps
 cask "docker-desktop"
