@@ -127,6 +127,9 @@ automatically-unhide-macos-hidden-apps = false
       fi
     '''
 
+    # Float and center the window. If it's already floating, return it back into the tiles.
+    alt-i = """exec-and-forget aerospace layout floating && sleep 0.2 && open -g 'raycast://extensions/raycast/window-management/center' || aerospace layout tiling"""
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#move
     ctrl-alt-h = 'move left'
     ctrl-alt-j = 'move down'
