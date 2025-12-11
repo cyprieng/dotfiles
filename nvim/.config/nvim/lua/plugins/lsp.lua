@@ -194,6 +194,7 @@ return {
           },
         },
         ruby_lsp = {},
+        herb_ls = {},
         copilot = {
           cmd = {
             vim.fn.expand("$HOME/.local/share/mise/installs/node/lts/bin/node"),
@@ -273,7 +274,6 @@ return {
         "markdownlint-cli2",
         "ruff",
         "xmlformatter",
-        "erb-formatter",
       })
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
@@ -370,7 +370,13 @@ return {
         ["terraform-vars"] = { "terraform_fmt" },
         xml = { "xmlformatter" },
         svg = { "xmlformatter" },
-        eruby = { "erb_format" },
+        eruby = { "herb_format" },
+      }
+
+      opts.formatters.herb_format = {
+        command = "herb-format",
+        args = {},
+        stdin = true,
       }
 
       -- Prettier

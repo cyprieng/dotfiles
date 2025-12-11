@@ -2,6 +2,7 @@
 node = "lts"
 "npm:@anthropic-ai/claude-code" = "latest"
 "npm:@devcontainers/cli" = "latest"
+"npm:@herb-tools/formatter" = "latest"
 
 python = "latest"
 uv = "latest"
