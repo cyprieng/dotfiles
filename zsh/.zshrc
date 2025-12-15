@@ -103,6 +103,7 @@ function notify() {
   return $cmdstatus
 }
 
+# Yazi explorer
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -111,33 +112,18 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
-whoseport() { lsof -i :$1 -sTCP:LISTEN -t | xargs -r ps -o pid=,comm= -p; }
 
-# Docker
-docker() {
+# Find process listening on a port
+function whoseport() { lsof -i :$1 -sTCP:LISTEN -t | xargs -r ps -o pid=,comm= -p; }
+
+# Docker custom commands
+function docker() {
   if [[ "$1" == "stop" && "$2" == "all" ]]; then
     command docker stop $(command docker ps -a -q)
   elif [[ "$1" == "rm" && "$2" == "all" ]]; then
     command docker rm $(command docker ps -a -q)
   else
     command docker "$@"
-  fi
-}
-
-# Agent devcontainer
-function agent.dev() {
-  # Check if the first argument is "init"
-  if [[ "$1" == "init" ]]; then
-    cp -r $DOTFILES_DIRECTORY/.agent-devcontainer .
-
-  # Check if the first argument is "shell"
-  elif [[ "$1" == "shell" ]]; then
-    shift
-    agent.dev exec zsh "$@"
-
-  # Otherwise, run devcontainer with the provided arguments
-  else
-    devcontainer $1 --workspace-folder . --config .agent-devcontainer/devcontainer.json ${@: 2}
   fi
 }
 

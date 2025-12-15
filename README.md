@@ -2,7 +2,7 @@
 
 My dotfiles for macOS.
 
-Some files (claude and raycast configurations) are encrypted and can only be decrypted with my private key.
+Some files (for example raycast configuration) are encrypted and can only be decrypted with my private key.
 Do not use the dotfiles as-is but as a base for your configuration.
 
 ## Available Commands
@@ -15,8 +15,7 @@ Run `make help` to see all available commands:
 - `make init` - Install brew and stow
 - `make deps` - Install all dependencies (Homebrew, Go, Node, Python, Rust packages)
 - `make setup` - Configure apps & system settings (decrypt secrets, setup git, apply macOS settings)
-- `make dns` - Set up a blocklist of malicious DNS entries using /etc/hosts
-- `make extras` - Install extra applications and configurations
+- `make extra` - Install extra applications and configurations
 - `make update` - Update everything (Homebrew, Node, Python, Rust)
 - `make clean` - Clean up broken symlinks and Homebrew cache
 - `make backup` - Backup app configurations (AltTab, BetterTouchTool, Raycast)
@@ -39,7 +38,6 @@ Make sure the following apps run on startup:
 - Display Link Manager
 - Hammerspoon
 - Raycast
-- Shortcat
 - AltTab
 - Karabiner
 - BetterTouchTool

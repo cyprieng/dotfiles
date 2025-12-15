@@ -176,10 +176,6 @@ setup:
 	@defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Fix scroll direction
 	@defaults write com.apple.dock minimize-to-application -bool true # Minimize into app icon
 	
-	# Reduce animations
-	@defaults write com.apple.Accessibility reduceMotion -bool true
-	@defaults write com.apple.dock launchanim -bool false
-
 	# Reduce dock animation time
 	@defaults write com.apple.dock mineffect -string "scale"
 	@defaults write com.apple.dock mineffect-duration -float 0.1
@@ -191,28 +187,13 @@ setup:
 # ==============================================================================
 # Extra setup 
 # ==============================================================================
-extra: dns
+extra:
 	@echo "Installing extra brew dependencies..."
 	@brew bundle --file=Brewfile-extra
 
 	# Use TouchId for sudo
 	@echo "Setting up TouchID for sudo..."
 	@grep -q "pam_tid.so" /etc/pam.d/sudo 2>/dev/null || (sudo cp /etc/pam.d/sudo /etc/pam.d/sudo.bak && sudo sed -i '' '1s/^/auth optional \/opt\/homebrew\/lib\/pam\/pam_reattach.so\nauth sufficient pam_tid.so\n/' /etc/pam.d/sudo)
-
-
-# ==============================================================================
-# DNS Update
-# ==============================================================================
-
-dns:
-	@echo "Downloading hosts..."
-	@curl -o /tmp/hosts https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-	@sudo cp /etc/hosts /etc/hosts.bak
-	@sudo cp /tmp/hosts /etc/hosts
-
-	@echo "Flushing DNS cache..."
-	@sudo dscacheutil -flushcache
-	@sudo killall -HUP mDNSResponder
 
 
 # ==============================================================================

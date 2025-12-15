@@ -1,4 +1,4 @@
-# Layout
+# Keyboard layout
 cask "qwerty-fr"
 
 # Install ghostty 
@@ -6,9 +6,6 @@ cask "ghostty"
 
 # Install neovim
 brew "neovim", args: ["head"] 
-
-# Fonts
-cask "font-jetbrains-mono-nerd-font"
 
 # Cli tools
 brew "stow"
@@ -22,7 +19,6 @@ brew "git-delta"
 brew "fzf"
 brew "tmux"
 brew "bat"
-brew "fpp"
 brew "jq"
 brew "zoxide"
 brew "tlrc"
@@ -35,22 +31,14 @@ brew "watch"
 brew "watchexec"
 brew "lnav"
 brew "commitizen"
-brew "ripgrep-all"
 brew "httpie"
-brew "glow"
-brew "tokei"
-brew "bottom"
 brew "tmux-xpanes"
 brew "gh"
 brew "kubectx"
-brew "yt-dlp"
-brew "typst"
 brew "git-secret"
 tap "tw93/tap"
 brew "tw93/tap/mole"
 brew "git-lfs"
-brew "television"
-brew "trippy"
 
 # Apps
 cask "docker-desktop"
@@ -66,7 +54,6 @@ cask "bettertouchtool"
 cask "alt-tab"
 cask "hammerspoon"
 cask "displaylink"
-brew "gifski"
 cask "aldente"
 cask "cleanshot"
 cask "obsidian"
