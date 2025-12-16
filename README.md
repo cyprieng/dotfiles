@@ -41,7 +41,6 @@ Make sure the following apps run on startup:
 - AltTab
 - Karabiner
 - BetterTouchTool
-- Boring Notch
 
 ### Dock
 

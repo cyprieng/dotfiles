@@ -1,6 +1,5 @@
 brew "pam-reattach"
 cask "claude"
-cask "TheBoredTeam/boring-notch/boring-notch", args: { no_quarantine: true }
 cask "datagrip"
 cask "localsend"
 cask "spotify"
