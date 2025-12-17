@@ -2,8 +2,28 @@ local map = vim.keymap.set
 
 local Snacks = require("snacks")
 
--- Toggle UI windows
-map("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "ToggleTerm", remap = true })
+-- ToggleTerm
+map("n", "<leader>t", function()
+  local ft = vim.bo.filetype
+  if ft == "toggleterm" then
+    -- Toggle the current terminal by its ID
+    local term_id = vim.b.toggle_number
+    if term_id then
+      vim.cmd(term_id .. "ToggleTerm")
+    end
+  else
+    -- Check if any terminals exist
+    local terminals = require("toggleterm.terminal").get_all()
+    if #terminals == 0 then
+      vim.cmd("ToggleTerm")
+    else
+      vim.cmd("ToggleTermToggleAll")
+    end
+  end
+end, { desc = "ToggleTerm", remap = true })
+map("n", "<leader>T", function()
+  require("toggleterm.terminal").Terminal:new():toggle()
+end, { desc = "New Terminal", remap = true })
 
 -- Neotree mappings
 local function is_neotree_open()
