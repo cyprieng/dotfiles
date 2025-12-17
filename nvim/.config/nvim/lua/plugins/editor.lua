@@ -139,12 +139,6 @@ return {
         position = "bottom",
         size = 0.3,
       },
-      preview = {
-        type = "float",
-        relative = "editor",
-        position = { 1, 1 },
-        size = { width = 0.5, height = 0.3 },
-      },
     },
     cmd = "Trouble",
     keys = {
