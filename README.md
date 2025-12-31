@@ -46,7 +46,7 @@ Make sure the following apps run on startup:
 
 Rearrange Dock:
 
-- Zen browser
+- Safari
 - Chrome
 - Claude
 - Mail
@@ -66,15 +66,12 @@ Install the following chrome extensions:
 - [Vimium](https://chromewebstore.google.com/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb)
 - [Wayback Machine](https://chromewebstore.google.com/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak)
 
-The following Zen extensions:
+The following Safari extensions:
 
-- [2FAS](https://addons.mozilla.org/fr/firefox/addon/2fas-two-factor-authentication/)
-- [Web Archives](https://addons.mozilla.org/fr/firefox/addon/view-page-archive/)
-- [Obsidian Web Clipper](https://addons.mozilla.org/fr/firefox/addon/web-clipper-obsidian/)
-- [Old Reddit Redirect](https://addons.mozilla.org/fr/firefox/addon/old-reddit-redirect/)
-- [Proton Pass](https://addons.mozilla.org/fr/firefox/addon/proton-pass/)
-- [uBlock Origin](https://addons.mozilla.org/fr/firefox/addon/ublock-origin/)
-- [Vimium](https://addons.mozilla.org/fr/firefox/addon/vimium-ff/)
+- [2FAS](https://apps.apple.com/fr/app/2fas-auth-browser-extension/id6443941139)
+- [Obsidian Web Clipper](https://apps.apple.com/fr/app/obsidian-web-clipper/id6720708363)
+- [Proton Pass](https://apps.apple.com/fr/app/proton-pass-for-safari/id6502835663)
+- [uBlock Origin](https://apps.apple.com/fr/app/ublock-origin-lite/id6745342698)
 
 Add the following bookmarks to the bookmarks bar:
 
@@ -83,6 +80,7 @@ Add the following bookmarks to the bookmarks bar:
 - [GitHub](https://github.com/)
 - [Kite News](https://kite.kagi.com/)
 - [Via](https://usevia.app/)
+- [Archive.is](<javascript:location.href='https://archive.is/'+encodeURIComponent(document.location)>)
 
 ### Others
 
