@@ -94,6 +94,12 @@ setup:
 				gpg --full-generate-key; \
 				echo ""; \
 				echo "✓ GPG key generated successfully!"; \
+				echo ""; \
+				echo "⚠️  Don't forget to add your GPG key to GitHub:"; \
+				echo "   1. Export your public key: gpg --armor --export <KEY_ID>"; \
+				echo "   2. Go to: https://github.com/settings/keys"; \
+				echo "   3. Click 'New GPG key' and paste your public key"; \
+				echo ""; \
 			else \
 				echo ""; \
 				echo "Skipped. Import your existing key with:"; \
