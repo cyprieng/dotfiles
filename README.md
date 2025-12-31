@@ -5,6 +5,46 @@ My dotfiles for macOS.
 Some files (for example raycast configuration) are encrypted and can only be decrypted with my private password.
 Do not use the dotfiles as-is but as a base for your configuration.
 
+## Initial Setup
+
+If this is your first time setting up this dotfiles repository on a new machine:
+
+### 1. Generate SSH Key
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# Press Enter to accept default location (~/.ssh/id_ed25519)
+# Enter a passphrase (recommended)
+
+# Add SSH key to macOS Keychain (stores passphrase)
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+```
+
+### 2. Add SSH Key to GitHub
+
+```bash
+# Copy your public key to clipboard
+pbcopy < ~/.ssh/id_ed25519.pub
+```
+
+Then go to [GitHub SSH Settings](https://github.com/settings/keys) and add your ssh key.
+
+### 3. Clone the Repository
+
+```bash
+cd ~
+git clone git@github.com:cyprieng/dotfiles.git
+cd dotfiles
+```
+
+### 4. Install
+
+```bash
+make install
+```
+
+This will run the full installation process (brew, stow, dependencies, and setup).
+
 ## Available Commands
 
 Run `make help` to see all available commands:
