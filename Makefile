@@ -82,8 +82,31 @@ setup:
 
 	# GPG key
 	@if [ -z "$$(git config --global user.signingkey)" ]; then \
+		echo ""; \
+		echo "=== GPG Key Setup ==="; \
+		if ! gpg --list-secret-keys --keyid-format=long 2>/dev/null | grep -q "sec"; then \
+			echo "No GPG keys found."; \
+			echo ""; \
+			read -p "Do you want to generate a new GPG key? (Y/n): " generate; \
+			if [ "$$generate" != "n" ] && [ "$$generate" != "N" ]; then \
+				echo ""; \
+				echo "Generating new GPG key (interactive)..."; \
+				gpg --full-generate-key; \
+				echo ""; \
+				echo "✓ GPG key generated successfully!"; \
+			else \
+				echo ""; \
+				echo "Skipped. Import your existing key with:"; \
+				echo "  gpg --import /path/to/your/private-key.asc"; \
+				echo ""; \
+				echo "Then run 'make setup' again."; \
+				exit 0; \
+			fi; \
+		fi; \
+		echo ""; \
 		echo "=== Available GPG Secret Keys ==="; \
 		gpg --list-secret-keys --keyid-format=long; \
+		echo ""; \
 		read -p "Enter the key ID you want to use for Git signing: " key_id; \
 		if [ -z "$$key_id" ]; then \
 			echo "Error: No key ID provided."; \
