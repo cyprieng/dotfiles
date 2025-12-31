@@ -2,7 +2,7 @@
 
 My dotfiles for macOS.
 
-Some files (for example raycast configuration) are encrypted and can only be decrypted with my private key.
+Some files (for example raycast configuration) are encrypted and can only be decrypted with my private password.
 Do not use the dotfiles as-is but as a base for your configuration.
 
 ## Available Commands

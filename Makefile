@@ -58,27 +58,6 @@ deps:
 # ==============================================================================
 
 setup:
-	# Decrypt secrets
-	@echo "Decrypting secrets..."
-	@if ! git secret reveal -f; then \
-		echo ""; \
-		echo "❌ Error: Failed to reveal secrets"; \
-		echo ""; \
-		echo "This usually means your GPG key is not imported."; \
-		echo ""; \
-		echo "To fix this:"; \
-		echo "     gpg --import /path/to/your/private-key.asc"; \
-		read -p "Have you imported your GPG key? (y/N): " answer; \
-		if [ "$$answer" = "y" ] || [ "$$answer" = "Y" ]; then \
-			echo ""; \
-			echo "Retrying..."; \
-			git secret reveal -f; \
-		else \
-			echo "Aborted. Please import your key and run this command again."; \
-			exit 1; \
-		fi \
-	fi
-
 	# Better touch tool
 	# The plist cannot be a symlink, so we need to copy it
 	@echo "Setting up BetterTouchTool..."
@@ -182,6 +161,8 @@ setup:
 
 	# Raycast
 	@echo "Setting up Raycast..."
+	@echo "Decrypting Raycast configuration..."
+	@gpg --decrypt -o raycast/config.rayconfig raycast/config.rayconfig.gpg 2>/dev/null || echo "⚠️  Warning: Could not decrypt Raycast config (wrong password or file missing)"
 	@open raycast/config.rayconfig
 
 # ==============================================================================
@@ -243,5 +224,3 @@ backup:
 
 	@echo "Backing up Raycast configuration..."
 	@./raycast/backup_config.sh
-	
-	@git secret hide

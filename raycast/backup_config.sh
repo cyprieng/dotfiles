@@ -32,3 +32,8 @@ sleep 2
 # Rename file
 rm "$BASEDIR/"config.rayconfig || true
 mv "$(find "$BASEDIR" -name "*.rayconfig" -maxdepth 1)" "$BASEDIR/"config.rayconfig 2>/dev/null
+
+# Encrypt with GPG (password-based)
+echo "Encrypting Raycast configuration..."
+gpg --symmetric --cipher-algo AES256 -o "$BASEDIR/config.rayconfig.gpg" "$BASEDIR/config.rayconfig"
+echo "✓ Configuration encrypted to config.rayconfig.gpg"
