@@ -1,8 +1,8 @@
-local claude_pane_id = nil
+local agent_pane_id = nil
 
-local function focus_claude_pane()
-  if claude_pane_id then
-    vim.system({ "tmux", "select-pane", "-t", claude_pane_id })
+local function focus_agent_pane()
+  if agent_pane_id then
+    vim.system({ "tmux", "select-pane", "-t", agent_pane_id })
   end
 end
 
@@ -66,7 +66,7 @@ return {
         "<leader>at",
         function()
           require("sidekick.cli").send({ msg = "{this}" })
-          vim.defer_fn(focus_claude_pane, 50)
+          vim.defer_fn(focus_agent_pane, 50)
         end,
         mode = { "x", "n" },
         desc = "Send This",
@@ -75,7 +75,7 @@ return {
         "<leader>af",
         function()
           require("sidekick.cli").send({ msg = "{file}" })
-          vim.defer_fn(focus_claude_pane, 50)
+          vim.defer_fn(focus_agent_pane, 50)
         end,
         desc = "Send File",
       },
@@ -83,7 +83,7 @@ return {
         "<leader>av",
         function()
           require("sidekick.cli").send({ msg = "{selection}" })
-          vim.defer_fn(focus_claude_pane, 50)
+          vim.defer_fn(focus_agent_pane, 50)
         end,
         mode = { "x" },
         desc = "Send Visual Selection",
@@ -92,7 +92,7 @@ return {
         "<leader>ap",
         function()
           require("sidekick.cli").prompt()
-          vim.defer_fn(focus_claude_pane, 50)
+          vim.defer_fn(focus_agent_pane, 50)
         end,
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
@@ -107,7 +107,7 @@ return {
             panes_before[pane_id] = true
           end
 
-          require("sidekick.cli").toggle({ name = "claude", focus = true })
+          require("sidekick.cli").toggle({ name = vim.g.default_ai_agent or "claude", focus = true })
 
           -- Wait for new pane to appear
           local max_attempts = 50 -- 5 seconds max
@@ -123,7 +123,7 @@ return {
                   for pane_id in obj.stdout:gmatch("[^\r\n]+") do
                     if not panes_before[pane_id] then
                       -- Found the new pane, save and focus it
-                      claude_pane_id = pane_id
+                      agent_pane_id = pane_id
                       vim.system({ "tmux", "select-pane", "-t", pane_id })
                       timer:stop()
                       timer:close()
@@ -141,7 +141,7 @@ return {
             end)
           end)
         end,
-        desc = "Sidekick Toggle Claude",
+        desc = "Sidekick Toggle Agent",
       },
     },
   },

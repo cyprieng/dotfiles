@@ -109,6 +109,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- Load custom options if any
+pcall(require, "options")
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
