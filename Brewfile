@@ -7,6 +7,9 @@ cask "ghostty"
 # Install neovim
 brew "neovim", args: ["head"] 
 
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
+
 # Cli tools
 brew "stow"
 brew "wget"
