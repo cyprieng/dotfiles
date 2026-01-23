@@ -193,7 +193,9 @@ return {
             },
           },
         },
-        ruby_lsp = {},
+        ruby_lsp = {
+          cmd = { "mise", "x", "--", "ruby-lsp" },
+        },
         herb_ls = {},
         copilot = {
           cmd = {

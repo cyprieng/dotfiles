@@ -41,6 +41,7 @@ brew "kubectx"
 tap "tw93/tap"
 brew "tw93/tap/mole"
 brew "git-lfs"
+brew "direnv"
 
 # Apps
 cask "docker-desktop"

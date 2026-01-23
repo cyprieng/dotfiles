@@ -6,6 +6,12 @@ export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="$HOME/.local/share/mise/shims:/usr/local/bin/:$HOME/.local/bin:$PATH"
 
+# Direnv
+eval "$(direnv hook zsh)"
+
+# Load .zshrc_secrets.sh if it exists
+[ -f "$HOME/.zshrc_secrets.sh" ] && source "$HOME/.zshrc_secrets.sh"
+
 # Load brew
 if [ "$(uname)" = "Linux" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

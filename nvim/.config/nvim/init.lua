@@ -1,3 +1,11 @@
+-- Inject mise env
+for _, line in ipairs(vim.fn.systemlist("mise env --shell bash")) do
+  local key, value = line:match("export (%w+)=['\"]?([^'\";]*)['\"]?")
+  if key and value then
+    vim.env[key] = value
+  end
+end
+
 -- Global UI settings
 vim.opt.ruler = false
 vim.opt.laststatus = 3
