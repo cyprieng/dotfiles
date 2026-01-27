@@ -1,1 +1,2 @@
+vim.g.enable_github_copilot = true 
 vim.g.default_ai_agent = "claude"
