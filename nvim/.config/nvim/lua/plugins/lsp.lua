@@ -297,7 +297,7 @@ return {
       end
 
       -- Github copilot
-      if vim.g.default_ai_agent then
+      if vim.g.enable_github_copilot then
         vim.api.nvim_create_autocmd("LspAttach", {
           callback = function(args)
             local bufnr = args.buf

@@ -1,16 +1,11 @@
-local agent_pane_id = nil
-
-local function focus_agent_pane()
-  if agent_pane_id then
-    vim.system({ "tmux", "select-pane", "-t", agent_pane_id })
-  end
-end
-
 return {
   -- AI sidekick
   {
     "folke/sidekick.nvim",
     opts = {
+      nes = {
+        enabled = vim.g.enable_github_copilot,
+      },
       cli = {
         mux = {
           backend = "tmux",
@@ -51,8 +46,6 @@ return {
         function()
           require("sidekick.cli").select()
         end,
-        -- Or to select only installed tools:
-        -- require("sidekick.cli").select({ filter = { installed = true } })
         desc = "Select CLI",
       },
       {
@@ -66,7 +59,6 @@ return {
         "<leader>at",
         function()
           require("sidekick.cli").send({ msg = "{this}" })
-          vim.defer_fn(focus_agent_pane, 50)
         end,
         mode = { "x", "n" },
         desc = "Send This",
@@ -75,7 +67,6 @@ return {
         "<leader>af",
         function()
           require("sidekick.cli").send({ msg = "{file}" })
-          vim.defer_fn(focus_agent_pane, 50)
         end,
         desc = "Send File",
       },
@@ -83,7 +74,6 @@ return {
         "<leader>av",
         function()
           require("sidekick.cli").send({ msg = "{selection}" })
-          vim.defer_fn(focus_agent_pane, 50)
         end,
         mode = { "x" },
         desc = "Send Visual Selection",
@@ -92,7 +82,6 @@ return {
         "<leader>ap",
         function()
           require("sidekick.cli").prompt()
-          vim.defer_fn(focus_agent_pane, 50)
         end,
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
@@ -100,46 +89,7 @@ return {
       {
         "<leader>ac",
         function()
-          -- Get pane IDs before toggle
-          local panes_before_str = vim.fn.system("tmux list-panes -F '#{pane_id}'")
-          local panes_before = {}
-          for pane_id in panes_before_str:gmatch("[^\r\n]+") do
-            panes_before[pane_id] = true
-          end
-
-          require("sidekick.cli").toggle({ name = vim.g.default_ai_agent or "claude", focus = true })
-
-          -- Wait for new pane to appear
-          local max_attempts = 50 -- 5 seconds max
-          local attempt = 0
-          local timer = vim.uv.new_timer()
-          timer:start(100, 100, function()
-            attempt = attempt + 1
-
-            vim.system({ "tmux", "list-panes", "-F", "#{pane_id}" }, {}, function(obj)
-              vim.schedule(function()
-                if obj.code == 0 then
-                  -- Find new pane by comparing IDs
-                  for pane_id in obj.stdout:gmatch("[^\r\n]+") do
-                    if not panes_before[pane_id] then
-                      -- Found the new pane, save and focus it
-                      agent_pane_id = pane_id
-                      vim.system({ "tmux", "select-pane", "-t", pane_id })
-                      timer:stop()
-                      timer:close()
-                      return
-                    end
-                  end
-                end
-
-                -- Timeout
-                if attempt >= max_attempts then
-                  timer:stop()
-                  timer:close()
-                end
-              end)
-            end)
-          end)
+          require("sidekick.cli").toggle({ name = vim.g.default_ai_agent or "claude" })
         end,
         desc = "Sidekick Toggle Agent",
       },
