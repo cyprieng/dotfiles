@@ -23,3 +23,4 @@ yarn-error.log
 .data
 .env.test.local
 .npmrc
+.claude
