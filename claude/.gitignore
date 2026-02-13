@@ -2,3 +2,6 @@
 !.gitignore
 !claude_desktop_config.json
 !CLAUDE.md
+!dot-claude/
+dot-claude/*
+!dot-claude/settings.json
