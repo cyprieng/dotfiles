@@ -75,7 +75,6 @@ Make sure the following apps run on startup:
 - Aerospace
 - AlDente
 - CleanShotX
-- Display Link Manager
 - Hammerspoon
 - Raycast
 - AltTab

@@ -55,7 +55,6 @@ cask "raycast"
 cask "bettertouchtool"
 cask "alt-tab"
 cask "hammerspoon"
-cask "displaylink"
 cask "cleanshot"
 cask "obsidian"
 
