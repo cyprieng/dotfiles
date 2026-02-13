@@ -51,9 +51,9 @@ fi
 # shellcheck disable=SC2128
 if [ -z "$TMUX_POWERLINE_WINDOW_STATUS_FORMAT" ]; then
   TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-    "#[fg=#222436,bg=#3B4261]$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
-    "#[fg=#babbf1,bg=#3B4261] #{?#{==:#F,-},#[nodim],#[dim]} #I #W #[nodim]"
-    "#[fg=#3B4261,bg=#222436]$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
+    "#{?window_bell_flag,#[fg=#222436#,bg=#ef9f76],#[fg=#222436#,bg=#3B4261]}$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
+    "#{?window_bell_flag,#[fg=#222436#,bg=#ef9f76],#[fg=#babbf1#,bg=#3B4261]} #{?#{==:#F,-},#[nodim],#[dim]} #I #W #[nodim]"
+    "#{?window_bell_flag,#[fg=#ef9f76#,bg=#222436],#[fg=#3B4261#,bg=#222436]}$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
   )
 #(
 #    "#[$(format regular)]"
