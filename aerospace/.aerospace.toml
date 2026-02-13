@@ -169,7 +169,11 @@ automatically-unhide-macos-hidden-apps = false
     2 = 'main'
     3 = ['secondary', 'main']
     4 = ['secondary', 'main']
+    5 = ['secondary', 'main']
     6 = ['secondary', 'main']
+    7 = ['secondary', 'main']
+    8 = ['secondary', 'main']
+    9 = ['secondary', 'main']
 
 # Browser 
 [[on-window-detected]]
