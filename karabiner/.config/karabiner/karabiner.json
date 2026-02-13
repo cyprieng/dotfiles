@@ -4,6 +4,24 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Fn/Globe → tmux prefix (Ctrl-b)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "fn",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "b",
+                                        "modifiers": ["left_control"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Hyper Key: Caps Lock → left control + left option + left shift + right command (⌃⇧⌥⌘)",
                         "manipulators": [
                             {
