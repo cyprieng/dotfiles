@@ -57,6 +57,7 @@ cask "alt-tab"
 cask "hammerspoon"
 cask "cleanshot"
 cask "obsidian"
+cask "meetingbar"
 
 # Languages
 brew "mise"
