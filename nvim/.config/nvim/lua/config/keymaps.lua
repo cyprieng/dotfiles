@@ -51,6 +51,12 @@ map("n", "<leader>bb", function()
   end
 end, { desc = "Neotree buffers" })
 
+map("n", "<leader>cp", function()
+  local path = vim.fn.expand("%:.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path)
+end, { desc = "Copy relative file path" })
+
 -- Git
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
 
