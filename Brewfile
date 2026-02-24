@@ -57,6 +57,7 @@ cask "hammerspoon"
 cask "cleanshot"
 cask "obsidian"
 cask "meetingbar"
+cask "monitorcontrol"
 
 # Languages
 brew "mise"
