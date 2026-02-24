@@ -210,14 +210,17 @@ end, { desc = "Select Scratch Buffer" })
 -- lazygit
 if vim.fn.executable("lazygit") == 1 then
   if vim.env.TMUX then
-    local function tmux_lazygit(args)
-      args = args or ""
-      vim.fn.system(string.format("tmux display-popup -E -w 90%% -h 90%% -d %s lazygit %s",
-        vim.fn.shellescape(vim.fn.getcwd()), args))
+    local function tmux_lazygit(extra_args)
+      local cmd = { "tmux", "display-popup", "-E", "-e", "NVIM=" .. vim.v.servername,
+        "-w", "90%", "-h", "90%", "-d", vim.fn.getcwd(), "--", "lazygit" }
+      for _, arg in ipairs(extra_args or {}) do
+        table.insert(cmd, arg)
+      end
+      vim.system(cmd)
     end
     map("n", "<leader>gg", function() tmux_lazygit() end, { desc = "Lazygit (cwd)" })
     map("n", "<leader>gf", function()
-      tmux_lazygit("-f " .. vim.fn.shellescape(vim.fn.expand("%")))
+      tmux_lazygit({ "-f", vim.fn.expand("%") })
     end, { desc = "Lazygit Current File History" })
     map("n", "<leader>gL", function() tmux_lazygit() end, { desc = "Lazygit Log (cwd)" })
   else
