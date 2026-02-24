@@ -142,10 +142,6 @@ setup:
 		echo "✓ Git name configured: $$user_name"; \
 	fi
 	
-	# Alt tab
-	@echo "Setting up AltTab..."
-	@defaults import com.lwouis.alt-tab-macos alttab/com.lwouis.alt-tab-macos.plist
-
 	# Macos settings
 	@echo "Applying macOS settings..."
 	@defaults write NSGlobalDomain AppleShowAllExtensions -bool true                      # Always show extensions
@@ -245,9 +241,6 @@ clean:
 # ==============================================================================
 
 backup:
-	@echo "Backing up AltTab configuration..."
-	@./alttab/backup_config.sh
-
 	@echo "Backing up BetterTouchTool configuration..."
 	@./bettertouchtool/backup_config.sh
 

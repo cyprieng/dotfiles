@@ -58,7 +58,7 @@ Run `make help` to see all available commands:
 - `make extra` - Install extra applications and configurations
 - `make update` - Update everything (Homebrew, Node, Python, Rust)
 - `make clean` - Clean up broken symlinks and Homebrew cache
-- `make backup` - Backup app configurations (AltTab, BetterTouchTool, Raycast)
+- `make backup` - Backup app configurations (BetterTouchTool, Raycast)
 
 ## Manual process
 
@@ -77,7 +77,6 @@ Make sure the following apps run on startup:
 - CleanShotX
 - Hammerspoon
 - Raycast
-- AltTab
 - Karabiner
 - BetterTouchTool
 
