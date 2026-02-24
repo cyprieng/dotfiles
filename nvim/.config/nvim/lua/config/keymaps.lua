@@ -209,9 +209,22 @@ end, { desc = "Select Scratch Buffer" })
 
 -- lazygit
 if vim.fn.executable("lazygit") == 1 then
-    map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd" })
+  if vim.env.TMUX then
+    local function tmux_lazygit(args)
+      args = args or ""
+      vim.fn.system(string.format("tmux display-popup -E -w 90%% -h 90%% -d %s lazygit %s",
+        vim.fn.shellescape(vim.fn.getcwd()), args))
+    end
+    map("n", "<leader>gg", function() tmux_lazygit() end, { desc = "Lazygit (cwd)" })
+    map("n", "<leader>gf", function()
+      tmux_lazygit("-f " .. vim.fn.shellescape(vim.fn.expand("%")))
+    end, { desc = "Lazygit Current File History" })
+    map("n", "<leader>gL", function() tmux_lazygit() end, { desc = "Lazygit Log (cwd)" })
+  else
+    map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
     map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
     map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
+  end
 end
 
 map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
