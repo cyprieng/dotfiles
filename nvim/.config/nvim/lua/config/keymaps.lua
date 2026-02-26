@@ -199,6 +199,14 @@ if vim.lsp.inlay_hint then
     Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
+map("n", "<leader>fF", function()
+  vim.ui.input({ prompt = "Set filetype: ", default = vim.bo.filetype }, function(ft)
+    if ft then
+      vim.bo.filetype = ft
+    end
+  end)
+end, { desc = "Set Filetype" })
+
 map("n", "<leader>.", function()
   require("snacks").scratch()
 end, { desc = "Toggle Scratch Buffer" })
