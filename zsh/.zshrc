@@ -86,6 +86,10 @@ alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
 
+# Disable rm security
+setopt rm_star_silent
+unalias rm 2>/dev/null
+
 # Notification function
 function dialog() {
   local title="${1:-Notification}"
