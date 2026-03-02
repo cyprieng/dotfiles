@@ -601,36 +601,54 @@ return {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    opts = {
-      ensure_installed = {
+    config = function()
+      local TS = require("nvim-treesitter")
+
+      local ensure_installed = {
         "bash",
         "c",
         "diff",
         "html",
+        "javascript",
         "lua",
         "luadoc",
         "markdown",
         "markdown_inline",
         "query",
+        "typescript",
         "vim",
         "vimdoc",
         "astro",
         "css",
-      },
-      auto_install = true,
-      highlight = {
-        enable = true,
-        disable = function(lang, buf)
+        "pug",
+        "vue",
+      }
+
+      -- Install missing parsers
+      local installed = TS.get_installed()
+      local to_install = vim.tbl_filter(function(lang)
+        return not vim.tbl_contains(installed, lang)
+      end, ensure_installed)
+      if #to_install > 0 then
+        TS.install(to_install)
+      end
+
+      -- Enable highlight on FileType, skip large files
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(ev)
           local max_filesize = 500 * 1024 -- 500 KB
-          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
           if ok and stats and stats.size > max_filesize then
-            return true
+            return
           end
+          pcall(vim.treesitter.start, ev.buf)
+          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
-      },
-      indent = { enable = true },
-    },
+      })
+    end,
   },
 
   -- Diagnostics
