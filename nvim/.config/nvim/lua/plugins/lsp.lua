@@ -332,9 +332,9 @@ return {
     cmd = { "ConformInfo" },
     keys = {
       {
-        "<leader>f",
+        "<leader>ff",
         function()
-          require("conform").format({ async = true, lsp_format = "fallback" })
+          require("conform").format({ timeout_ms = 5000, lsp_format = "fallback" })
         end,
         mode = "",
         desc = "[F]ormat buffer",
