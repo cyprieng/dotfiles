@@ -405,6 +405,12 @@ return {
     config = function(_, opts)
       require("bufferline").setup(opts)
 
+      -- Make Normal bg transparent so tmux window-style can dim inactive panes
+      local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
+      normal_hl.bg = nil
+      vim.api.nvim_set_hl(0, "Normal", normal_hl)
+      vim.api.nvim_set_hl(0, "NormalNC", normal_hl)
+
       -- Fix bufferline when restoring a session (only during session load)
       vim.api.nvim_create_autocmd("SessionLoadPost", {
         callback = function()
