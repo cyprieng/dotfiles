@@ -139,7 +139,7 @@ function docker() {
 
 # I want clear to also clear the scrollback in tmux or nvim
 if [[ -n "$NVIM" ]]; then
-  alias clear="nvim --server \"\$NVIM\" --remote-send '<Cmd>lua require(\"toggleterm\").exec(\"exit\", 1)<CR><Cmd>lua vim.defer_fn(function() require(\"toggleterm\").toggle() end, 200)<CR>'"
+  alias clear='command clear && nvim --server "$NVIM" --remote-send "<Cmd>set scrollback=1 | sleep 100m | set scrollback=-1<CR>"'
 elif [ -n "$TMUX" ]; then
   alias clear='clear && tmux clear-history'
 fi
