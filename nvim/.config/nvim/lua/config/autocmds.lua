@@ -18,13 +18,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Ensure cmdheight is not getting resized when resizing the window
-vim.api.nvim_create_autocmd({ "VimResized", "BufEnter", "BufWinEnter", "BufLeave", "FocusLost" }, {
-  pattern = "*",
+-- Ensure cmdheight stays at 0 after window resize (e.g. switching monitors)
+vim.api.nvim_create_autocmd("VimResized", {
   callback = function()
-    vim.defer_fn(function()
-      vim.opt.cmdheight = 0
-    end, 50)
+    for _, delay in ipairs({ 0, 50, 100, 200, 500 }) do
+      vim.defer_fn(function()
+        vim.o.cmdheight = 0
+      end, delay)
+    end
   end,
 })
 
