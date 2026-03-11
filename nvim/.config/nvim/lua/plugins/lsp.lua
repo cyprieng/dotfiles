@@ -334,7 +334,13 @@ return {
       {
         "<leader>ff",
         function()
-          require("conform").format({ timeout_ms = 5000, lsp_format = "fallback" })
+          require("conform").format({ timeout_ms = 5000 }, function(err, did_edit)
+            if err or not did_edit then
+              vim.schedule(function()
+                vim.lsp.buf.format({ timeout_ms = 5000 })
+              end)
+            end
+          end)
         end,
         mode = "",
         desc = "[F]ormat buffer",
