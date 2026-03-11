@@ -1,4 +1,21 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(command:rg *)",
+      "Bash(command:fd *)",
+      "Bash(command:find *)",
+      "Bash(command:ls *)",
+      "Bash(command:cat *)",
+      "Bash(command:head *)",
+      "Bash(command:tail *)",
+      "Bash(command:wc *)",
+      "Bash(command:jq *)",
+      "Bash(command:git status*)",
+      "Bash(command:git log*)",
+      "Bash(command:git diff*)",
+      "Bash(command:diff *)"
+    ]
+  },
   "hooks": {
     "Notification": [
       {
