@@ -3,7 +3,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     opts = {
-      bigfile = { enabled = true },
+      bigfile = { enabled = true, line_length = 10000 },
       indent = {
         enabled = true,
         scope = {
