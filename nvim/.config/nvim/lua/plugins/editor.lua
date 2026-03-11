@@ -45,6 +45,59 @@ return {
   -- Diff view
   {
     "sindrets/diffview.nvim",
+    config = function()
+      -- Monkey-patch FilePanel:update_components() to persist collapsed directory state across refreshes.
+      -- The collapsed state lives on component contexts (DirData), not on tree nodes,
+      -- because flatten_dirs creates new DirData copies in create_comp_schema().
+      local FilePanel = require("diffview.scene.views.diff.file_panel").FilePanel
+
+      local function collect_collapsed_from_comp(comp_struct)
+        local state = {}
+        if not comp_struct or not comp_struct.comp then return state end
+        comp_struct.comp:deep_some(function(comp)
+          if comp.name == "directory" and comp.context and comp.context.collapsed then
+            state[comp.context.path] = true
+          end
+          return false
+        end)
+        return state
+      end
+
+      local function restore_collapsed_on_comp(comp_struct, state)
+        if not comp_struct or not comp_struct.comp or not next(state) then return end
+        comp_struct.comp:deep_some(function(comp)
+          if comp.name == "directory" and comp.context and state[comp.context.path] then
+            comp.context.collapsed = true
+          end
+          return false
+        end)
+      end
+
+      -- Save collapsed state on every toggle so it survives tree rebuilds
+      local orig_set_item_fold = FilePanel.set_item_fold
+      function FilePanel:set_item_fold(item, open)
+        orig_set_item_fold(self, item, open)
+        -- Persist current state after fold change
+        if self.components then
+          self._collapsed_state = {
+            conflicting = collect_collapsed_from_comp(self.components.conflicting and self.components.conflicting.files),
+            working = collect_collapsed_from_comp(self.components.working and self.components.working.files),
+            staged = collect_collapsed_from_comp(self.components.staged and self.components.staged.files),
+          }
+        end
+      end
+
+      -- After update_components rebuilds everything, restore saved state
+      local orig_update_components = FilePanel.update_components
+      function FilePanel:update_components()
+        orig_update_components(self)
+        if self._collapsed_state and self.components then
+          restore_collapsed_on_comp(self.components.conflicting and self.components.conflicting.files, self._collapsed_state.conflicting or {})
+          restore_collapsed_on_comp(self.components.working and self.components.working.files, self._collapsed_state.working or {})
+          restore_collapsed_on_comp(self.components.staged and self.components.staged.files, self._collapsed_state.staged or {})
+        end
+      end
+    end,
   },
 
   -- Toggle terminal
