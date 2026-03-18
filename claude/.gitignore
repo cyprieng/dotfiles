@@ -5,3 +5,5 @@
 !dot-claude/
 dot-claude/*
 !dot-claude/settings.json
+!dot-claude/skills/
+!dot-claude/skills/**

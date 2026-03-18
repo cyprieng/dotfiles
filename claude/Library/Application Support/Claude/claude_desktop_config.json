@@ -3,10 +3,10 @@
   "mcpServers": {},
   "preferences": {
     "menuBarEnabled": false,
-    "coworkWebSearchEnabled": true,
-    "coworkScheduledTasksEnabled": false,
-    "ccdScheduledTasksEnabled": true,
     "quickEntryShortcut": "off",
-    "sidebarMode": "code"
+    "coworkScheduledTasksEnabled": true,
+    "ccdScheduledTasksEnabled": true,
+    "sidebarMode": "chat",
+    "coworkWebSearchEnabled": true
   }
 }
