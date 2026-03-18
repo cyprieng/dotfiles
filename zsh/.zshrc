@@ -86,6 +86,14 @@ alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
 
+# Markdown to rich text
+function mdcopy() {
+  local tmpfile=$(mktemp /tmp/mdcopy.XXXXXX.rtf)
+  pandoc -f markdown -t html --wrap=none "${1:--}" | textutil -stdin -format html -convert rtf -stdout -inputencoding UTF-8 -encoding UTF-8 > "$tmpfile"
+  osascript -e "set the clipboard to (read POSIX file \"$tmpfile\" as «class RTF »)"
+  rm -f "$tmpfile"
+}
+
 # Disable rm security
 setopt rm_star_silent
 unalias rm 2>/dev/null
