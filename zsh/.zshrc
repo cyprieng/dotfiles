@@ -60,6 +60,8 @@ zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
+# remove default prefix (·) before completion items
+zstyle ':fzf-tab:*' prefix ''
 # use tmux popup for fzf
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # Min size apply to all command
