@@ -39,5 +39,11 @@ keybind = ctrl+shift+up=csi:5~
 # Control + Shift + Down -> Page Down
 keybind = ctrl+shift+down=csi:6~
 
-# Claude new line 
+# Claude new line
 keybind = shift+enter=text:\x1b\r
+
+# Clear scrollback (Cmd+K sends Esc-K for tmux)
+keybind = super+k=text:\x1bK
+
+# Search scrollback (Cmd+F sends Esc-F for tmux)
+keybind = super+f=text:\x1bF
