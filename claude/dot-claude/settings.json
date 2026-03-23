@@ -13,8 +13,14 @@
       "Bash(command:git status*)",
       "Bash(command:git log*)",
       "Bash(command:git diff*)",
-      "Bash(command:diff *)"
-    ]
+      "Bash(command:diff *)",
+      "Bash(gh pr view:*)",
+      "Bash(git show:*)",
+      "Bash(git log:*)",
+      "Bash(grep:*)",
+      "Bash(tee:*)"
+    ],
+    "defaultMode": "default"
   },
   "hooks": {
     "Notification": [
