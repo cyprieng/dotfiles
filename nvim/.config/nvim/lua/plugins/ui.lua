@@ -272,7 +272,11 @@ return {
         {
           title = "Neo-Tree",
           ft = "neo-tree",
-          size = { width = 0.15, height = 0.7 },
+          size = {
+            width = function()
+              return math.floor(vim.o.columns * 0.15)
+            end,
+          },
         },
       },
 
@@ -281,7 +285,11 @@ return {
         {
           title = "Terminal",
           ft = "toggleterm",
-          size = { width = 0.25 },
+          size = {
+            width = function()
+              return math.floor(vim.o.columns * 0.25)
+            end,
+          },
           filter = function()
             return vim.o.columns > 250
           end,
