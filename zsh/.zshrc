@@ -6,8 +6,15 @@ export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="$HOME/.local/share/mise/shims:/usr/local/bin/:$HOME/.local/bin:$PATH"
 
-# Direnv
+# Direnv (auto-allow in ~/projects)
 eval "$(direnv hook zsh)"
+functions[_direnv_hook_orig]=$functions[_direnv_hook]
+_direnv_hook() {
+  if [[ "$PWD" == "$HOME/projects"* ]] && direnv status 2>/dev/null | grep -q "Found RC allowed [^0]"; then
+    direnv allow 2>/dev/null
+  fi
+  _direnv_hook_orig
+}
 
 # Load .zshrc_secrets.sh if it exists
 [ -f "$HOME/.zshrc_secrets.sh" ] && source "$HOME/.zshrc_secrets.sh"
