@@ -44,6 +44,13 @@ map("n", "<leader>e", function()
   end
 end, { desc = "Neotree", remap = true })
 
+map("n", "<leader>ge", function()
+  vim.cmd("Neotree source=git_status toggle")
+  if is_neotree_open() then
+    vim.cmd("Neotree focus source=git_status")
+  end
+end, { desc = "Neotree git status" })
+
 map("n", "<leader>bb", function()
   vim.cmd("Neotree source=buffers toggle")
   if is_neotree_open() then
