@@ -240,3 +240,9 @@ if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
 else
   compinit -C
 fi
+
+# Completions
+source <(kubectl completion zsh)
+source <(gh completion -s zsh)
+source <(mise completion zsh)
+source <(k9s completion zsh)
