@@ -29,10 +29,13 @@ vim.api.nvim_create_autocmd({ "VimResized", "WinResized", "WinEnter" }, {
   end,
 })
 
--- Trigger git status update when leaving a buffer
--- Used by neo-tree
-vim.api.nvim_create_autocmd({ "BufLeave" }, {
+-- Refresh git state for gitsigns and neo-tree
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "BufLeave" }, {
   callback = function()
+    local gs = package.loaded["gitsigns"]
+    if gs then
+      gs.refresh()
+    end
     local events = require("neo-tree.events")
     events.fire_event(events.GIT_EVENT)
   end,
