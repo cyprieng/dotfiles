@@ -6,6 +6,12 @@ for _, line in ipairs(vim.fn.systemlist("mise env --shell bash")) do
   end
 end
 
+-- Listen on a tmux window-scoped socket for remote control
+if vim.env.TMUX then
+  local window_id = vim.fn.system("tmux display-message -p '#{window_id}'"):gsub("%s+", "")
+  vim.fn.serverstart("/tmp/nvim-tmux-" .. window_id .. ".sock")
+end
+
 -- Global UI settings
 vim.opt.ruler = false
 vim.opt.laststatus = 3

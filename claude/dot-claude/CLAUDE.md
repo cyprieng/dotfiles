@@ -21,6 +21,16 @@
 - Write all PR descriptions and text output in English unless explicitly told otherwise.
 - Keep formatting minimal — bullet points only, no extra headers or flourishes.
 
+## Neovim Remote Control
+
+`nvr` is always available to control the user's Neovim instance:
+
+- `nvr --remote <file>` — open a file
+- `nvr --remote-tab <file>` — open a file in a new tab
+- `nvr --remote-send '<cmd>'` — send a Vim command (e.g. `nvr --remote-send ':e file.lua<CR>'`)
+- `nvr --remote-send ':lua <code><CR>'` — execute Lua code
+- `nvr --remote-expr '<expr>'` — evaluate a Vim expression and return the result
+
 ## Code Review
 
 - When reviewing PRs or investigating code, verify claims by reading the actual code before asserting behavior. Do not fabricate file existence or code paths.

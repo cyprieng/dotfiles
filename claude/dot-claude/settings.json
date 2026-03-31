@@ -19,6 +19,7 @@
       "Bash(git log:*)",
       "Bash(grep:*)",
       "Bash(tee:*)",
+      "Bash(nvr *)",
       "mcp__plugin_claude-mem_mcp-search__*"
     ],
     "defaultMode": "default"

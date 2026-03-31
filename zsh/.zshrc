@@ -86,7 +86,18 @@ DISABLE_AUTO_TITLE="true"
 export DOTFILES_DIRECTORY="$HOME/dotfiles"
 alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias tt="tmux new-session -A -D"
-alias v="nvim" 
+alias v="nvim"
+
+# Send commands to the Neovim instance in the same tmux window
+nvr() {
+  local sock="/tmp/nvim-tmux-$(tmux display-message -p '#{window_id}').sock"
+  if [[ ! -S "$sock" ]]; then
+    echo "No Neovim instance found in this tmux window"
+    return 1
+  fi
+  nvim --server "$sock" "$@"
+}
+
 alias g="git" 
 alias ls="eza --icons=always --group-directories-first --git"
 alias lla="ls -la"
