@@ -9,6 +9,38 @@ return {
     "folke/persistence.nvim",
     event = "BufReadPre",
     opts = {},
+    init = function()
+      -- Track neo-tree open state continuously
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufDelete", "WinClosed" }, {
+        callback = function()
+          vim.schedule(function()
+            vim.g.SessionNeotree = 0
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+              if vim.api.nvim_win_is_valid(win) and vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "neo-tree" then
+                vim.g.SessionNeotree = 1
+                break
+              end
+            end
+          end)
+        end,
+      })
+
+      -- Restore neo-tree after session load
+      vim.api.nvim_create_autocmd("SessionLoadPost", {
+        callback = function()
+          if vim.g.SessionNeotree == 1 then
+            vim.schedule(function()
+              vim.cmd("Neotree show")
+            end)
+          end
+
+          -- Force normal mode after restore (terminal buffer triggers startinsert)
+          vim.defer_fn(function()
+            vim.cmd("stopinsert")
+          end, 100)
+        end,
+      })
+    end,
     keys = {
       {
         "<leader>qs",
