@@ -193,9 +193,6 @@ return {
             },
           },
         },
-        ruby_lsp = {
-          cmd = { "mise", "x", "--", "ruby-lsp" },
-        },
         herb_ls = {},
         copilot = {
           cmd = {
@@ -295,6 +292,13 @@ return {
         server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
         vim.lsp.config(server_name, server)
       end
+
+      -- ruby_lsp: managed by mise, not Mason
+      vim.lsp.config("ruby_lsp", {
+        cmd = { "mise", "x", "--", "ruby-lsp" },
+        capabilities = capabilities,
+      })
+      vim.lsp.enable("ruby_lsp")
 
       -- Github copilot
       if vim.g.enable_github_copilot then
