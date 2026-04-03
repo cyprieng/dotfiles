@@ -241,8 +241,6 @@ return {
       },
     },
     config = function()
-      local actions = require("telescope.actions")
-
       local open_with_trouble = function(...)
         return require("trouble.sources.telescope").open(...)
       end

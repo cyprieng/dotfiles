@@ -109,7 +109,6 @@ return {
         update_in_insert = false, -- Don't update diagnostics in insert mode
         severity_sort = true, -- Sort diagnostics by severity
         float = {
-          show_header = true,
           border = "rounded",
         },
       })
@@ -127,8 +126,6 @@ return {
       local servers = {
         astro = {},
         bashls = {},
-        shfmt = {},
-        shellcheck = {},
         css_variables = {},
         cssls = {},
         docker_compose_language_service = {},
@@ -161,7 +158,6 @@ return {
             },
           },
         },
-        rust_analyzer = {},
         somesass_ls = {},
         sqlls = {},
         tailwindcss = {},
@@ -263,6 +259,8 @@ return {
       require("mason").setup()
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
+        "shfmt",
+        "shellcheck",
         "stylua",
         "prettier",
         "eslint",
@@ -309,7 +307,7 @@ return {
         vim.api.nvim_create_autocmd("LspAttach", {
           callback = function(args)
             local bufnr = args.buf
-            local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+            local client = assert(vim.lsp.get_client(args.data.client_id))
 
             if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
               vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
@@ -382,7 +380,6 @@ return {
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
         php = { "php_cs_fixer" },
         python = { "ruff_format" },
-        rust = { "rustfmt", lsp_format = "fallback" },
         terraform = { "terraform_fmt" },
         tf = { "terraform_fmt" },
         ["terraform-vars"] = { "terraform_fmt" },
@@ -654,7 +651,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         callback = function(ev)
           local max_filesize = 500 * 1024 -- 500 KB
-          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
+          local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
           if ok and stats and stats.size > max_filesize then
             return
           end
@@ -676,74 +673,4 @@ return {
     end,
   },
 
-  -- Rust
-  {
-    "mrcjkb/rustaceanvim",
-    version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
-    ft = { "rust" },
-    opts = {
-      server = {
-        on_attach = function(_, bufnr)
-          vim.keymap.set("n", "<leader>cR", function()
-            vim.cmd.RustLsp("codeAction")
-          end, { desc = "Code Action", buffer = bufnr })
-          vim.keymap.set("n", "<leader>dr", function()
-            vim.cmd.RustLsp("debuggables")
-          end, { desc = "Rust Debuggables", buffer = bufnr })
-        end,
-        default_settings = {
-          -- rust-analyzer language server configuration
-          ["rust-analyzer"] = {
-            cargo = {
-              allFeatures = true,
-              loadOutDirsFromCheck = true,
-              buildScripts = {
-                enable = true,
-              },
-            },
-            -- Add clippy lints for Rust if using rust-analyzer
-            checkOnSave = diagnostics == "rust-analyzer",
-            -- Enable diagnostics if using rust-analyzer
-            diagnostics = {
-              enable = diagnostics == "rust-analyzer",
-            },
-            procMacro = {
-              enable = true,
-              ignored = {
-                ["async-trait"] = { "async_trait" },
-                ["napi-derive"] = { "napi" },
-                ["async-recursion"] = { "async_recursion" },
-              },
-            },
-            files = {
-              excludeDirs = {
-                ".direnv",
-                ".git",
-                ".github",
-                ".gitlab",
-                "bin",
-                "node_modules",
-                "target",
-                "venv",
-                ".venv",
-              },
-            },
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      local package_path = require("mason-registry").get_package("codelldb"):get_install_path()
-      local codelldb = package_path .. "/extension/adapter/codelldb"
-      local library_path = package_path .. "/extension/lldb/lib/liblldb.dylib"
-      local uname = io.popen("uname"):read("*l")
-      if uname == "Linux" then
-        library_path = package_path .. "/extension/lldb/lib/liblldb.so"
-      end
-      opts.dap = {
-        adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
-      }
-      vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-    end,
-  },
 }

@@ -20,6 +20,7 @@ return {
       -- Monkey-patch select format to show tmux window name
       local select = require("sidekick.cli.ui.select")
       local orig_format = select.format
+      ---@diagnostic disable-next-line: duplicate-set-field
       select.format = function(state, picker)
         local ret = orig_format(state, picker)
         if state.session and state.session.mux_session then

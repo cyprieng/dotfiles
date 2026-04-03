@@ -13,8 +13,7 @@ python = "latest"
 uv = "latest"
 ruby = "latest"
 go = "latest"
-rust = "latest"
 terraform = "latest"
 
 [settings]
-idiomatic_version_file_enable_tools = ["node", "python", "ruby", "go", "rust", "terraform"]
+idiomatic_version_file_enable_tools = ["node", "python", "ruby", "go", "terraform"]

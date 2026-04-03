@@ -131,9 +131,11 @@ return {
           Snacks.profiler.status(),
           {
             function()
+              ---@diagnostic disable-next-line: undefined-field
               return require("noice").api.status.command.get()
             end,
             cond = function()
+              ---@diagnostic disable-next-line: undefined-field
               return package.loaded["noice"] and require("noice").api.status.command.has()
             end,
             color = function()
@@ -142,9 +144,11 @@ return {
           },
           {
             function()
+              ---@diagnostic disable-next-line: undefined-field
               return require("noice").api.status.mode.get()
             end,
             cond = function()
+              ---@diagnostic disable-next-line: undefined-field
               return package.loaded["noice"] and require("noice").api.status.mode.has()
             end,
             color = function()
@@ -416,7 +420,9 @@ return {
       -- Make Normal bg transparent so tmux window-style can dim inactive panes
       local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
       normal_hl.bg = nil
+      ---@diagnostic disable-next-line: param-type-mismatch
       vim.api.nvim_set_hl(0, "Normal", normal_hl)
+      ---@diagnostic disable-next-line: param-type-mismatch
       vim.api.nvim_set_hl(0, "NormalNC", normal_hl)
 
       -- Fix bufferline when restoring a session (only during session load)
