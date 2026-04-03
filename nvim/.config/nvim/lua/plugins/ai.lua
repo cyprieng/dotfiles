@@ -14,6 +14,34 @@ return {
         },
       },
     },
+    config = function(_, opts)
+      require("sidekick").setup(opts)
+
+      -- Monkey-patch select format to show tmux window name
+      local select = require("sidekick.cli.ui.select")
+      local orig_format = select.format
+      select.format = function(state, picker)
+        local ret = orig_format(state, picker)
+        if state.session and state.session.mux_session then
+          -- Query tmux for the window name of this pane
+          local pane_id = state.session.tmux_pane_id
+          if pane_id then
+            local result = vim.fn.system({ "tmux", "display-message", "-t", pane_id, "-p", "#{window_name}" })
+            local window_name = vim.trim(result or "")
+            if window_name ~= "" then
+              -- Find the backend bracket and append window name
+              for i, part in ipairs(ret) do
+                if type(part) == "table" and part[2] == "Special" and part[1]:match("^%[") then
+                  ret[i][1] = part[1]:gsub("%]$", ":" .. window_name .. "]")
+                  break
+                end
+              end
+            end
+          end
+        end
+        return ret
+      end
+    end,
     keys = {
       {
         "<tab>",
