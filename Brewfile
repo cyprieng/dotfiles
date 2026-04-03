@@ -65,6 +65,8 @@ tap "shivammathur/php"
 brew "shivammathur/php/php"
 
 # Other
+brew "lua-language-server"
+brew "gopls"
 brew "luarocks"
 brew "gnupg"
 brew "poppler"
