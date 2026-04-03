@@ -228,11 +228,6 @@ return {
     },
   },
 
-  -- Better comments
-  {
-    "numToStr/Comment.nvim",
-    opts = {},
-  },
 
   -- Replace
   {
@@ -341,11 +336,6 @@ return {
     },
   },
 
-  -- Highlight current word
-  {
-    "RRethy/vim-illuminate",
-    event = "VeryLazy",
-  },
 
   -- Auto detect indent
   { "tpope/vim-sleuth" },

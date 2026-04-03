@@ -11,6 +11,7 @@ return {
         },
       },
       input = { enabled = true },
+      words = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
       statuscolumn = { enabled = true },

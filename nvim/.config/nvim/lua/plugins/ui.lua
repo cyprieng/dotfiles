@@ -430,9 +430,6 @@ return {
     end,
   },
 
-  -- UI improvements
-  { "stevearc/dressing.nvim" },
-
   -- Better quickfix
   { "kevinhwang91/nvim-bqf" },
 
