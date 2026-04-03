@@ -11,6 +11,7 @@ return {
         },
       },
       input = { enabled = true },
+      picker = { ui_select = true },
       words = { enabled = true },
       notifier = { enabled = true },
       quickfile = { enabled = true },
