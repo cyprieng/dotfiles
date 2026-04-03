@@ -194,14 +194,18 @@ return {
           },
         },
         herb_ls = {},
-        copilot = {
+      }
+
+      -- Github copilot
+      if vim.g.enable_github_copilot then
+        servers.copilot = {
           cmd = {
             vim.fn.expand("$HOME/.local/share/mise/installs/node/lts/bin/node"),
             vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
             "--stdio",
           },
-        },
-      }
+        }
+      end
 
       -- VUE config
       local vue_language_server_path = vim.fn.stdpath("data")
