@@ -42,6 +42,7 @@ tap "tw93/tap"
 brew "tw93/tap/mole"
 brew "git-lfs"
 brew "direnv"
+brew "mermaid-cli"
 
 # Apps
 cask "docker-desktop"

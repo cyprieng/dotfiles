@@ -53,7 +53,9 @@ return {
 
       local function collect_collapsed_from_comp(comp_struct)
         local state = {}
-        if not comp_struct or not comp_struct.comp then return state end
+        if not comp_struct or not comp_struct.comp then
+          return state
+        end
         comp_struct.comp:deep_some(function(comp)
           if comp.name == "directory" and comp.context and comp.context.collapsed then
             state[comp.context.path] = true
@@ -64,7 +66,9 @@ return {
       end
 
       local function restore_collapsed_on_comp(comp_struct, state)
-        if not comp_struct or not comp_struct.comp or not next(state) then return end
+        if not comp_struct or not comp_struct.comp or not next(state) then
+          return
+        end
         comp_struct.comp:deep_some(function(comp)
           if comp.name == "directory" and comp.context and state[comp.context.path] then
             comp.context.collapsed = true
@@ -81,7 +85,9 @@ return {
         if self.components then
           ---@diagnostic disable-next-line: inject-field
           self._collapsed_state = {
-            conflicting = collect_collapsed_from_comp(self.components.conflicting and self.components.conflicting.files),
+            conflicting = collect_collapsed_from_comp(
+              self.components.conflicting and self.components.conflicting.files
+            ),
             working = collect_collapsed_from_comp(self.components.working and self.components.working.files),
             staged = collect_collapsed_from_comp(self.components.staged and self.components.staged.files),
           }
@@ -93,9 +99,18 @@ return {
       function FilePanel:update_components()
         orig_update_components(self)
         if self._collapsed_state and self.components then
-          restore_collapsed_on_comp(self.components.conflicting and self.components.conflicting.files, self._collapsed_state.conflicting or {})
-          restore_collapsed_on_comp(self.components.working and self.components.working.files, self._collapsed_state.working or {})
-          restore_collapsed_on_comp(self.components.staged and self.components.staged.files, self._collapsed_state.staged or {})
+          restore_collapsed_on_comp(
+            self.components.conflicting and self.components.conflicting.files,
+            self._collapsed_state.conflicting or {}
+          )
+          restore_collapsed_on_comp(
+            self.components.working and self.components.working.files,
+            self._collapsed_state.working or {}
+          )
+          restore_collapsed_on_comp(
+            self.components.staged and self.components.staged.files,
+            self._collapsed_state.staged or {}
+          )
         end
       end
     end,
@@ -228,7 +243,6 @@ return {
     },
   },
 
-
   -- Replace
   {
     "MagicDuck/grug-far.nvim",
@@ -284,6 +298,33 @@ return {
     ft = { "markdown" },
   },
 
+  -- Mermaid diagram preview
+  {
+    "3rd/diagram.nvim",
+    config = function()
+      require("diagram").setup({
+        integrations = {
+          require("diagram.integrations.markdown"),
+        },
+        renderer_options = {
+          mermaid = {
+            theme = "forest",
+          },
+          plantuml = {
+            charset = "utf-8",
+          },
+          d2 = {
+            theme_id = 1,
+          },
+          gnuplot = {
+            theme = "dark",
+            size = "800,600",
+          },
+        },
+      })
+    end,
+  },
+
   -- Rainbow delimiters
   { "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 
@@ -335,7 +376,6 @@ return {
       },
     },
   },
-
 
   -- Auto detect indent
   { "tpope/vim-sleuth" },

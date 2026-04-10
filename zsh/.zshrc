@@ -5,6 +5,7 @@ export BAT_PAGER="less -R"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="$HOME/.local/share/mise/shims:/usr/local/bin/:$HOME/.local/bin:$PATH"
+export PUPPETEER_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # Direnv (auto-allow in ~/projects)
 eval "$(direnv hook zsh)"
