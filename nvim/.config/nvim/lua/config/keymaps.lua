@@ -337,3 +337,9 @@ map("t", "<C-h>", smart_term_move("SmartCursorMoveLeft"))
 map("t", "<C-j>", smart_term_move("SmartCursorMoveDown"))
 map("t", "<C-k>", smart_term_move("SmartCursorMoveUp"))
 map("t", "<C-l>", smart_term_move("SmartCursorMoveRight"))
+
+-- :Diff <file> — vertical diff in a new tab
+vim.api.nvim_create_user_command("Diff", function(opts)
+  vim.cmd("tabnew %")
+  vim.cmd("vert diffsplit " .. opts.args)
+end, { nargs = 1, complete = "file" })
