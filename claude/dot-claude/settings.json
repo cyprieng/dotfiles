@@ -1,25 +1,42 @@
 {
   "permissions": {
     "allow": [
-      "Bash(command:rg *)",
-      "Bash(command:fd *)",
-      "Bash(command:find *)",
-      "Bash(command:ls *)",
-      "Bash(command:cat *)",
-      "Bash(command:head *)",
-      "Bash(command:tail *)",
-      "Bash(command:wc *)",
-      "Bash(command:jq *)",
-      "Bash(command:git status*)",
-      "Bash(command:git log*)",
-      "Bash(command:git diff*)",
-      "Bash(command:diff *)",
-      "Bash(gh pr view:*)",
-      "Bash(git show:*)",
+      "Bash(rg:*)",
+      "Bash(fd:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(jq:*)",
+      "Bash(git status:*)",
       "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(diff:*)",
+      "Bash(gh pr view:*)",
       "Bash(grep:*)",
       "Bash(tee:*)",
-      "Bash(nvr *)",
+      "Bash(nvr:*)",
+      "Bash(rtk rg:*)",
+      "Bash(rtk fd:*)",
+      "Bash(rtk find:*)",
+      "Bash(rtk ls:*)",
+      "Bash(rtk cat:*)",
+      "Bash(rtk head:*)",
+      "Bash(rtk tail:*)",
+      "Bash(rtk wc:*)",
+      "Bash(rtk jq:*)",
+      "Bash(rtk git status:*)",
+      "Bash(rtk git log:*)",
+      "Bash(rtk git diff:*)",
+      "Bash(rtk git show:*)",
+      "Bash(rtk diff:*)",
+      "Bash(rtk gh pr view:*)",
+      "Bash(rtk grep:*)",
+      "Bash(rtk tee:*)",
+      "Bash(rtk nvr:*)",
       "mcp__plugin_claude-mem_mcp-search__*"
     ],
     "defaultMode": "default"
@@ -51,6 +68,17 @@
           {
             "type": "command",
             "command": "printf '\\a' > /dev/tty"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/rtk-rewrite.sh"
           }
         ]
       }

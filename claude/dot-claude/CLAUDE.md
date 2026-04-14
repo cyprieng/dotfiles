@@ -75,3 +75,5 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - `nvr --remote-send '<cmd>'` — send a Vim command (e.g. `nvr --remote-send ':e file.lua<CR>'`)
 - `nvr --remote-send ':lua <code><CR>'` — execute Lua code
 - `nvr --remote-expr '<expr>'` — evaluate a Vim expression and return the result
+
+@RTK.md
