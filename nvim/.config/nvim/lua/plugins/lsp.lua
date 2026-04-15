@@ -162,7 +162,6 @@ return {
         sqlls = {},
         tailwindcss = {},
         terraformls = {},
-        harper_ls = {},
         vue_ls = {},
         vtsls = {},
         lemminx = {},
