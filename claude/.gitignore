@@ -1,9 +1,22 @@
+# Ignore everything, whitelist explicitly
 *
+
+# Root files
 !.gitignore
-!claude_desktop_config.json
 !CLAUDE.md
+
+# ~/.claude/
 !dot-claude/
 dot-claude/*
 !dot-claude/settings.json
 !dot-claude/skills/
 !dot-claude/skills/**
+
+# ~/Library/Application Support/
+!Library/
+Library/*
+!Library/Application Support/
+Library/Application Support/*
+!Library/Application Support/Claude/
+!Library/Application Support/rtk/
+!Library/Application Support/rtk/**

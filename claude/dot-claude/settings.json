@@ -19,6 +19,7 @@
       "Bash(grep:*)",
       "Bash(tee:*)",
       "Bash(nvr:*)",
+      "Bash(rtk read:*)",
       "Bash(rtk rg:*)",
       "Bash(rtk fd:*)",
       "Bash(rtk find:*)",
@@ -102,3 +103,4 @@
     }
   }
 }
+
