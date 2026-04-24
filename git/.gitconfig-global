@@ -71,6 +71,21 @@
 	# Show the user email for the current repository.
 	whoami = config user.email
 
+	# Files most modified in the last year (code churn hotspots).
+	hotspots = "!git log --since='1 year ago' --name-only --pretty=format: | sort | uniq -c | sort -rg | head -20"
+
+	# Top contributors in the last year (knowledge concentration).
+	owners = "!git shortlog -sn --no-merges --since='1 year ago' | head -10"
+
+	# Files most present in bug/fix commits in the last year.
+	bugspots = "!git log --since='1 year ago' -i --grep='fix\\|bug\\|issue\\|error' --name-only --pretty=format: | sort | uniq -c | sort -rg | head -20"
+
+	# Commits per month in the last year (project momentum).
+	momentum = "!git log --since='1 year ago' --date=format:'%Y-%m' --pretty=format:'%ad' | sort | uniq -c"
+
+	# Reverts, hotfixes, rollbacks in the last year (crisis indicators).
+	crisis = "!git log --since='1 year ago' --oneline -i --grep='revert\\|hotfix\\|rollback'"
+
 [column]
 	ui = auto
 
