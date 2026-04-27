@@ -27,11 +27,11 @@ install: init stow deps setup
 
 stow:
 	@echo "Symlinking dotfiles..."
-	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
+	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
 
 unstow:
 	@echo "Removing symlinks..."
-	@stow -D --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
+	@stow -D --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
 
 # ==============================================================================
 # Dependencies installation
@@ -124,6 +124,10 @@ setup:
 		git config --global user.signingkey "$$key_id"; \
 		echo "✓ Git signing key configured successfully!"; \
 	fi
+
+	# Reload gpg-agent so pinentry-mac config takes effect
+	@echo "Reloading gpg-agent..."
+	@gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
 
         # Git user name and email
 	@if [ -z "$$(git config --global user.email)" ]; then \
