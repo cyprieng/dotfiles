@@ -213,7 +213,15 @@ precmd() {
     local now=$EPOCHREALTIME
     local diff=$(( now - CMD_TIMER ))
     if (( diff > 1 )); then
-      printf -v elapsed "(%s%.2fs%s) " "%F{yellow}" "$diff" "%f"
+      local fmt total=${${diff%.*}:-0}
+      if (( total >= 3600 )); then
+        printf -v fmt "%dh%02dm%02ds" $((total/3600)) $(( (total%3600)/60 )) $((total%60))
+      elif (( total >= 60 )); then
+        printf -v fmt "%dm%02ds" $((total/60)) $((total%60))
+      else
+        printf -v fmt "%.2fs" "$diff"
+      fi
+      printf -v elapsed "(%s%s%s) " "%F{yellow}" "$fmt" "%f"
     fi
     unset CMD_TIMER
   fi
