@@ -333,6 +333,14 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     vscode = true,
+    opts = {
+      modes = {
+        search = {
+          enabled = true,
+          highlight = { backdrop = true },
+        },
+      },
+    },
     keys = {
       {
         "s",
