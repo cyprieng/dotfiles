@@ -102,5 +102,6 @@
       }
     }
   },
-  "effortLevel": "xhigh"
+  "effortLevel": "xhigh",
+  "skipAutoPermissionPrompt": true
 }
