@@ -27,13 +27,14 @@ return {
           -- Query tmux for the window name of this pane
           local pane_id = state.session.tmux_pane_id
           if pane_id then
-            local result = vim.fn.system({ "tmux", "display-message", "-t", pane_id, "-p", "#{window_name}" })
-            local window_name = vim.trim(result or "")
-            if window_name ~= "" then
-              -- Find the backend bracket and append window name
+            local result =
+              vim.fn.system({ "tmux", "display-message", "-t", pane_id, "-p", "#{window_index}:#{window_name}" })
+            local window_info = vim.trim(result or "")
+            if window_info ~= "" then
+              -- Find the backend bracket and append window index:name
               for i, part in ipairs(ret) do
                 if type(part) == "table" and part[2] == "Special" and part[1]:match("^%[") then
-                  ret[i][1] = part[1]:gsub("%]$", ":" .. window_name .. "]")
+                  ret[i][1] = part[1]:gsub("%]$", ":" .. window_info .. "]")
                   break
                 end
               end
