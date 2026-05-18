@@ -7,6 +7,7 @@ macos-titlebar-style = hidden
 confirm-close-surface = false
 quit-after-last-window-closed = true
 macos-auto-secure-input = false
+clipboard-read = allow
 
 # Shell
 shell-integration-features = true
