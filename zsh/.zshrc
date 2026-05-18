@@ -5,7 +5,9 @@ export BAT_PAGER="less -R"
 export EDITOR="$VISUAL"
 export GPG_TTY=$(tty)
 export PATH="$HOME/.local/share/mise/shims:/usr/local/bin/:$HOME/.local/bin:$PATH"
-export PUPPETEER_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export PUPPETEER_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+fi
 
 # Direnv (auto-allow in ~/projects)
 eval "$(direnv hook zsh)"
@@ -107,40 +109,44 @@ alias ghce="gh copilot explain"
 alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
 
-# Markdown to rich text
-function mdcopy() {
-  local tmpfile=$(mktemp /tmp/mdcopy.XXXXXX.rtf)
-  pandoc -f markdown -t html --wrap=none "${1:--}" | textutil -stdin -format html -convert rtf -stdout -inputencoding UTF-8 -encoding UTF-8 > "$tmpfile"
-  osascript -e "set the clipboard to (read POSIX file \"$tmpfile\" as «class RTF »)"
-  rm -f "$tmpfile"
-}
+# Markdown to rich text (macOS only)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  function mdcopy() {
+    local tmpfile=$(mktemp /tmp/mdcopy.XXXXXX.rtf)
+    pandoc -f markdown -t html --wrap=none "${1:--}" | textutil -stdin -format html -convert rtf -stdout -inputencoding UTF-8 -encoding UTF-8 > "$tmpfile"
+    osascript -e "set the clipboard to (read POSIX file \"$tmpfile\" as «class RTF »)"
+    rm -f "$tmpfile"
+  }
+fi
 
 # Disable rm security
 setopt rm_star_silent
 unalias rm 2>/dev/null
 
-# Notification function
-function dialog() {
-  local title="${1:-Notification}"
-  local message="${2:-Your message here}"
-  osascript -e "display dialog \"$message\" with title \"$title\" buttons {\"OK\"} default button 1" > /dev/null
-}
-function notify() {
-  local cmdstatus=$?
-  local title message
-  local last_cmd="${LAST_CMD:-Unknown command}"
+# Notification functions (macOS only)
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  function dialog() {
+    local title="${1:-Notification}"
+    local message="${2:-Your message here}"
+    osascript -e "display dialog \"$message\" with title \"$title\" buttons {\"OK\"} default button 1" > /dev/null
+  }
+  function notify() {
+    local cmdstatus=$?
+    local title message
+    local last_cmd="${LAST_CMD:-Unknown command}"
 
-  if [[ $cmdstatus -eq 0 ]]; then
-    title="✓ Success"
-    message="${1:-$last_cmd}"
-  else
-    title="✗ Failed (exit $cmdstatus)"
-    message="${1:-$last_cmd}"
-  fi
+    if [[ $cmdstatus -eq 0 ]]; then
+      title="✓ Success"
+      message="${1:-$last_cmd}"
+    else
+      title="✗ Failed (exit $cmdstatus)"
+      message="${1:-$last_cmd}"
+    fi
 
-  dialog "$title" "$message"
-  return $cmdstatus
-}
+    dialog "$title" "$message"
+    return $cmdstatus
+  }
+fi
 
 # Yazi explorer
 function y() {
@@ -269,7 +275,7 @@ else
 fi
 
 # Completions
-source <(kubectl completion zsh)
-source <(gh completion -s zsh)
-source <(mise completion zsh)
-source <(k9s completion zsh)
+command -v kubectl >/dev/null 2>&1 && source <(timeout 5 kubectl completion zsh 2>/dev/null)
+command -v gh >/dev/null 2>&1 && source <(timeout 5 gh completion -s zsh 2>/dev/null)
+command -v mise >/dev/null 2>&1 && source <(timeout 5 mise completion zsh 2>/dev/null)
+command -v k9s >/dev/null 2>&1 && source <(timeout 5 k9s completion zsh 2>/dev/null)

@@ -1,0 +1,44 @@
+# Stow (apt version is buggy with --dotfiles flag)
+brew "stow"
+
+# Neovim (apt version is outdated)
+brew "neovim"
+
+# CLI tools (naming conflicts or absent in apt)
+brew "bat"
+brew "fd"
+brew "eza"
+brew "zoxide"
+brew "git-delta"
+brew "atuin"
+brew "yazi"
+brew "tlrc"
+brew "fx"
+brew "watchexec"
+
+# Git tools
+brew "lazygit"
+brew "lazydocker"
+brew "gh"
+
+# Kubernetes
+brew "kubectl"
+brew "kubectx"
+brew "k9s"
+
+# Tmux
+brew "tmux"
+brew "tmux-xpanes"
+
+# Search & code
+brew "ast-grep"
+
+# Language tooling
+brew "mise"
+brew "uv"
+brew "commitizen"
+brew "sqlfluff"
+
+# Language servers
+brew "lua-language-server"
+brew "gopls"

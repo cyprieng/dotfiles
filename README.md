@@ -1,6 +1,6 @@
 # Dotfiles
 
-My dotfiles for macOS.
+My dotfiles for macOS and Linux (Ubuntu 24.04).
 
 Some files (for example raycast configuration) are encrypted and can only be decrypted with my private password.
 Do not use the dotfiles as-is but as a base for your configuration.
@@ -16,15 +16,21 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 # Press Enter to accept default location (~/.ssh/id_ed25519)
 # Enter a passphrase (recommended)
 
-# Add SSH key to macOS Keychain (stores passphrase)
+# macOS: add SSH key to Keychain (stores passphrase)
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+
+# Linux: add SSH key to agent
+ssh-add ~/.ssh/id_ed25519
 ```
 
 ### 2. Add SSH Key to GitHub
 
 ```bash
-# Copy your public key to clipboard
+# macOS
 pbcopy < ~/.ssh/id_ed25519.pub
+
+# Linux
+xclip -sel clip < ~/.ssh/id_ed25519.pub
 ```
 
 Then go to [GitHub SSH Settings](https://github.com/settings/keys) and add your ssh key.
@@ -43,24 +49,26 @@ cd dotfiles
 make install
 ```
 
-This will run the full installation process (brew, stow, dependencies, and setup).
+This will run the full installation process (auto-detects macOS or Linux).
 
 ## Available Commands
 
 Run `make help` to see all available commands:
 
-- `make install` - Full installation (runs stow, deps, and setup)
-- `make stow` - Symlink all dotfiles to your home directory
+- `make install` - Full installation (auto-detects OS)
+- `make install-macos` / `make install-linux` - OS-specific full installation
+- `make stow` - Symlink all dotfiles
 - `make unstow` - Remove all symlinks
-- `make init` - Install brew and stow
-- `make deps` - Install all dependencies (Homebrew, Go, Node, Python, Rust packages)
-- `make setup` - Configure apps & system settings (decrypt secrets, setup git, apply macOS settings)
-- `make extra` - Install extra applications and configurations
-- `make update` - Update everything (Homebrew, Node, Python, Rust)
+- `make init` - Install prerequisites (brew on macOS, apt on Linux)
+- `make deps` - Install all dependencies
+- `make setup` - Configure apps & system settings
+- `make tools` - Install language tools via mise + uv (runs after stow)
+- `make extra` - Install extra applications and configurations (macOS only)
+- `make update` - Update everything
 - `make clean` - Clean up broken symlinks and Homebrew cache
-- `make backup` - Backup app configurations (BetterTouchTool, Raycast)
+- `make backup` - Backup app configurations (macOS only)
 
-## Manual process
+## Manual process (macOS)
 
 ### macOS Settings
 

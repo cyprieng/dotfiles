@@ -1,72 +1,153 @@
-PATH  := $(PATH):/opt/homebrew/bin/
+UNAME := $(shell uname)
+PATH  := /opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:$(PATH)
 SHELL := env PATH=$(PATH) /bin/bash
-.PHONY: help install stow unstow init deps setup update clean backup
+.PHONY: help install install-macos install-linux \
+        stow stow-macos stow-linux unstow unstow-macos unstow-linux \
+        init init-macos init-linux deps deps-macos deps-linux \
+        setup setup-common setup-macos setup-linux tools \
+        update clean backup extra
+
+PACKAGES_MACOS := aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
+PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude
 
 help:
 	@echo "Available commands:"
-	@echo "  make install  - Full installation (everything)"
-	@echo "  make stow     - Symlink all dotfiles"
-	@echo "  make unstow   - Remove all symlinks"
-	@echo "  make init     - Install brew and stow"
-	@echo "  make deps     - Install all dependencies (brew + languages)"
-	@echo "  make setup    - Configure apps & system settings"
-	@echo "  make update   - Update everything"
-	@echo "  make clean    - Clean up broken symlinks"
-	@echo "  make backup   - Backup app configurations"
+	@echo "  make install        - Full installation (auto-detects OS)"
+	@echo "  make install-macos  - macOS full installation"
+	@echo "  make install-linux  - Linux full installation"
+	@echo "  make stow           - Symlink dotfiles (auto-detects OS)"
+	@echo "  make unstow         - Remove symlinks (auto-detects OS)"
+	@echo "  make init           - Install prerequisites (auto-detects OS)"
+	@echo "  make deps           - Install dependencies (auto-detects OS)"
+	@echo "  make setup          - Configure system (auto-detects OS)"
+	@echo "  make tools          - Install language tools via mise + uv (after stow)"
+	@echo "  make update         - Update everything"
+	@echo "  make clean          - Clean up broken symlinks"
+	@echo "  make backup         - Backup app configurations (macOS)"
+
+# ==============================================================================
+# Dispatchers
+# ==============================================================================
+
+install:
+ifeq ($(UNAME), Darwin)
+	$(MAKE) install-macos
+else
+	$(MAKE) install-linux
+endif
+
+stow:
+ifeq ($(UNAME), Darwin)
+	$(MAKE) stow-macos
+else
+	$(MAKE) stow-linux
+endif
+
+unstow:
+ifeq ($(UNAME), Darwin)
+	$(MAKE) unstow-macos
+else
+	$(MAKE) unstow-linux
+endif
+
+init:
+ifeq ($(UNAME), Darwin)
+	$(MAKE) init-macos
+else
+	$(MAKE) init-linux
+endif
+
+deps:
+ifeq ($(UNAME), Darwin)
+	$(MAKE) deps-macos
+else
+	$(MAKE) deps-linux
+endif
+
+setup:
+ifeq ($(UNAME), Darwin)
+	$(MAKE) setup-macos
+else
+	$(MAKE) setup-linux
+endif
 
 # ==============================================================================
 # Main installation
 # ==============================================================================
 
-install: init stow deps setup
-	@echo "✓ Installation complete!"
+install-macos: init-macos stow-macos deps-macos setup-macos tools
+	@echo "✓ macOS installation complete!"
+
+install-linux: init-linux deps-linux stow-linux setup-linux tools
+	@echo "✓ Linux installation complete!"
 
 # ==============================================================================
 # Symlink management
 # ==============================================================================
 
-stow:
-	@echo "Symlinking dotfiles..."
-	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
+stow-macos:
+	@echo "Symlinking dotfiles (macOS)..."
+	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) $(PACKAGES_MACOS)
 
-unstow:
-	@echo "Removing symlinks..."
-	@stow -D --dotfiles --ignore='\.DS_Store' -t $(HOME) aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
+stow-linux:
+	@echo "Symlinking dotfiles (Linux)..."
+	@stow --dotfiles --ignore='\.DS_Store' --ignore='Library' -t $(HOME) $(PACKAGES_LINUX)
+
+unstow-macos:
+	@echo "Removing symlinks (macOS)..."
+	@stow -D --dotfiles --ignore='\.DS_Store' -t $(HOME) $(PACKAGES_MACOS)
+
+unstow-linux:
+	@echo "Removing symlinks (Linux)..."
+	@stow -D --dotfiles --ignore='\.DS_Store' --ignore='Library' -t $(HOME) $(PACKAGES_LINUX)
 
 # ==============================================================================
 # Dependencies installation
 # ==============================================================================
 
-init:
+init-macos:
 	# Install brew
 	@echo "Installing Homebrew..."
 	@which brew >/dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	
+
 	# Install stow
 	@brew install stow
 
-deps:
+init-linux:
+	@echo "Installing prerequisites via apt..."
+	@sudo apt-get update -qq
+	@sudo apt-get install -y curl build-essential
+
+deps-macos:
 	# Install Brewfile
 	@echo "Installing brew dependencies..."
 	@brew bundle
 
-	# Mise
-	@mise install
+deps-linux:
+	@echo "Installing apt packages..."
+	@sudo apt-get update -qq
+	@grep -v '^#\|^$$' apt-packages.txt | xargs sudo apt-get install -y
 
-	# UV tools
+	@echo "Installing Homebrew (Linux)..."
+	@which brew >/dev/null || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	@echo "Installing brew packages (Linux)..."
+	@brew bundle --file=Brewfile-linux
+
+# ==============================================================================
+# Language tools (shared, requires dotfiles to be stowed first)
+# ==============================================================================
+
+tools:
+	@echo "Installing language tools..."
+	@mise install
 	@uv tool install "markitdown[all]"
 
 # ==============================================================================
 # System and app configuration
 # ==============================================================================
 
-setup:
-	# Better touch tool
-	# The plist cannot be a symlink, so we need to copy it
-	@echo "Setting up BetterTouchTool..."
-	@killall "BetterTouchTool" >/dev/null 2>&1 || true
-	@cp bettertouchtool/Library/Preferences/com.hegenberg.BetterTouchTool.plist ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
-
+setup-common:
 	# Install tmux catpuccin
 	@echo "Installing tmux plugins..."
 	@[ -d ~/.config/tmux/plugins/catppuccin ] || (mkdir -p ~/.config/tmux/plugins/catppuccin && git clone -b v2.1.3 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux)
@@ -81,7 +162,7 @@ setup:
 
 	# Git config
 	@echo "Configuring git..."
-	@grep -q "gitconfig-global" ~/.gitconfig 2>/dev/null || echo -e "[include]\n    path = .gitconfig-global" >> ~/.gitconfig
+	@grep -q "gitconfig-global" ~/.gitconfig 2>/dev/null || printf "[include]\n    path = .gitconfig-global\n" >> ~/.gitconfig
 
 	# GPG key
 	@if [ -z "$$(git config --global user.signingkey)" ]; then \
@@ -125,11 +206,7 @@ setup:
 		echo "✓ Git signing key configured successfully!"; \
 	fi
 
-	# Reload gpg-agent so pinentry-mac config takes effect
-	@echo "Reloading gpg-agent..."
-	@gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
-
-        # Git user name and email
+	# Git user name and email
 	@if [ -z "$$(git config --global user.email)" ]; then \
 		read -p "Enter your Git email: " user_email; \
 		if [ -z "$$user_email" ]; then \
@@ -148,7 +225,18 @@ setup:
 		git config --global user.name "$$user_name"; \
 		echo "✓ Git name configured: $$user_name"; \
 	fi
-	
+
+setup-macos: setup-common
+	# Better touch tool
+	# The plist cannot be a symlink, so we need to copy it
+	@echo "Setting up BetterTouchTool..."
+	@killall "BetterTouchTool" >/dev/null 2>&1 || true
+	@cp bettertouchtool/Library/Preferences/com.hegenberg.BetterTouchTool.plist ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
+
+	# Reload gpg-agent so pinentry-mac config takes effect
+	@echo "Reloading gpg-agent..."
+	@gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
+
 	# Macos settings
 	@echo "Applying macOS settings..."
 	@defaults write NSGlobalDomain AppleShowAllExtensions -bool true                      # Always show extensions
@@ -186,7 +274,7 @@ setup:
 	@launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2>/dev/null || true # Disable Apple Music opening on media key press
 	@defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false # Fix scroll direction
 	@defaults write com.apple.dock minimize-to-application -bool true # Minimize into app icon
-	
+
 	# Reduce dock animation time
 	@defaults write com.apple.dock mineffect -string "scale"
 	@defaults write com.apple.dock mineffect-duration -float 0.1
@@ -197,8 +285,15 @@ setup:
 	@gpg --decrypt -o raycast/config.rayconfig raycast/config.rayconfig.gpg 2>/dev/null || echo "⚠️  Warning: Could not decrypt Raycast config (wrong password or file missing)"
 	@open raycast/config.rayconfig
 
+setup-linux: setup-common
+	# Set zsh as default shell
+	@if [ "$$SHELL" != "$$(which zsh)" ]; then \
+		echo "Setting zsh as default shell..."; \
+		chsh -s $$(which zsh); \
+	fi
+
 # ==============================================================================
-# Extra setup 
+# Extra setup (macOS only)
 # ==============================================================================
 extra:
 	@echo "Installing extra brew dependencies..."
@@ -230,21 +325,27 @@ update:
 
 clean:
 	@echo "Cleaning up brew formulae and casks"
+ifeq ($(UNAME), Darwin)
 	@./clean-brew.sh
+endif
 
 	@echo "Cleaning up broken symlinks..."
 	@find ~ -maxdepth 1 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
 	@find ~/.config -maxdepth 2 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
+ifeq ($(UNAME), Darwin)
 	@find ~/Library/Application\ Support -maxdepth 2 -type l ! -exec test -e {} \; -print -delete 2>/dev/null || true
+endif
 
 	@echo "Cleaning Homebrew..."
 	@brew cleanup
 
+ifeq ($(UNAME), Darwin)
 	@echo "Cleaning system..."
 	@mo clean
+endif
 
 # ==============================================================================
-# Backup for configuration that cannot be symlinked
+# Backup for configuration that cannot be symlinked (macOS only)
 # ==============================================================================
 
 backup:

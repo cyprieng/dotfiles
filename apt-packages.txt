@@ -1,0 +1,48 @@
+# System essentials
+stow
+curl
+wget
+build-essential
+unzip
+pkg-config
+
+# Shell & terminal
+zsh
+direnv
+xclip
+
+# Git
+git
+git-lfs
+gnupg
+
+# Search & navigation
+ripgrep
+fzf
+
+# Data & text processing
+jq
+pandoc
+lnav
+
+# Media
+ffmpeg
+imagemagick
+p7zip-full
+
+# Misc CLI
+httpie
+graphviz
+
+# Lua (for neovim)
+luarocks
+lua5.4
+
+# Python
+python3-venv
+
+# Document processing
+poppler-utils
+
+# Coreutils
+coreutils
