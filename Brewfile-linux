@@ -42,3 +42,10 @@ brew "sqlfluff"
 # Language servers
 brew "lua-language-server"
 brew "gopls"
+
+# Infra & network
+brew "cloudflared"
+brew "rtk"
+
+# Diagrams
+brew "mermaid-cli"

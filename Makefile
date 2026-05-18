@@ -134,6 +134,23 @@ deps-linux:
 	@echo "Installing brew packages (Linux)..."
 	@brew bundle --file=Brewfile-linux
 
+	@echo "Installing JetBrains Mono Nerd Font..."
+	@mkdir -p ~/.local/share/fonts
+	@wget -O /tmp/JetBrainsMono.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip
+	@unzip -o /tmp/JetBrainsMono.zip -d ~/.local/share/fonts/JetBrainsMono > /dev/null
+	@fc-cache -f ~/.local/share/fonts
+	@rm /tmp/JetBrainsMono.zip
+
+	@echo "Installing Google Chrome..."
+	@curl -L -o /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+	@sudo apt-get install -y /tmp/chrome.deb
+	@rm /tmp/chrome.deb
+
+	@echo "Installing GUI apps..."
+	@sudo snap install postman
+	@sudo snap install obsidian --classic
+	@sudo snap install ghostty --classic
+
 	@echo "Installing RustDesk..."
 	@RUSTDESK_URL=$$(curl -s https://api.github.com/repos/rustdesk/rustdesk/releases/latest | grep -o 'https://[^"]*x86_64\.deb' | head -1); \
 		wget -O /tmp/rustdesk.deb "$$RUSTDESK_URL"; \
