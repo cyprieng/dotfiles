@@ -46,3 +46,9 @@ poppler-utils
 
 # Coreutils
 coreutils
+
+# Desktop (i3 + X11)
+i3
+i3status
+sddm
+dmenu

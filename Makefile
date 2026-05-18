@@ -8,7 +8,7 @@ SHELL := env PATH=$(PATH) /bin/bash
         update clean backup extra
 
 PACKAGES_MACOS := aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
-PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude
+PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude i3
 
 help:
 	@echo "Available commands:"
@@ -133,6 +133,12 @@ deps-linux:
 
 	@echo "Installing brew packages (Linux)..."
 	@brew bundle --file=Brewfile-linux
+
+	@echo "Installing RustDesk..."
+	@RUSTDESK_URL=$$(curl -s https://api.github.com/repos/rustdesk/rustdesk/releases/latest | grep -o 'https://[^"]*x86_64\.deb' | head -1); \
+		wget -O /tmp/rustdesk.deb "$$RUSTDESK_URL"; \
+		sudo apt-get install -y /tmp/rustdesk.deb; \
+		rm /tmp/rustdesk.deb
 
 # ==============================================================================
 # Language tools (shared, requires dotfiles to be stowed first)
@@ -291,6 +297,12 @@ setup-linux: setup-common
 		echo "Setting zsh as default shell..."; \
 		chsh -s $$(which zsh); \
 	fi
+
+	# SDDM auto-login
+	@echo "Configuring SDDM auto-login..."
+	@sudo mkdir -p /etc/sddm.conf.d
+	@printf '[Autologin]\nUser=cyprien\nSession=i3\n' | sudo tee /etc/sddm.conf.d/autologin.conf > /dev/null
+	@sudo systemctl enable sddm
 
 # ==============================================================================
 # Extra setup (macOS only)
