@@ -44,6 +44,7 @@ brew "git-lfs"
 brew "direnv"
 brew "mermaid-cli"
 brew "rtk"
+brew "cloudflared"
 
 # Apps
 cask "docker-desktop"
