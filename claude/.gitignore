@@ -9,6 +9,7 @@
 !dot-claude/
 dot-claude/*
 !dot-claude/settings.json
+!dot-claude/statusline-command.sh
 !dot-claude/skills/
 !dot-claude/skills/**
 

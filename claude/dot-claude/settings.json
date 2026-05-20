@@ -102,6 +102,10 @@
       }
     }
   },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/statusline-command.sh"
+  },
   "effortLevel": "xhigh",
   "skipAutoPermissionPrompt": true
 }
