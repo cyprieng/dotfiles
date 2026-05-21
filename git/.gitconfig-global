@@ -203,8 +203,7 @@
 	all = true
 
 [rerere]
-        enabled = true
-	autoupdate = true
+        enabled = false
 
 [rebase]
         autoSquash = true
