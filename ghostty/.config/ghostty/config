@@ -11,7 +11,7 @@ clipboard-read = allow
 
 # Shell
 shell-integration-features = true
-initial-command = tmux new-session -A -D
+initial-command = /bin/sh -c "PATH=/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH; tmux new-session -A -D || exec $SHELL -l"
 
 ## Keybindings
 macos-option-as-alt = false
