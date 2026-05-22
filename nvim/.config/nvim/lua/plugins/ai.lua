@@ -119,7 +119,7 @@ return {
       {
         "<leader>ac",
         function()
-          require("sidekick.cli").toggle({ name = vim.g.default_ai_agent or "claude" })
+          require("sidekick.cli").toggle({ filter = { installed = true } })
         end,
         desc = "Sidekick Toggle Agent",
       },
