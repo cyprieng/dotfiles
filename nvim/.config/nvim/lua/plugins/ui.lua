@@ -347,8 +347,10 @@ return {
       },
       views = {
         mini = {
+          align = "message-right",
           position = {
-            row = 0,
+            row = -2,
+            col = "100%",
           },
         },
       },

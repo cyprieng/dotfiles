@@ -294,9 +294,16 @@ return {
         vim.lsp.config(server_name, server)
       end
 
-      -- ruby_lsp: managed by mise, not Mason
+      -- ruby_lsp: managed by mise, not Mason.
+      -- Wrapper neutralizes ruby-lsp's 4h auto `bundle update prism rbs ...` which
+      -- cascades into unconstrained project gems (rubocop & co), causing crashes
+      -- and stuck indexing. To refresh ruby-lsp/debug/prism: `rm -rf .ruby-lsp/`.
       vim.lsp.config("ruby_lsp", {
-        cmd = { "mise", "x", "--", "ruby-lsp" },
+        cmd = {
+          "sh",
+          "-c",
+          'mkdir -p .ruby-lsp && date -u +"%Y-%m-%dT%H:%M:%SZ" > .ruby-lsp/last_updated && exec mise x -- ruby-lsp',
+        },
         capabilities = capabilities,
       })
       vim.lsp.enable("ruby_lsp")
