@@ -166,6 +166,9 @@ tools:
 	@mise install
 	@uv tool install "markitdown[all]"
 
+	@echo "Installing Claude Code..."
+	@curl -fsSL https://claude.ai/install.sh | bash
+
 # ==============================================================================
 # System and app configuration
 # ==============================================================================
