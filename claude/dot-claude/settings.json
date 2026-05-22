@@ -37,8 +37,7 @@
       "Bash(rtk gh pr view:*)",
       "Bash(rtk grep:*)",
       "Bash(rtk tee:*)",
-      "Bash(rtk nvr:*)",
-      "mcp__plugin_claude-mem_mcp-search__*"
+      "Bash(rtk nvr:*)"
     ],
     "defaultMode": "default"
   },
@@ -48,7 +47,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a'"
+            "command": "printf '\\a' > \"$(tmux display-message -t \"$TMUX_PANE\" -p '#{pane_tty}')\" 2>/dev/null"
           }
         ]
       }
@@ -58,7 +57,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a'"
+            "command": "printf '\\a' > \"$(tmux display-message -t \"$TMUX_PANE\" -p '#{pane_tty}')\" 2>/dev/null"
           }
         ]
       }
@@ -68,7 +67,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a'"
+            "command": "printf '\\a' > \"$(tmux display-message -t \"$TMUX_PANE\" -p '#{pane_tty}')\" 2>/dev/null"
           }
         ]
       }
@@ -85,8 +84,11 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
-    "claude-mem@thedotmack": true,
     "gopls-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
@@ -94,18 +96,8 @@
     "ruby-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },
-  "extraKnownMarketplaces": {
-    "thedotmack": {
-      "source": {
-        "source": "github",
-        "repo": "thedotmack/claude-mem"
-      }
-    }
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "$HOME/.claude/statusline-command.sh"
-  },
+  "model": "sonnet",
   "effortLevel": "xhigh",
+  "advisorModel": "opus",
   "skipAutoPermissionPrompt": true
 }
