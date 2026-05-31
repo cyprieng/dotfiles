@@ -49,6 +49,12 @@ coreutils
 
 # Desktop (i3 + X11)
 i3
-i3status
 sddm
-dmenu
+polybar
+picom
+fonts-noto-color-emoji
+rofi
+papirus-icon-theme
+thunar
+gvfs
+gvfs-backends

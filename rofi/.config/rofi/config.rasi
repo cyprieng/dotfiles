@@ -1,0 +1,90 @@
+configuration {
+    modi: "drun,run";
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: "";
+    display-run: "";
+    drun-display-format: "{name}";
+    font: "DejaVu Sans 24";
+}
+
+* {
+    base:     #303446;
+    surface0: #414559;
+    surface1: #51576d;
+    text:     #c6d0f5;
+    subtext0: #a5adce;
+    blue:     #8caaee;
+    mauve:    #ca9ee6;
+    red:      #e78284;
+
+    background-color: transparent;
+    text-color:       @text;
+}
+
+window {
+    background-color: @base;
+    border:           2px;
+    border-color:     @blue;
+    border-radius:    8px;
+    width:            900px;
+}
+
+mainbox {
+    padding: 12px;
+    spacing: 8px;
+}
+
+inputbar {
+    background-color: @surface0;
+    border-radius:    6px;
+    padding:          10px 14px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color: @blue;
+    padding:    0 8px 0 0;
+}
+
+entry {
+    text-color:        @text;
+    placeholder:       "Search...";
+    placeholder-color: @subtext0;
+}
+
+listview {
+    lines:   8;
+    spacing: 4px;
+    padding: 4px 0 0 0;
+}
+
+element {
+    border-radius: 6px;
+    padding:       8px 10px;
+    spacing:       10px;
+    orientation:   horizontal;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @text;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @text;
+}
+
+element selected.normal {
+    background-color: @surface0;
+    text-color:       @blue;
+}
+
+element-icon {
+    size: 24px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}

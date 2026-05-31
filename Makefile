@@ -8,7 +8,7 @@ SHELL := env PATH=$(PATH) /bin/bash
         update clean backup extra
 
 PACKAGES_MACOS := aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
-PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude i3
+PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude i3 polybar picom rofi
 
 help:
 	@echo "Available commands:"
@@ -146,10 +146,23 @@ deps-linux:
 	@sudo apt-get install -y /tmp/chrome.deb
 	@rm /tmp/chrome.deb
 
-	@echo "Installing GUI apps..."
-	@sudo snap install postman
-	@sudo snap install obsidian --classic
-	@sudo snap install ghostty --classic
+	@echo "Installing Ghostty..."
+	@/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+
+	@echo "Installing Obsidian..."
+	@OBSIDIAN_URL=$$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest | grep -o 'https://[^"]*amd64\.deb' | head -1); \
+		curl -L -o /tmp/obsidian.deb "$$OBSIDIAN_URL"; \
+		sudo apt-get install -y /tmp/obsidian.deb; \
+		rm /tmp/obsidian.deb
+
+	@echo "Installing Postman..."
+	@curl -L https://dl.pstmn.io/download/latest/linux64 -o /tmp/postman.tar.gz
+	@sudo tar -xzf /tmp/postman.tar.gz -C /opt
+	@sudo ln -sf /opt/Postman/Postman /usr/local/bin/postman
+	@ICON=$$(find /opt/Postman -name "icon.png" | head -1); \
+		printf '[Desktop Entry]\nName=Postman\nExec=/opt/Postman/Postman\nIcon=%s\nTerminal=false\nType=Application\nCategories=Development;\n' "$$ICON" \
+		| sudo tee /usr/share/applications/postman.desktop > /dev/null
+	@rm /tmp/postman.tar.gz
 
 	@echo "Installing RustDesk..."
 	@RUSTDESK_URL=$$(curl -s https://api.github.com/repos/rustdesk/rustdesk/releases/latest | grep -o 'https://[^"]*x86_64\.deb' | head -1); \
@@ -323,6 +336,13 @@ setup-linux: setup-common
 	@sudo mkdir -p /etc/sddm.conf.d
 	@printf '[Autologin]\nUser=cyprien\nSession=i3\n' | sudo tee /etc/sddm.conf.d/autologin.conf > /dev/null
 	@sudo systemctl enable sddm
+
+	# GPG loopback (no pinentry, passphrase asked inline in terminal)
+	@mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
+	@printf 'pinentry-mode loopback\n' > ~/.gnupg/gpg.conf
+	@printf 'allow-loopback-pinentry\ndefault-cache-ttl 86400\nmax-cache-ttl 86400\n' > ~/.gnupg/gpg-agent.conf
+	@chmod 600 ~/.gnupg/gpg.conf ~/.gnupg/gpg-agent.conf
+	@gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
 
 # ==============================================================================
 # Extra setup (macOS only)
