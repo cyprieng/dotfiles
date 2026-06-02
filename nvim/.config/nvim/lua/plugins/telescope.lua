@@ -204,6 +204,29 @@ local function bufferline_picker(opts)
     :find()
 end
 
+-- Frecency file picker mirroring the old find_files behaviour: hidden files
+-- included, .git excluded, .gitignore respected. <C-i> toggles --no-ignore.
+local frecency_normal_scan = { "rg", "--hidden", "--files", "--color", "never", "-g", "!.git" }
+local frecency_no_ignore_scan = { "rg", "--hidden", "--files", "--color", "never", "-g", "!.git", "--no-ignore" }
+local frecency_use_no_ignore = false
+
+local function open_frecency()
+  require("telescope").extensions.frecency.frecency({
+    workspace = "CWD",
+    attach_mappings = function(_, map)
+      map("i", "<C-i>", function(prompt_bufnr)
+        frecency_use_no_ignore = not frecency_use_no_ignore
+        require("frecency.config").setup({
+          workspace_scan_cmd = frecency_use_no_ignore and frecency_no_ignore_scan or frecency_normal_scan,
+        })
+        actions.close(prompt_bufnr)
+        open_frecency()
+      end)
+      return true
+    end,
+  })
+end
+
 return {
   -- Fuzzy finder.
   {
@@ -214,6 +237,7 @@ return {
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "debugloop/telescope-undo.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-frecency.nvim",
     },
     keys = {
       {
@@ -223,7 +247,7 @@ return {
       },
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Grep (Root Dir)" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      { "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find Files (Root Dir)" },
+      { "<leader><space>", open_frecency, desc = "Find Files (Root Dir)" },
       -- find
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
@@ -293,6 +317,9 @@ return {
       require("telescope").setup({
         extensions = {
           undo = {},
+          frecency = {
+            workspace_scan_cmd = frecency_normal_scan,
+          },
           file_browser = {
             hidden = {
               file_browser = true,
@@ -379,6 +406,7 @@ return {
       -- Load plugins
       require("telescope").load_extension("undo")
       require("telescope").load_extension("fzf")
+      require("telescope").load_extension("frecency")
     end,
   },
 }
