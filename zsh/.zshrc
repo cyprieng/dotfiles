@@ -93,7 +93,7 @@ alias v="nvim"
 
 # Send commands to the Neovim instance in the same tmux window
 nvr() {
-  local sock="/tmp/nvim-tmux-$(tmux display-message -p '#{window_id}').sock"
+  local sock="/tmp/nvim-tmux-$(tmux display-message -p -t "$TMUX_PANE" '#{window_id}').sock"
   if [[ ! -S "$sock" ]]; then
     echo "No Neovim instance found in this tmux window"
     return 1
