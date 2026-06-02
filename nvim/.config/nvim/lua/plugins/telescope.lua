@@ -141,6 +141,24 @@ local function bufferline_picker(opts)
 
           local bufnr = selection.value
 
+          -- A buffer that is displayed in a window (e.g. the active buffer
+          -- behind the picker) cannot be unlisted by :bdelete: it silently
+          -- does nothing. Switch any window showing it to another buffer first.
+          local wins = vim.fn.win_findbuf(bufnr)
+          if #wins > 0 then
+            local alt
+            for _, el in ipairs(bufferline.get_elements().elements or {}) do
+              if el.id ~= bufnr then
+                alt = el.id
+                break
+              end
+            end
+            alt = alt or vim.api.nvim_create_buf(true, false)
+            for _, win in ipairs(wins) do
+              vim.api.nvim_win_set_buf(win, alt)
+            end
+          end
+
           -- Delete the buffer using vim command
           -- Bufferline will intercept this and handle it properly
           local success, err = pcall(vim.cmd.bdelete, bufnr)
