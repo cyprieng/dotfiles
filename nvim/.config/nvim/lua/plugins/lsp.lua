@@ -295,15 +295,25 @@ return {
       end
 
       -- ruby_lsp: managed by mise, not Mason.
-      -- Wrapper neutralizes ruby-lsp's 4h auto `bundle update prism rbs ...` which
-      -- cascades into unconstrained project gems (rubocop & co), causing crashes
-      -- and stuck indexing. To refresh ruby-lsp/debug/prism: `rm -rf .ruby-lsp/`.
+      -- cmd as function to access config.root_dir: neovim defaults cmd CWD to its
+      -- own CWD (not root_dir), so last_updated and needs_update were written to
+      -- the wrong directory, silently breaking the update-prevention mechanism.
+      -- Wrapper prevents the 4h `bundle update prism rbs ruby-lsp debug` cascade
+      -- that updates project gems (e.g. rubocop) beyond Gemfile.lock constraints.
+      -- To force a full re-setup: `rm -rf .ruby-lsp/`.
       vim.lsp.config("ruby_lsp", {
-        cmd = {
-          "sh",
-          "-c",
-          'mkdir -p .ruby-lsp && date -u +"%Y-%m-%dT%H:%M:%SZ" > .ruby-lsp/last_updated && exec mise x -- ruby-lsp',
-        },
+        cmd = function(dispatchers, config)
+          local root = config.root_dir or vim.uv.cwd()
+          return require("vim.lsp.rpc").start(
+            {
+              "sh",
+              "-c",
+              'mkdir -p .ruby-lsp && rm -f .ruby-lsp/needs_update && echo "2099-01-01T00:00:00Z" > .ruby-lsp/last_updated && exec mise x -- ruby-lsp',
+            },
+            dispatchers,
+            { cwd = root }
+          )
+        end,
         capabilities = capabilities,
       })
       vim.lsp.enable("ruby_lsp")
