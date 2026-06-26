@@ -319,6 +319,7 @@ return {
           undo = {},
           frecency = {
             workspace_scan_cmd = frecency_normal_scan,
+            db_safe_mode = false,
           },
           file_browser = {
             hidden = {
