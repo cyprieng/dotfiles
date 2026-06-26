@@ -193,9 +193,25 @@ return {
   -- Image preview
   {
     "3rd/image.nvim",
-    opts = {
-      tmux_show_only_in_active_window = true,
-    },
+    config = function()
+      require("image").setup({
+        tmux_show_only_in_active_window = true,
+      })
+      if vim.env.TMUX then
+        local initial_window_id = vim.trim(vim.fn.system("tmux list-windows -F '#{window_id}' -f '#{window_active}'"))
+        local was_active = true
+        local function poll()
+          local active_window_id = vim.trim(vim.fn.system("tmux list-windows -F '#{window_id}' -f '#{window_active}'"))
+          local is_active = active_window_id == initial_window_id
+          if was_active ~= is_active then
+            vim.api.nvim_exec_autocmds(is_active and "FocusGained" or "FocusLost", {})
+            was_active = is_active
+          end
+          vim.defer_fn(poll, 1000)
+        end
+        vim.defer_fn(poll, 1000)
+      end
+    end,
   },
 
   -- Trouble
