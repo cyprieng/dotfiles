@@ -9,6 +9,7 @@ input=$(cat)
 model=$(printf '%s' "$input" | jq -r '.model.display_name // empty')
 cwd=$(printf '%s' "$input" | jq -r '.workspace.current_dir // .cwd // empty')
 cost=$(printf '%s' "$input" | jq -r '.cost.total_cost_usd // 0')
+ctx=$(printf '%s' "$input" | jq -r '.context_window.used_percentage // empty' | cut -d. -f1)
 
 cwd_base=""
 [ -n "$cwd" ] && cwd_base=$(basename "$cwd")
@@ -22,13 +23,14 @@ fi
 
 # ANSI: bold + color, dim separators. Mirrors zsh prompt palette.
 R=$'\e[0m'; B=$'\e[1m'; D=$'\e[2m'
-CYAN=$'\e[36m'; MAGENTA=$'\e[35m'; YELLOW=$'\e[33m'; GREY=$'\e[90m'
+CYAN=$'\e[36m'; MAGENTA=$'\e[35m'; YELLOW=$'\e[33m'; GREY=$'\e[90m'; GREEN=$'\e[32m'
 SEP="${D}${GREY} · ${R}"
 
 parts=()
 [ -n "$model" ]    && parts+=("${GREY}󰚩${R} ${model}")
 [ -n "$branch" ]   && parts+=("${MAGENTA}󰘬${R} ${B}${MAGENTA}${branch}${R}")
 [ -n "$cwd_base" ] && parts+=("${CYAN}󰉋${R} ${B}${CYAN}${cwd_base}${R}")
+[ -n "$ctx" ]      && parts+=("${GREEN}󰍛${R} ${B}${GREEN}${ctx}%${R}")
 parts+=("${YELLOW}${R} ${B}${YELLOW}$(printf '$%.2f' "$cost")${R}")
 
 out=""
