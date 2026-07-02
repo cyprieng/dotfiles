@@ -61,6 +61,7 @@ cask "cleanshot"
 cask "obsidian"
 cask "meetingbar"
 cask "betterdisplay"
+cask "qlmarkdown"
 
 # Languages
 brew "mise"
