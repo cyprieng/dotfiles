@@ -315,6 +315,13 @@ return {
           )
         end,
         capabilities = capabilities,
+        init_options = {
+          addonSettings = {
+            ["Ruby LSP Rails"] = {
+              enablePendingMigrationsPrompt = false,
+            },
+          },
+        },
       })
       vim.lsp.enable("ruby_lsp")
 
