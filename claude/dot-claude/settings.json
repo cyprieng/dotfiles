@@ -41,7 +41,38 @@
     ],
     "defaultMode": "default"
   },
+  "model": "sonnet",
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/tmux-window-name.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/tmux-window-name.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -n \"$TMUX_PANE\" ] && tmux set-window-option -t \"$(tmux display-message -p -t \"$TMUX_PANE\" '#I')\" automatic-rename on 2>/dev/null"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "hooks": [
@@ -96,8 +127,8 @@
     "ruby-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true
   },
-  "model": "sonnet",
-  "effortLevel": "xhigh",
+  "effortLevel": "medium",
   "advisorModel": "opus",
+  "tui": "fullscreen",
   "skipAutoPermissionPrompt": true
 }

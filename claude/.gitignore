@@ -12,6 +12,8 @@ dot-claude/*
 !dot-claude/statusline-command.sh
 !dot-claude/skills/
 !dot-claude/skills/**
+!dot-claude/hooks/
+!dot-claude/hooks/tmux-window-name.sh
 
 # ~/Library/Application Support/
 !Library/
