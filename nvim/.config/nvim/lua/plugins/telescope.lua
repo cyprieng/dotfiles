@@ -204,6 +204,124 @@ local function bufferline_picker(opts)
     :find()
 end
 
+-- Git worktree picker: list/switch/delete worktrees.
+-- Switch does a native global chdir (nvim's :cd), which neo-tree
+-- (bind_to_cwd default) and telescope pickers already follow on their own.
+-- Open buffers are intentionally left untouched.
+local function parse_worktrees()
+  local lines = vim.fn.systemlist({ "git", "worktree", "list", "--porcelain" })
+  if vim.v.shell_error ~= 0 then
+    return {}
+  end
+
+  local worktrees = {}
+  local current = nil
+  for _, line in ipairs(lines) do
+    if line == "" then
+      current = nil
+    else
+      if line:match("^worktree ") then
+        current = { path = line:sub(#"worktree " + 1), branch = "(bare or detached)" }
+        table.insert(worktrees, current)
+      elseif current then
+        local branch = line:match("^branch refs/heads/(.+)$")
+        if branch then
+          current.branch = branch
+        elseif line == "bare" then
+          current.branch = "(bare)"
+        elseif line:match("^detached") then
+          current.branch = "(detached)"
+        end
+      end
+    end
+  end
+  return worktrees
+end
+
+local function worktree_picker(opts)
+  opts = opts or {}
+
+  local cwd = vim.uv.cwd()
+
+  local function make_entry(entry)
+    local is_current = entry.path == cwd
+    return {
+      value = entry,
+      ordinal = entry.branch .. " " .. entry.path,
+      display = function()
+        return string.format("%s %-30s %s", is_current and "*" or " ", entry.branch, entry.path)
+      end,
+    }
+  end
+
+  local function refresh(prompt_bufnr)
+    local current_picker = action_state.get_current_picker(prompt_bufnr)
+    current_picker:refresh(
+      finders.new_table({
+        results = parse_worktrees(),
+        entry_maker = make_entry,
+      }),
+      { reset_prompt = false }
+    )
+  end
+
+  pickers
+    .new(opts, {
+      prompt_title = "Git Worktrees",
+      finder = finders.new_table({
+        results = parse_worktrees(),
+        entry_maker = make_entry,
+      }),
+      sorter = conf.generic_sorter(opts),
+      attach_mappings = function(prompt_bufnr, map)
+        actions.select_default:replace(function()
+          local selection = action_state.get_selected_entry()
+          actions.close(prompt_bufnr)
+          if not selection then
+            return
+          end
+          vim.fn.chdir(selection.value.path)
+          vim.notify("Switched worktree: " .. selection.value.path)
+        end)
+
+        local delete_worktree = function()
+          local selection = action_state.get_selected_entry()
+          if not selection then
+            return
+          end
+
+          local path = selection.value.path
+          if path == cwd then
+            vim.notify("Cannot delete the current worktree", vim.log.levels.WARN)
+            return
+          end
+
+          local choice = vim.fn.confirm("Delete worktree " .. path .. "?", "&Yes\n&No", 2)
+          if choice ~= 1 then
+            return
+          end
+
+          vim.fn.system({ "git", "worktree", "remove", path })
+          if vim.v.shell_error ~= 0 then
+            vim.fn.system({ "git", "worktree", "remove", "--force", path })
+          end
+          if vim.v.shell_error ~= 0 then
+            vim.notify("Failed to delete worktree: " .. path, vim.log.levels.ERROR)
+            return
+          end
+
+          refresh(prompt_bufnr)
+        end
+
+        map("i", "<C-d>", delete_worktree)
+        map("n", "<C-d>", delete_worktree)
+
+        return true
+      end,
+    })
+    :find()
+end
+
 -- Frecency file picker mirroring the old find_files behaviour: hidden files
 -- included, .git excluded, .gitignore respected. <C-i> toggles --no-ignore.
 local frecency_normal_scan = { "rg", "--hidden", "--files", "--color", "never", "-g", "!.git" }
@@ -256,6 +374,7 @@ return {
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
       { "<leader>gh", "<cmd>Telescope git_bcommits_range<cr>", { desc = "Open file git history", remap = true } },
       { "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file git history", remap = true } },
+      { "<leader>gw", worktree_picker, desc = "Git Worktrees" },
 
       -- search
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
