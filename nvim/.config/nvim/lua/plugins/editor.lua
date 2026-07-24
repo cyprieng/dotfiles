@@ -224,6 +224,25 @@ return {
         size = 0.3,
       },
     },
+    config = function(_, opts)
+      require("trouble").setup(opts)
+
+      local Main = require("trouble.view.main")
+      local valid = Main._valid
+      function Main._valid(win, buf)
+        if vim.bo[buf].filetype == "snacks_dashboard" then
+          return valid(win, buf)
+            or (
+              vim.api.nvim_win_is_valid(win)
+              and vim.api.nvim_buf_is_valid(buf)
+              and vim.api.nvim_win_get_buf(win) == buf
+              and vim.api.nvim_win_get_config(win).relative == ""
+              and not vim.w[win].trouble
+            )
+        end
+        return valid(win, buf)
+      end
+    end,
     cmd = "Trouble",
     keys = {
       {
@@ -349,14 +368,7 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     vscode = true,
-    opts = {
-      modes = {
-        search = {
-          enabled = true,
-          highlight = { backdrop = true },
-        },
-      },
-    },
+    opts = {},
     keys = {
       {
         "s",
