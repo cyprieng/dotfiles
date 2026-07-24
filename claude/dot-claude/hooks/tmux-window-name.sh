@@ -18,6 +18,6 @@ title=$(tac "$transcript" 2>/dev/null | grep -m1 '"type":"ai-title"' | jq -r '.a
 # window.pane separator in target parsing).
 title=${title//./}
 
-window=$(tmux display-message -p -t "$TMUX_PANE" '#I')
+window=$(tmux display-message -p -t "$TMUX_PANE" '#{window_id}')
 tmux set-window-option -t "$window" automatic-rename off
 tmux rename-window -t "$window" "$title"

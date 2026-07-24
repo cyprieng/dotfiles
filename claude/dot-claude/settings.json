@@ -39,9 +39,8 @@
       "Bash(rtk tee:*)",
       "Bash(rtk nvr:*)"
     ],
-    "defaultMode": "default"
+    "defaultMode": "auto"
   },
-  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -68,7 +67,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "[ -n \"$TMUX_PANE\" ] && tmux set-window-option -t \"$(tmux display-message -p -t \"$TMUX_PANE\" '#I')\" automatic-rename on 2>/dev/null"
+            "command": "win=$(tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}' 2>/dev/null); [ -n \"$win\" ] && tmux set-window-option -t \"$win\" automatic-rename on 2>/dev/null"
           }
         ]
       }
@@ -130,5 +129,7 @@
   "effortLevel": "medium",
   "advisorModel": "opus",
   "tui": "fullscreen",
-  "skipAutoPermissionPrompt": true
+  "editorMode": "normal",
+  "skipAutoPermissionPrompt": true,
+  "model": "sonnet"
 }
