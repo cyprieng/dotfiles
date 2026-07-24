@@ -31,6 +31,9 @@ local function updateSlackBadge()
 	if label and label ~= "" then
 		if not slackIndicator then
 			slackIndicator = hs.menubar.new(true, "slackIndicator")
+			slackIndicator:setClickCallback(function()
+				hs.application.launchOrFocus("Slack")
+			end)
 		end
 		slackIndicator:setIcon(makeBadgeIcon(label), false)
 		slackIndicator:setTitle("")
