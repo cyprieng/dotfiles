@@ -2,6 +2,12 @@ return {
   {
     "folke/snacks.nvim",
     priority = 1000,
+    --- Eager-load notifier after setup to avoid lazy vim.notify race
+    --- (loop/previous error loading snacks.notifier on first notify).
+    config = function(_, opts)
+      require("snacks").setup(opts)
+      require("snacks.notifier")
+    end,
     opts = {
       bigfile = { enabled = true, line_length = 10000 },
       indent = {
