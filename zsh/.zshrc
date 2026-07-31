@@ -160,6 +160,32 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+# fpp-like picker: file → editor, directory → cd
+fgo() {
+  local l w tmp
+  tmp=$(mktemp)
+  if [[ -t 0 ]]; then
+    [[ -n "$PREV_CMD" && "$PREV_CMD" != fgo* ]] || { rm -f "$tmp"; return 1; }
+    eval "$PREV_CMD" > "$tmp" 2>/dev/null
+  else
+    cat > "$tmp" || { rm -f "$tmp"; return; }
+  fi
+  [[ -s "$tmp" ]] || { rm -f "$tmp"; return; }
+  l=$(fzf < "$tmp") || { rm -f "$tmp"; return; }
+  rm -f "$tmp"
+  for w in ${=l}; do
+    w=${w//\"/}
+    w=${w%%[:|]*}
+    [[ -e $w ]] || continue
+    if [[ -d $w ]]; then
+      cd -- "$w"
+    else
+      "$EDITOR" "$w"
+    fi
+    return
+  done
+}
+
 # Find process listening on a port
 function whoseport() { lsof -i :$1 -sTCP:LISTEN -t | xargs -r ps -o pid=,comm= -p; }
 
@@ -204,6 +230,7 @@ preexec() {
   echo -ne "\033]0;$action - ${PWD##*/}\a"
 
   # Capture command for notify
+  PREV_CMD="$LAST_CMD"
   LAST_CMD="$1"
 
   # Only set timer if the command is not empty or just whitespace
