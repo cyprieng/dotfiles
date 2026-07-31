@@ -400,9 +400,44 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
-      file_types = { "markdown" },
+      file_types = { "markdown", "markdown.mdx" },
+      render_modes = { "n", "v", "V", "\22", "c", "t" },
+      anti_conceal = { enabled = false },
+      pipe_table = { enabled = false },
+      ignore = function(buf)
+        return vim.b[buf].markdown_table_wrap_reader == true
+      end,
     },
-    ft = { "markdown" },
+    ft = { "markdown", "markdown.mdx" },
+    init = function()
+      -- wrap keeps render-markdown active (it disables rendering when leftcol > 0).
+      -- Do not toggle wrap via win_options — that caused a flicker loop at EOL.
+      local group = vim.api.nvim_create_augroup("markdown_wrap", { clear = true })
+      vim.api.nvim_create_autocmd("FileType", {
+        group = group,
+        pattern = { "markdown", "markdown.mdx" },
+        callback = function()
+          vim.opt_local.wrap = true
+          vim.opt_local.linebreak = true
+        end,
+      })
+    end,
+  },
+
+  -- Markdown tables with column-aware wrapping (complements render-markdown).
+  -- Inline mode uses virt_lines: cursor can't land on wrapped rows and visual
+  -- mode clears the overlay. Reader mode uses real buffer lines instead.
+  {
+    "ice345/markdown-table-wrap.nvim",
+    ft = { "markdown", "markdown.mdx" },
+    opts = {
+      extra_filetypes = { "markdown.mdx" },
+      highlight_preset = "catppuccin",
+      preview_mode = "reader",
+      auto_preview = true,
+      render_all = true,
+      auto_preview_in_insert = false,
+    },
   },
 
   -- Rainbow delimiters
