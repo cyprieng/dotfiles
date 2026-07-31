@@ -7,8 +7,8 @@ SHELL := env PATH=$(PATH) /bin/bash
         setup setup-common setup-macos setup-linux tools \
         update clean backup extra
 
-PACKAGES_MACOS := aerospace bettertouchtool claude commitizen ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
-PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude i3 polybar picom rofi
+PACKAGES_MACOS := aerospace bettertouchtool claude commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
+PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude cursor i3 polybar picom rofi
 
 help:
 	@echo "Available commands:"

@@ -1,0 +1,12 @@
+# Ignore everything, whitelist explicitly
+*
+
+!.gitignore
+
+# ~/.cursor/
+!dot-cursor/
+dot-cursor/*
+!dot-cursor/hooks.json
+!dot-cursor/hooks/
+!dot-cursor/hooks/tmux-bell.sh
+!dot-cursor/hooks/tmux-window-name.sh
