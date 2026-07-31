@@ -21,5 +21,3 @@ Library/*
 !Library/Application Support/
 Library/Application Support/*
 !Library/Application Support/Claude/
-!Library/Application Support/rtk/
-!Library/Application Support/rtk/**

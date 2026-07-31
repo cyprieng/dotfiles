@@ -45,7 +45,6 @@ brew "gopls"
 
 # Infra & network
 brew "cloudflared"
-brew "rtk"
 
 # Diagrams
 brew "mermaid-cli"
