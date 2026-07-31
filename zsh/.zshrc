@@ -23,8 +23,10 @@ _direnv_hook() {
 [ -f "$HOME/.zshrc_secrets.sh" ] && source "$HOME/.zshrc_secrets.sh"
 
 # Load brew
-if [ "$(uname)" = "Linux" ]; then
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [[ "$OSTYPE" == darwin* ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ "$(uname)" == "Linux" ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 # Enable correction
@@ -275,6 +277,7 @@ else
 fi
 
 # Completions
+command -v docker >/dev/null 2>&1 && compdef _docker docker
 command -v kubectl >/dev/null 2>&1 && source <(timeout 5 kubectl completion zsh 2>/dev/null)
 command -v gh >/dev/null 2>&1 && source <(timeout 5 gh completion -s zsh 2>/dev/null)
 command -v mise >/dev/null 2>&1 && source <(timeout 5 mise completion zsh 2>/dev/null)
