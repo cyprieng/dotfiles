@@ -264,6 +264,10 @@ return {
     config = function()
       require("image").setup({
         tmux_show_only_in_active_window = true,
+        -- nil = use natural size (up to window bounds); scale_factor enlarges display
+        max_width_window_percentage = nil,
+        max_height_window_percentage = nil,
+        scale_factor = 1.5,
       })
       if vim.env.TMUX then
         local initial_window_id = vim.trim(vim.fn.system("tmux list-windows -F '#{window_id}' -f '#{window_active}'"))
@@ -399,33 +403,6 @@ return {
       file_types = { "markdown" },
     },
     ft = { "markdown" },
-  },
-
-  -- Mermaid diagram preview
-  {
-    "3rd/diagram.nvim",
-    config = function()
-      require("diagram").setup({
-        integrations = {
-          require("diagram.integrations.markdown"),
-        },
-        renderer_options = {
-          mermaid = {
-            theme = "forest",
-          },
-          plantuml = {
-            charset = "utf-8",
-          },
-          d2 = {
-            theme_id = 1,
-          },
-          gnuplot = {
-            theme = "dark",
-            size = "800,600",
-          },
-        },
-      })
-    end,
   },
 
   -- Rainbow delimiters
