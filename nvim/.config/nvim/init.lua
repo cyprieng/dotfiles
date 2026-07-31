@@ -163,3 +163,4 @@ require("lazy").setup({
 
 require("config.keymaps")
 require("config.autocmds")
+require("config.tab_names").setup()
