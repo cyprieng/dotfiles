@@ -438,6 +438,31 @@ return {
       render_all = true,
       auto_preview_in_insert = false,
     },
+    init = function()
+      vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, {
+        group = vim.api.nvim_create_augroup("mtw_diff", { clear = true }),
+        callback = function(ev)
+          local buf = ev.buf
+          vim.schedule(function()
+            if not vim.api.nvim_buf_is_valid(buf) then
+              return
+            end
+            local mtw = require("markdown-table-wrap")
+            if vim.wo.diff or vim.fn.bufname(buf):match("^diffview://") then
+              if require("markdown-table-wrap.reader").is_reader(0) then
+                mtw.close_reader()
+              end
+              mtw.pause_buffer(buf)
+              vim.b[buf].mtw_diff = true
+            elseif vim.b[buf].mtw_diff then
+              vim.b[buf].mtw_diff = nil
+              mtw.state.paused_buffers[buf] = nil
+              mtw.refresh_auto({ force = true })
+            end
+          end)
+        end,
+      })
+    end,
   },
 
   -- Rainbow delimiters
