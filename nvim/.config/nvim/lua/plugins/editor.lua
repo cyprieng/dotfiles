@@ -46,6 +46,74 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
+      require("diffview").setup({ watch_index = true })
+
+      -- Auto-refresh: diffview only watches .git/index by default, so working tree
+      -- changes (external edits, new untracked files, agents) don't show up until
+      -- you manually refresh. Refresh on FocusGained (return to Neovim), GitSignsChanged
+      -- (stage/unstage), and after terminal git cmds. TabEnter picks up a pending
+      -- refresh when you switch back to the Diffview tab.
+      -- Limitation: update_files() only runs when the Diffview tabpage is active.
+
+      local DiffView = require("diffview.scene.views.diff.diff_view").DiffView
+
+      local refresh_pending = false
+      local debounce_id = 0
+
+      local function refresh_diffview()
+        local current = require("diffview.lib").get_current_view()
+        if current and current:instanceof(DiffView) and current.ready and current:is_cur_tabpage() then
+          current:update_files()
+          return true
+        end
+        return false
+      end
+
+      local function refresh_debounced()
+        debounce_id = debounce_id + 1
+        local id = debounce_id
+        vim.defer_fn(function()
+          if id ~= debounce_id then
+            return
+          end
+          if refresh_diffview() then
+            refresh_pending = false
+          end
+        end, 300)
+      end
+
+      local function request_refresh()
+        refresh_pending = true
+        refresh_debounced()
+      end
+
+      local augroup = vim.api.nvim_create_augroup("diffview_auto_refresh", { clear = true })
+
+      vim.api.nvim_create_autocmd("FocusGained", {
+        group = augroup,
+        callback = request_refresh,
+      })
+
+      vim.api.nvim_create_autocmd("TabEnter", {
+        group = augroup,
+        callback = function()
+          if refresh_pending then
+            refresh_debounced()
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("User", {
+        group = augroup,
+        pattern = "GitSignsChanged",
+        callback = request_refresh,
+      })
+
+      vim.api.nvim_create_autocmd({ "TermClose", "TermLeave" }, {
+        group = augroup,
+        callback = request_refresh,
+      })
+
       -- Monkey-patch FilePanel:update_components() to persist collapsed directory state across refreshes.
       -- The collapsed state lives on component contexts (DirData), not on tree nodes,
       -- because flatten_dirs creates new DirData copies in create_comp_schema().
