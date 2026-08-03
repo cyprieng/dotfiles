@@ -2,7 +2,7 @@
 node = "lts"
 "npm:@devcontainers/cli" = "latest"
 "npm:@herb-tools/formatter" = "latest"
-"npm:tree-sitter-cli" = "latest"
+"npm:tree-sitter-cli" = { version = "latest", allow_builds = ["tree-sitter-cli"] }
 "npm:typescript-language-server" = "latest"
 "npm:typescript" = "latest"
 "npm:pyright" = "latest"
