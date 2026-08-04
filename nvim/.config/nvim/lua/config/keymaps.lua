@@ -65,7 +65,21 @@ map("n", "<leader>cp", function()
 end, { desc = "Copy relative file path" })
 
 -- Git
+local function origin_base_branch()
+  for _, branch in ipairs({ "master", "main" }) do
+    vim.fn.system({ "git", "rev-parse", "--verify", "origin/" .. branch })
+    if vim.v.shell_error == 0 then
+      return branch
+    end
+  end
+  return "main"
+end
+
 map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
+map("n", "<leader>gD", function()
+  local base = origin_base_branch()
+  vim.cmd(("DiffviewOpen origin/%s...HEAD --imply-local"):format(base))
+end, { desc = "PR diff vs origin base branch (incl. uncommitted)" })
 
 -- Exit terminal insert mode
 map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
