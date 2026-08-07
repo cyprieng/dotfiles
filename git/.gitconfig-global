@@ -65,6 +65,9 @@
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
+	# Remove worktrees whose GitHub PR is merged. Needs gh. Use -D to force-remove dirty ones.
+	dwt = "!bash \"$HOME/dotfiles/git/scripts/dwt.sh\""
+
 	# List contributors with number of commits.
 	contributors = shortlog --summary --numbered
 
