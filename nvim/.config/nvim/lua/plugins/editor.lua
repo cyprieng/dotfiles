@@ -401,68 +401,8 @@ return {
     "MeanderingProgrammer/render-markdown.nvim",
     opts = {
       file_types = { "markdown", "markdown.mdx" },
-      render_modes = { "n", "v", "V", "\22", "c", "t" },
-      anti_conceal = { enabled = false },
-      pipe_table = { enabled = false },
-      ignore = function(buf)
-        return vim.b[buf].markdown_table_wrap_reader == true
-      end,
     },
     ft = { "markdown", "markdown.mdx" },
-    init = function()
-      -- wrap keeps render-markdown active (it disables rendering when leftcol > 0).
-      -- Do not toggle wrap via win_options — that caused a flicker loop at EOL.
-      local group = vim.api.nvim_create_augroup("markdown_wrap", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        group = group,
-        pattern = { "markdown", "markdown.mdx" },
-        callback = function()
-          vim.opt_local.wrap = true
-          vim.opt_local.linebreak = true
-        end,
-      })
-    end,
-  },
-
-  -- Markdown tables with column-aware wrapping (complements render-markdown).
-  -- Inline mode uses virt_lines: cursor can't land on wrapped rows and visual
-  -- mode clears the overlay. Reader mode uses real buffer lines instead.
-  {
-    "ice345/markdown-table-wrap.nvim",
-    ft = { "markdown", "markdown.mdx" },
-    opts = {
-      extra_filetypes = { "markdown.mdx" },
-      highlight_preset = "catppuccin",
-      preview_mode = "reader",
-      auto_preview = true,
-      render_all = true,
-      auto_preview_in_insert = false,
-    },
-    init = function()
-      vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, {
-        group = vim.api.nvim_create_augroup("mtw_diff", { clear = true }),
-        callback = function(ev)
-          local buf = ev.buf
-          vim.schedule(function()
-            if not vim.api.nvim_buf_is_valid(buf) then
-              return
-            end
-            local mtw = require("markdown-table-wrap")
-            if vim.wo.diff or vim.fn.bufname(buf):match("^diffview://") then
-              if require("markdown-table-wrap.reader").is_reader(0) then
-                mtw.close_reader()
-              end
-              mtw.pause_buffer(buf)
-              vim.b[buf].mtw_diff = true
-            elseif vim.b[buf].mtw_diff then
-              vim.b[buf].mtw_diff = nil
-              mtw.state.paused_buffers[buf] = nil
-              mtw.refresh_auto({ force = true })
-            end
-          end)
-        end,
-      })
-    end,
   },
 
   -- Rainbow delimiters
