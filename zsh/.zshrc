@@ -53,6 +53,7 @@ zinit load zsh-users/zsh-autosuggestions
 zinit load zsh-users/zsh-syntax-highlighting
 zinit load MichaelAquilina/zsh-you-should-use
 zinit load wfxr/forgit
+alias ziclean='find "${XDG_DATA_HOME:-$HOME/.local/share}/zinit/completions" -type l ! -exec test -e {} \; -print -delete'
 
 # fzf-tab configuration
 # disable sort when completing `git checkout`
