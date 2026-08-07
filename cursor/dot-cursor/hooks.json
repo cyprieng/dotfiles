@@ -6,8 +6,9 @@
       { "command": "./hooks/tmux-window-name.sh" }
     ],
     "beforeSubmitPrompt": [{ "command": "./hooks/tmux-window-name.sh" }],
-    "beforeShellExecution": [{ "command": "./hooks/tmux-bell.sh" }],
-    "beforeMCPExecution": [{ "command": "./hooks/tmux-bell.sh" }],
+    "beforeShellExecution": [{ "command": "./hooks/tmux-bell-on-approval.sh" }],
+    "beforeMCPExecution": [{ "command": "./hooks/tmux-bell-on-approval.sh" }],
+    "subagentStop": [{ "command": "./hooks/tmux-bell.sh" }],
     "sessionEnd": [
       {
         "command": "win=$(tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}' 2>/dev/null); [ -n \"$win\" ] && tmux set-window-option -t \"$win\" automatic-rename on 2>/dev/null"
