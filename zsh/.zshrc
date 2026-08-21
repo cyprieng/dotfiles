@@ -94,6 +94,37 @@ alias dotfiles="cd $DOTFILES_DIRECTORY && nvim"
 alias tt="tmux new-session -A -D"
 alias v="nvim"
 
+# Before exiting the last pane of a session, switch tmux to another session
+# (or create one). Hooks don't run when it would kill the tmux server.
+_tmux_switch_on_last_exit() {
+  [[ -z "$TMUX" ]] && return
+  command -v tmux >/dev/null || return
+
+  local windows panes
+  windows=$(tmux display-message -p '#{session_windows}' 2>/dev/null) || return
+  panes=$(tmux display-message -p '#{window_panes}' 2>/dev/null) || return
+  [[ "$windows" == "1" && "$panes" == "1" ]] || return
+
+  local current other
+  current=$(tmux display-message -p '#{session_name}' 2>/dev/null) || return
+  other=$(
+    tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null |
+      sort -rn |
+      awk -v cur="$current" '$2 != cur { print $2; exit }'
+  )
+
+  if [[ -n "$other" ]]; then
+    tmux switch-client -t "$other" 2>/dev/null
+  else
+    local new_session
+    new_session=$(tmux new-session -d -P -F '#{session_name}' -c "$PWD" 2>/dev/null) || return
+    tmux switch-client -t "$new_session" 2>/dev/null
+  fi
+}
+if [[ -o interactive ]] && [[ -n "$TMUX" ]]; then
+  trap '_tmux_switch_on_last_exit' EXIT
+fi
+
 # Send commands to the Neovim instance in the same tmux window
 nvr() {
   local sock="/tmp/nvim-tmux-$(tmux display-message -p -t "$TMUX_PANE" '#{window_id}').sock"
