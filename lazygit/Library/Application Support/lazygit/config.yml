@@ -9,6 +9,6 @@ os:
   editAtLine: '[ -z "$NVIM" ] && (nvim +{{line}} -- {{filename}}) || (nvim --server "$NVIM" --remote {{filename}} && nvim --server "$NVIM" --remote-send ":{{line}}<CR>")'
   editAtLineAndWait: '[ -z "$NVIM" ] && (nvim -- {{dir}}) || (nvim --server "$NVIM" --remote {{dir}})'
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --dark --paging=never --syntax-theme base16-256 -s
+      command: delta --dark --paging=never --syntax-theme base16-256 -s
