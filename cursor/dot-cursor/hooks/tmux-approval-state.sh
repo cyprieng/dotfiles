@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
-# Ring the tmux bell only when Cursor is likely to show an approval prompt.
+# Mark the pane as waiting only when Cursor is likely to show an approval prompt.
 #
 # beforeShellExecution / beforeMCPExecution fire on every tool call, even when
 # approvalMode is "unrestricted" and nothing is shown to the user. Stay silent
-# in that case; ring only in allowlist mode for commands/tools not on the list.
+# in that case; flag only in allowlist mode for commands/tools not on the list.
 
 set -euo pipefail
 
-ring_bell() {
-  [ -n "${TMUX_PANE:-}" ] || return 0
-  local tty
-  tty=$(tmux display-message -t "$TMUX_PANE" -p '#{pane_tty}' 2>/dev/null)
-  [ -n "$tty" ] && printf '\a' > "$tty"
+mark_waiting() {
+  "$HOME/.config/tmux/agent-state.sh" cursor waiting </dev/null
 }
 
 command -v jq &>/dev/null || exit 0
@@ -63,12 +60,12 @@ case "$event" in
   beforeShellExecution)
     cmd=$(echo "$input" | jq -r '.command // empty')
     [ -n "$cmd" ] || exit 0
-    shell_allowed "$cmd" || ring_bell
+    shell_allowed "$cmd" || mark_waiting
     ;;
   beforeMCPExecution)
     tool=$(echo "$input" | jq -r '.tool_name // empty')
     [ -n "$tool" ] || exit 0
-    mcp_allowed "$tool" || ring_bell
+    mcp_allowed "$tool" || mark_waiting
     ;;
 esac
 

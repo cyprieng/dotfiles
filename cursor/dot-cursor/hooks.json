@@ -1,18 +1,23 @@
 {
   "version": 1,
   "hooks": {
-    "stop": [
-      { "command": "./hooks/tmux-bell.sh" },
-      { "command": "./hooks/tmux-window-name.sh" }
+    "beforeSubmitPrompt": [
+      { "command": "$HOME/.config/tmux/agent-state.sh cursor busy" }
     ],
-    "beforeSubmitPrompt": [{ "command": "./hooks/tmux-window-name.sh" }],
-    "beforeShellExecution": [{ "command": "./hooks/tmux-bell-on-approval.sh" }],
-    "beforeMCPExecution": [{ "command": "./hooks/tmux-bell-on-approval.sh" }],
-    "subagentStop": [{ "command": "./hooks/tmux-bell.sh" }],
+    "afterShellExecution": [
+      { "command": "$HOME/.config/tmux/agent-state.sh cursor busy" }
+    ],
+    "afterMCPExecution": [
+      { "command": "$HOME/.config/tmux/agent-state.sh cursor busy" }
+    ],
+    "beforeShellExecution": [{ "command": "./hooks/tmux-approval-state.sh" }],
+    "beforeMCPExecution": [{ "command": "./hooks/tmux-approval-state.sh" }],
+    "stop": [{ "command": "$HOME/.config/tmux/agent-state.sh cursor done" }],
+    "subagentStop": [
+      { "command": "$HOME/.config/tmux/agent-state.sh cursor done" }
+    ],
     "sessionEnd": [
-      {
-        "command": "win=$(tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}' 2>/dev/null); [ -n \"$win\" ] && tmux set-window-option -t \"$win\" automatic-rename on 2>/dev/null"
-      }
+      { "command": "$HOME/.config/tmux/agent-state.sh cursor clear" }
     ]
   }
 }

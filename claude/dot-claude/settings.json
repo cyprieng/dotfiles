@@ -22,14 +22,14 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "opus",
   "hooks": {
     "SessionStart": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/tmux-window-name.sh"
+            "command": "$HOME/.config/tmux/agent-state.sh claude title"
           }
         ]
       }
@@ -39,27 +39,28 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/tmux-window-name.sh"
+            "command": "$HOME/.config/tmux/agent-state.sh claude busy"
           }
         ]
       }
     ],
-    "SessionEnd": [
+    "PostToolUse": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "win=$(tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}' 2>/dev/null); [ -n \"$win\" ] && tmux set-window-option -t \"$win\" automatic-rename on 2>/dev/null"
+            "command": "$HOME/.config/tmux/agent-state.sh claude busy"
           }
         ]
       }
     ],
     "Notification": [
       {
+        "matcher": "permission_prompt|agent_needs_input|elicitation_dialog|elicitation_url_dialog",
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > \"$(tmux display-message -t \"$TMUX_PANE\" -p '#{pane_tty}')\" 2>/dev/null"
+            "command": "$HOME/.config/tmux/agent-state.sh claude waiting"
           }
         ]
       }
@@ -69,7 +70,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > \"$(tmux display-message -t \"$TMUX_PANE\" -p '#{pane_tty}')\" 2>/dev/null"
+            "command": "$HOME/.config/tmux/agent-state.sh claude waiting"
           }
         ]
       }
@@ -79,7 +80,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "printf '\\a' > \"$(tmux display-message -t \"$TMUX_PANE\" -p '#{pane_tty}')\" 2>/dev/null"
+            "command": "$HOME/.config/tmux/agent-state.sh claude done"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.config/tmux/agent-state.sh claude clear"
           }
         ]
       }

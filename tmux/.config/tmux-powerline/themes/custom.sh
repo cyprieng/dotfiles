@@ -30,12 +30,30 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 # See `man tmux` for additional formatting options for the status line.
 # The `format regular` and `format inverse` functions are provided as conveniences
 
+# AI agent panes (Claude Code, Cursor CLI) advertise themselves through the
+# @agent_state / @agent_title pane options set by ~/.config/tmux/agent-state.sh.
+# Both are aggregated over every pane of the window with #{P:...}, so an agent
+# stays visible from a sibling pane (nvim, a shell, ...) — the window, not the
+# focused pane, is the unit the user thinks in.
+
+# Pick one of four values by the most urgent agent state in the window.
+# Commas inside #[...] must be escaped as "#," since they sit in a conditional.
+agent_style() { # <waiting> <done> <busy> <none>
+  local s="#{P:#{@agent_state}}"
+  printf '#{?#{m:*waiting*,%s},%s,#{?#{m:*done*,%s},%s,#{?#{m:*busy*,%s},%s,%s}}}' \
+    "$s" "$1" "$s" "$2" "$s" "$3" "$4"
+}
+
+# The agent title when any pane has one, otherwise tmux's own window name — so
+# non-agent windows keep their live automatic-rename behaviour untouched.
+TMUX_POWERLINE_AGENT_NAME="#{?#{P:#{?@agent_title,1,}},#{=/24/…:#{P:#{?@agent_title,#{@agent_title} ,}}},#W}"
+
 # shellcheck disable=SC2128
 if [ -z "$TMUX_POWERLINE_WINDOW_STATUS_CURRENT" ]; then
   TMUX_POWERLINE_WINDOW_STATUS_CURRENT=(
     "#[$(format inverse)]"
     "$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
-    " #I #W "
+    " #I ${TMUX_POWERLINE_AGENT_NAME} "
     "#[$(format regular)]"
     "$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
   )
@@ -51,9 +69,9 @@ fi
 # shellcheck disable=SC2128
 if [ -z "$TMUX_POWERLINE_WINDOW_STATUS_FORMAT" ]; then
   TMUX_POWERLINE_WINDOW_STATUS_FORMAT=(
-    "#{?window_bell_flag,#[fg=#222436#,bg=#ef9f76],#[fg=#222436#,bg=#3B4261]}$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
-    "#{?window_bell_flag,#[fg=#222436#,bg=#ef9f76],#[fg=#babbf1#,bg=#3B4261]} #{?#{==:#F,-},#[nodim],#[dim]} #I #W #[nodim]"
-    "#{?window_bell_flag,#[fg=#ef9f76#,bg=#222436],#[fg=#3B4261#,bg=#222436]}$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
+    "$(agent_style '#[fg=#222436#,bg=#ef9f76]' '#[fg=#222436#,bg=#a6d189]' '#[fg=#222436#,bg=#8caaee]' '#[fg=#222436#,bg=#3B4261]')$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
+    "$(agent_style '#[fg=#222436#,bg=#ef9f76]' '#[fg=#222436#,bg=#a6d189]' '#[fg=#222436#,bg=#8caaee]' '#[fg=#babbf1#,bg=#3B4261]') #{?#{==:#F,-},#[nodim],#[dim]} #I ${TMUX_POWERLINE_AGENT_NAME} #[nodim]"
+    "$(agent_style '#[fg=#ef9f76#,bg=#222436]' '#[fg=#a6d189#,bg=#222436]' '#[fg=#8caaee#,bg=#222436]' '#[fg=#3B4261#,bg=#222436]')$TMUX_POWERLINE_DEFAULT_LEFTSIDE_SEPARATOR"
   )
 #(
 #    "#[$(format regular)]"
