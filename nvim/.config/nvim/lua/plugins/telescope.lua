@@ -458,14 +458,21 @@ return {
         defaults = {
           prompt_prefix = " ",
           selection_caret = " ",
-          -- open files in the first window that is an actual file.
+          -- open files in the first window of the current tabpage that can host
+          -- a file: skip floats and panel windows (neo-tree, terminal, quickfix,
+          -- grug-far...), which stickybuf already knows how to identify.
           -- use the current window if no other window is available.
           get_selection_window = function()
-            local wins = vim.api.nvim_list_wins()
+            local sticky = require("stickybuf")
+            local wins = vim.api.nvim_tabpage_list_wins(0)
             table.insert(wins, 1, vim.api.nvim_get_current_win())
             for _, win in ipairs(wins) do
               local buf = vim.api.nvim_win_get_buf(win)
-              if vim.bo[buf].buftype == "" then
+              if
+                vim.api.nvim_win_get_config(win).relative == ""
+                and not sticky.is_pinned(win)
+                and not sticky.should_auto_pin(buf)
+              then
                 return win
               end
             end
