@@ -95,12 +95,16 @@
     "php-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "ruby-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "platform-tooling@ai-skills-marketplace": true
+    "typescript-lsp@claude-plugins-official": true
   },
   "effortLevel": "medium",
-  "advisorModel": "opus",
+  "modelSettings": {
+    "claude-opus-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "tui": "fullscreen",
   "editorMode": "normal",
+  "verbose": false,
   "skipAutoPermissionPrompt": true
 }
