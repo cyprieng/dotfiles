@@ -191,17 +191,6 @@ return {
         herb_ls = {},
       }
 
-      -- Github copilot
-      if vim.g.enable_github_copilot then
-        servers.copilot = {
-          cmd = {
-            vim.fn.expand("$HOME/.local/share/mise/installs/node/lts/bin/node"),
-            vim.fn.stdpath("data") .. "/mason/bin/copilot-language-server",
-            "--stdio",
-          },
-        }
-      end
-
       -- VUE config
       local vue_language_server_path = vim.fn.stdpath("data")
         .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
@@ -304,15 +293,11 @@ return {
       vim.lsp.config("ruby_lsp", {
         cmd = function(dispatchers, config)
           local root = config.root_dir or vim.uv.cwd()
-          return require("vim.lsp.rpc").start(
-            {
-              "sh",
-              "-c",
-              'mkdir -p .ruby-lsp && rm -f .ruby-lsp/needs_update && echo "2099-01-01T00:00:00Z" > .ruby-lsp/last_updated && exec mise x -- ruby-lsp',
-            },
-            dispatchers,
-            { cwd = root }
-          )
+          return require("vim.lsp.rpc").start({
+            "sh",
+            "-c",
+            'mkdir -p .ruby-lsp && rm -f .ruby-lsp/needs_update && echo "2099-01-01T00:00:00Z" > .ruby-lsp/last_updated && exec mise x -- ruby-lsp',
+          }, dispatchers, { cwd = root })
         end,
         capabilities = capabilities,
         init_options = {
@@ -324,33 +309,6 @@ return {
         },
       })
       vim.lsp.enable("ruby_lsp")
-
-      -- Github copilot
-      if vim.g.enable_github_copilot then
-        vim.api.nvim_create_autocmd("LspAttach", {
-          callback = function(args)
-            local bufnr = args.buf
-            local client = assert(vim.lsp.get_client(args.data.client_id))
-
-            if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, bufnr) then
-              vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
-
-              vim.keymap.set(
-                "i",
-                "<C-F>",
-                vim.lsp.inline_completion.get,
-                { desc = "LSP: accept inline completion", buffer = bufnr }
-              )
-              vim.keymap.set(
-                "i",
-                "<C-G>",
-                vim.lsp.inline_completion.select,
-                { desc = "LSP: switch inline completion", buffer = bufnr }
-              )
-            end
-          end,
-        })
-      end
     end,
   },
 
@@ -695,5 +653,4 @@ return {
       vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
     end,
   },
-
 }

@@ -4,7 +4,7 @@ return {
     "folke/sidekick.nvim",
     opts = {
       nes = {
-        enabled = vim.g.enable_github_copilot,
+        enabled = false,
       },
       cli = {
         mux = {

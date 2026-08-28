@@ -197,7 +197,6 @@ setup-common:
 	# GH
 	@echo "Setting up GitHub..."
 	@gh auth status >/dev/null 2>&1 || gh auth login
-	@gh extension install github/gh-copilot 2>/dev/null || true
 
 	# Git config
 	@echo "Configuring git..."

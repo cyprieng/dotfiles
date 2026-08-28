@@ -139,8 +139,6 @@ alias g="git"
 alias ls="eza --icons=always --group-directories-first --git"
 alias lla="ls -la"
 alias cz="cz --config ~/.cz.toml"
-alias ghce="gh copilot explain"
-alias ghcs="gh copilot suggest"
 alias load.env="set -a && source .env && set +a"
 
 # Markdown to rich text (macOS only)
