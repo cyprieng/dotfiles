@@ -39,6 +39,10 @@ When your changes create orphans:
 
 The test: Every changed line should trace directly to the user's request.
 
+### No Meta Comments
+
+Never add comments that reference the current task, fix, or conversation (e.g. "added for X", "fix for issue Y", "removed Z"). Only add a comment when the WHY is non-obvious; otherwise write no comment at all.
+
 ## 4. Goal-Driven Execution
 
 **Define success criteria. Loop until verified.**
