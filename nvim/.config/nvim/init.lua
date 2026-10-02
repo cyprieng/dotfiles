@@ -9,7 +9,7 @@ end
 -- Listen on a tmux window-scoped socket for remote control (skip in nested neovim)
 if vim.env.TMUX and not vim.env.NVIM then
   local window_id = vim.fn.system("tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}'"):gsub("%s+", "")
-  vim.fn.serverstart("/tmp/nvim-tmux-" .. window_id .. ".sock")
+  pcall(vim.fn.serverstart, "/tmp/nvim-tmux-" .. window_id .. ".sock")
 end
 
 -- Global UI settings
