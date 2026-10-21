@@ -46,7 +46,17 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
-      require("diffview").setup({ watch_index = true })
+      require("diffview").setup({
+        watch_index = true,
+        -- update_files() runs git on the UI thread (vim.wait). Two things make that
+        -- hang for ~30s, sometimes many minutes (see ~/.cache/nvim/diffview.log):
+        --   --no-optional-locks: don't block when another git (agent, gitsigns,
+        --     lazygit) holds .git/index.lock, and don't rewrite the index (that
+        --     rewrite was re-triggering watch_index).
+        --   diff.renames=true: global git config sets diff.renames=copies, and
+        --     copy detection makes `git diff --numstat` very slow.
+        git_cmd = { "git", "--no-optional-locks", "-c", "diff.renames=true" },
+      })
 
       -- Auto-refresh: diffview only watches .git/index by default, so working tree
       -- changes (external edits, new untracked files, agents) don't show up until
@@ -54,22 +64,44 @@ return {
       -- (stage/unstage), and after terminal git cmds. TabEnter picks up a pending
       -- refresh when you switch back to the Diffview tab.
       -- Limitation: update_files() only runs when the Diffview tabpage is active.
+      -- GitSignsChanged fires about once a second while a buffer is dirty, and each
+      -- update_files() blocks the UI, so the refresh is rate-limited.
 
       local DiffView = require("diffview.scene.views.diff.diff_view").DiffView
 
       local refresh_pending = false
       local debounce_id = 0
+      local last_refresh_ms = 0
+      local trailing_scheduled = false
+      local MIN_REFRESH_INTERVAL_MS = 2000
+      local refresh_debounced
 
       local function refresh_diffview()
+        local now = vim.uv.now()
+        local elapsed = now - last_refresh_ms
+        if elapsed < MIN_REFRESH_INTERVAL_MS then
+          -- Keep the latest state, but don't stack another blocking git diff.
+          if not trailing_scheduled then
+            trailing_scheduled = true
+            vim.defer_fn(function()
+              trailing_scheduled = false
+              if refresh_pending then
+                refresh_debounced()
+              end
+            end, MIN_REFRESH_INTERVAL_MS - elapsed)
+          end
+          return false
+        end
         local current = require("diffview.lib").get_current_view()
         if current and current:instanceof(DiffView) and current.ready and current:is_cur_tabpage() then
+          last_refresh_ms = now
           current:update_files()
           return true
         end
         return false
       end
 
-      local function refresh_debounced()
+      refresh_debounced = function()
         debounce_id = debounce_id + 1
         local id = debounce_id
         vim.defer_fn(function()
