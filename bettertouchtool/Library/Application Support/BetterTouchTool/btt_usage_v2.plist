@@ -2,6 +2,122 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>2026-10-1</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>38</integer>
+	</dict>
+	<key>2026-10-10</key>
+	<dict/>
+	<key>2026-10-11</key>
+	<dict/>
+	<key>2026-10-12</key>
+	<dict>
+		<key>v2||42EFD9D3-338F-410C-9D2B-4552607CF0BA||1||100||206||0||Balayage vers la gauche à 3 doigts||Exécuter un script shell / une tâche: -||</key>
+		<integer>1</integer>
+		<key>v2||42EFD9D3-338F-410C-9D2B-4552607CF0BA||1||100||366||49||Balayage vers la gauche à 3 doigts||Exécuter un script shell / une tâche: -||Actions exécutées lors d'un mouvement rapide</key>
+		<integer>2</integer>
+		<key>v2||6556DF8A-46DD-4FAE-8531-382B6DEDBACC||1||101||206||0||Balayage vers la droite à 3 doigts||Exécuter un script shell / une tâche: -||</key>
+		<integer>3</integer>
+		<key>v2||6556DF8A-46DD-4FAE-8531-382B6DEDBACC||1||101||366||49||Balayage vers la droite à 3 doigts||Exécuter un script shell / une tâche: -||Actions exécutées lors d'un mouvement rapide</key>
+		<integer>6</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>44</integer>
+	</dict>
+	<key>2026-10-13</key>
+	<dict/>
+	<key>2026-10-14</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>42</integer>
+	</dict>
+	<key>2026-10-15</key>
+	<dict/>
+	<key>2026-10-16</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>33</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-10-17</key>
+	<dict/>
+	<key>2026-10-18</key>
+	<dict/>
+	<key>2026-10-19</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>53</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)|| P||</key>
+		<integer>2</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃ B||</key>
+		<integer>4</integer>
+	</dict>
+	<key>2026-10-2</key>
+	<dict/>
+	<key>2026-10-20</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-10-3</key>
+	<dict/>
+	<key>2026-10-4</key>
+	<dict/>
+	<key>2026-10-5</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>58</integer>
+	</dict>
+	<key>2026-10-6</key>
+	<dict/>
+	<key>2026-10-7</key>
+	<dict>
+		<key>v2||77B682AA-028A-4129-AB51-EFB0BE5BECEA||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)|| N||</key>
+		<integer>2</integer>
+		<key>v2||77B682AA-028A-4129-AB51-EFB0BE5BECEA||1||114||128||0||Tapotement à droite (maintien d'1 doigt)||Envoyer ⌃ B à app under mouse cursor||</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>61</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)|| P||</key>
+		<integer>3</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃ B||</key>
+		<integer>6</integer>
+	</dict>
+	<key>2026-10-8</key>
+	<dict>
+		<key>v2||AD4AD013-392C-4EDD-9E8E-34B4B65E295B||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃⇧ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>31</integer>
+	</dict>
+	<key>2026-10-9</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>4</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>2</integer>
+	</dict>
 	<key>2026-4-1</key>
 	<dict>
 		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
@@ -493,6 +609,50 @@
 		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
 		<integer>15</integer>
 	</dict>
+	<key>2026-7-10</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>7</integer>
+	</dict>
+	<key>2026-7-11</key>
+	<dict/>
+	<key>2026-7-12</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-7-13</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-7-14</key>
+	<dict/>
+	<key>2026-7-15</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>9</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)|| P||</key>
+		<integer>4</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃ B||</key>
+		<integer>8</integer>
+	</dict>
+	<key>2026-7-16</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-7-17</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>8</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>6</integer>
+	</dict>
+	<key>2026-7-18</key>
+	<dict/>
+	<key>2026-7-19</key>
+	<dict/>
 	<key>2026-7-2</key>
 	<dict>
 		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
@@ -504,8 +664,95 @@
 		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
 		<integer>1</integer>
 	</dict>
+	<key>2026-7-20</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>3</integer>
+	</dict>
+	<key>2026-7-21</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-7-22</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>7</integer>
+	</dict>
+	<key>2026-7-23</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-7-24</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>16</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>8</integer>
+	</dict>
+	<key>2026-7-25</key>
+	<dict/>
+	<key>2026-7-26</key>
+	<dict/>
+	<key>2026-7-27</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>9</integer>
+	</dict>
+	<key>2026-7-28</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>4</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-7-29</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>12</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>6</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>2</integer>
+	</dict>
 	<key>2026-7-3</key>
 	<dict/>
+	<key>2026-7-30</key>
+	<dict/>
+	<key>2026-7-31</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>13</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>18</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>6</integer>
+	</dict>
 	<key>2026-7-4</key>
 	<dict/>
 	<key>2026-7-5</key>
@@ -546,5 +793,333 @@
 		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
 		<integer>3</integer>
 	</dict>
+	<key>2026-8-1</key>
+	<dict/>
+	<key>2026-8-10</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>31</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>14</integer>
+	</dict>
+	<key>2026-8-11</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>4</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-8-12</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>3</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>6</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>3</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>3</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>42</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>8</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>4</integer>
+	</dict>
+	<key>2026-8-13</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-8-14</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>17</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>12</integer>
+	</dict>
+	<key>2026-8-15</key>
+	<dict/>
+	<key>2026-8-16</key>
+	<dict/>
+	<key>2026-8-17</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>22</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>24</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>6</integer>
+	</dict>
+	<key>2026-8-18</key>
+	<dict/>
+	<key>2026-8-19</key>
+	<dict>
+		<key>v2||77B682AA-028A-4129-AB51-EFB0BE5BECEA||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)|| N||</key>
+		<integer>1</integer>
+		<key>v2||77B682AA-028A-4129-AB51-EFB0BE5BECEA||1||114||128||0||Tapotement à droite (maintien d'1 doigt)||Envoyer ⌃ B à app under mouse cursor||</key>
+		<integer>1</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>26</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>6</integer>
+	</dict>
+	<key>2026-8-2</key>
+	<dict/>
+	<key>2026-8-20</key>
+	<dict/>
+	<key>2026-8-21</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>18</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>4</integer>
+	</dict>
+	<key>2026-8-22</key>
+	<dict/>
+	<key>2026-8-23</key>
+	<dict/>
+	<key>2026-8-24</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>30</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>4</integer>
+	</dict>
+	<key>2026-8-25</key>
+	<dict/>
+	<key>2026-8-26</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>24</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-8-27</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-8-28</key>
+	<dict>
+		<key>v2||AD4AD013-392C-4EDD-9E8E-34B4B65E295B||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃⇧ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>37</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>4</integer>
+	</dict>
+	<key>2026-8-29</key>
+	<dict/>
+	<key>2026-8-3</key>
+	<dict>
+		<key>v2||6556DF8A-46DD-4FAE-8531-382B6DEDBACC||1||101||206||0||Balayage vers la droite à 3 doigts||Exécuter Script Shell / Tâche: -||</key>
+		<integer>1</integer>
+		<key>v2||6556DF8A-46DD-4FAE-8531-382B6DEDBACC||1||101||366||49||Balayage vers la droite à 3 doigts||Exécuter Script Shell / Tâche: -||Actions Executed On Quick Flick</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>14</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>8</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>6</integer>
+	</dict>
+	<key>2026-8-30</key>
+	<dict/>
+	<key>2026-8-31</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+	</dict>
+	<key>2026-8-4</key>
+	<dict/>
+	<key>2026-8-5</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>23</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>6</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-8-6</key>
+	<dict/>
+	<key>2026-8-7</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>23</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>6</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-8-8</key>
+	<dict/>
+	<key>2026-8-9</key>
+	<dict/>
+	<key>2026-9-1</key>
+	<dict>
+		<key>v2||42EFD9D3-338F-410C-9D2B-4552607CF0BA||1||100||206||0||Balayage vers la gauche à 3 doigts||Exécuter Script Shell / Tâche: -||</key>
+		<integer>1</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>12</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-9-10</key>
+	<dict/>
+	<key>2026-9-11</key>
+	<dict/>
+	<key>2026-9-12</key>
+	<dict/>
+	<key>2026-9-13</key>
+	<dict/>
+	<key>2026-9-14</key>
+	<dict/>
+	<key>2026-9-15</key>
+	<dict/>
+	<key>2026-9-16</key>
+	<dict/>
+	<key>2026-9-17</key>
+	<dict/>
+	<key>2026-9-18</key>
+	<dict/>
+	<key>2026-9-19</key>
+	<dict/>
+	<key>2026-9-2</key>
+	<dict>
+		<key>v2||42EFD9D3-338F-410C-9D2B-4552607CF0BA||1||100||206||0||Balayage vers la gauche à 3 doigts||Exécuter Script Shell / Tâche: -||</key>
+		<integer>1</integer>
+		<key>v2||42EFD9D3-338F-410C-9D2B-4552607CF0BA||1||100||366||49||Balayage vers la gauche à 3 doigts||Exécuter Script Shell / Tâche: -||Actions exécutées lors d'un mouvement rapide</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>30</integer>
+	</dict>
+	<key>2026-9-20</key>
+	<dict/>
+	<key>2026-9-21</key>
+	<dict>
+		<key>v2||AD4AD013-392C-4EDD-9E8E-34B4B65E295B||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃⇧ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>34</integer>
+	</dict>
+	<key>2026-9-22</key>
+	<dict/>
+	<key>2026-9-23</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>1</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>1</integer>
+		<key>v2||AD4AD013-392C-4EDD-9E8E-34B4B65E295B||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃⇧ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>19</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>6</integer>
+		<key>v2||FABEDF09-068D-4210-93B4-EBF1DFF05543||1||163||-1||0||Double-tap à 3 doigts||⌘ W||</key>
+		<integer>4</integer>
+	</dict>
+	<key>2026-9-24</key>
+	<dict>
+		<key>v2||77B682AA-028A-4129-AB51-EFB0BE5BECEA||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)|| N||</key>
+		<integer>5</integer>
+		<key>v2||77B682AA-028A-4129-AB51-EFB0BE5BECEA||1||114||128||0||Tapotement à droite (maintien d'1 doigt)||Envoyer ⌃ B à app under mouse cursor||</key>
+		<integer>5</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>14</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)|| P||</key>
+		<integer>5</integer>
+		<key>v2||F3ED6051-AA1C-4453-A953-8074B76A8B9F||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃ B||</key>
+		<integer>10</integer>
+	</dict>
+	<key>2026-9-25</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-9-26</key>
+	<dict/>
+	<key>2026-9-27</key>
+	<dict/>
+	<key>2026-9-28</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>14</integer>
+	</dict>
+	<key>2026-9-29</key>
+	<dict>
+		<key>v2||AD4AD013-392C-4EDD-9E8E-34B4B65E295B||1||113||-1||0||Tapotement à gauche (maintien d'1 doigt)||⌃⇧ ⇥||</key>
+		<integer>2</integer>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>46</integer>
+	</dict>
+	<key>2026-9-3</key>
+	<dict/>
+	<key>2026-9-30</key>
+	<dict>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L|| ↩||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ C||</key>
+		<integer>4</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ T||</key>
+		<integer>2</integer>
+		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-9-4</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>45</integer>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-9-5</key>
+	<dict/>
+	<key>2026-9-6</key>
+	<dict/>
+	<key>2026-9-7</key>
+	<dict/>
+	<key>2026-9-8</key>
+	<dict/>
+	<key>2026-9-9</key>
+	<dict/>
 </dict>
 </plist>
