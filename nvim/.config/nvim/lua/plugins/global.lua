@@ -1,8 +1,17 @@
 return {
   -- TMUX split integration
-  { "mrjones2014/smart-splits.nvim", opts = {
-    at_edge = "stop",
-  } },
+  {
+    "smart-splits-nvim/smart-splits.nvim",
+    dependencies = {
+      { "smart-splits-nvim/backend-tmux", main = "smart-splits-backend-tmux" },
+    },
+    opts = {
+      mux = { backend = "smart-splits-backend-tmux" },
+      move = {
+        at_edge = "stop",
+      },
+    },
+  },
 
   -- Session management
   {
