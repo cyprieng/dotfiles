@@ -76,8 +76,43 @@
 		<key>v2||7CF6247D-D22C-4FFD-A1D9-4F0E228E6BEC||9||0||-1||0||⌃⌥⇧⌘ L||⌘ V||</key>
 		<integer>1</integer>
 	</dict>
+	<key>2026-10-21</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>57</integer>
+	</dict>
+	<key>2026-10-22</key>
+	<dict>
+		<key>v2||E07B45BF-0050-4898-8735-066EE37EBB73||1||114||-1||0||Tapotement à droite (maintien d'1 doigt)||⌃ ⇥||</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-10-23</key>
+	<dict/>
+	<key>2026-10-24</key>
+	<dict/>
+	<key>2026-10-25</key>
+	<dict/>
+	<key>2026-10-26</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>57</integer>
+	</dict>
+	<key>2026-10-27</key>
+	<dict/>
+	<key>2026-10-28</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>58</integer>
+	</dict>
+	<key>2026-10-29</key>
+	<dict/>
 	<key>2026-10-3</key>
 	<dict/>
+	<key>2026-10-30</key>
+	<dict>
+		<key>v2||B3CDEE74-728D-49A9-8D75-3C2A7EEE871E||1||179||186||0||Double-tap à 2 doigts||⌘ Touche Cmd enfoncée||</key>
+		<integer>59</integer>
+	</dict>
 	<key>2026-10-4</key>
 	<dict/>
 	<key>2026-10-5</key>
