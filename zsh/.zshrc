@@ -256,8 +256,8 @@ zstyle ':vcs_info:git:*' formats 'on %B%F{5}%b%f '
 preexec() {
   local action="$1"
 
-  # Set window title
-  echo -ne "\033]0;$action - ${PWD##*/}\a"
+  # Set window title (command name only — full $1 can contain OSC/CSI and break the terminal)
+  echo -ne "\033]0;${action%% *} - ${PWD##*/}\a"
 
   # Capture command for notify
   PREV_CMD="$LAST_CMD"
