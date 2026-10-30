@@ -327,11 +327,13 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 
 # Load zfunc and compinit (optimized: only once per day)
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+_stale_zcompdump=(${ZDOTDIR:-$HOME}/.zcompdump(N.mh+24))
+if (( $#_stale_zcompdump )); then
   compinit
 else
   compinit -C
 fi
+unset _stale_zcompdump
 
 # Completions
 command -v docker >/dev/null 2>&1 && compdef _docker docker
