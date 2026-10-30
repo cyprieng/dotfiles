@@ -29,9 +29,6 @@ elif [[ "$(uname)" == "Linux" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-# Enable correction
-ENABLE_CORRECTION="true"
-
 # Load zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -84,9 +81,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Preview command
 zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
   '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) || (out=$(MANWIDTH=$FZF_PREVIEW_COLUMNS man "$word") 2>/dev/null && echo $out) || (out=$(which "$word") && echo $out) || echo "${(P)word}"'
-
-# Custom title
-DISABLE_AUTO_TITLE="true"
 
 # Aliases
 export DOTFILES_DIRECTORY="$HOME/dotfiles"
