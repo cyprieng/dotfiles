@@ -1,4 +1,3 @@
-cask "aldente"
 brew "pam-reattach"
 cask "claude"
 cask "datagrip"

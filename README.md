@@ -74,14 +74,13 @@ Run `make help` to see all available commands:
 
 - Reduce animations: Apple menu > System Settings > Accessibility > Motion > Turn on Reduce motion
 - Add qwerty-fr: Apple menu > System Settings > Keyboard > Input Sources > Add qwerty-fr from Others
-- Hide menu bar items: Apple menu > Menu Bar > Hide everything except Aerospace and AlDente (replace native battery with it)
+- Hide menu bar items: Apple menu > Menu Bar > Hide everything except Aerospace
 
 ### Apps on startup
 
 Make sure the following apps run on startup:
 
 - Aerospace
-- AlDente
 - CleanShotX
 - Hammerspoon
 - Raycast
