@@ -63,7 +63,7 @@
 
 	# Remove branches that have already been merged with main.
 	# a.k.a. ‘delete merged’
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	dm = "!git branch --merged | grep -vE '^\\*|^[[:space:]]*(main|master)$' | xargs -n 1 git branch -d"
 
 	# Remove worktrees whose GitHub PR is merged. Needs gh. Use -D to force-remove dirty ones.
 	dwt = "!bash \"$HOME/dotfiles/git/scripts/dwt.sh\""
@@ -142,11 +142,6 @@
 	line-numbers-plus-style       = "#b8db87"
 	line-numbers-zero-style       = "#3b4261"
 
-[color]
-	# Use colors in Git commands that are capable of colored output when
-	# outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
-	ui = auto
-
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -173,10 +168,6 @@
         colorMoved = plain
         mnemonicPrefix = true
 
-[diff "bin"]
-	# Use `hexdump` to diff binary files.
-	textconv = hexdump -v -C
-
 [help]
 	# Automatically correct and execute mistyped commands.
 	autocorrect = prompt
@@ -187,8 +178,6 @@
 	conflictstyle = zdiff3
 
 [push]
-	# https://git-scm.com/docs/git-config#git-config-pushdefault
-	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 	autoSetupRemote = true
@@ -200,9 +189,6 @@
         prune = true
         pruneTags = true
 	all = true
-
-[rerere]
-        enabled = false
 
 [rebase]
         autoSquash = true

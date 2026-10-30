@@ -16,7 +16,6 @@ Thumbs.db
 node_modules
 yarn-error.log
 
-.DS_Store
 .idea
 .env.local
 .vscode
