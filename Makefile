@@ -177,7 +177,7 @@ deps-linux:
 tools:
 	@echo "Installing language tools..."
 	@mise install
-	@uv tool install "markitdown[all]"
+	@mise exec -- uv tool install "markitdown[all]"
 
 	@echo "Installing Claude Code..."
 	@curl -fsSL https://claude.ai/install.sh | bash
@@ -298,7 +298,6 @@ setup-macos: setup-common
 	@defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"                  # Use list view in all Finder windows by default
 	@defaults write com.apple.finder NewWindowTarget -string "PfHm"                       # Set home as default finder location
 	@defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"                  # Search the current folder by default
-	@defaults write com.apple.dock expose-group-by-app -bool false                        # Don't group windows by application in Mission Control
 	@defaults write com.apple.dock autohide-delay -float 0                                # Remove the auto-hiding Dock delay
 	@defaults write com.apple.dock autohide-time-modifier -float 0                        # Remove the animation when hiding/showing the Dock
 	@defaults write com.apple.dock autohide -bool true                                    # Automatically hide and show the Dock
