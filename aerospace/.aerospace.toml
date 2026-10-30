@@ -240,7 +240,4 @@ run = "move-node-to-workspace 9"
 if.app-id = 'org.openvpn.client.app'
 run = "move-node-to-workspace 9"
 
-[[on-window-detected]]
-if.app-id = 'com.macpaw.CleanMyMac5'
-run = "move-node-to-workspace 9"
 

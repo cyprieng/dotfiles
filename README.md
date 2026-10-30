@@ -98,7 +98,7 @@ Rearrange Dock:
 - Ghostty
 - Obsidian
 
-### Zen / Chrome
+### Chrome
 
 Install the following chrome extensions:
 
@@ -128,8 +128,6 @@ Add the following bookmarks to the bookmarks bar:
 - [Archive.is](<javascript:location.href='https://archive.is/'+encodeURIComponent(document.location)>)
 
 ### Others
-
-Install [CleanMyMac](https://macpaw.com/fr/download/cleanmymac)
 
 Change the wallpaper using the ones from `wallpaper` directory.
 
