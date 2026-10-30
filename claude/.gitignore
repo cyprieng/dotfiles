@@ -14,8 +14,6 @@ dot-claude/*
 !dot-claude/skills/**
 dot-claude/skills/synced/
 dot-claude/skills/.trash/
-!dot-claude/hooks/
-!dot-claude/hooks/tmux-window-name.sh
 
 # ~/Library/Application Support/
 !Library/

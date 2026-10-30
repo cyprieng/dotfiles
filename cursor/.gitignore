@@ -8,6 +8,4 @@
 dot-cursor/*
 !dot-cursor/hooks.json
 !dot-cursor/hooks/
-!dot-cursor/hooks/tmux-bell.sh
-!dot-cursor/hooks/tmux-bell-on-approval.sh
-!dot-cursor/hooks/tmux-window-name.sh
+!dot-cursor/hooks/tmux-approval-state.sh
