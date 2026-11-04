@@ -1,6 +1,7 @@
 UNAME := $(shell uname)
 PATH  := /opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:$(PATH)
-SHELL := env PATH=$(PATH) /bin/bash
+export PATH
+SHELL := /bin/bash
 .PHONY: help install install-macos install-linux \
         stow stow-macos stow-linux unstow unstow-macos unstow-linux \
         init init-macos init-linux deps deps-macos deps-linux \
