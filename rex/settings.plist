@@ -586,7 +586,7 @@
 	<key>Workspace.usesStandardInactiveWindowPaneStyles</key>
 	<false/>
 	<key>rex.agents.names-sessions</key>
-	<true/>
+	<false/>
 	<key>rex.client.remoteControl</key>
 	<true/>
 	<key>rex.server.automatic-restart-enabled</key>
