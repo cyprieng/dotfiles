@@ -15,6 +15,9 @@ local function agent_kind(fg)
   if exe:find("claude", 1, true) then
     return "claude"
   end
+  if exe:find("codex", 1, true) then
+    return "codex"
+  end
 end
 
 ---Terminal panes of the tiled layer holding `self`, in reading order (left to right, then top to bottom)

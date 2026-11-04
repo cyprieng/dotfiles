@@ -2,13 +2,13 @@
 name: pane-agent
 description: >-
   Interview the user about a task, write a concise brief, then open a new
-  tmux or Rex pane side-by-side and launch claude or cursor-agent in it with
+  tmux or Rex pane side-by-side and launch claude, codex or cursor-agent in it with
   the brief as the initial prompt. Use when the user wants to delegate a task
   to a new agent instance in a new pane, or mentions "écris un brief et lance",
-  "ouvre un pane avec ce brief", "lance claude/cursor dans un nouveau pane".
+  "ouvre un pane avec ce brief", "lance claude/codex/cursor dans un nouveau pane".
 ---
 
-Turn a task idea into a brief, then hand it off to a fresh `claude` or
+Turn a task idea into a brief, then hand it off to a fresh `claude`, `codex` or
 `cursor-agent` instance running in a new pane next to the current one, in
 whichever multiplexer the current session runs in (tmux or Rex).
 
@@ -32,8 +32,8 @@ whichever multiplexer the current session runs in (tmux or Rex).
    2-4 kebab-case words summarizing the task; timestamp via
    `date +%Y%m%d-%H%M`).
 
-4. **Pick the tool.** Default to `claude`. Use `cursor-agent` only if the
-   user explicitly asked for cursor.
+4. **Pick the tool.** Default to `claude`. Use `codex` if the user asked for
+   Codex, or `cursor-agent` if they asked for Cursor.
 
 5. **Open a side-by-side shell pane and type the launch command into it,**
    with the brief as the tool's initial prompt argument. The pane runs a
@@ -61,7 +61,7 @@ whichever multiplexer the current session runs in (tmux or Rex).
    - **Neither is set:** don't open anything; report the brief file path so
      the user can launch it manually.
 
-   Swap `claude` for `cursor-agent` if that tool was picked. Keep the
+   Swap `claude` for `codex` or `cursor-agent` if that tool was picked. Keep the
    working directory option (`-c "$PWD"`) so the new pane starts in the
    current working directory. The command is typed right after the split,
    while the shell is still starting; the terminal buffers it until the

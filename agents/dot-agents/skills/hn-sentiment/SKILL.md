@@ -1,14 +1,19 @@
+---
+name: hn-sentiment
+description: Search Hacker News discussions about a keyword or topic and summarize sentiment from their comments.
+---
+
 Search Hacker News discussions for a keyword and summarize the sentiment from comments.
 
 Arguments: the keyword or topic to search for (required).
 
 ## Steps
 
-1. **Search stories** — Use WebFetch to call the Hacker News Algolia API:
+1. **Search stories** — Use the available web-fetch tool or `curl` to call the Hacker News Algolia API:
    `https://hn.algolia.com/api/v1/search?query=<KEYWORD>&tags=story&hitsPerPage=5`
    Pick the top 5 most relevant stories (sort by points + num_comments).
 
-2. **Fetch comments** — For each story, use WebFetch to get its comment tree:
+2. **Fetch comments** — For each story, fetch its comment tree:
    `https://hn.algolia.com/api/v1/items/<objectID>`
    Collect comment text from the response (traverse `children` recursively, keep only `text` fields). Limit to ~50 top-level comments per story to stay within context.
 

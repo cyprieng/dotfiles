@@ -1,3 +1,8 @@
+---
+name: prep-pr
+description: Propose a branch name, commit message, and PR description for the current changes without creating commits or branches.
+---
+
 Generate a commit message, branch name, and PR description for the current staged/unstaged changes.
 
 - Read the git diff (staged + unstaged) against main

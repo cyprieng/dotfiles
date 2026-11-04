@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Single source of truth for how an AI agent shows up in tmux and Rex.
-# Called from both the Claude Code and the Cursor CLI hooks.
+# Called from the Claude Code, Codex and Cursor CLI hooks.
 #
 # The state lives in pane options rather than in the window name, so it dies
 # with the pane: killing the agent, the pane or Ghostty needs no cleanup hook,
@@ -10,11 +10,11 @@
 #
 #
 # Outside tmux, in Rex, the state is reported with the Program Status Protocol
-# (OSC 7501) instead; Claude Code emits it natively, so only Cursor needs it.
+# (OSC 7501) instead; Claude Code and Codex emit it natively, so only Cursor needs it.
 # Rex has no per-pane options, so the agent's own pane title becomes the tab
 # label instead, keeping it visible whichever pane of the tab has the focus.
 #
-# Usage: agent-state.sh <claude|cursor> <busy|waiting|done|title|clear>
+# Usage: agent-state.sh <claude|codex|cursor> <busy|waiting|done|title|clear>
 #        with the hook payload on stdin.
 
 flavor=$1
@@ -133,6 +133,12 @@ if [ "$state" != "waiting" ] && command -v jq &>/dev/null && ! [ -t 0 ]; then
       sleep 0.2
     done
     printf '%s' "$title"
+  }
+
+  # Codex publishes its conversation title directly to the terminal.
+  codex_title() {
+    tmux display-message -p -t "$TMUX_PANE" '#{pane_title}' 2>/dev/null |
+      sed -E 's/^[^[:alnum:]]+//'
   }
 
   title=$("${flavor}_title")

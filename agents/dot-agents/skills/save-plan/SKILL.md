@@ -22,7 +22,7 @@ file in `/tmp/`, then open it in the user's running Neovim instance via `nvr`.
 3. **Build the filename** as `/tmp/plan-<description>-<YYYYMMDD-HHMM>.md`. Use
    `date +%Y%m%d-%H%M` for the timestamp.
 
-4. **Write the file** with the Write tool — full Markdown content, no preamble
+4. **Write the file** with the available file-editing tool — full Markdown content, no preamble
    ("Here is the plan…") and no closing summary.
 
 5. **Open in Neovim** with:

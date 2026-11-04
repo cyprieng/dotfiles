@@ -8,8 +8,8 @@ SHELL := /bin/bash
         setup setup-common setup-macos setup-linux tools \
         update clean backup extra
 
-PACKAGES_MACOS := aerospace agents bettertouchtool claude commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim rex sqlfluff tmux zsh mise
-PACKAGES_LINUX := zsh nvim tmux agents git lazygit k9s mise sqlfluff commitizen ghostty claude cursor i3 polybar picom rofi
+PACKAGES_MACOS := aerospace agents bettertouchtool claude codex commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim rex sqlfluff tmux zsh mise
+PACKAGES_LINUX := zsh nvim tmux agents git lazygit k9s mise sqlfluff commitizen ghostty claude codex cursor i3 polybar picom rofi
 
 help:
 	@echo "Available commands:"
