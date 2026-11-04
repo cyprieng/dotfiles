@@ -29,7 +29,16 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude title"
+            "command": "$HOME/.config/agents/agent-state.sh claude title"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh -c 'rex __internal session-start --agent claude 2>/dev/null || true'",
+            "timeout": 5
           }
         ]
       }
@@ -39,7 +48,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude busy"
+            "command": "$HOME/.config/agents/agent-state.sh claude busy"
           }
         ]
       }
@@ -49,7 +58,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude busy"
+            "command": "$HOME/.config/agents/agent-state.sh claude busy"
           }
         ]
       }
@@ -60,7 +69,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude waiting"
+            "command": "$HOME/.config/agents/agent-state.sh claude waiting"
           }
         ]
       }
@@ -70,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude waiting"
+            "command": "$HOME/.config/agents/agent-state.sh claude waiting"
           }
         ]
       }
@@ -80,7 +89,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude done"
+            "command": "$HOME/.config/agents/agent-state.sh claude done"
           }
         ]
       }
@@ -90,7 +99,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.config/tmux/agent-state.sh claude clear"
+            "command": "$HOME/.config/agents/agent-state.sh claude clear"
           }
         ]
       }

@@ -76,6 +76,11 @@ zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 # Min size apply to all command
 zstyle ':fzf-tab:*' popup-min-size 200 8
+# Outside tmux (Rex) there is no popup: draw fzf inline as a framed window
+if [[ -z "$TMUX" ]]; then
+  zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --border=rounded --border-label=' completion ' --margin=0,2 --padding=0,1 --input-border=rounded --list-border=rounded
+  zstyle ':fzf-tab:*' fzf-min-height 20
+fi
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 # Preview command
@@ -119,11 +124,17 @@ if [[ -o interactive ]] && [[ -n "$TMUX" ]]; then
   trap '_tmux_switch_on_last_exit' EXIT
 fi
 
-# Send commands to the Neovim instance in the same tmux window
+# Send commands to the Neovim instance in the same tmux / Rex window
 nvr() {
-  local sock="/tmp/nvim-tmux-$(tmux display-message -p -t "$TMUX_PANE" '#{window_id}').sock"
+  local sock
+  if [[ -n "$TMUX" ]]; then
+    sock="/tmp/nvim-tmux-$(tmux display-message -p -t "$TMUX_PANE" '#{window_id}').sock"
+  elif [[ -n "$REX_SESSION" ]]; then
+    local window_id=$(rex whoami --json 2>/dev/null | jq -r '.window_id // empty')
+    sock="/tmp/nvim-rex-${window_id#window:}.sock"
+  fi
   if [[ ! -S "$sock" ]]; then
-    echo "No Neovim instance found in this tmux window"
+    echo "No Neovim instance found in this window"
     return 1
   fi
   nvim --server "$sock" "$@"

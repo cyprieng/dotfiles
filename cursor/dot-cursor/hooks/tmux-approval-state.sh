@@ -8,7 +8,7 @@
 set -euo pipefail
 
 mark_waiting() {
-  "$HOME/.config/tmux/agent-state.sh" cursor waiting </dev/null
+  "$HOME/.config/agents/agent-state.sh" cursor waiting </dev/null
 }
 
 command -v jq &>/dev/null || exit 0

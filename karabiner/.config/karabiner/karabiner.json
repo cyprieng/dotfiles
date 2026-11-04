@@ -277,7 +277,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.mitchellh\\.ghostty$"
+                                            "^com\\.mitchellh\\.ghostty$",
+                                            "^com\\.superlogical\\.rex$"
                                         ],
                                         "type": "frontmost_application_if"
                                     },
@@ -302,7 +303,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.mitchellh\\.ghostty$"
+                                            "^com\\.mitchellh\\.ghostty$",
+                                            "^com\\.superlogical\\.rex$"
                                         ],
                                         "type": "frontmost_application_if"
                                     },

@@ -251,6 +251,17 @@ if vim.fn.executable("lazygit") == 1 then
       tmux_lazygit({ "-f", vim.fn.expand("%") })
     end, { desc = "Lazygit Current File History" })
     map("n", "<leader>gL", function() tmux_lazygit() end, { desc = "Lazygit Log (cwd)" })
+  elseif require("config.rex").enabled() then
+    local function rex_lazygit(extra_args)
+      local cmd = { "env", "NVIM=" .. vim.v.servername, "lazygit" }
+      vim.list_extend(cmd, extra_args or {})
+      require("config.rex").float(cmd, vim.fn.getcwd())
+    end
+    map("n", "<leader>gg", function() rex_lazygit() end, { desc = "Lazygit (cwd)" })
+    map("n", "<leader>gf", function()
+      rex_lazygit({ "-f", vim.fn.expand("%") })
+    end, { desc = "Lazygit Current File History" })
+    map("n", "<leader>gL", function() rex_lazygit() end, { desc = "Lazygit Log (cwd)" })
   else
     map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
     map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })

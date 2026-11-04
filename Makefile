@@ -7,8 +7,8 @@ SHELL := env PATH=$(PATH) /bin/bash
         setup setup-common setup-macos setup-linux tools \
         update clean backup extra
 
-PACKAGES_MACOS := aerospace bettertouchtool claude commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim sqlfluff tmux zsh mise
-PACKAGES_LINUX := zsh nvim tmux git lazygit k9s mise sqlfluff commitizen ghostty claude cursor i3 polybar picom rofi
+PACKAGES_MACOS := aerospace agents bettertouchtool claude commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim rex sqlfluff tmux zsh mise
+PACKAGES_LINUX := zsh nvim tmux agents git lazygit k9s mise sqlfluff commitizen ghostty claude cursor i3 polybar picom rofi
 
 help:
 	@echo "Available commands:"
@@ -271,6 +271,10 @@ setup-macos: setup-common
 	@killall "BetterTouchTool" >/dev/null 2>&1 || true
 	@cp bettertouchtool/Library/Preferences/com.hegenberg.BetterTouchTool.plist ~/Library/Preferences/com.hegenberg.BetterTouchTool.plist
 
+	# Rex settings set through its UI (preferences domain, not a config file)
+	@echo "Setting up Rex..."
+	@./rex/restore_config.sh
+
 	# Reload gpg-agent so pinentry-mac config takes effect
 	@echo "Reloading gpg-agent..."
 	@gpg-connect-agent reloadagent /bye >/dev/null 2>&1 || true
@@ -401,6 +405,9 @@ endif
 backup:
 	@echo "Backing up BetterTouchTool configuration..."
 	@./bettertouchtool/backup_config.sh
+
+	@echo "Backing up Rex settings..."
+	@./rex/backup_config.sh
 
 	@echo "Backing up Raycast configuration..."
 	@./raycast/backup_config.sh

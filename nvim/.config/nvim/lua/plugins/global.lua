@@ -1,12 +1,14 @@
 return {
-  -- TMUX split integration
+  -- TMUX / Rex split integration
   {
     "smart-splits-nvim/smart-splits.nvim",
     dependencies = {
       { "smart-splits-nvim/backend-tmux", main = "smart-splits-backend-tmux" },
+      { "rawnly/smart-splits-backend-rex", main = "smart-splits-backend-rex" },
     },
     opts = {
-      mux = { backend = "smart-splits-backend-tmux" },
+      -- tmux first: a tmux started from a Rex pane inherits REX_SESSION
+      mux = { backend = { "smart-splits-backend-tmux", "smart-splits-backend-rex" } },
       move = {
         at_edge = "stop",
       },

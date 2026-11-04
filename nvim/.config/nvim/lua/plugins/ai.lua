@@ -88,6 +88,10 @@ return {
       {
         "<leader>at",
         function()
+          local rex_agent = require("config.rex.agent")
+          if rex_agent.enabled() then
+            return rex_agent.send("this")
+          end
           require("sidekick.cli").send({ msg = "{this}" })
         end,
         mode = { "x", "n" },
@@ -96,6 +100,10 @@ return {
       {
         "<leader>af",
         function()
+          local rex_agent = require("config.rex.agent")
+          if rex_agent.enabled() then
+            return rex_agent.send("file")
+          end
           require("sidekick.cli").send({ msg = "{file}" })
         end,
         desc = "Send File",
@@ -103,6 +111,10 @@ return {
       {
         "<leader>av",
         function()
+          local rex_agent = require("config.rex.agent")
+          if rex_agent.enabled() then
+            return rex_agent.send("selection")
+          end
           require("sidekick.cli").send({ msg = "{selection}" })
         end,
         mode = { "x" },

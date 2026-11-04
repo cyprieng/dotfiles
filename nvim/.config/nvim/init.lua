@@ -6,10 +6,19 @@ for _, line in ipairs(vim.fn.systemlist("mise env --shell bash")) do
   end
 end
 
--- Listen on a tmux window-scoped socket for remote control (skip in nested neovim)
+-- Listen on a tmux / Rex window-scoped socket for remote control (skip in nested neovim)
 if vim.env.TMUX and not vim.env.NVIM then
   local window_id = vim.fn.system("tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}'"):gsub("%s+", "")
   pcall(vim.fn.serverstart, "/tmp/nvim-tmux-" .. window_id .. ".sock")
+elseif require("config.rex").enabled() and not vim.env.NVIM then
+  vim.system({ "rex", "whoami", "--json" }, { text = true }, function(res)
+    local ok, whoami = pcall(vim.json.decode, res.stdout or "")
+    if res.code == 0 and ok and whoami.window_id then
+      vim.schedule(function()
+        pcall(vim.fn.serverstart, require("config.rex").socket(whoami.window_id))
+      end)
+    end
+  end)
 end
 
 -- Global UI settings

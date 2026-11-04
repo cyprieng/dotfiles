@@ -2,22 +2,22 @@
   "version": 1,
   "hooks": {
     "beforeSubmitPrompt": [
-      { "command": "$HOME/.config/tmux/agent-state.sh cursor busy" }
+      { "command": "$HOME/.config/agents/agent-state.sh cursor busy" }
     ],
     "afterShellExecution": [
-      { "command": "$HOME/.config/tmux/agent-state.sh cursor busy" }
+      { "command": "$HOME/.config/agents/agent-state.sh cursor busy" }
     ],
     "afterMCPExecution": [
-      { "command": "$HOME/.config/tmux/agent-state.sh cursor busy" }
+      { "command": "$HOME/.config/agents/agent-state.sh cursor busy" }
     ],
     "beforeShellExecution": [{ "command": "./hooks/tmux-approval-state.sh" }],
     "beforeMCPExecution": [{ "command": "./hooks/tmux-approval-state.sh" }],
-    "stop": [{ "command": "$HOME/.config/tmux/agent-state.sh cursor done" }],
+    "stop": [{ "command": "$HOME/.config/agents/agent-state.sh cursor done" }],
     "subagentStop": [
-      { "command": "$HOME/.config/tmux/agent-state.sh cursor done" }
+      { "command": "$HOME/.config/agents/agent-state.sh cursor done" }
     ],
     "sessionEnd": [
-      { "command": "$HOME/.config/tmux/agent-state.sh cursor clear" }
+      { "command": "$HOME/.config/agents/agent-state.sh cursor clear" }
     ]
   }
 }

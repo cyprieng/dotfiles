@@ -2,14 +2,15 @@
 name: pane-agent
 description: >-
   Interview the user about a task, write a concise brief, then open a new
-  tmux pane side-by-side and launch claude or cursor-agent in it with the
-  brief as the initial prompt. Use when the user wants to delegate a task to
-  a new agent instance in a new pane, or mentions "écris un brief et lance",
+  tmux or Rex pane side-by-side and launch claude or cursor-agent in it with
+  the brief as the initial prompt. Use when the user wants to delegate a task
+  to a new agent instance in a new pane, or mentions "écris un brief et lance",
   "ouvre un pane avec ce brief", "lance claude/cursor dans un nouveau pane".
 ---
 
 Turn a task idea into a brief, then hand it off to a fresh `claude` or
-`cursor-agent` instance running in a new tmux pane next to the current one.
+`cursor-agent` instance running in a new pane next to the current one, in
+whichever multiplexer the current session runs in (tmux or Rex).
 
 ## Steps
 
@@ -34,15 +35,37 @@ Turn a task idea into a brief, then hand it off to a fresh `claude` or
 4. **Pick the tool.** Default to `claude`. Use `cursor-agent` only if the
    user explicitly asked for cursor.
 
-5. **Open a side-by-side tmux pane and launch the tool with the brief as its
-   initial prompt argument:**
+5. **Open a side-by-side shell pane and type the launch command into it,**
+   with the brief as the tool's initial prompt argument. The pane runs a
+   regular shell, so quitting the agent drops back to a prompt instead of
+   closing the pane, and the command stays in the shell history. Pick the
+   multiplexer from the environment:
 
-   ```bash
-   tmux split-window -h -c "$PWD" "claude \"\$(cat '<brief-file>')\""
-   ```
+   - **`$TMUX` is set** (checked first: a tmux started from Rex inherits the
+     Rex variables):
 
-   Swap `claude` for `cursor-agent` if that tool was picked. Keep `-c "$PWD"`
-   so the new pane starts in the current working directory.
+     ```bash
+     pane=$(tmux split-window -h -c "$PWD" -P -F '#{pane_id}')
+     tmux send-keys -t "$pane" -l "claude \"\$(cat '<brief-file>')\""
+     tmux send-keys -t "$pane" Enter
+     ```
+
+   - **Otherwise, `$REX_SESSION` is set:**
+
+     ```bash
+     block=$(rex split -s "$REX_SESSION" -b "$REX_BLOCK" --split=right -c "$PWD" --json | jq -r '.block_ids[0]')
+     rex send -s "$REX_SESSION" -b "$block" "claude \"\$(cat '<brief-file>')\""
+     rex send-key -s "$REX_SESSION" -b "$block" enter
+     ```
+
+   - **Neither is set:** don't open anything; report the brief file path so
+     the user can launch it manually.
+
+   Swap `claude` for `cursor-agent` if that tool was picked. Keep the
+   working directory option (`-c "$PWD"`) so the new pane starts in the
+   current working directory. The command is typed right after the split,
+   while the shell is still starting; the terminal buffers it until the
+   prompt reads it.
 
 6. **Report** the brief file path and which tool was launched, in one short
    line. Nothing else.
@@ -53,7 +76,8 @@ Turn a task idea into a brief, then hand it off to a fresh `claude` or
   vague brief handed to a fresh agent wastes more time than the questions
   cost.
 - Do NOT write the brief file anywhere outside `/tmp/`.
-- Do NOT run any tmux command other than the single `split-window` above
-  (no closing/killing panes, no resizing, no touching other windows).
-- If `tmux split-window` fails (e.g. not inside a tmux session), report the
-  brief file path and the error verbatim so the user can launch it manually.
+- Do NOT run any tmux or rex command other than the split and the keys sent
+  to the new pane above (no closing/killing panes, no resizing, no touching
+  other windows).
+- If the split fails, report the brief file path and the error verbatim so
+  the user can launch it manually.

@@ -31,7 +31,7 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 # The `format regular` and `format inverse` functions are provided as conveniences
 
 # AI agent panes (Claude Code, Cursor CLI) advertise themselves through the
-# @agent_state / @agent_title pane options set by ~/.config/tmux/agent-state.sh.
+# @agent_state / @agent_title pane options set by ~/.config/agents/agent-state.sh.
 # Both are aggregated over every pane of the window with #{P:...}, so an agent
 # stays visible from a sibling pane (nvim, a shell, ...) — the window, not the
 # focused pane, is the unit the user thinks in.
