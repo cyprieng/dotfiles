@@ -61,12 +61,9 @@ cask "cyprieng/dotfiles/cleanshot@4.8.11", trusted: true
 cask "obsidian"
 cask "meetingbar"
 cask "betterdisplay"
-cask "qlmarkdown"
 
 # Languages
 brew "mise"
-tap "shivammathur/php"
-brew "shivammathur/php/php"
 
 # Other
 brew "lua-language-server"

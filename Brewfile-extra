@@ -1,5 +1,4 @@
 brew "pam-reattach"
 cask "claude"
-cask "datagrip"
 cask "localsend"
 cask "spotify"
