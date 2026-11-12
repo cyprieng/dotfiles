@@ -33,6 +33,9 @@ end
 rex.action({
   name = "smart_splits_resize",
   title = "Smart Splits: Resize Pane",
+  -- Fire again on key repeat, same as tmux. Covers a Rex pane and Neovim,
+  -- which receives the key through pane.send_key on each repeat.
+  repeats = true,
   run = function(ctx, args)
     if is_vim(ctx) then
       rex.client.queue("pane.send_key", { key = args.key })
