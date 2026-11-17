@@ -2,8 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>RexAppUpdateChannel</key>
+	<string>preview</string>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUScheduledCheckInterval</key>
+	<real>86400</real>
 	<key>Workspace.appIconVisibility</key>
 	<string>dockOnly</string>
+	<key>Workspace.cursorShader</key>
+	<string>warp</string>
+	<key>Workspace.cursorShadersEnabled</key>
+	<true/>
 	<key>Workspace.customThemes</key>
 	<data>
 	W3siY3JlYXRlZEF0Ijo4MTU0NzMxMzguMzI0MTIsImlkIjoiY3VzdG9tLTYyNjQzODRF
@@ -551,6 +563,8 @@
 	<string>themed</string>
 	<key>Workspace.showsActivePaneBorder</key>
 	<false/>
+	<key>Workspace.sidebarCollapsed</key>
+	<false/>
 	<key>Workspace.sidebarPosition</key>
 	<string>left</string>
 	<key>Workspace.sidebarShowsActivity</key>
@@ -562,8 +576,10 @@
 	<key>Workspace.tabIconTintMode</key>
 	<string>off</string>
 	<key>Workspace.tabStyle</key>
-	<string>horizontal</string>
+	<string>vertical</string>
 	<key>Workspace.tabsFillAvailableSpace</key>
+	<false/>
+	<key>Workspace.terminalCopyOnSelect</key>
 	<false/>
 	<key>Workspace.terminalCursorBlinkIntervalMilliseconds</key>
 	<integer>0</integer>
@@ -576,20 +592,32 @@
 	<key>Workspace.terminalFontSmoothing</key>
 	<false/>
 	<key>Workspace.terminalSmoothScrolling</key>
-	<false/>
+	<true/>
 	<key>Workspace.terminalUseThemePalette</key>
-	<false/>
+	<true/>
 	<key>Workspace.terminalUsesDisplayP3</key>
 	<false/>
 	<key>Workspace.tintsPanesWithProgramBackground</key>
 	<true/>
+	<key>Workspace.toolbarBehavior</key>
+	<string>alwaysShow</string>
 	<key>Workspace.usesStandardInactiveWindowPaneStyles</key>
 	<false/>
 	<key>rex.agents.names-sessions</key>
 	<false/>
 	<key>rex.client.remoteControl</key>
 	<true/>
+	<key>rex.developer-mode-enabled</key>
+	<false/>
 	<key>rex.server.automatic-restart-enabled</key>
 	<true/>
+	<key>rex.server.block-plugin-reload-enabled</key>
+	<false/>
+	<key>rex.server.run-mode</key>
+	<string>bundled</string>
+	<key>rex.server.web-client-origin-patterns</key>
+	<array>
+		<string>https://rex.superlogical.com</string>
+	</array>
 </dict>
 </plist>
