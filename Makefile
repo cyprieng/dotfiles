@@ -23,7 +23,7 @@ help:
 	@echo "  make setup          - Configure system (auto-detects OS)"
 	@echo "  make tools          - Install language tools via mise + uv (after stow)"
 	@echo "  make update         - Update everything"
-	@echo "  make clean          - Clean up broken symlinks"
+	@echo "  make clean          - Clean symlinks, Homebrew, Docker, and mise"
 	@echo "  make backup         - Backup app configurations (macOS)"
 
 # ==============================================================================
@@ -393,6 +393,19 @@ endif
 
 	@echo "Cleaning Homebrew..."
 	@brew cleanup
+
+	@if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then \
+		echo "Cleaning Docker..."; \
+		docker system prune -af --volumes; \
+		docker volume prune -af; \
+	else \
+		echo "Docker is not running, skipping"; \
+	fi
+
+	@if command -v mise >/dev/null 2>&1; then \
+		echo "Cleaning mise..."; \
+		mise prune; \
+	fi
 
 ifeq ($(UNAME), Darwin)
 	@echo "Cleaning system..."

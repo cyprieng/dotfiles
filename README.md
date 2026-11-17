@@ -65,7 +65,7 @@ Run `make help` to see all available commands:
 - `make tools` - Install language tools via mise + uv (runs after stow)
 - `make extra` - Install extra applications and configurations (macOS only)
 - `make update` - Update everything
-- `make clean` - Clean up broken symlinks and Homebrew cache
+- `make clean` - Clean up broken symlinks, Homebrew, Docker, and mise
 - `make backup` - Backup app configurations (macOS only)
 
 ## Manual process (macOS)
