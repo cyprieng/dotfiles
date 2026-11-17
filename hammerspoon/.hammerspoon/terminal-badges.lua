@@ -4,6 +4,7 @@ local apps = {
 	{ name = "Rex Beta", icon = "🦖", autosave = "rexIndicator" },
 }
 
+local dockBadge = require("dock-badge")
 local indicators = {}
 
 local function makeBadgeIcon(text)
@@ -23,8 +24,7 @@ local function makeBadgeIcon(text)
 end
 
 local function updateBadge(app)
-	local output = hs.execute('lsappinfo info -only StatusLabel "' .. app.name .. '"')
-	local label = output and output:match('"label"="(.-)"')
+	local label = dockBadge.label(app.name)
 	local indicator = indicators[app.name]
 	if label and label ~= "" then
 		if not indicator then

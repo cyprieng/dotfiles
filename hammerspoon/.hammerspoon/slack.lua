@@ -1,3 +1,4 @@
+local dockBadge = require("dock-badge")
 local slackIndicator = nil
 
 local function makeBadgeIcon(text)
@@ -26,8 +27,7 @@ local function makeBadgeIcon(text)
 end
 
 local function updateSlackBadge()
-	local output = hs.execute('lsappinfo info -only StatusLabel "Slack"')
-	local label = output and output:match('"label"="(.-)"')
+	local label = dockBadge.label("Slack")
 	if label and label ~= "" then
 		if not slackIndicator then
 			slackIndicator = hs.menubar.new(true, "slackIndicator")
