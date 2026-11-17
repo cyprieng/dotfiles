@@ -126,5 +126,6 @@
   "tui": "fullscreen",
   "editorMode": "normal",
   "verbose": false,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "feedbackDrafts": "off"
 }
