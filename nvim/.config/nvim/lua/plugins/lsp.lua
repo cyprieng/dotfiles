@@ -617,6 +617,25 @@ return {
         "css",
         "pug",
         "vue",
+        "ruby",
+        "embedded_template",
+        "python",
+        "go",
+        "gomod",
+        "php",
+        "json",
+        "yaml",
+        "toml",
+        "tsx",
+        "sql",
+        "hcl",
+        "terraform",
+        "dockerfile",
+        "regex",
+        "http",
+        "scss",
+        "gitcommit",
+        "git_rebase",
       }
 
       -- Install missing parsers
@@ -636,8 +655,9 @@ return {
           if ok and stats and stats.size > max_filesize then
             return
           end
-          pcall(vim.treesitter.start, ev.buf)
-          vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          if pcall(vim.treesitter.start, ev.buf) then
+            vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
         end,
       })
     end,
