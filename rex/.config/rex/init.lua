@@ -67,3 +67,18 @@ for key, data in pairs(sequences) do
     return rex.block.call("com.superlogical.terminal", "write", { block_id = ctx.block_id, data = data }) ~= nil
   end)
 end
+
+-- Bound after the sequences so they are tried first. pane.copy_mode.move is
+-- only available in copy mode; otherwise the sequence binding above runs.
+local copy_mode_moves = {
+  ["alt+left"] = "word_backward",
+  ["alt+right"] = "word_forward",
+  ["cmd+left"] = "line_start",
+  ["cmd+right"] = "line_end",
+  ["ctrl+shift+up"] = "page_up",
+  ["ctrl+shift+down"] = "page_down",
+}
+
+for key, to in pairs(copy_mode_moves) do
+  rex.bind(key, "pane.copy_mode.move", { to = to })
+end
