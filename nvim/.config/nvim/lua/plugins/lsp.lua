@@ -322,101 +322,58 @@ return {
   -- Autoformat
   {
     "stevearc/conform.nvim",
-    event = { "BufWritePre" },
-    cmd = { "ConformInfo" },
+    event = "BufWritePre",
+    cmd = "ConformInfo",
     keys = {
       {
         "<leader>ff",
         function()
-          require("conform").format({ timeout_ms = 5000 }, function(err, did_edit)
-            if err or not did_edit then
-              vim.schedule(function()
-                vim.lsp.buf.format({ timeout_ms = 5000 })
-              end)
-            end
-          end)
+          require("conform").format({ timeout_ms = 5000, lsp_format = "fallback" })
         end,
         mode = "",
         desc = "[F]ormat buffer",
       },
     },
-    opts = function(_, opts)
-      opts.formatters = opts.formatters or {}
-      opts.notify_on_error = false
-      opts.format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        local lsp_format_opt
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          lsp_format_opt = "never"
-        else
-          lsp_format_opt = "fallback"
-        end
-
-        return {
-          timeout_ms = 5000,
-          lsp_format = lsp_format_opt,
-        }
-      end
-      opts.formatters_by_ft = {
+    opts = {
+      notify_on_error = false,
+      format_on_save = { timeout_ms = 5000, lsp_format = "fallback" },
+      formatters_by_ft = {
         lua = { "stylua" },
-        astro = { "prettier" },
         go = { "goimports", "gofumpt" },
-        markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
-        ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-        php = { "php_cs_fixer" },
         python = { "ruff_format" },
+        php = { "php_cs_fixer" },
+        eruby = { "herb_format" },
         terraform = { "terraform_fmt" },
         tf = { "terraform_fmt" },
         ["terraform-vars"] = { "terraform_fmt" },
         xml = { "xmlformatter" },
         svg = { "xmlformatter" },
-        eruby = { "herb_format" },
-      }
-
-      opts.formatters.herb_format = {
-        command = "herb-format",
-        args = {},
-        stdin = true,
-      }
-
-      -- Prettier
-      local prettierSupported = {
-        "css",
-        "graphql",
-        "handlebars",
-        "html",
-        "javascript",
-        "javascriptreact",
-        "json",
-        "jsonc",
-        "less",
-        "markdown",
-        "markdown.mdx",
-        "scss",
-        "typescript",
-        "typescriptreact",
-        "vue",
-        "yaml",
-      }
-      opts.formatters_by_ft = opts.formatters_by_ft or {}
-      for _, ft in ipairs(prettierSupported) do
-        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "prettier")
-      end
-
-      -- SQL
-      local sql_ft = { "sql", "mysql", "plsql" }
-      opts.formatters.sqlfluff = {
-        args = { "format", "--dialect=ansi", "-" },
-      }
-      for _, ft in ipairs(sql_ft) do
-        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "sqlfluff")
-      end
-    end,
+        sql = { "sqlfluff" },
+        mysql = { "sqlfluff" },
+        plsql = { "sqlfluff" },
+        markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
+        ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+        astro = { "prettier" },
+        css = { "prettier" },
+        graphql = { "prettier" },
+        handlebars = { "prettier" },
+        html = { "prettier" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        less = { "prettier" },
+        scss = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        vue = { "prettier" },
+        yaml = { "prettier" },
+      },
+      formatters = {
+        herb_format = { command = "herb-format", stdin = true },
+        sqlfluff = { args = { "format", "--dialect=ansi", "-" } },
+      },
+    },
   },
 
   -- Autocompletion
