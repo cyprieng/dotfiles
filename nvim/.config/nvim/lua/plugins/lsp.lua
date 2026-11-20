@@ -419,7 +419,8 @@ return {
         ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-        ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+        -- <C-k> is reserved for split navigation
+        ["<C-k>"] = false,
       },
 
       appearance = {
