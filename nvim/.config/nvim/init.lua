@@ -1,11 +1,3 @@
--- Inject mise env
-for _, line in ipairs(vim.fn.systemlist("mise env --shell bash")) do
-  local key, value = line:match("export (%w+)=['\"]?([^'\";]*)['\"]?")
-  if key and value then
-    vim.env[key] = value
-  end
-end
-
 -- Listen on a tmux / Rex window-scoped socket for remote control (skip in nested neovim)
 if vim.env.TMUX and not vim.env.NVIM then
   local window_id = vim.fn.system("tmux display-message -p -t \"$TMUX_PANE\" '#{window_id}'"):gsub("%s+", "")
