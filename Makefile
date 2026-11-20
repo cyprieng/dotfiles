@@ -8,7 +8,7 @@ SHELL := /bin/bash
         setup setup-common setup-macos setup-linux tools \
         update clean backup extra
 
-PACKAGES_MACOS := aerospace agents bettertouchtool claude codex commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim rex sqlfluff tmux zsh mise
+PACKAGES_MACOS := aerospace agents bettertouchtool claude codex colima commitizen cursor ghostty git gnupg hammerspoon k9s karabiner lazygit nvim rex sqlfluff tmux zsh mise
 PACKAGES_LINUX := zsh nvim tmux agents git lazygit k9s mise sqlfluff commitizen ghostty claude codex cursor i3 polybar picom rofi
 
 help:
@@ -88,6 +88,8 @@ install-linux: init-linux deps-linux stow-linux setup-linux tools
 
 stow-macos:
 	@echo "Symlinking dotfiles (macOS)..."
+	# Prevent stow from folding this dir into the repo, it holds runtime state (VM disk, sockets)
+	@mkdir -p ~/.colima/default
 	@stow --dotfiles --ignore='\.DS_Store' -t $(HOME) $(PACKAGES_MACOS)
 
 stow-linux:
@@ -275,6 +277,18 @@ setup-macos: setup-common
 	# Rex settings set through its UI (preferences domain, not a config file)
 	@echo "Setting up Rex..."
 	@./rex/restore_config.sh
+
+	# Docker writes logins and contexts into its config, so it is not symlinked:
+	# only the Homebrew plugins dir is set in it, before Colima starts writing to it
+	@echo "Setting up Docker..."
+	@mkdir -p ~/.docker
+	@test -s ~/.docker/config.json || echo '{}' > ~/.docker/config.json
+	@config=$$(jq '.cliPluginsExtraDirs = ["/opt/homebrew/lib/docker/cli-plugins"]' ~/.docker/config.json) && \
+		echo "$$config" > ~/.docker/config.json
+
+	# Colima (Docker runtime), started now and at login
+	@echo "Starting Colima..."
+	@brew services start colima
 
 	# Reload gpg-agent so pinentry-mac config takes effect
 	@echo "Reloading gpg-agent..."
