@@ -99,6 +99,14 @@ return {
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.name == "eslint" then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = event.buf,
+              command = "LspEslintFixAll",
+            })
+          end
         end,
       })
 
@@ -252,7 +260,6 @@ return {
         "stylua",
         "prettier",
         "eslint",
-        "eslint_d",
         "php-debug-adapter",
         "php-cs-fixer",
         "delve",
@@ -398,42 +405,6 @@ return {
       for _, ft in ipairs(prettierSupported) do
         opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
         table.insert(opts.formatters_by_ft[ft], "prettier")
-      end
-
-      -- Eslint
-      opts.formatters.eslint = {
-        condition = function(ctx)
-          -- Check eslint LSP
-          local has_eslint = false
-          for _, client in ipairs(vim.lsp.get_clients({ bufnr = ctx.buf })) do
-            if client.name == "eslint" then
-              has_eslint = true
-              break
-            end
-          end
-
-          -- Check config file
-          local has_config = vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" }, {
-            upward = true,
-            path = ctx.filename,
-          })[1] ~= nil
-
-          return has_eslint and has_config
-        end,
-
-        command = "eslint_d",
-        args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
-      }
-
-      local js_filetypes = {
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-      }
-
-      for _, ft in ipairs(js_filetypes) do
-        opts.formatters_by_ft[ft] = { "prettier", "eslint" }
       end
 
       -- SQL
