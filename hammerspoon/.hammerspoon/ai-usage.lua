@@ -30,6 +30,9 @@ local function money(cents)
 end
 
 local function utcEpoch(iso)
+	if type(iso) ~= "string" then
+		return nil
+	end
 	local y, mo, d, h, mi, s = iso:match("(%d+)%-(%d+)%-(%d+)T(%d+):(%d+):(%d+)")
 	if not y then
 		return nil
@@ -98,6 +101,17 @@ local function quotaWindow(usedPercent, durationSeconds, resetsAt)
 	return { used = used, label = label, resetsAt = tonumber(resetsAt) }
 end
 
+local function quotaPercents(rows)
+	local quotas = {}
+	for _, row in ipairs(rows) do
+		local used = tonumber(row.used)
+		if row.label and used then
+			table.insert(quotas, { label = row.label, used = used })
+		end
+	end
+	return #quotas > 0 and quotas or nil
+end
+
 local function quotaTitle(windows)
 	local parts = {}
 	for _, window in ipairs(windows) do
@@ -114,9 +128,10 @@ local function metricTitle(metric)
 end
 
 -- Every provider maps its API response to one of these shared metric formats:
--- Spending: { used = cents, limit = cents, resetsAt = epoch? }
+-- Spending: { used = cents, limit = cents, startsAt = epoch?, resetsAt = epoch?, quotas = { { label, used } }? }
 -- Quotas: { windows = { quotaWindow(usedPercent, durationSeconds, resetEpoch), ... } }
 -- Titles and menus depend only on these formats, never on the provider.
+-- A spending metric with no period uses the current calendar month.
 local providers = {
 	{
 		id = "codex",
@@ -194,7 +209,13 @@ local providers = {
 			if not metric then
 				return nil
 			end
-			metric.resetsAt = data.billingCycleEnd and utcEpoch(data.billingCycleEnd)
+			metric.startsAt = utcEpoch(data.billingCycleStart)
+			metric.resetsAt = utcEpoch(data.billingCycleEnd)
+			local plan = type(individual.plan) == "table" and individual.plan or {}
+			metric.quotas = quotaPercents({
+				{ label = "Modèles Cursor", used = plan.autoPercentUsed },
+				{ label = "Autres modèles", used = plan.apiPercentUsed },
+			})
 			return metric
 		end,
 	},
@@ -212,13 +233,74 @@ local function bar(provider)
 	return item
 end
 
+local function monthPeriod(now)
+	local date = os.date("*t", now)
+	local startsAt = os.time({ year = date.year, month = date.month, day = 1, hour = 0, min = 0, sec = 0 })
+	local year = date.year
+	local month = date.month + 1
+	if month == 13 then
+		year = year + 1
+		month = 1
+	end
+	return startsAt, os.time({ year = year, month = month, day = 1, hour = 0, min = 0, sec = 0 })
+end
+
+local function periodBounds(metric, now)
+	if metric.startsAt or metric.resetsAt then
+		return metric.startsAt, metric.resetsAt
+	end
+	return monthPeriod(now)
+end
+
+local function moneyDaily(centsPerDay)
+	return string.format("$%.2f/j", centsPerDay / 100)
+end
+
+-- Monday to Friday, holidays included. A day is 86400s of that time.
+local function weekdaySeconds(from, to)
+	if not from or not to or to <= from then
+		return 0
+	end
+	local seconds = 0
+	local cursor = from
+	while cursor < to do
+		local date = os.date("*t", cursor)
+		local midnight = os.time({ year = date.year, month = date.month, day = date.day + 1, hour = 0, min = 0, sec = 0 })
+		local sliceEnd = math.min(midnight, to)
+		if date.wday >= 2 and date.wday <= 6 then
+			seconds = seconds + (sliceEnd - cursor)
+		end
+		cursor = sliceEnd
+	end
+	return seconds
+end
+
+local function paceItems(metric)
+	local now = os.time()
+	local startsAt, resetsAt = periodBounds(metric, now)
+	local items = {}
+	local elapsed = weekdaySeconds(startsAt, now)
+	if elapsed >= 3600 then
+		table.insert(items, { title = "Moyenne " .. moneyDaily(metric.used / (elapsed / 86400)) })
+	end
+	local leftSeconds = weekdaySeconds(now, resetsAt)
+	if leftSeconds > 0 then
+		local left = math.max(metric.limit - metric.used, 0)
+		table.insert(items, { title = "À consommer " .. moneyDaily(left / (leftSeconds / 86400)) })
+	end
+	return items
+end
+
 local function detailMenu(metric)
 	if not metric then
 		return { { title = "Pas récupéré" } }
 	end
 	if metric.windows then
 		local items = {}
-		for _, window in ipairs(metric.windows) do
+		for index, window in ipairs(metric.windows) do
+			if index > 1 then
+				table.insert(items, { title = "-" })
+			end
 			table.insert(items, { title = string.format("%s : %.0f%% consommé", window.label, window.used) })
 			if window.resetsAt then
 				table.insert(items, { title = "Reset " .. os.date("%d/%m %H:%M", window.resetsAt) })
@@ -227,8 +309,19 @@ local function detailMenu(metric)
 		return items
 	end
 	local items = { { title = "Plafond " .. money(metric.limit) } }
-	if metric.resetsAt then
-		table.insert(items, { title = "Reset " .. os.date("%d/%m %H:%M", metric.resetsAt) })
+	for _, item in ipairs(paceItems(metric)) do
+		table.insert(items, item)
+	end
+	local _, resetsAt = periodBounds(metric, os.time())
+	if resetsAt then
+		table.insert(items, { title = "Reset " .. os.date("%d/%m %H:%M", resetsAt) })
+	end
+	local quotas = metric.quotas or {}
+	if #quotas > 0 then
+		table.insert(items, { title = "-" })
+		for _, quota in ipairs(quotas) do
+			table.insert(items, { title = string.format("%s : %.0f%%", quota.label, quota.used) })
+		end
 	end
 	return items
 end
