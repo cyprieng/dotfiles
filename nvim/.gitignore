@@ -6,5 +6,4 @@ debug
 foo.*
 *.log
 data
-lazy-lock.json
 .config/nvim/lua/options.lua
