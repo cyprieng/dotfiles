@@ -1,6 +1,9 @@
 {
   "version": 1,
   "hooks": {
+    "sessionStart": [
+      { "command": "$HOME/.config/agents/rex-tab-context.sh cursor" }
+    ],
     "beforeSubmitPrompt": [
       { "command": "$HOME/.config/agents/agent-state.sh cursor busy" }
     ],

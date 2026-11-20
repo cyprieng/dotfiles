@@ -9,6 +9,15 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.config/agents/rex-tab-context.sh\" codex",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
