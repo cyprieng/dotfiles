@@ -263,6 +263,8 @@ return {
         "php-debug-adapter",
         "php-cs-fixer",
         "delve",
+        "goimports",
+        "gofumpt",
         "js-debug-adapter",
         "debugpy",
         "sqlfluff",
