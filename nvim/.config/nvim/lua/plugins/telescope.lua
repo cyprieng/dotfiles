@@ -372,8 +372,8 @@ return {
       -- git
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Commits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
-      { "<leader>gh", "<cmd>Telescope git_bcommits_range<cr>", { desc = "Open file git history", remap = true } },
-      { "<leader>gH", "<cmd>Telescope git_bcommits<cr>", { desc = "Open file git history", remap = true } },
+      { "<leader>gh", "<cmd>Telescope git_bcommits_range<cr>", desc = "Line git history" },
+      { "<leader>gH", "<cmd>Telescope git_bcommits<cr>", desc = "File git history" },
       { "<leader>gw", worktree_picker, desc = "Git Worktrees" },
 
       -- search
