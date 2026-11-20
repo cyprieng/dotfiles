@@ -8,4 +8,6 @@
 dot-cursor/*
 !dot-cursor/hooks.json
 !dot-cursor/hooks/
-!dot-cursor/hooks/tmux-approval-state.sh
+!dot-cursor/hooks/*
+!dot-cursor/rules/
+!dot-cursor/rules/*
