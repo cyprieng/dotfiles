@@ -110,7 +110,7 @@ local function wait_for_job(job_id, callback)
     return
   end
 
-  local timer = vim.loop.new_timer()
+  local timer = vim.uv.new_timer()
   if not timer then
     callback()
     return
