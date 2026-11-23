@@ -1,6 +1,4 @@
 return {
-  -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-  -- used for completion, annotations and signatures of Neovim apis
   {
     "folke/lazydev.nvim",
     ft = "lua",
@@ -76,27 +74,23 @@ return {
         end,
       })
 
-      -- Change diagnostic symbols in the sign column (gutter)
       vim.diagnostic.config({
-        signs = true, -- Show signs in the sign column
-        underline = true, -- Use underline for diagnostics
-        update_in_insert = false, -- Don't update diagnostics in insert mode
-        severity_sort = true, -- Sort diagnostics by severity
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
         float = {
           border = "rounded",
         },
       })
 
-      if vim.g.have_nerd_font then
-        local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
-        local diagnostic_signs = {}
-        for type, icon in pairs(signs) do
-          diagnostic_signs[vim.diagnostic.severity[type]] = icon
-        end
-        vim.diagnostic.config({ signs = { text = diagnostic_signs } })
+      local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
+      local diagnostic_signs = {}
+      for type, icon in pairs(signs) do
+        diagnostic_signs[vim.diagnostic.severity[type]] = icon
       end
+      vim.diagnostic.config({ signs = { text = diagnostic_signs } })
 
-      -- Enable the following language servers
       local servers = {
         astro = {},
         bashls = {},
