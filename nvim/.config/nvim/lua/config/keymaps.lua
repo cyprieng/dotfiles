@@ -345,59 +345,36 @@ map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 
--- Vim / Tmux navigation
-map({ "t", "i", "n" }, "<S-left>", function()
-  local win = require("edgy").get_win()
-  if win then
-    win:resize("width", -2)
-  else
-    require("smart-splits").resize_left()
+-- Resize the focused edgy panel, otherwise the split / tmux / Rex pane
+local function resize(dim, delta, fallback)
+  return function()
+    local win = require("edgy").get_win()
+    if win then
+      win:resize(dim, delta)
+    else
+      require("smart-splits")[fallback]()
+    end
   end
-end)
-map({ "t", "i", "n" }, "<S-down>", function()
-  local win = require("edgy").get_win()
-  if win then
-    win:resize("height", -2)
-  else
-    require("smart-splits").resize_down()
-  end
-end)
-map({ "t", "i", "n" }, "<S-up>", function()
-  local win = require("edgy").get_win()
-  if win then
-    win:resize("height", 2)
-  else
-    require("smart-splits").resize_up()
-  end
-end)
-map({ "t", "i", "n" }, "<S-right>", function()
-  local win = require("edgy").get_win()
-  if win then
-    win:resize("width", 2)
-  else
-    require("smart-splits").resize_right()
-  end
-end)
+end
+map({ "t", "i", "n" }, "<S-Left>", resize("width", -2, "resize_left"))
+map({ "t", "i", "n" }, "<S-Down>", resize("height", -2, "resize_down"))
+map({ "t", "i", "n" }, "<S-Up>", resize("height", 2, "resize_up"))
+map({ "t", "i", "n" }, "<S-Right>", resize("width", 2, "resize_right"))
 
-map({ "i", "n" }, "<C-h>", "<cmd>:SmartCursorMoveLeft<cr>")
-map({ "i", "n" }, "<C-j>", "<cmd>:SmartCursorMoveDown<cr>")
-map({ "i", "n" }, "<C-k>", "<cmd>:SmartCursorMoveUp<cr>")
-map({ "i", "n" }, "<C-l>", "<cmd>:SmartCursorMoveRight<cr>")
-
--- For terminal mode we need to exit to normal mode before executing the command otherwise it sometimes move to the wrong window
+-- In terminal mode, leave it before moving, otherwise the move sometimes targets the wrong window
 local function smart_term_move(cmd)
   return function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
+    vim.api.nvim_feedkeys(vim.keycode("<C-\\><C-n>"), "n", false)
     vim.defer_fn(function()
       vim.cmd(cmd)
     end, 1)
   end
 end
 
-map("t", "<C-h>", smart_term_move("SmartCursorMoveLeft"))
-map("t", "<C-j>", smart_term_move("SmartCursorMoveDown"))
-map("t", "<C-k>", smart_term_move("SmartCursorMoveUp"))
-map("t", "<C-l>", smart_term_move("SmartCursorMoveRight"))
+for key, dir in pairs({ h = "Left", j = "Down", k = "Up", l = "Right" }) do
+  map({ "i", "n" }, "<C-" .. key .. ">", "<cmd>SmartCursorMove" .. dir .. "<cr>")
+  map("t", "<C-" .. key .. ">", smart_term_move("SmartCursorMove" .. dir))
+end
 
 -- :Diff <file> — vertical diff in a new tab
 vim.api.nvim_create_user_command("Diff", function(opts)
