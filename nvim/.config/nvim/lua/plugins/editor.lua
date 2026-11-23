@@ -139,6 +139,9 @@ return {
   -- Image preview
   {
     "3rd/image.nvim",
+    -- Markdown for inline diagrams, image files for image.nvim's buffer preview
+    ft = { "markdown", "markdown.mdx" },
+    event = { "BufReadPre *.png,*.jpg,*.jpeg,*.gif,*.webp,*.avif" },
     config = function()
       require("image").setup({
         tmux_show_only_in_active_window = true,
@@ -356,16 +359,15 @@ return {
   {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function()
-      require("neogen").setup({
-        enabled = true,
-        snippet_engine = "luasnip",
-      })
-
-      vim.keymap.set("n", "<leader>cn", ":lua require('neogen').generate()<CR>", {
-        silent = true,
+    opts = { snippet_engine = "luasnip" },
+    keys = {
+      {
+        "<leader>cn",
+        function()
+          require("neogen").generate()
+        end,
         desc = "Generate documentation",
-      })
-    end,
+      },
+    },
   },
 }
