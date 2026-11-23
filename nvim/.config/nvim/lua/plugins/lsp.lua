@@ -78,8 +78,27 @@ return {
     opts = {},
     keys = {
       { "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select venv" },
-      { "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Restore cached venv" },
     },
+    init = function()
+      -- Auto-activate the project's venv when there is exactly one and none is active yet
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "python",
+        callback = function(ev)
+          -- Let venv-selector restore its cached venv first
+          vim.defer_fn(function()
+            local vs = require("venv-selector")
+            if vs.python() then
+              return
+            end
+            local root = vim.fs.root(ev.buf, { "pyproject.toml", "setup.py", "requirements.txt", ".git" })
+            local venvs = root and vim.fn.glob(root .. "/*/pyvenv.cfg", true, true) or {}
+            if #venvs == 1 then
+              vs.activate_from_path(vim.fs.dirname(venvs[1]) .. "/bin/python")
+            end
+          end, 500)
+        end,
+      })
+    end,
   },
 
   {
