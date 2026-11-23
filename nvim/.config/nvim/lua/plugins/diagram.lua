@@ -15,10 +15,10 @@ local function get_integrations()
 end
 
 local inline_renderer_options = {
+  -- No width/height: diagram.nvim passes --width/--height, which mmdc 12 removed
   mermaid = {
     theme = "forest",
     scale = 3,
-    width = 2800,
   },
   plantuml = {
     charset = "utf-8",
@@ -32,26 +32,8 @@ local inline_renderer_options = {
   },
 }
 
--- Separate cache + higher mmdc settings: inline cache is too small for fullscreen.
-local fullscreen_renderer_options = {
-  mermaid = {
-    theme = "forest",
-    scale = 6,
-    width = 6400,
-  },
-  plantuml = {
-    charset = "utf-8",
-  },
-  d2 = {
-    theme_id = 1,
-    scale = 2,
-  },
-  gnuplot = {
-    theme = "dark",
-    size = "2400,1800",
-  },
-}
-
+-- diagram.nvim caches by source only, so fullscreen needs its own cache to get a sharper render
+local fullscreen_mermaid_options = { theme = "forest", scale = 6 }
 local fullscreen_mermaid_cache = vim.fn.stdpath("cache") .. "/diagram-cache/mermaid-fullscreen"
 
 local function get_integration(bufnr)
@@ -99,101 +81,35 @@ local function get_diagram_at_cursor(bufnr)
   for _, diagram in ipairs(integration.query_buffer_diagrams(bufnr)) do
     local range = get_extended_range(bufnr, diagram)
     if row >= range.start_row and row <= range.end_row then
-      return diagram, integration
+      return diagram
     end
   end
 end
 
-local function wait_for_job(job_id, callback)
-  if not job_id then
-    callback()
-    return
-  end
-
-  local timer = vim.uv.new_timer()
-  if not timer then
-    callback()
-    return
-  end
-
-  timer:start(
-    0,
-    100,
-    vim.schedule_wrap(function()
-      if vim.fn.jobwait({ job_id }, 0)[1] == -1 then
-        return
-      end
-      if timer:is_active() then
-        timer:stop()
-      end
-      if not timer:is_closing() then
-        timer:close()
-      end
-      callback()
-    end)
-  )
-end
-
-local function render_mermaid_fullscreen(source, options)
+local function render_mermaid_fullscreen(source, on_done)
   vim.fn.mkdir(fullscreen_mermaid_cache, "p")
-  local path = vim.fn.resolve(fullscreen_mermaid_cache .. "/" .. vim.fn.sha256(source) .. ".png")
-
+  local path = fullscreen_mermaid_cache .. "/" .. vim.fn.sha256(source) .. ".png"
   if vim.fn.filereadable(path) == 1 then
-    return { file_path = path }
+    return on_done(path)
+  end
+  if vim.fn.executable("mmdc") == 0 then
+    return vim.notify("mmdc not found in PATH", vim.log.levels.ERROR, { title = "Diagram" })
   end
 
-  if not vim.fn.executable("mmdc") then
-    vim.notify("mmdc not found in PATH", vim.log.levels.ERROR, { title = "Diagram" })
-    return nil
-  end
-
-  local tmpsource = vim.fn.tempname()
-  vim.fn.writefile(vim.split(source, "\n"), tmpsource)
-
-  local cmd = { "mmdc", "-i", tmpsource, "-o", path }
-  if options.theme then
-    vim.list_extend(cmd, { "-t", options.theme })
-  end
-  if options.scale then
-    vim.list_extend(cmd, { "-s", tostring(options.scale) })
-  end
-  if options.width then
-    vim.list_extend(cmd, { "--width", tostring(options.width) })
-  end
-  if options.height then
-    vim.list_extend(cmd, { "--height", tostring(options.height) })
-  end
-
-  local job_id = vim.fn.jobstart(cmd, {
-    on_stderr = function(_, data)
-      local msg = table.concat(data, "\n"):gsub("^%s+", ""):gsub("%s+$", "")
-      if msg ~= "" then
-        vim.notify("Mermaid render failed:\n" .. msg, vim.log.levels.ERROR, { title = "Diagram" })
+  local input = vim.fn.tempname() .. ".mmd"
+  vim.fn.writefile(vim.split(source, "\n"), input)
+  local o = fullscreen_mermaid_options
+  local cmd = { "mmdc", "-i", input, "-o", path, "-t", o.theme, "-s", tostring(o.scale) }
+  vim.system(cmd, { text = true }, function(res)
+    os.remove(input)
+    vim.schedule(function()
+      if res.code ~= 0 then
+        local err = vim.trim(res.stderr or "")
+        return vim.notify("Mermaid render failed:\n" .. err, vim.log.levels.ERROR, { title = "Diagram" })
       end
-    end,
-  })
-
-  return { file_path = path, job_id = job_id }
-end
-
-local function render_fullscreen(diagram, integration)
-  local renderer = nil
-  for _, r in ipairs(integration.renderers) do
-    if r.id == diagram.renderer_id then
-      renderer = r
-      break
-    end
-  end
-  if not renderer then
-    return nil
-  end
-
-  local options = fullscreen_renderer_options[renderer.id] or {}
-  if renderer.id == "mermaid" then
-    return render_mermaid_fullscreen(diagram.source, options)
-  end
-
-  return renderer.render(diagram.source, options)
+      on_done(path)
+    end)
+  end)
 end
 
 local function show_in_tab(diagram, file_path)
@@ -255,28 +171,17 @@ local function show_in_tab(diagram, file_path)
 end
 
 local function show_fullscreen()
-  local bufnr = vim.api.nvim_get_current_buf()
-  local diagram, integration = get_diagram_at_cursor(bufnr)
+  local diagram = get_diagram_at_cursor(vim.api.nvim_get_current_buf())
   if not diagram then
-    vim.notify("No diagram at cursor", vim.log.levels.INFO, { title = "Diagram" })
-    return
+    return vim.notify("No diagram at cursor", vim.log.levels.INFO, { title = "Diagram" })
+  end
+  if diagram.renderer_id ~= "mermaid" then
+    return vim.notify("Fullscreen only supports mermaid", vim.log.levels.WARN, { title = "Diagram" })
   end
 
-  vim.notify("Rendering fullscreen " .. diagram.renderer_id .. " diagram...", vim.log.levels.INFO, {
-    timeout = 8000,
-  })
-
-  local result = render_fullscreen(diagram, integration)
-  if not result then
-    return
-  end
-
-  wait_for_job(result.job_id, function()
-    if vim.fn.filereadable(result.file_path) == 0 then
-      vim.notify("Diagram file not found: " .. result.file_path, vim.log.levels.ERROR, { title = "Diagram" })
-      return
-    end
-    show_in_tab(diagram, result.file_path)
+  vim.notify("Rendering fullscreen mermaid diagram...", vim.log.levels.INFO, { timeout = 8000 })
+  render_mermaid_fullscreen(diagram.source, function(path)
+    show_in_tab(diagram, path)
   end)
 end
 
