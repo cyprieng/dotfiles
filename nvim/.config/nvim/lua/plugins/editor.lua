@@ -301,17 +301,22 @@ return {
         max_height_window_percentage = nil,
         scale_factor = 1.5,
       })
+      -- tmux focus events don't reliably reach Neovim on window switch, so poll
+      -- the pane's window state to let image.nvim hide images in other windows
       if vim.env.TMUX then
-        local initial_window_id = vim.trim(vim.fn.system("tmux list-windows -F '#{window_id}' -f '#{window_active}'"))
         local was_active = true
         local function poll()
-          local active_window_id = vim.trim(vim.fn.system("tmux list-windows -F '#{window_id}' -f '#{window_active}'"))
-          local is_active = active_window_id == initial_window_id
-          if was_active ~= is_active then
-            vim.api.nvim_exec_autocmds(is_active and "FocusGained" or "FocusLost", {})
-            was_active = is_active
-          end
-          vim.defer_fn(poll, 1000)
+          local cmd = { "tmux", "display-message", "-p", "-t", vim.env.TMUX_PANE, "#{window_active}" }
+          vim.system(cmd, { text = true }, function(res)
+            local is_active = vim.trim(res.stdout or "") == "1"
+            if res.code == 0 and is_active ~= was_active then
+              was_active = is_active
+              vim.schedule(function()
+                vim.api.nvim_exec_autocmds(is_active and "FocusGained" or "FocusLost", {})
+              end)
+            end
+            vim.defer_fn(poll, 1000)
+          end)
         end
         vim.defer_fn(poll, 1000)
       end
