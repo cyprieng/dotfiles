@@ -116,18 +116,22 @@ local function wait_for_job(job_id, callback)
     return
   end
 
-  timer:start(0, 100, vim.schedule_wrap(function()
-    if vim.fn.jobwait({ job_id }, 0)[1] == -1 then
-      return
-    end
-    if timer:is_active() then
-      timer:stop()
-    end
-    if not timer:is_closing() then
-      timer:close()
-    end
-    callback()
-  end))
+  timer:start(
+    0,
+    100,
+    vim.schedule_wrap(function()
+      if vim.fn.jobwait({ job_id }, 0)[1] == -1 then
+        return
+      end
+      if timer:is_active() then
+        timer:stop()
+      end
+      if not timer:is_closing() then
+        timer:close()
+      end
+      callback()
+    end)
+  )
 end
 
 local function render_mermaid_fullscreen(source, options)

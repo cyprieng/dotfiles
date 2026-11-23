@@ -363,7 +363,6 @@ return {
       })
 
       vim.keymap.set("n", "<leader>cn", ":lua require('neogen').generate()<CR>", {
-        noremap = true,
         silent = true,
         desc = "Generate documentation",
       })

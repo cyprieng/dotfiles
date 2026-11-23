@@ -20,10 +20,10 @@ map("n", "<leader>t", function()
       vim.cmd("ToggleTermToggleAll")
     end
   end
-end, { desc = "ToggleTerm", remap = true })
+end, { desc = "ToggleTerm" })
 map("n", "<leader>T", function()
   require("toggleterm.terminal").Terminal:new():toggle()
-end, { desc = "New Terminal", remap = true })
+end, { desc = "New Terminal" })
 
 -- Neotree mappings
 local function is_neotree_open()
@@ -42,7 +42,7 @@ map("n", "<leader>e", function()
   if is_neotree_open() then
     vim.cmd("Neotree focus")
   end
-end, { desc = "Neotree", remap = true })
+end, { desc = "Neotree" })
 
 map("n", "<leader>ge", function()
   vim.cmd("Neotree source=git_status toggle")
@@ -82,30 +82,30 @@ map("n", "<leader>gD", function()
 end, { desc = "PR diff vs origin base branch (incl. uncommitted)" })
 
 -- Exit terminal insert mode
-map("t", "<Esc><Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+map("t", "<Esc><Esc>", [[<C-\><C-n>]], { silent = true })
 
 -- Page up/down
-map("n", "<PageUp>", "20k", { noremap = true, silent = true })
-map("n", "<PageDown>", "20j", { noremap = true, silent = true })
+map("n", "<PageUp>", "20k", { silent = true })
+map("n", "<PageDown>", "20j", { silent = true })
 
 -- Start/end of line (Command+Left/Right sends Home/End)
 -- Map Home to first non-blank character
-map("n", "<Home>", "^", { noremap = true })
-map("i", "<Home>", "<C-o>^", { noremap = true })
-map("v", "<Home>", "^", { noremap = true })
+map("n", "<Home>", "^")
+map("i", "<Home>", "<C-o>^")
+map("v", "<Home>", "^")
 
 -- Map End to end of line
-map("n", "<End>", "$", { noremap = true })
-map("i", "<End>", "<C-o>$", { noremap = true })
-map("v", "<End>", "$", { noremap = true })
+map("n", "<End>", "$")
+map("i", "<End>", "<C-o>$")
+map("v", "<End>", "$")
 
 -- Word navigation (Alt+Left/Right)
-map("n", "<M-Left>", "b", { noremap = true })
-map("n", "<M-Right>", "w", { noremap = true })
-map("i", "<M-Left>", "<C-o>b", { noremap = true })
-map("i", "<M-Right>", "<C-o>w", { noremap = true })
-map("v", "<M-Left>", "b", { noremap = true })
-map("v", "<M-Right>", "w", { noremap = true })
+map("n", "<M-Left>", "b")
+map("n", "<M-Right>", "w")
+map("i", "<M-Left>", "<C-o>b")
+map("i", "<M-Right>", "<C-o>w")
+map("v", "<M-Left>", "b")
+map("v", "<M-Right>", "w")
 
 -- Word remove
 -- Alt + Backspace to delete word backward
@@ -201,22 +201,22 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- stylua: ignore start
-
 -- toggle options
 Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
 Snacks.toggle.diagnostics():map("<leader>ud")
 Snacks.toggle.line_number():map("<leader>ul")
-Snacks.toggle.option("conceallevel",
-    { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
-Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
-    :map("<leader>uA")
+Snacks.toggle
+  .option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" })
+  :map("<leader>uc")
+Snacks.toggle
+  .option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" })
+  :map("<leader>uA")
 Snacks.toggle.treesitter():map("<leader>uT")
 Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
 if vim.lsp.inlay_hint then
-    Snacks.toggle.inlay_hints():map("<leader>uh")
+  Snacks.toggle.inlay_hints():map("<leader>uh")
 end
 
 map("n", "<leader>fF", function()
@@ -239,40 +239,76 @@ end, { desc = "Select Scratch Buffer" })
 if vim.fn.executable("lazygit") == 1 then
   if vim.env.TMUX then
     local function tmux_lazygit(extra_args)
-      local cmd = { "tmux", "display-popup", "-E", "-e", "NVIM=" .. vim.v.servername,
-        "-w", "90%", "-h", "90%", "-d", vim.fn.getcwd(), "--", "lazygit" }
+      local cmd = {
+        "tmux",
+        "display-popup",
+        "-E",
+        "-e",
+        "NVIM=" .. vim.v.servername,
+        "-w",
+        "90%",
+        "-h",
+        "90%",
+        "-d",
+        vim.fn.getcwd(),
+        "--",
+        "lazygit",
+      }
       for _, arg in ipairs(extra_args or {}) do
         table.insert(cmd, arg)
       end
       vim.system(cmd)
     end
-    map("n", "<leader>gg", function() tmux_lazygit() end, { desc = "Lazygit (cwd)" })
+    map("n", "<leader>gg", function()
+      tmux_lazygit()
+    end, { desc = "Lazygit (cwd)" })
     map("n", "<leader>gf", function()
       tmux_lazygit({ "-f", vim.fn.expand("%") })
     end, { desc = "Lazygit Current File History" })
-    map("n", "<leader>gL", function() tmux_lazygit() end, { desc = "Lazygit Log (cwd)" })
+    map("n", "<leader>gL", function()
+      tmux_lazygit()
+    end, { desc = "Lazygit Log (cwd)" })
   elseif require("config.rex").enabled() then
     local function rex_lazygit(extra_args)
       local cmd = { "env", "NVIM=" .. vim.v.servername, "lazygit" }
       vim.list_extend(cmd, extra_args or {})
       require("config.rex").float(cmd, vim.fn.getcwd())
     end
-    map("n", "<leader>gg", function() rex_lazygit() end, { desc = "Lazygit (cwd)" })
+    map("n", "<leader>gg", function()
+      rex_lazygit()
+    end, { desc = "Lazygit (cwd)" })
     map("n", "<leader>gf", function()
       rex_lazygit({ "-f", vim.fn.expand("%") })
     end, { desc = "Lazygit Current File History" })
-    map("n", "<leader>gL", function() rex_lazygit() end, { desc = "Lazygit Log (cwd)" })
+    map("n", "<leader>gL", function()
+      rex_lazygit()
+    end, { desc = "Lazygit Log (cwd)" })
   else
-    map("n", "<leader>gg", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
-    map("n", "<leader>gf", function() Snacks.lazygit.log_file() end, { desc = "Lazygit Current File History" })
-    map("n", "<leader>gL", function() Snacks.lazygit.log() end, { desc = "Lazygit Log (cwd)" })
+    map("n", "<leader>gg", function()
+      Snacks.lazygit()
+    end, { desc = "Lazygit (cwd)" })
+    map("n", "<leader>gf", function()
+      Snacks.lazygit.log_file()
+    end, { desc = "Lazygit Current File History" })
+    map("n", "<leader>gL", function()
+      Snacks.lazygit.log()
+    end, { desc = "Lazygit Log (cwd)" })
   end
 end
 
-map("n", "<leader>gb", function() Snacks.git.blame_line() end, { desc = "Git Blame Line" })
-map({ "n", "x" }, "<leader>gB", function() Snacks.gitbrowse() end, { desc = "Git Browse (open)" })
+map("n", "<leader>gb", function()
+  Snacks.git.blame_line()
+end, { desc = "Git Blame Line" })
+map({ "n", "x" }, "<leader>gB", function()
+  Snacks.gitbrowse()
+end, { desc = "Git Browse (open)" })
 map({ "n", "x" }, "<leader>gY", function()
-    Snacks.gitbrowse({ open = function(url) vim.fn.setreg("+", url) end, notify = false })
+  Snacks.gitbrowse({
+    open = function(url)
+      vim.fn.setreg("+", url)
+    end,
+    notify = false,
+  })
 end, { desc = "Git Browse (copy)" })
 
 -- quit
@@ -283,9 +319,9 @@ map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 -- windows
-map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
+map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below" })
+map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right" })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window" })
 
 -- tabs
 map("n", "<leader><tab>N", "<cmd>tabnew<cr>", { desc = "New Tab" })
@@ -298,62 +334,62 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>p", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Folding
-map('n', 'zR', require('ufo').openAllFolds)
-map('n', 'zM', require('ufo').closeAllFolds)
+map("n", "zR", require("ufo").openAllFolds)
+map("n", "zM", require("ufo").closeAllFolds)
 
 -- Yanky
-map({"n","x"}, "p", "<Plug>(YankyPutAfter)")
-map({"n","x"}, "P", "<Plug>(YankyPutBefore)")
-map({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
-map({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+map({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
+map({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
+map({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
+map({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
 map("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
 map("n", "<c-n>", "<Plug>(YankyNextEntry)")
 
 -- Vim / Tmux navigation
-map({"t", "i", "n"}, '<S-left>', function()
+map({ "t", "i", "n" }, "<S-left>", function()
   local win = require("edgy").get_win()
   if win then
     win:resize("width", -2)
   else
-    require('smart-splits').resize_left()
+    require("smart-splits").resize_left()
   end
 end)
-map({"t", "i", "n"}, '<S-down>', function()
+map({ "t", "i", "n" }, "<S-down>", function()
   local win = require("edgy").get_win()
   if win then
     win:resize("height", -2)
   else
-    require('smart-splits').resize_down()
+    require("smart-splits").resize_down()
   end
 end)
-map({"t", "i", "n"}, '<S-up>', function()
+map({ "t", "i", "n" }, "<S-up>", function()
   local win = require("edgy").get_win()
   if win then
     win:resize("height", 2)
   else
-    require('smart-splits').resize_up()
+    require("smart-splits").resize_up()
   end
 end)
-map({"t", "i", "n"}, '<S-right>', function()
+map({ "t", "i", "n" }, "<S-right>", function()
   local win = require("edgy").get_win()
   if win then
     win:resize("width", 2)
   else
-    require('smart-splits').resize_right()
+    require("smart-splits").resize_right()
   end
 end)
 
-map({"i", "n"}, '<C-h>', '<cmd>:SmartCursorMoveLeft<cr>')
-map({"i", "n"}, '<C-j>', '<cmd>:SmartCursorMoveDown<cr>')
-map({"i", "n"}, '<C-k>', '<cmd>:SmartCursorMoveUp<cr>')
-map({"i", "n"}, '<C-l>', '<cmd>:SmartCursorMoveRight<cr>')
+map({ "i", "n" }, "<C-h>", "<cmd>:SmartCursorMoveLeft<cr>")
+map({ "i", "n" }, "<C-j>", "<cmd>:SmartCursorMoveDown<cr>")
+map({ "i", "n" }, "<C-k>", "<cmd>:SmartCursorMoveUp<cr>")
+map({ "i", "n" }, "<C-l>", "<cmd>:SmartCursorMoveRight<cr>")
 
 -- For terminal mode we need to exit to normal mode before executing the command otherwise it sometimes move to the wrong window
 local function smart_term_move(cmd)
   return function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
     vim.defer_fn(function()
-     vim.cmd(cmd)
+      vim.cmd(cmd)
     end, 1)
   end
 end
