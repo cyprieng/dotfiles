@@ -8,6 +8,10 @@ return {
     priority = 1000,
     opts = {
       flavour = "frappe",
+      -- No editor background, so tmux window-style can dim inactive panes
+      custom_highlights = function()
+        return { Normal = { bg = "NONE" }, NormalNC = { bg = "NONE" } }
+      end,
       integrations = {
         blink_cmp = true,
         diffview = true,
@@ -371,7 +375,6 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    after = "catppuccin",
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
@@ -386,10 +389,6 @@ return {
       { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
     },
     opts = {
-      highlights = {
-        buffer_visible = { fg = "#C6D0F5", bg = "#303546", bold = true, italic = true },
-        separator_visible = { bg = "#303546", fg = "#191C26" },
-      },
       options = {
         separator_style = "slant",
         close_command = function(n)
@@ -427,15 +426,16 @@ return {
       },
     },
     config = function(_, opts)
+      local C = require("catppuccin.palettes").get_palette()
+      opts.highlights = require("catppuccin.special.bufferline").get_theme({
+        custom = {
+          all = {
+            buffer_visible = { fg = C.text, bg = C.base, style = { "bold", "italic" } },
+            separator_visible = { fg = C.crust, bg = C.base },
+          },
+        },
+      })
       require("bufferline").setup(opts)
-
-      -- Make Normal bg transparent so tmux window-style can dim inactive panes
-      local normal_hl = vim.api.nvim_get_hl(0, { name = "Normal" })
-      normal_hl.bg = nil
-      ---@diagnostic disable-next-line: param-type-mismatch
-      vim.api.nvim_set_hl(0, "Normal", normal_hl)
-      ---@diagnostic disable-next-line: param-type-mismatch
-      vim.api.nvim_set_hl(0, "NormalNC", normal_hl)
 
       -- Fix bufferline when restoring a session (only during session load)
       vim.api.nvim_create_autocmd("SessionLoadPost", {
@@ -483,7 +483,7 @@ return {
             " ",
             { filename, gui = modified and "bold,italic" or "bold" },
             " ",
-            guibg = "#44406e",
+            guibg = require("catppuccin.palettes").get_palette().surface0,
           }
         end,
       })
