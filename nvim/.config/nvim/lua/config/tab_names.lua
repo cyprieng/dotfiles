@@ -4,8 +4,8 @@ local M = {}
 ---@return string
 function M.label(tabnr)
   for _, buf in ipairs(vim.fn.tabpagebuflist(tabnr)) do
-    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype:match("^Diffview") then
-      return "Diffview"
+    if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype:match("^codediff") then
+      return "CodeDiff"
     end
   end
 
@@ -60,7 +60,7 @@ function M.setup()
   })
 
   vim.api.nvim_create_autocmd("User", {
-    pattern = { "DiffviewOpen", "DiffviewClose" },
+    pattern = { "CodeDiffOpen", "CodeDiffClose" },
     callback = function()
       vim.schedule(M.update)
     end,

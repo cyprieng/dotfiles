@@ -42,177 +42,23 @@ return {
     opts = {},
   },
 
-  -- Diff view
+  -- Diff review
   {
-    "sindrets/diffview.nvim",
-    config = function()
-      require("diffview").setup({
-        watch_index = true,
-        -- update_files() runs git on the UI thread (vim.wait). Two things make that
-        -- hang for ~30s, sometimes many minutes (see ~/.cache/nvim/diffview.log):
-        --   --no-optional-locks: don't block when another git (agent, gitsigns,
-        --     lazygit) holds .git/index.lock, and don't rewrite the index (that
-        --     rewrite was re-triggering watch_index).
-        --   diff.renames=true: global git config sets diff.renames=copies, and
-        --     copy detection makes `git diff --numstat` very slow.
-        git_cmd = { "git", "--no-optional-locks", "-c", "diff.renames=true" },
-      })
-
-      -- Auto-refresh: diffview only watches .git/index by default, so working tree
-      -- changes (external edits, new untracked files, agents) don't show up until
-      -- you manually refresh. Refresh on FocusGained (return to Neovim), GitSignsChanged
-      -- (stage/unstage), and after terminal git cmds. TabEnter picks up a pending
-      -- refresh when you switch back to the Diffview tab.
-      -- Limitation: update_files() only runs when the Diffview tabpage is active.
-      -- GitSignsChanged fires about once a second while a buffer is dirty, and each
-      -- update_files() blocks the UI, so the refresh is rate-limited.
-
-      local DiffView = require("diffview.scene.views.diff.diff_view").DiffView
-
-      local refresh_pending = false
-      local debounce_id = 0
-      local last_refresh_ms = 0
-      local trailing_scheduled = false
-      local MIN_REFRESH_INTERVAL_MS = 2000
-      local refresh_debounced
-
-      local function refresh_diffview()
-        local now = vim.uv.now()
-        local elapsed = now - last_refresh_ms
-        if elapsed < MIN_REFRESH_INTERVAL_MS then
-          -- Keep the latest state, but don't stack another blocking git diff.
-          if not trailing_scheduled then
-            trailing_scheduled = true
-            vim.defer_fn(function()
-              trailing_scheduled = false
-              if refresh_pending then
-                refresh_debounced()
-              end
-            end, MIN_REFRESH_INTERVAL_MS - elapsed)
-          end
-          return false
-        end
-        local current = require("diffview.lib").get_current_view()
-        if current and current:instanceof(DiffView) and current.ready and current:is_cur_tabpage() then
-          last_refresh_ms = now
-          current:update_files()
-          return true
-        end
-        return false
-      end
-
-      refresh_debounced = function()
-        debounce_id = debounce_id + 1
-        local id = debounce_id
-        vim.defer_fn(function()
-          if id ~= debounce_id then
-            return
-          end
-          if refresh_diffview() then
-            refresh_pending = false
-          end
-        end, 300)
-      end
-
-      local function request_refresh()
-        refresh_pending = true
-        refresh_debounced()
-      end
-
-      local augroup = vim.api.nvim_create_augroup("diffview_auto_refresh", { clear = true })
-
-      vim.api.nvim_create_autocmd("FocusGained", {
-        group = augroup,
-        callback = request_refresh,
-      })
-
-      vim.api.nvim_create_autocmd("TabEnter", {
-        group = augroup,
-        callback = function()
-          if refresh_pending then
-            refresh_debounced()
-          end
+    "esmuellert/codediff.nvim",
+    cmd = "CodeDiff",
+    opts = {
+      explorer = {
+        view_mode = "tree",
+      },
+    },
+    init = function()
+      -- Click acts like <CR>: codediff only handles double click, and only on files
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "codediff-explorer",
+        callback = function(ev)
+          vim.keymap.set("n", "<LeftRelease>", "<CR>", { buffer = ev.buf, remap = true })
         end,
       })
-
-      vim.api.nvim_create_autocmd("User", {
-        group = augroup,
-        pattern = "GitSignsChanged",
-        callback = request_refresh,
-      })
-
-      vim.api.nvim_create_autocmd({ "TermClose", "TermLeave" }, {
-        group = augroup,
-        callback = request_refresh,
-      })
-
-      -- Monkey-patch FilePanel:update_components() to persist collapsed directory state across refreshes.
-      -- The collapsed state lives on component contexts (DirData), not on tree nodes,
-      -- because flatten_dirs creates new DirData copies in create_comp_schema().
-      local FilePanel = require("diffview.scene.views.diff.file_panel").FilePanel
-
-      local function collect_collapsed_from_comp(comp_struct)
-        local state = {}
-        if not comp_struct or not comp_struct.comp then
-          return state
-        end
-        comp_struct.comp:deep_some(function(comp)
-          if comp.name == "directory" and comp.context and comp.context.collapsed then
-            state[comp.context.path] = true
-          end
-          return false
-        end)
-        return state
-      end
-
-      local function restore_collapsed_on_comp(comp_struct, state)
-        if not comp_struct or not comp_struct.comp or not next(state) then
-          return
-        end
-        comp_struct.comp:deep_some(function(comp)
-          if comp.name == "directory" and comp.context and state[comp.context.path] then
-            comp.context.collapsed = true
-          end
-          return false
-        end)
-      end
-
-      -- Save collapsed state on every toggle so it survives tree rebuilds
-      local orig_set_item_fold = FilePanel.set_item_fold
-      function FilePanel:set_item_fold(item, open)
-        orig_set_item_fold(self, item, open)
-        -- Persist current state after fold change
-        if self.components then
-          ---@diagnostic disable-next-line: inject-field
-          self._collapsed_state = {
-            conflicting = collect_collapsed_from_comp(
-              self.components.conflicting and self.components.conflicting.files
-            ),
-            working = collect_collapsed_from_comp(self.components.working and self.components.working.files),
-            staged = collect_collapsed_from_comp(self.components.staged and self.components.staged.files),
-          }
-        end
-      end
-
-      -- After update_components rebuilds everything, restore saved state
-      local orig_update_components = FilePanel.update_components
-      function FilePanel:update_components()
-        orig_update_components(self)
-        if self._collapsed_state and self.components then
-          restore_collapsed_on_comp(
-            self.components.conflicting and self.components.conflicting.files,
-            self._collapsed_state.conflicting or {}
-          )
-          restore_collapsed_on_comp(
-            self.components.working and self.components.working.files,
-            self._collapsed_state.working or {}
-          )
-          restore_collapsed_on_comp(
-            self.components.staged and self.components.staged.files,
-            self._collapsed_state.staged or {}
-          )
-        end
-      end
     end,
   },
 

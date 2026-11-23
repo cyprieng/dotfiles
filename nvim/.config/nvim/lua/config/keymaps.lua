@@ -75,10 +75,10 @@ local function origin_base_branch()
   return "main"
 end
 
-map("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Open git diff", remap = true })
+map("n", "<leader>gd", "<cmd>CodeDiff<cr>", { desc = "Open git diff" })
 map("n", "<leader>gD", function()
   local base = origin_base_branch()
-  vim.cmd(("DiffviewOpen origin/%s...HEAD --imply-local"):format(base))
+  vim.cmd(("CodeDiff origin/%s..."):format(base))
 end, { desc = "PR diff vs origin base branch (incl. uncommitted)" })
 
 -- Exit terminal insert mode
