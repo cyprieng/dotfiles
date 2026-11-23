@@ -59,6 +59,26 @@ return {
           vim.keymap.set("n", "<LeftRelease>", "<CR>", { buffer = ev.buf, remap = true })
         end,
       })
+
+      -- codediff forces nowrap on its diff panes, from its renders (OptionSet) and from its
+      -- own enter autocmds (where OptionSet doesn't fire, hence the scheduled re-check)
+      local function wrap_diff_panes()
+        if not package.loaded["codediff"] then
+          return
+        end
+        local sess = require("codediff.ui.lifecycle").get_session(vim.api.nvim_get_current_tabpage())
+        for _, win in ipairs(sess and { sess.original_win, sess.modified_win } or {}) do
+          if vim.api.nvim_win_is_valid(win) and not vim.wo[win].wrap then
+            vim.wo[win].wrap = true
+          end
+        end
+      end
+      vim.api.nvim_create_autocmd("OptionSet", { pattern = "wrap", callback = wrap_diff_panes })
+      vim.api.nvim_create_autocmd({ "BufWinEnter", "BufEnter", "WinEnter", "FileType" }, {
+        callback = function()
+          vim.schedule(wrap_diff_panes)
+        end,
+      })
     end,
   },
 
