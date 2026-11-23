@@ -49,7 +49,6 @@ vim.schedule(function()
 end)
 
 -- Folding
-vim.opt.foldmethod = "expr"
 vim.opt.foldenable = true
 vim.opt.foldlevel = 99
 vim.o.foldlevelstart = 99
