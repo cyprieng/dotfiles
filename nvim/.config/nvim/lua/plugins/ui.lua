@@ -1,5 +1,13 @@
 local Snacks = require("snacks")
 
+local function trash(state, paths)
+  local res = vim.system(vim.list_extend({ "trash" }, paths)):wait()
+  if res.code ~= 0 then
+    vim.notify("trash failed: " .. (res.stderr or ""), vim.log.levels.ERROR)
+  end
+  require("neo-tree.sources.manager").refresh(state.name)
+end
+
 return {
   -- Theme
   {
@@ -188,19 +196,23 @@ return {
       },
       commands = {
         system_open = function(state)
-          local node = state.tree:get_node()
-          local path = node:get_id()
-          vim.fn.jobstart({ "open", path }, { detach = true })
+          vim.ui.open(state.tree:get_node():get_id())
         end,
       },
       filesystem = {
         use_libuv_file_watcher = true,
         commands = {
-          -- Override delete to use trash instead of rm
+          -- Delete moves to the trash without confirmation (neo-tree's own trash always asks)
           delete = function(state)
-            local path = state.tree:get_node().path
-            vim.fn.system({ "trash", vim.fn.fnameescape(path) })
-            require("neo-tree.sources.manager").refresh(state.name)
+            trash(state, { state.tree:get_node().path })
+          end,
+          delete_visual = function(state, nodes)
+            trash(
+              state,
+              vim.tbl_map(function(node)
+                return node.path
+              end, nodes)
+            )
           end,
         },
         follow_current_file = {
@@ -373,16 +385,9 @@ return {
           delay = 50,
           reveal = { "close" },
         },
-        custom_filter = function(buf_number, _)
-          if
-            vim.bo[buf_number].buftype ~= "terminal"
-            and vim.bo[buf_number].buftype ~= "quickfix"
-            and vim.bo[buf_number].buftype ~= "nofile"
-          then
-            return true
-          else
-            return false
-          end
+        custom_filter = function(buf_number)
+          local buftype = vim.bo[buf_number].buftype
+          return buftype ~= "terminal" and buftype ~= "quickfix" and buftype ~= "nofile"
         end,
       },
     },
