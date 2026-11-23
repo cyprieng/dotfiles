@@ -15,6 +15,30 @@ return {
   -- JSON Schema Store
   { "b0o/schemastore.nvim" },
 
+  -- Python venv
+  {
+    "linux-cultist/venv-selector.nvim",
+    ft = "python",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "nvim-telescope/telescope.nvim",
+      {
+        "mfussenegger/nvim-dap-python",
+        build = {
+          type = "builtin",
+          copy_directories = {
+            "doc",
+          },
+        },
+      },
+    },
+    opts = {},
+    keys = {
+      { "<leader>vs", "<cmd>VenvSelect<cr>", desc = "Select venv" },
+      { "<leader>vc", "<cmd>VenvSelectCached<cr>", desc = "Restore cached venv" },
+    },
+  },
+
   -- LSP
   {
     "neovim/nvim-lspconfig",
@@ -22,31 +46,6 @@ return {
       { "mason-org/mason.nvim", config = true },
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-
-      -- Python venv
-      {
-        "linux-cultist/venv-selector.nvim",
-        dependencies = {
-          "neovim/nvim-lspconfig",
-          "nvim-telescope/telescope.nvim",
-          {
-            "mfussenegger/nvim-dap-python",
-            build = {
-              type = "builtin",
-              copy_directories = {
-                "doc",
-              },
-            },
-          },
-        },
-        opts = {},
-        keys = {
-          -- Keymap to open VenvSelector to pick a venv.
-          { "<leader>vs", "<cmd>VenvSelect<cr>" },
-          -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-          { "<leader>vc", "<cmd>VenvSelectCached<cr>" },
-        },
-      },
     },
     config = function()
       vim.api.nvim_create_autocmd("LspAttach", {
