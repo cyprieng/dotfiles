@@ -18,17 +18,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Ensure cmdheight stays at 0 after window resize (e.g. switching monitors)
-vim.api.nvim_create_autocmd({ "VimResized", "WinResized", "WinEnter" }, {
-  callback = function()
-    for _, delay in ipairs({ 0, 50, 100, 200, 500 }) do
-      vim.defer_fn(function()
-        vim.o.cmdheight = 0
-      end, delay)
-    end
-  end,
-})
-
 -- Refresh git state for gitsigns and neo-tree
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "BufLeave" }, {
   callback = function()
