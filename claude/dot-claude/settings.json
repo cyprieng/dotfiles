@@ -132,7 +132,6 @@
       "effortLevel": "xhigh"
     }
   },
-  "tui": "fullscreen",
   "editorMode": "normal",
   "verbose": false,
   "skipAutoPermissionPrompt": true,
