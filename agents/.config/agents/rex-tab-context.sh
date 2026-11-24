@@ -15,16 +15,18 @@ if [ -z "${REX_SESSION:-}" ] || { [ "$flavor" != "cursor" ] && [ -n "${CURSOR_IN
 fi
 
 context=$(cat <<EOF
-You're running in a Rex tab. Your FIRST tool call of the conversation must
-name it, before any other tool call, whatever the request (question, review,
-investigation, code). Skip it only if you answer without any tool call.
+You're running in a Rex tab. Name it once you know the subject: right away if
+the request states it, otherwise right after the first read that reveals it
+(ticket, finding, PR, file). Never before. Skip it if you answer without any
+tool call.
 
 "\$HOME/.config/agents/agent-state.sh" $flavor name "<2-4 words>"
 
-Name: 2 to 4 plain words naming the specific subject, plus the ticket or PR
-number if any (e.g. "review PR 9935 sentry"). No quotes or apostrophes.
-If the subject only becomes clear later (e.g. after reading the PR), rename
-once more then. Otherwise rename again only if the task changes.
+Name: 2 to 4 plain words saying what the work is about, for a human scanning
+tabs (e.g. "zendesk ticket html injection", "hotel cancel refund bug"). Name the
+subject, not the kind of task ("PR review", "finding check" say nothing). No
+ticket or PR numbers, no quotes or apostrophes. Rename only if the task really
+changes.
 EOF
 )
 
