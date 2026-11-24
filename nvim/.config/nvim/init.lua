@@ -28,6 +28,7 @@ vim.opt.mousemoveevent = true
 vim.opt.showmode = false
 vim.opt.smartindent = true
 vim.opt.breakindent = true
+vim.opt.smoothscroll = true
 vim.opt.undofile = true
 vim.opt.sessionoptions = "buffers,curdir,folds,globals,help,tabpages,winsize,terminal"
 vim.opt.ignorecase = true
