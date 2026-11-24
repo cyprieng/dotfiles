@@ -11,8 +11,8 @@
 #
 # Outside tmux, in Rex, the state is reported with the Program Status Protocol
 # (OSC 7501) instead; Claude Code and Codex emit it natively, so only Cursor needs it.
-# The tab name comes from pane labels: each agent labels its own pane and the
-# tab shows its newest agent pane, whichever pane of the tab has the focus.
+# Each agent labels its own pane, and rex-tabs.sh names the tabs from the pane
+# labels, the way the tmux status line does.
 #
 # Usage: agent-state.sh <claude|codex|cursor> <busy|waiting|done|title|clear>
 #        with the hook payload on stdin.
@@ -51,17 +51,12 @@ if [ -z "${TMUX_PANE:-}" ]; then
     done
   }
 
-  # Rex keeps no state of ours, so two small files stand in for it:
-  #   rex-agent-named-<block>  the agent named its pane itself: keep that name
-  #   rex-agent-tab-<window>   the tab label set here: a tab label outlives the
-  #                            agent, and one renamed by hand is left alone
-
   # The pane label is the agent's title until the agent names itself with
   # `agent-state.sh <flavor> name <title>` (see rex-tab-context.sh), and goes
   # back to `shell` when the agent exits.
   label_pane() {
-    local named pane
-    named="${TMPDIR:-/tmp}/rex-agent-named-${REX_BLOCK#block:}"
+    # Marks a pane the agent named itself: keep that name (rex-tabs.sh removes it with the pane)
+    local named="${TMPDIR:-/tmp}/rex-agent-named-${REX_BLOCK#block:}" pane
     case "$state" in
       # An empty label would give `Block <id>`, not the `shell` a pane starts with
       clear) pane=shell && rm -f "$named" ;;
@@ -74,42 +69,13 @@ if [ -z "${TMUX_PANE:-}" ]; then
       "$(jq -nc --arg b "$REX_BLOCK" --arg l "$pane" '{block_id: $b, label: $l}')" >/dev/null 2>&1
   }
 
-  # The tab shows the label of its newest agent pane (block IDs sort by
-  # creation), so it falls back to the previous agent when one exits, and gets
-  # its default name back when none is left.
-  name_tab() {
-    local blocks window title file mine label
-    blocks=$(rex block ls -s "$REX_SESSION" --json 2>/dev/null) || return
-    window=$(printf '%s' "$blocks" | jq -r --arg b "$REX_BLOCK" '.blocks[] | select(.block_id == $b) | .window_id')
-    [ -n "$window" ] || return
-    title=$(printf '%s' "$blocks" | jq -r --arg w "$window" '
-      [.blocks[] | select(.window_id == $w and .label != "shell" and (.label | test("^Block [0-9a-f]{8}$") | not))]
-      | sort_by(.block_id) | last | .label // empty')
-
-    file="${TMPDIR:-/tmp}/rex-agent-tab-${window#window:}"
-    mine=$(cat "$file" 2>/dev/null)
-    label=$(rex window ls -s "$REX_SESSION" --json 2>/dev/null |
-      jq -r --arg w "$window" '.windows[] | select(.window_id == $w) | .label')
-
-    if [ -z "$title" ]; then
-      # An empty label restores the default, which shows the focused pane title
-      [ -n "$mine" ] && [ "$label" = "$mine" ] &&
-        rex api call -s "$REX_SESSION" session.set_window_label "{\"window_id\":\"$window\",\"label\":\"\"}" >/dev/null
-      rm -f "$file"
-      return
-    fi
-
-    [ -n "$mine" ] && [ "$label" = "$mine" ] || [[ "$label" =~ ^Window\ [0-9a-f]{8}$ ]] || return
-    [ "$title" != "$label" ] || return
-    rex window rename -s "$REX_SESSION" "$window" "$title" >/dev/null && printf '%s' "$title" >"$file"
-  }
-
   [ "$flavor" = "cursor" ] && report_status
   case "$state" in
     busy | done | clear | name)
       command -v jq &>/dev/null || exit 0
       label_pane "$@"
-      name_tab
+      # Tab names follow pane labels, see rex-tabs.sh
+      nohup "$(dirname "$0")/rex-tabs.sh" "$REX_SESSION" >/dev/null 2>&1 &
       ;;
   esac
   exit 0
