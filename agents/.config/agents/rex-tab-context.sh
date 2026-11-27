@@ -9,7 +9,7 @@
 flavor=$1
 
 # Cursor also runs the Claude Code hooks; it gets its own context.
-if [ -z "${REX_SESSION:-}" ] || { [ "$flavor" != "cursor" ] && [ -n "${CURSOR_INVOKED_AS:-}" ]; }; then
+if [ -z "${REX_BLOCK:-}" ] || { [ "$flavor" != "cursor" ] && [ -n "${CURSOR_INVOKED_AS:-}" ]; }; then
   [ "$flavor" = "cursor" ] && echo '{}'
   exit 0
 fi
@@ -25,8 +25,8 @@ tool call.
 Name: 2 to 4 plain words saying what the work is about, for a human scanning
 tabs (e.g. "zendesk ticket html injection", "hotel cancel refund bug"). Name the
 subject, not the kind of task ("PR review", "finding check" say nothing). No
-ticket or PR numbers, no quotes or apostrophes. Rename only if the task really
-changes.
+ticket or PR numbers, no quotes or apostrophes. Rename when the subject gets
+clearer or changes, not for wording tweaks.
 EOF
 )
 

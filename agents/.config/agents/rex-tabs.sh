@@ -9,12 +9,15 @@
 # listener gave it or the name of an agent living elsewhere: a tab renamed by
 # hand is left alone.
 #
-# Usage: rex-tabs.sh <session>
-#        started by agent-state.sh on every hook; a second instance exits at once,
-#        and the listener stops with its session.
+# Usage: rex-tabs.sh <block>
+#        started by agent-state.sh on every hook with the agent's block; a second
+#        instance for the same session exits at once, and the listener stops with
+#        its session.
 
-session=$1
-[ -n "$session" ] && command -v jq &>/dev/null || exit 1
+[ -n "$1" ] && command -v jq &>/dev/null || exit 1
+# Rex no longer exports REX_SESSION; the lock needs the session ID, not a block ID
+session=$(REX_BLOCK=$1 rex whoami --json 2>/dev/null | jq -r '.session_id // empty')
+[ -n "$session" ] || exit 1
 tmp=${TMPDIR:-/tmp}
 lock="$tmp/rex-tabs-${session#session:}.pid"
 
