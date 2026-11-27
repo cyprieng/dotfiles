@@ -1,0 +1,16 @@
+theme = "frappe"
+transparent_background = true
+mode = "split"
+wrap_lines = true
+file_gap = 2
+sidebar = true
+agent_notes = true
+
+[themes.frappe]
+base = "catppuccin-frappe"
+label = "Catppuccin Frappe (bright rules)"
+border = "#babbf1"
+
+[keybindings]
+"explorer.focus" = "tab"
+"hunk.app.toggleFocusArea" = "ctrl+f"

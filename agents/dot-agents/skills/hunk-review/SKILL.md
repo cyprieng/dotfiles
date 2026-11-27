@@ -1,0 +1,18 @@
+---
+name: hunk-review
+description: Interacts with live Hunk diff review sessions via CLI. Inspects review focus, navigates files, hunks, and exact lines, reloads session contents, adds inline review comments, and paints attention marks on character ranges. Use when the user has a Hunk session running or wants to review diffs interactively.
+---
+
+# hunk-review
+
+This file is a pointer. The instructions live in the installed `hunk` CLI so they always match its version.
+
+Before anything else, load them and follow them:
+
+```bash
+hunk skill show hunk-review
+```
+
+If the installed Hunk version is older than 0.24, ask the user to upgrade to Hunk 0.24.x or newer before continuing.
+
+If `hunk` is not on PATH, ask the user to install Hunk first: https://hunk.dev/docs/start/install/

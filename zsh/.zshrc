@@ -146,6 +146,23 @@ alias lla="ls -la"
 alias cz="cz --config ~/.cz.toml"
 alias load.env="set -a && source .env && set +a"
 
+alias hd="hunk diff --watch"
+# Branch vs its merge-base with a parent branch (default: origin's master/main), uncommitted changes included
+hD() {
+  local base=$1
+  if [[ -z $base ]]; then
+    for base in master main; do
+      git rev-parse --verify --quiet "origin/$base" >/dev/null && break
+      base=""
+    done
+    [[ -z $base ]] && { echo "hD: no origin/master or origin/main" >&2; return 1; }
+  fi
+  git fetch --quiet origin "$base" || return 1
+  hunk diff "$(git merge-base "origin/$base" HEAD)" --watch
+}
+# Review a GitHub PR: current branch's PR, a number, or a URL
+hdpr() { GH_TOKEN=$(gh auth token) hunk gh pr "$@"; }
+
 # Markdown to rich text (macOS only)
 if [[ "$OSTYPE" == "darwin"* ]]; then
   function mdcopy() {
