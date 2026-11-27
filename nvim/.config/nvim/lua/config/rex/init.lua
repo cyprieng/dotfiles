@@ -3,7 +3,7 @@ local M = {}
 
 ---@return boolean
 function M.enabled()
-  return vim.env.REX_SESSION ~= nil and vim.env.TMUX == nil
+  return vim.env.REX_BLOCK ~= nil and vim.env.TMUX == nil
 end
 
 ---@param args string[]
@@ -51,7 +51,7 @@ function M.float(command, cwd)
       },
     },
   })
-  local _, err = M.cli({ "api", "call", "-s", vim.env.REX_SESSION, "session.new_layer", args })
+  local _, err = M.cli({ "api", "call", "-s", vim.env.REX_BLOCK, "session.new_layer", args })
   if err then
     vim.notify("Rex float failed: " .. err, vim.log.levels.ERROR)
   end

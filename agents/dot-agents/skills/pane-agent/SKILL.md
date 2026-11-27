@@ -50,12 +50,12 @@ whichever multiplexer the current session runs in (tmux or Rex).
      tmux send-keys -t "$pane" Enter
      ```
 
-   - **Otherwise, `$REX_SESSION` is set:**
+   - **Otherwise, `$REX_BLOCK` is set:**
 
      ```bash
-     block=$(rex split -s "$REX_SESSION" -b "$REX_BLOCK" --split=right -c "$PWD" --json | jq -r '.block_ids[0]')
-     rex send -s "$REX_SESSION" -b "$block" "claude \"\$(cat '<brief-file>')\""
-     rex send-key -s "$REX_SESSION" -b "$block" enter
+     block=$(rex split -s "$REX_BLOCK" -b "$REX_BLOCK" --split=right -c "$PWD" --json | jq -r '.block_ids[0]')
+     rex send -s "$REX_BLOCK" -b "$block" "claude \"\$(cat '<brief-file>')\""
+     rex send-key -s "$REX_BLOCK" -b "$block" enter
      ```
 
    - **Neither is set:** don't open anything; report the brief file path so

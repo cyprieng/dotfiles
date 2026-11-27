@@ -129,7 +129,7 @@ nvr() {
   local sock
   if [[ -n "$TMUX" ]]; then
     sock="/tmp/nvim-tmux-$(tmux display-message -p -t "$TMUX_PANE" '#{window_id}').sock"
-  elif [[ -n "$REX_SESSION" ]]; then
+  elif [[ -n "$REX_BLOCK" ]]; then
     local window_id=$(rex whoami --json 2>/dev/null | jq -r '.window_id // empty')
     sock="/tmp/nvim-rex-${window_id#window:}.sock"
   fi

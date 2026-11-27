@@ -7,7 +7,7 @@ return {
       { "rawnly/smart-splits-backend-rex", main = "smart-splits-backend-rex" },
     },
     opts = {
-      -- tmux first: a tmux started from a Rex pane inherits REX_SESSION
+      -- tmux first: a tmux started from a Rex pane inherits REX_BLOCK
       mux = { backend = { "smart-splits-backend-tmux", "smart-splits-backend-rex" } },
       move = {
         at_edge = "stop",

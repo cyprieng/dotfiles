@@ -65,7 +65,8 @@ end
 
 ---@return { block: string, kind: string, cwd: string|nil, title: string|nil, state: string|nil, index: integer, count: integer }[]|nil, string|nil err
 local function find_agents()
-  local session, self = vim.env.REX_SESSION, vim.env.REX_BLOCK
+  local self = vim.env.REX_BLOCK
+  local session = self
   local panes, err = window_panes(session, self)
   if not panes then
     return nil, err
@@ -140,7 +141,7 @@ local function format(ref, cwd)
 end
 
 local function deliver(agent, ref)
-  local session = vim.env.REX_SESSION
+  local session = vim.env.REX_BLOCK
   -- focus first: agents can reset their input on the focus-in event, which would drop text sent before it
   Rex.cli({ "focus", "-s", session, agent.block })
   local _, err = Rex.cli({ "send", "-s", session, "-b", agent.block, format(ref, agent.cwd) })
